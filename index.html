@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Go Steady — Smart Walker Companion for Peace of Mind</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-sage: #4A7C59;
+      --color-sage-light: #5D9A6F;
+      --color-sage-dark: #3A6147;
+      --color-cream: #F9F6F0;
+      --color-warm-white: #FFFCF7;
+      --color-text: #2D3A2E;
+      --color-text-soft: #5A6B5C;
+      --color-accent: #50C878;
+      --color-border: #E5E0D8;
+      --font-serif: 'Fraunces', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-warm-white);
+      color: var(--color-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Ambient background pattern */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(74, 124, 89, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(80, 200, 120, 0.04) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 252, 247, 0.9);
+      backdrop-filter: blur(20px);
+      z-index: 100;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .logo {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--color-sage);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo-img {
+      height: 28px;
+      width: auto;
+    }
+
+    .logo-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.1); }
+    }
+
+    .nav-cta {
+      padding: 0.75rem 1.5rem;
+      background: var(--color-sage);
+      color: white;
+      border: none;
+      border-radius: 100px;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-cta:hover {
+      background: var(--color-sage-dark);
+      transform: translateY(-1px);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 8rem 4rem 4rem;
+      gap: 4rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .hero-content {
+      animation: fadeUp 1s ease-out;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: rgba(74, 124, 89, 0.1);
+      border-radius: 100px;
+      font-size: 0.85rem;
+      color: var(--color-sage);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--color-accent);
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--color-text);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--color-sage);
+    }
+
+    .hero-subheading {
+      font-size: 1.35rem;
+      font-weight: 500;
+      color: var(--color-text);
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
+      max-width: 500px;
+    }
+
+    .hero-body {
+      font-size: 1.1rem;
+      color: var(--color-text-soft);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+      max-width: 500px;
+    }
+
+    .hero-shipping {
+      font-size: 0.95rem;
+      color: var(--color-sage);
+      margin-bottom: 2rem;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      padding: 1rem 2rem;
+      background: var(--color-sage);
+      color: white;
+      border: none;
+      border-radius: 100px;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-sage-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(74, 124, 89, 0.3);
+    }
+
+    .btn-primary svg {
+      transition: transform 0.3s ease;
+    }
+
+    .btn-primary:hover svg {
+      transform: translateX(3px);
+    }
+
+    .hero-price {
+      font-size: 0.95rem;
+      color: var(--color-text-soft);
+    }
+
+    .hero-price strong {
+      font-size: 1.3rem;
+      color: var(--color-text);
+      font-weight: 600;
+    }
+
+    .hero-image {
+      position: relative;
+      animation: fadeUp 1s ease-out 0.2s both;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-image .walker-img {
+      width: 100%;
+      max-width: 500px;
+      height: auto;
+      border-radius: 24px;
+      box-shadow: 0 40px 80px rgba(45, 58, 46, 0.12);
+    }
+
+    .hero-image::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 40px;
+      background: radial-gradient(ellipse, rgba(45, 58, 46, 0.1) 0%, transparent 70%);
+      filter: blur(10px);
+    }
+
+    /* Features Section */
+    .features {
+      padding: 4rem 4rem 8rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+
+    .section-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-sage);
+      margin-bottom: 1rem;
+    }
+
+    .section-header h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      color: var(--color-text);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    .feature-card {
+      padding: 2rem;
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      transition: all 0.4s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(45, 58, 46, 0.08);
+      border-color: var(--color-sage-light);
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--color-sage) 0%, var(--color-sage-light) 100%);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      color: white;
+    }
+
+    .feature-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+      color: var(--color-text);
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      color: var(--color-text-soft);
+      line-height: 1.6;
+    }
+
+    /* Product Showcase */
+    .showcase {
+      padding: 5rem 4rem;
+      background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-warm-white) 100%);
+    }
+
+    .showcase-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .showcase-image {
+      position: relative;
+    }
+
+    .showcase-image img {
+      width: 100%;
+      max-width: 450px;
+      border-radius: 24px;
+      box-shadow: 0 30px 60px rgba(45, 58, 46, 0.15);
+    }
+
+    .showcase-content h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      color: var(--color-text);
+    }
+
+    .showcase-content p {
+      font-size: 1.1rem;
+      color: var(--color-text-soft);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .showcase-list {
+      list-style: none;
+    }
+
+    .showcase-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      font-size: 1rem;
+      color: var(--color-text);
+    }
+
+    .showcase-list li svg {
+      color: var(--color-accent);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .showcase-inner.reverse .showcase-content {
+      order: 1;
+    }
+
+    .showcase-inner.reverse .showcase-image {
+      order: 2;
+    }
+
+    .app-showcase {
+      background: var(--color-warm-white);
+      padding-top: 0;
+    }
+
+    .app-image img {
+      max-width: 280px;
+      border-radius: 36px;
+      box-shadow: 0 40px 80px rgba(45, 58, 46, 0.18);
+    }
+
+    /* How it Works */
+    /* Waitlist Section */
+    .waitlist {
+      padding: 8rem 4rem;
+      background: linear-gradient(135deg, var(--color-sage-dark) 0%, var(--color-sage) 50%, var(--color-sage-light) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .waitlist::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(255,255,255,0.08) 0%, transparent 40%);
+    }
+
+    .waitlist-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .waitlist h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .waitlist-subtitle {
+      font-size: 1.15rem;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 0.5rem;
+    }
+
+    .waitlist-price {
+      font-size: 2rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 0.5rem;
+    }
+
+    .waitlist-shipping {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 3rem;
+    }
+
+    .waitlist-form {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 24px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-subtitle {
+      font-size: 0.95rem;
+      color: var(--color-text-soft);
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: var(--color-cream);
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--color-sage);
+      box-shadow: 0 0 0 4px rgba(74, 124, 89, 0.1);
+    }
+
+    .form-group input::placeholder {
+      color: #A0A8A1;
+    }
+
+    .form-group select {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: var(--color-cream);
+      color: var(--color-text);
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235A6B5C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+    }
+
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--color-sage);
+      box-shadow: 0 0 0 4px rgba(74, 124, 89, 0.1);
+    }
+
+    .form-group select {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: var(--color-cream);
+      color: var(--color-text);
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%235A6B5C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 1rem;
+    }
+
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--color-sage);
+      box-shadow: 0 0 0 4px rgba(74, 124, 89, 0.1);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 1.15rem;
+      background: var(--color-sage);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 0.5rem;
+    }
+
+    .btn-submit:hover {
+      background: var(--color-sage-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(74, 124, 89, 0.4);
+    }
+
+    .form-note {
+      font-size: 0.85rem;
+      color: var(--color-text-soft);
+      margin-top: 1.25rem;
+    }
+
+    .form-note svg {
+      display: inline;
+      vertical-align: middle;
+      margin-right: 0.25rem;
+    }
+
+    /* Success State */
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .form-success.show {
+      display: block;
+    }
+
+    .form-success svg {
+      color: var(--color-sage);
+      margin-bottom: 1rem;
+    }
+
+    .form-success h3 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-success p {
+      color: var(--color-text-soft);
+    }
+
+    .form-fields.hidden {
+      display: none;
+    }
+
+    /* Footer */
+    footer {
+      padding: 4rem;
+      background: var(--color-text);
+      color: rgba(255, 255, 255, 0.7);
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: white;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .footer-logo .logo-dot {
+      background: var(--color-accent);
+    }
+
+    footer p {
+      font-size: 0.9rem;
+      max-width: 400px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+    }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.85rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 7rem 2rem 4rem;
+      }
+
+      .hero-content {
+        order: 1;
+      }
+
+      .hero-image {
+        order: 0;
+      }
+
+      .hero-subheading,
+      .hero-body {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-cta-group {
+        justify-content: center;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .showcase-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .showcase-inner.reverse .showcase-content {
+        order: 2;
+      }
+
+      .showcase-inner.reverse .showcase-image {
+        order: 1;
+      }
+
+      .app-image img {
+        max-width: 220px;
+      }
+
+      .showcase-image {
+        order: 0;
+      }
+
+      .showcase-image img {
+        margin: 0 auto;
+        display: block;
+      }
+
+      .hero-image .walker-img {
+        max-width: 400px;
+      }
+
+      .showcase-content {
+        order: 1;
+      }
+
+      .showcase-list li {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 1.5rem;
+      }
+
+      .hero {
+        padding: 6rem 1.5rem 3rem;
+      }
+
+      .features {
+        padding: 2rem 1.5rem 5rem;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .showcase {
+        padding: 4rem 1.5rem;
+      }
+
+      .hero-image .walker-img {
+        max-width: 300px;
+      }
+
+      .waitlist {
+        padding: 5rem 1.5rem;
+      }
+
+      .waitlist-form {
+        padding: 2rem 1.5rem;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        padding: 3rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">
+      <img src="logo.png" alt="Go Steady" class="logo-img">
+      Go Steady
+    </div>
+    <a href="#waitlist" class="nav-cta">Join Waitlist</a>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">Now accepting pre-orders</div>
+      <h1>Peace of Mind, <em>Delivered Step-by-Step.</em></h1>
+      <p class="hero-subheading">Turn any walker into a discreet safety companion, no app required.</p>
+<p class="hero-body">Go Steady monitors and alerts on mobility trends — helping loved ones stay independent and caregivers stay informed.</p>
+        <p class="hero-shipping"><em><strong>Shipping September 2026</strong></em></p>
+        <div class="hero-cta-group">
+        <a href="#waitlist" class="btn-primary">
+          Request more info
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <div class="hero-price">
+          Starting at <strong>$129</strong>
+        </div>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="walker-wide.jpg" alt="Go Steady attached to a standard walker, showing the sleek design with green indicator ring" class="walker-img">
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features">
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+            <path d="M16 7V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v3"/>
+            <line x1="12" y1="12" x2="12" y2="16"/>
+          </svg>
+        </div>
+        <h3>2 Year Battery</h3>
+        <p>Set it and forget it. Our advanced low-power design means no weekly charging hassles.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <h3>Instant Install</h3>
+        <p>Snaps onto any standard walker in seconds. No tools, no modifications, no waiting.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="14" width="3" height="8" rx="1"/>
+            <rect x="10" y="10" width="3" height="12" rx="1"/>
+            <rect x="16" y="6" width="3" height="16" rx="1"/>
+          </svg>
+        </div>
+        <h3>No Bluetooth Required</h3>
+        <p>Works anywhere with cell coverage. No Wi-Fi setup, no Bluetooth pairing, no tech headaches.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+            <polyline points="7.5 4.21 12 6.81 16.5 4.21"/>
+            <polyline points="7.5 19.79 7.5 14.6 3 12"/>
+            <polyline points="21 12 16.5 14.6 16.5 19.79"/>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+            <line x1="12" y1="22.08" x2="12" y2="12"/>
+          </svg>
+        </div>
+        <h3>Replaceable Caps</h3>
+        <p>Swap between smooth-glide or high-traction caps to match any floor surface or preference.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Showcase -->
+  <section class="showcase">
+    <div class="showcase-inner">
+      <div class="showcase-image">
+        <img src="product-closeup.jpg" alt="Close-up of Go Steady device showing the sleek gray design with green activity ring">
+      </div>
+      <div class="showcase-content">
+        <h2>Discreet design that doesn't draw attention</h2>
+        <p>Go Steady replaces the standard walker foot, blending seamlessly into your loved one's daily routine. They'll never feel "monitored"—and you'll always have peace of mind.</p>
+        <ul class="showcase-list">
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            Activity tracking shows daily mobility patterns
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            Instant fall detection alerts sent to your phone
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            Green indicator ring confirms active connection
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            Weather-resistant for indoor and outdoor use
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- App Showcase -->
+  <section class="showcase app-showcase">
+    <div class="showcase-inner reverse">
+      <div class="showcase-image app-image">
+        <img src="app-screenshot.png" alt="Go Steady mobile app showing weekly steps chart and low activity alert">
+      </div>
+      <div class="showcase-content">
+        <h2>See the Trends That Matter</h2>
+        <p>The Go Steady app gives caregivers a clear window into daily activity—without being intrusive. Get the insights that give you peace of mind, right when you need them.</p>
+        <ul class="showcase-list">
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            Weekly and monthly activity trends at a glance
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            Smart alerts when activity drops below normal
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            Easily shareable activity reports
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            Access to insights on mobile or desktop
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Waitlist Section -->
+  <section class="waitlist" id="waitlist">
+    <div class="waitlist-inner">
+      <h2>Be first in line</h2>
+      <p class="waitlist-subtitle">Reserve yours today at our introductory price</p>
+      <div class="waitlist-price">$129</div>
+      <p class="waitlist-shipping">Expected shipping: September 2026</p>
+      
+      <div class="waitlist-form">
+        <div class="form-fields">
+          <h3 class="form-title">Join the Waitlist</h3>
+          <p class="form-subtitle">No payment required. We'll notify you when Go Steady is ready.</p>
+          
+          <form id="waitlist-form" name="waitlist" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="waitlist">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" placeholder="Jane" required>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Smith" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="jane@example.com" required>
+            </div>
+            <div class="form-group">
+              <label for="userType">I am a...</label>
+              <select id="userType" name="userType" required>
+                <option value="" disabled selected>Select one</option>
+                <option value="caregiver">Caregiver or family member</option>
+                <option value="user">Walker user</option>
+              </select>
+            </div>
+            <button type="submit" class="btn-submit">Reserve My Spot</button>
+          </form>
+          
+          <p class="form-note">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            Your information is secure. We never share your data.
+          </p>
+        </div>
+        
+        <div class="form-success" id="form-success">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          <h3>You're on the list!</h3>
+          <p>We'll send you updates as we get closer to launch.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">
+      <span class="logo-dot"></span>
+      Go Steady
+    </div>
+    <p>Helping families stay connected while honoring independence. Made with care in Colorado, USA.</p>
+    <div class="footer-bottom">
+      © 2026 Go Steady. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    // Form submission handler for Netlify
+    document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const form = e.target;
+      const formData = new FormData(form);
+      
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
+      })
+      .then(() => {
+        // Show success state
+        document.querySelector('.form-fields').classList.add('hidden');
+        document.getElementById('form-success').classList.add('show');
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        alert('Something went wrong. Please try again.');
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
