@@ -1,0 +1,8 @@
+[build]
+  publish = "."
+
+# Redirect all traffic to index.html for SPA-like behavior if needed
+# [[redirects]]
+#   from = "/*"
+#   to = "/index.html"
+#   status = 200

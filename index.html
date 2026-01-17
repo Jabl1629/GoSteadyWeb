@@ -122,15 +122,16 @@
       min-height: 100vh;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      align-items: center;
+      align-items: end;
       padding: 8rem 4rem 4rem;
-      gap: 4rem;
+      gap: 1rem;
       max-width: 1400px;
       margin: 0 auto;
     }
 
     .hero-content {
       animation: fadeUp 1s ease-out;
+      padding-bottom: 2rem;
     }
 
     @keyframes fadeUp {
@@ -254,16 +255,31 @@
       position: relative;
       animation: fadeUp 1s ease-out 0.2s both;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      align-items: flex-end;
+      justify-content: flex-start;
+      align-self: flex-end;
+      margin-left: -3rem;
     }
 
     .hero-image .walker-img {
-      width: 100%;
-      max-width: 500px;
-      height: auto;
+      height: 420px;
+      width: auto;
       border-radius: 24px;
       box-shadow: 0 40px 80px rgba(45, 58, 46, 0.12);
+    }
+
+    .hero-image .feature-img {
+      height: 630px;
+      width: auto;
+      margin-bottom: -60px;
+    }
+
+    .hero-image .phone-video {
+      height: 380px;
+      width: 265px;
+      object-fit: cover;
+      border-radius: 36px;
+      box-shadow: 0 30px 60px rgba(45, 58, 46, 0.2);
     }
 
     .hero-image::after {
@@ -272,7 +288,7 @@
       bottom: -20px;
       left: 50%;
       transform: translateX(-50%);
-      width: 80%;
+      width: 90%;
       height: 40px;
       background: radial-gradient(ellipse, rgba(45, 58, 46, 0.1) 0%, transparent 70%);
       filter: blur(10px);
@@ -280,7 +296,7 @@
 
     /* Features Section */
     .features {
-      padding: 4rem 4rem 8rem;
+      padding: 2rem 4rem 5rem;
       max-width: 1200px;
       margin: 0 auto;
     }
@@ -422,15 +438,34 @@
       order: 2;
     }
 
-    .app-showcase {
+    .notifications-showcase {
       background: var(--color-warm-white);
       padding-top: 0;
+      padding-bottom: 3rem;
     }
 
-    .app-image img {
-      max-width: 280px;
-      border-radius: 36px;
-      box-shadow: 0 40px 80px rgba(45, 58, 46, 0.18);
+    .notifications-showcase .showcase-inner {
+      gap: 5rem;
+    }
+
+    .notification-video video {
+      height: 420px;
+      width: 290px;
+      object-fit: cover;
+      border-radius: 40px;
+      box-shadow: 0 40px 80px rgba(45, 58, 46, 0.2);
+    }
+
+    .dashboard-showcase {
+      background: linear-gradient(180deg, var(--color-warm-white) 0%, var(--color-cream) 100%);
+      padding-top: 3rem;
+    }
+
+    .dashboard-image img {
+      max-width: 600px;
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 40px 80px rgba(45, 58, 46, 0.15);
     }
 
     /* How it Works */
@@ -739,8 +774,13 @@
         order: 1;
       }
 
-      .app-image img {
-        max-width: 220px;
+      .notification-video video {
+        height: 360px;
+        width: 250px;
+      }
+
+      .dashboard-image img {
+        max-width: 100%;
       }
 
       .showcase-image {
@@ -753,7 +793,16 @@
       }
 
       .hero-image .walker-img {
-        max-width: 400px;
+        height: 360px;
+      }
+
+      .hero-image .feature-img {
+        height: 500px;
+      }
+
+      .hero-image .phone-video {
+        height: 320px;
+        width: 220px;
       }
 
       .showcase-content {
@@ -786,8 +835,23 @@
         padding: 4rem 1.5rem;
       }
 
+      .hero-image {
+        gap: 1rem;
+      }
+
       .hero-image .walker-img {
-        max-width: 300px;
+        height: 280px;
+        width: auto;
+      }
+
+      .hero-image .feature-img {
+        height: 380px;
+      }
+
+      .hero-image .phone-video {
+        height: 240px;
+        width: 160px;
+        border-radius: 24px;
       }
 
       .waitlist {
@@ -809,6 +873,87 @@
   </style>
 </head>
 <body>
+  <!-- Password Gate -->
+  <div id="password-gate" style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #3A6147 0%, #4A7C59 50%, #5D9A6F 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  ">
+    <div style="
+      background: white;
+      padding: 3rem;
+      border-radius: 24px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.2);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+    ">
+      <div style="font-family: 'Fraunces', Georgia, serif; font-size: 1.75rem; color: #2D3A2E; margin-bottom: 0.5rem;">Go Steady</div>
+      <p style="font-family: 'Inter', sans-serif; color: #5A6B5C; margin-bottom: 2rem; font-size: 0.95rem;">Enter the password to preview this site</p>
+      <input 
+        type="password" 
+        id="password-input" 
+        placeholder="Enter password"
+        style="
+          width: 100%;
+          padding: 1rem;
+          border: 1px solid #E5E0D8;
+          border-radius: 12px;
+          font-size: 1rem;
+          margin-bottom: 1rem;
+          font-family: 'Inter', sans-serif;
+          background: #F9F6F0;
+          box-sizing: border-box;
+        "
+        onkeypress="if(event.key === 'Enter') checkPassword()"
+      >
+      <button 
+        onclick="checkPassword()"
+        style="
+          width: 100%;
+          padding: 1rem;
+          background: #4A7C59;
+          color: white;
+          border: none;
+          border-radius: 12px;
+          font-size: 1rem;
+          font-weight: 600;
+          cursor: pointer;
+          font-family: 'Inter', sans-serif;
+        "
+      >Enter</button>
+      <p id="password-error" style="color: #c85050; margin-top: 1rem; font-size: 0.9rem; display: none; font-family: 'Inter', sans-serif;">Incorrect password</p>
+    </div>
+  </div>
+
+  <script>
+    // Simple password protection - change 'gosteady2026' to your desired password
+    const SITE_PASSWORD = 'gosteady2026';
+    
+    // Check if already authenticated
+    if (sessionStorage.getItem('authenticated') === 'true') {
+      document.getElementById('password-gate').style.display = 'none';
+    }
+    
+    function checkPassword() {
+      const input = document.getElementById('password-input').value;
+      if (input === SITE_PASSWORD) {
+        sessionStorage.setItem('authenticated', 'true');
+        document.getElementById('password-gate').style.display = 'none';
+      } else {
+        document.getElementById('password-error').style.display = 'block';
+        document.getElementById('password-input').value = '';
+      }
+    }
+  </script>
+
   <!-- Navigation -->
   <nav>
     <div class="logo">
@@ -839,7 +984,46 @@
       </div>
     </div>
     <div class="hero-image">
-      <img src="walker-wide.jpg" alt="Go Steady attached to a standard walker, showing the sleek design with green indicator ring" class="walker-img">
+      <img src="closeup-features.png" alt="Go Steady device showing automatic stability scores, mobility insights, weight transfer tracking, and event notifications" class="feature-img">
+    </div>
+  </section>
+
+  <!-- Product Showcase -->
+  <section class="showcase">
+    <div class="showcase-inner">
+      <div class="showcase-image">
+        <img src="walker-wide.jpg" alt="Go Steady attached to a standard walker, showing the sleek design with green indicator ring">
+      </div>
+      <div class="showcase-content">
+        <h2>Discreet design that doesn't draw attention</h2>
+        <p>Go Steady replaces the standard walker foot, blending seamlessly into your loved one's daily routine. They'll never feel "monitored"—and you'll always have peace of mind.</p>
+        <ul class="showcase-list">
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            Activity tracking shows daily mobility patterns
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            Instant sharing of activity alerts with caregivers
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            Green indicator ring confirms active connection
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            Weather-resistant for indoor and outdoor use
+          </li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -895,54 +1079,50 @@
     </div>
   </section>
 
-  <!-- Product Showcase -->
-  <section class="showcase">
-    <div class="showcase-inner">
-      <div class="showcase-image">
-        <img src="product-closeup.jpg" alt="Close-up of Go Steady device showing the sleek gray design with green activity ring">
+  <!-- Notifications Showcase -->
+  <section class="showcase notifications-showcase">
+    <div class="showcase-inner reverse">
+      <div class="showcase-image notification-video">
+        <video autoplay loop muted playsinline>
+          <source src="go-steady-movie1.mp4" type="video/mp4">
+        </video>
       </div>
       <div class="showcase-content">
-        <h2>Discreet design that doesn't draw attention</h2>
-        <p>Go Steady replaces the standard walker foot, blending seamlessly into your loved one's daily routine. They'll never feel "monitored"—and you'll always have peace of mind.</p>
+        <h2>Configure notifications for your peace of mind</h2>
+        <p>Choose how and when you want to be notified. Go Steady sends smart alerts directly to your phone — from low activity warnings to weekly summaries — so you're always in the loop without being overwhelmed.</p>
         <ul class="showcase-list">
           <li>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="20 6 9 17 4 12"/>
             </svg>
-            Activity tracking shows daily mobility patterns
+            Customizable notification thresholds
           </li>
           <li>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="20 6 9 17 4 12"/>
             </svg>
-            Instant fall detection alerts sent to your phone
+            Push notifications or email digests
           </li>
           <li>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="20 6 9 17 4 12"/>
             </svg>
-            Green indicator ring confirms active connection
-          </li>
-          <li>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"/>
-            </svg>
-            Weather-resistant for indoor and outdoor use
+            Share notifications with multiple family members
           </li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- App Showcase -->
-  <section class="showcase app-showcase">
-    <div class="showcase-inner reverse">
-      <div class="showcase-image app-image">
-        <img src="app-screenshot.png" alt="Go Steady mobile app showing weekly steps chart and low activity alert">
+  <!-- Dashboard Showcase -->
+  <section class="showcase dashboard-showcase">
+    <div class="showcase-inner">
+      <div class="showcase-image dashboard-image">
+        <img src="steady-desktop-view.png" alt="Go Steady web dashboard showing activity metrics, weekly charts, and alerts">
       </div>
       <div class="showcase-content">
         <h2>See the Trends That Matter</h2>
-        <p>The Go Steady app gives caregivers a clear window into daily activity—without being intrusive. Get the insights that give you peace of mind, right when you need them.</p>
+        <p>The Go Steady portal gives caregivers a clear window into daily activity—without being intrusive. Get the insights that give you peace of mind, right when you need them.</p>
         <ul class="showcase-list">
           <li>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
