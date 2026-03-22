@@ -122,9 +122,9 @@
       min-height: 100vh;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      align-items: end;
+      align-items: center;
       padding: 8rem 4rem 4rem;
-      gap: 1rem;
+      gap: 2rem;
       max-width: 1400px;
       margin: 0 auto;
     }
@@ -251,47 +251,84 @@
       font-weight: 600;
     }
 
-    .hero-image {
-      position: relative;
+    .hero-product {
       animation: fadeUp 1s ease-out 0.2s both;
       display: flex;
-      align-items: flex-end;
-      justify-content: flex-start;
-      align-self: flex-end;
-      margin-left: -3rem;
+      align-items: center;
+      gap: 2.5rem;
     }
 
-    .hero-image .walker-img {
-      height: 420px;
+    .hero-product-img {
+      height: 560px;
       width: auto;
-      border-radius: 24px;
-      box-shadow: 0 40px 80px rgba(45, 58, 46, 0.12);
+      flex-shrink: 0;
     }
 
-    .hero-image .feature-img {
-      height: 630px;
-      width: auto;
-      margin-bottom: -60px;
+    .hero-feature-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
     }
 
-    .hero-image .phone-video {
-      height: 380px;
-      width: 265px;
-      object-fit: cover;
-      border-radius: 36px;
-      box-shadow: 0 30px 60px rgba(45, 58, 46, 0.2);
+    .hfp-eyebrow {
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--color-sage);
+      margin-bottom: 0.75rem;
     }
 
-    .hero-image::after {
-      content: '';
-      position: absolute;
-      bottom: -20px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      height: 40px;
-      background: radial-gradient(ellipse, rgba(45, 58, 46, 0.1) 0%, transparent 70%);
-      filter: blur(10px);
+    .hfp-title {
+      font-family: var(--font-serif);
+      font-size: 2.25rem;
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--color-text);
+      margin-bottom: 2.5rem;
+    }
+
+    .hfp-features {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .hfp-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hfp-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(74, 124, 89, 0.08);
+      border: 1px solid rgba(74, 124, 89, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+
+    .hfp-text strong {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-text);
+      line-height: 1.3;
+    }
+
+    .hfp-text span {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      color: var(--color-text-soft);
+      line-height: 1.4;
     }
 
     /* Features Section */
@@ -695,6 +732,88 @@
       display: none;
     }
 
+    /* FAQ Section */
+    .faq {
+      padding: 6rem 4rem;
+      background: var(--color-cream);
+    }
+
+    .faq-inner {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .faq .section-header {
+      margin-bottom: 3rem;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .faq-item:first-of-type {
+      border-top: 1px solid var(--color-border);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 1.5rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--font-sans);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--color-text);
+      gap: 1.5rem;
+      transition: color 0.2s ease;
+    }
+
+    .faq-question:hover {
+      color: var(--color-sage);
+    }
+
+    .faq-question svg {
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+      color: var(--color-sage);
+    }
+
+    .faq-item.open .faq-question svg {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+    }
+
+    .faq-answer p {
+      padding-bottom: 1.5rem;
+      font-size: 1rem;
+      color: var(--color-text-soft);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 768px) {
+      .faq {
+        padding: 4rem 1.5rem;
+      }
+
+      .faq-question {
+        font-size: 1rem;
+      }
+    }
+
     /* Footer */
     footer {
       padding: 4rem;
@@ -743,8 +862,17 @@
         order: 1;
       }
 
-      .hero-image {
+      .hero-product {
         order: 0;
+        justify-content: center;
+      }
+
+      .hero-product-img {
+        height: 420px;
+      }
+
+      .hfp-title {
+        font-size: 1.85rem;
       }
 
       .hero-subheading,
@@ -792,17 +920,8 @@
         display: block;
       }
 
-      .hero-image .walker-img {
-        height: 360px;
-      }
-
-      .hero-image .feature-img {
-        height: 500px;
-      }
-
-      .hero-image .phone-video {
-        height: 320px;
-        width: 220px;
+      .hfp-title {
+        font-size: 1.4rem;
       }
 
       .showcase-content {
@@ -835,23 +954,29 @@
         padding: 4rem 1.5rem;
       }
 
-      .hero-image {
-        gap: 1rem;
+      .hero-product {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
       }
 
-      .hero-image .walker-img {
-        height: 280px;
-        width: auto;
+      .hero-product-img {
+        height: 320px;
       }
 
-      .hero-image .feature-img {
-        height: 380px;
+      .hero-feature-panel {
+        align-items: center;
+        text-align: center;
       }
 
-      .hero-image .phone-video {
-        height: 240px;
-        width: 160px;
-        border-radius: 24px;
+      .hfp-title {
+        font-size: 1.3rem;
+      }
+
+      .hfp-row {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.4rem;
       }
 
       .waitlist {
@@ -873,87 +998,6 @@
   </style>
 </head>
 <body>
-  <!-- Password Gate -->
-  <div id="password-gate" style="
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, #3A6147 0%, #4A7C59 50%, #5D9A6F 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-  ">
-    <div style="
-      background: white;
-      padding: 3rem;
-      border-radius: 24px;
-      box-shadow: 0 40px 80px rgba(0,0,0,0.2);
-      text-align: center;
-      max-width: 400px;
-      width: 90%;
-    ">
-      <div style="font-family: 'Fraunces', Georgia, serif; font-size: 1.75rem; color: #2D3A2E; margin-bottom: 0.5rem;">Go Steady</div>
-      <p style="font-family: 'Inter', sans-serif; color: #5A6B5C; margin-bottom: 2rem; font-size: 0.95rem;">Enter the password to preview this site</p>
-      <input 
-        type="password" 
-        id="password-input" 
-        placeholder="Enter password"
-        style="
-          width: 100%;
-          padding: 1rem;
-          border: 1px solid #E5E0D8;
-          border-radius: 12px;
-          font-size: 1rem;
-          margin-bottom: 1rem;
-          font-family: 'Inter', sans-serif;
-          background: #F9F6F0;
-          box-sizing: border-box;
-        "
-        onkeypress="if(event.key === 'Enter') checkPassword()"
-      >
-      <button 
-        onclick="checkPassword()"
-        style="
-          width: 100%;
-          padding: 1rem;
-          background: #4A7C59;
-          color: white;
-          border: none;
-          border-radius: 12px;
-          font-size: 1rem;
-          font-weight: 600;
-          cursor: pointer;
-          font-family: 'Inter', sans-serif;
-        "
-      >Enter</button>
-      <p id="password-error" style="color: #c85050; margin-top: 1rem; font-size: 0.9rem; display: none; font-family: 'Inter', sans-serif;">Incorrect password</p>
-    </div>
-  </div>
-
-  <script>
-    // Simple password protection - change 'gosteady2026' to your desired password
-    const SITE_PASSWORD = 'gosteady2026';
-    
-    // Check if already authenticated
-    if (sessionStorage.getItem('authenticated') === 'true') {
-      document.getElementById('password-gate').style.display = 'none';
-    }
-    
-    function checkPassword() {
-      const input = document.getElementById('password-input').value;
-      if (input === SITE_PASSWORD) {
-        sessionStorage.setItem('authenticated', 'true');
-        document.getElementById('password-gate').style.display = 'none';
-      } else {
-        document.getElementById('password-error').style.display = 'block';
-        document.getElementById('password-input').value = '';
-      }
-    }
-  </script>
-
   <!-- Navigation -->
   <nav>
     <div class="logo">
@@ -970,7 +1014,7 @@
       <h1>Peace of Mind, <em>Delivered Step-by-Step.</em></h1>
       <p class="hero-subheading">Turn any walker into a discreet safety companion, no app required.</p>
 <p class="hero-body">Go Steady monitors and alerts on mobility trends — helping loved ones stay independent and caregivers stay informed.</p>
-        <p class="hero-shipping"><em><strong>Shipping September 2026</strong></em></p>
+        <p class="hero-shipping"><em><strong>Shipping Late 2026</strong></em></p>
         <div class="hero-cta-group">
         <a href="#waitlist" class="btn-primary">
           Request more info
@@ -983,8 +1027,35 @@
         </div>
       </div>
     </div>
-    <div class="hero-image">
-      <img src="closeup-features.png" alt="Go Steady device showing automatic stability scores, mobility insights, weight transfer tracking, and event notifications" class="feature-img">
+    <div class="hero-product">
+      <img src="product-closeup2.png" alt="Go Steady smart walker attachment with green indicator ring" class="hero-product-img">
+      <div class="hero-feature-panel">
+        <div class="hfp-eyebrow">Introducing</div>
+        <div class="hfp-title">GoSteady<br>Smart Walker<br>Attachment</div>
+        <div class="hfp-features">
+          <div class="hfp-row">
+            <div class="hfp-icon">📍</div>
+            <div class="hfp-text">
+              <strong>Live Activity Tracking</strong>
+              <span>Know when they're moving</span>
+            </div>
+          </div>
+          <div class="hfp-row">
+            <div class="hfp-icon">⚠️</div>
+            <div class="hfp-text">
+              <strong>Fall Risk Assessment</strong>
+              <span>Alerts before problems arise</span>
+            </div>
+          </div>
+          <div class="hfp-row">
+            <div class="hfp-icon">📵</div>
+            <div class="hfp-text">
+              <strong>No Phone Needed</strong>
+              <span>For the walker user</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1159,7 +1230,7 @@
       <h2>Be first in line</h2>
       <p class="waitlist-subtitle">Reserve yours today at our introductory price</p>
       <div class="waitlist-price">$129</div>
-      <p class="waitlist-shipping">Expected shipping: September 2026</p>
+      <p class="waitlist-shipping">Expected shipping: Late 2026</p>
       
       <div class="waitlist-form">
         <div class="form-fields">
@@ -1211,6 +1282,47 @@
           <p>We'll send you updates as we get closer to launch.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq">
+    <div class="faq-inner">
+      <div class="section-header">
+        <p class="section-label">Common Questions</p>
+        <h2>Frequently Asked Questions</h2>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          Is there any financial commitment to joining the waitlist?
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>No, you won't be charged anything to join the waitlist. We'll follow up in waitlist order once shipping dates are confirmed.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          How is there no app required for the walker user?
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Go Steady uses a built-in cellular connection to send data directly to the cloud — no phone pairing, no Wi-Fi, and no Bluetooth required on the walker user's end. The device is completely self-contained. Caregivers access activity data through a simple web portal on their own phone or computer, so the person using the walker never has to interact with any technology at all.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          Will Go Steady fit my walker?
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>GoSteady fits standard (1" tube) walkers. Our team can help confirm compatibility if you email us at support@gosteady.co</p>
+        </div>
+      </div>
+
     </div>
   </section>
 
