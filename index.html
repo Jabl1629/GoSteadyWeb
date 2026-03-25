@@ -994,12 +994,7 @@
 
     @media (max-width: 768px) {
       .sticky-bar {
-        padding: 0.75rem 1rem;
-        gap: 0.75rem;
-      }
-
-      .sticky-bar-text {
-        font-size: 0.8rem;
+        display: none !important;
       }
 
       .exit-popup {
@@ -1140,6 +1135,10 @@
     }
 
     @media (max-width: 768px) {
+      .hide-mobile {
+        display: none !important;
+      }
+
       nav {
         padding: 1rem 1.5rem;
       }
@@ -1161,28 +1160,53 @@
       }
 
       .hero-product {
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
-        gap: 1.5rem;
+        gap: 1rem;
+        justify-content: center;
       }
 
       .hero-product-img {
-        height: 320px;
+        height: 200px;
       }
 
       .hero-feature-panel {
-        align-items: center;
-        text-align: center;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .hfp-eyebrow {
+        font-size: 0.65rem;
+        margin-bottom: 0.4rem;
       }
 
       .hfp-title {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+      }
+
+      .hfp-features {
+        gap: 0.75rem;
       }
 
       .hfp-row {
-        flex-direction: column;
-        text-align: center;
-        gap: 0.4rem;
+        flex-direction: row;
+        text-align: left;
+        gap: 0.5rem;
+      }
+
+      .hfp-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+      }
+
+      .hfp-text strong {
+        font-size: 0.8rem;
+      }
+
+      .hfp-text span {
+        font-size: 0.7rem;
       }
 
       .hero-inline-form {
@@ -1220,7 +1244,7 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
-      <div class="hero-badge">Now accepting pre-orders</div>
+      <div class="hero-badge">Coming Late 2026</div>
       <h1>Peace of Mind, <em>Delivered Step-by-Step.</em></h1>
       <p class="hero-subheading">Turn any walker into a discreet safety companion, no app required.</p>
 <p class="hero-body">Go Steady monitors and alerts on mobility trends — helping loved ones stay independent and caregivers stay informed.</p>
@@ -1275,7 +1299,7 @@
   </section>
 
   <!-- Product Showcase -->
-  <section class="showcase">
+  <section class="showcase hide-mobile">
     <div class="showcase-inner">
       <div class="showcase-image">
         <img src="walker-wide.jpg" alt="Go Steady attached to a standard walker, showing the sleek design with green indicator ring">
@@ -1314,7 +1338,7 @@
   </section>
 
   <!-- Features Section -->
-  <section class="features">
+  <section class="features hide-mobile">
     <div class="features-grid">
       <div class="feature-card">
         <div class="feature-icon">
@@ -1366,7 +1390,7 @@
   </section>
 
   <!-- Notifications Showcase -->
-  <section class="showcase notifications-showcase">
+  <section class="showcase notifications-showcase hide-mobile">
     <div class="showcase-inner reverse">
       <div class="showcase-image notification-video">
         <video autoplay loop muted playsinline>
@@ -1443,8 +1467,7 @@
   <section class="waitlist" id="waitlist">
     <div class="waitlist-inner">
       <h2>Be first in line</h2>
-      <p class="waitlist-subtitle">Reserve yours today at our introductory price</p>
-      <div class="waitlist-price">$129</div>
+      <p class="waitlist-subtitle">Sign up to get updates and early access pricing</p>
       <p class="waitlist-shipping">Expected shipping: Late 2026</p>
       
       <div class="waitlist-form">
@@ -1511,6 +1534,16 @@
         </button>
         <div class="faq-answer">
           <p>Go Steady uses a built-in cellular connection to send data directly to the cloud — no phone pairing, no Wi-Fi, and no Bluetooth required on the walker user's end. The device is completely self-contained. Caregivers access activity data through a simple web portal on their own phone or computer, so the person using the walker never has to interact with any technology at all.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          What will the introductory price be?
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>A $129 purchase price will be offered for those who sign up for early access.</p>
         </div>
       </div>
 
