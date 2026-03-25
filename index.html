@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Go Steady — Smart Walker Companion for Peace of Mind</title>
+  <script async src="https://plausible.io/js/pa-1F6kJUB_Hmb5mZjKjHFKC.js"></script>
+  <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -110,6 +112,7 @@
       font-weight: 500;
       cursor: pointer;
       transition: all 0.3s ease;
+      text-decoration: none;
     }
 
     .nav-cta:hover {
@@ -199,56 +202,92 @@
     .hero-shipping {
       font-size: 0.95rem;
       color: var(--color-sage);
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
 
-    .hero-cta-group {
+    .hero-inline-form {
       display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      align-items: center;
+      gap: 0.5rem;
+      max-width: 460px;
+      margin-bottom: 1rem;
     }
 
-    .btn-primary {
-      padding: 1rem 2rem;
+    .hero-inline-form input {
+      flex: 1;
+      padding: 0.9rem 1.15rem;
+      border: 1px solid var(--color-border);
+      border-radius: 100px;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      background: white;
+      min-width: 0;
+    }
+
+    .hero-inline-form input:focus {
+      outline: none;
+      border-color: var(--color-sage);
+      box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.1);
+    }
+
+    .hero-inline-form input::placeholder {
+      color: #A0A8A1;
+    }
+
+    .hero-inline-form button {
+      padding: 0.9rem 1.5rem;
       background: var(--color-sage);
       color: white;
       border: none;
       border-radius: 100px;
       font-family: var(--font-sans);
-      font-size: 1rem;
-      font-weight: 500;
+      font-size: 0.95rem;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
-      text-decoration: none;
-      display: inline-flex;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .hero-inline-form button:hover {
+      background: var(--color-sage-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(74, 124, 89, 0.3);
+    }
+
+    .hero-inline-success {
+      display: none;
       align-items: center;
       gap: 0.5rem;
-    }
-
-    .btn-primary:hover {
-      background: var(--color-sage-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(74, 124, 89, 0.3);
-    }
-
-    .btn-primary svg {
-      transition: transform 0.3s ease;
-    }
-
-    .btn-primary:hover svg {
-      transform: translateX(3px);
-    }
-
-    .hero-price {
+      color: var(--color-sage);
       font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .hero-inline-success.show {
+      display: flex;
+    }
+
+    .hero-inline-form.hidden {
+      display: none;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      align-items: center;
+      font-size: 0.9rem;
       color: var(--color-text-soft);
     }
 
-    .hero-price strong {
-      font-size: 1.3rem;
-      color: var(--color-text);
-      font-weight: 600;
+    .hero-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .hero-meta svg {
+      color: var(--color-sage);
     }
 
     .hero-product {
@@ -615,59 +654,6 @@
       color: #A0A8A1;
     }
 
-    .form-group select {
-      width: 100%;
-      padding: 1rem 1.25rem;
-      border: 1px solid var(--color-border);
-      border-radius: 12px;
-      font-family: var(--font-sans);
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      background: var(--color-cream);
-      color: var(--color-text);
-      cursor: pointer;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235A6B5C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 1rem center;
-    }
-
-    .form-group select:focus {
-      outline: none;
-      border-color: var(--color-sage);
-      box-shadow: 0 0 0 4px rgba(74, 124, 89, 0.1);
-    }
-
-    .form-group select {
-      width: 100%;
-      padding: 1rem 1.25rem;
-      border: 1px solid var(--color-border);
-      border-radius: 12px;
-      font-family: var(--font-sans);
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      background: var(--color-cream);
-      color: var(--color-text);
-      cursor: pointer;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%235A6B5C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 1rem center;
-      background-size: 1rem;
-    }
-
-    .form-group select:focus {
-      outline: none;
-      border-color: var(--color-sage);
-      box-shadow: 0 0 0 4px rgba(74, 124, 89, 0.1);
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
     .btn-submit {
       width: 100%;
       padding: 1.15rem;
@@ -814,6 +800,216 @@
       }
     }
 
+    /* Sticky Bottom Bar */
+    .sticky-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--color-text);
+      padding: 0.85rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      z-index: 99;
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .sticky-bar.visible {
+      transform: translateY(0);
+    }
+
+    .sticky-bar-text {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .sticky-bar-btn {
+      padding: 0.6rem 1.25rem;
+      background: var(--color-accent);
+      color: var(--color-text);
+      border: none;
+      border-radius: 100px;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .sticky-bar-btn:hover {
+      background: white;
+      color: var(--color-sage);
+    }
+
+    /* Exit Intent Popup */
+    .exit-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(45, 58, 46, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .exit-overlay.show {
+      display: flex;
+    }
+
+    .exit-popup {
+      background: white;
+      border-radius: 24px;
+      padding: 2.5rem;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2);
+      animation: fadeUp 0.3s ease-out;
+    }
+
+    .exit-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: var(--color-cream);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-soft);
+      transition: all 0.2s ease;
+    }
+
+    .exit-close:hover {
+      background: var(--color-border);
+    }
+
+    .exit-popup h3 {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+    }
+
+    .exit-popup p {
+      font-size: 0.95rem;
+      color: var(--color-text-soft);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .exit-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .exit-form input {
+      width: 100%;
+      padding: 0.9rem 1.15rem;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      background: var(--color-cream);
+    }
+
+    .exit-form input:focus {
+      outline: none;
+      border-color: var(--color-sage);
+      box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.1);
+    }
+
+    .exit-form input::placeholder {
+      color: #A0A8A1;
+    }
+
+    .exit-form button {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--color-sage);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .exit-form button:hover {
+      background: var(--color-sage-dark);
+    }
+
+    .exit-form-success {
+      display: none;
+      padding: 1rem 0;
+    }
+
+    .exit-form-success.show {
+      display: block;
+    }
+
+    .exit-form-success svg {
+      color: var(--color-sage);
+      margin-bottom: 0.5rem;
+    }
+
+    .exit-form-success p {
+      margin-bottom: 0;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    .exit-form.hidden {
+      display: none;
+    }
+
+    .exit-note {
+      font-size: 0.8rem;
+      color: var(--color-text-soft);
+      margin-top: 0.75rem;
+    }
+
+    @media (max-width: 768px) {
+      .sticky-bar {
+        padding: 0.75rem 1rem;
+        gap: 0.75rem;
+      }
+
+      .sticky-bar-text {
+        font-size: 0.8rem;
+      }
+
+      .exit-popup {
+        padding: 2rem 1.5rem;
+      }
+
+      .exit-popup h3 {
+        font-size: 1.35rem;
+      }
+    }
+
     /* Footer */
     footer {
       padding: 4rem;
@@ -881,7 +1077,16 @@
         margin-right: auto;
       }
 
-      .hero-cta-group {
+      .hero-inline-form {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-inline-success {
+        justify-content: center;
+      }
+
+      .hero-meta {
         justify-content: center;
       }
 
@@ -979,16 +1184,20 @@
         gap: 0.4rem;
       }
 
+      .hero-inline-form {
+        flex-direction: column;
+      }
+
+      .hero-inline-form button {
+        width: 100%;
+      }
+
       .waitlist {
         padding: 5rem 1.5rem;
       }
 
       .waitlist-form {
         padding: 2rem 1.5rem;
-      }
-
-      .form-row {
-        grid-template-columns: 1fr;
       }
 
       footer {
@@ -1004,7 +1213,7 @@
       <img src="logo.png" alt="Go Steady" class="logo-img">
       Go Steady
     </div>
-    <a href="#waitlist" class="nav-cta">Join Waitlist</a>
+    <a href="#waitlist" class="nav-cta">Get Early Access</a>
   </nav>
 
   <!-- Hero Section -->
@@ -1015,17 +1224,22 @@
       <p class="hero-subheading">Turn any walker into a discreet safety companion, no app required.</p>
 <p class="hero-body">Go Steady monitors and alerts on mobility trends — helping loved ones stay independent and caregivers stay informed.</p>
         <p class="hero-shipping"><em><strong>Shipping Late 2026</strong></em></p>
-        <div class="hero-cta-group">
-        <a href="#waitlist" class="btn-primary">
-          Request more info
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
-        <div class="hero-price">
-          Starting at <strong>$129</strong>
+        <form class="hero-inline-form" id="hero-form" name="waitlist-quick" method="POST" data-netlify="true">
+          <input type="hidden" name="form-name" value="waitlist-quick">
+          <input type="hidden" name="source" value="hero">
+          <input type="email" name="email" placeholder="Enter your email" required>
+          <button type="submit">Stay Updated</button>
+        </form>
+        <div class="hero-inline-success" id="hero-success">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          You're on the list — we'll be in touch!
         </div>
-      </div>
+        <div class="hero-meta">
+          <span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            No payment or commitment required
+          </span>
+        </div>
     </div>
     <div class="hero-product">
       <img src="product-closeup2.png" alt="Go Steady smart walker attachment with green indicator ring" class="hero-product-img">
@@ -1234,34 +1448,20 @@
       
       <div class="waitlist-form">
         <div class="form-fields">
-          <h3 class="form-title">Join the Waitlist</h3>
-          <p class="form-subtitle">No payment required. We'll notify you when Go Steady is ready.</p>
+          <h3 class="form-title">Stay Updated</h3>
+          <p class="form-subtitle">No payment or commitment required. We'll notify you when Go Steady is ready.</p>
           
           <form id="waitlist-form" name="waitlist" method="POST" data-netlify="true">
             <input type="hidden" name="form-name" value="waitlist">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="firstName">First Name</label>
-                <input type="text" id="firstName" name="firstName" placeholder="Jane" required>
-              </div>
-              <div class="form-group">
-                <label for="lastName">Last Name</label>
-                <input type="text" id="lastName" name="lastName" placeholder="Smith" required>
-              </div>
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" name="firstName" placeholder="Jane" required>
             </div>
             <div class="form-group">
               <label for="email">Email Address</label>
               <input type="email" id="email" name="email" placeholder="jane@example.com" required>
             </div>
-            <div class="form-group">
-              <label for="userType">I am a...</label>
-              <select id="userType" name="userType" required>
-                <option value="" disabled selected>Select one</option>
-                <option value="caregiver">Caregiver or family member</option>
-                <option value="user">Walker user</option>
-              </select>
-            </div>
-            <button type="submit" class="btn-submit">Reserve My Spot</button>
+            <button type="submit" class="btn-submit">Stay Updated</button>
           </form>
           
           <p class="form-note">
@@ -1326,6 +1526,34 @@
     </div>
   </section>
 
+  <!-- Sticky Bottom Bar -->
+  <div class="sticky-bar" id="sticky-bar">
+    <span class="sticky-bar-text">Get early access to Go Steady</span>
+    <a href="#waitlist" class="sticky-bar-btn">Stay Updated</a>
+  </div>
+
+  <!-- Exit Intent Popup -->
+  <div class="exit-overlay" id="exit-overlay">
+    <div class="exit-popup">
+      <button class="exit-close" id="exit-close" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <h3>Before you go...</h3>
+      <p>Join the waitlist to get notified when Go Steady is ready to ship — plus early access pricing.</p>
+      <form class="exit-form" id="exit-form" name="waitlist-quick" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="waitlist-quick">
+        <input type="hidden" name="source" value="exit-popup">
+        <input type="email" name="email" placeholder="Enter your email" required>
+        <button type="submit">Stay Updated</button>
+      </form>
+      <div class="exit-form-success" id="exit-form-success">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <p>You're on the list!</p>
+      </div>
+      <p class="exit-note">No spam, no payment — just launch updates.</p>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer>
     <div class="footer-logo">
@@ -1339,27 +1567,44 @@
   </footer>
 
   <script>
-    // Form submission handler for Netlify
-    document.getElementById('waitlist-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const form = e.target;
+    function submitToNetlify(form) {
       const formData = new FormData(form);
-      
-      fetch('/', {
+      return fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams(formData).toString()
-      })
-      .then(() => {
-        // Show success state
+      });
+    }
+
+    // Hero inline form
+    document.getElementById('hero-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      submitToNetlify(this).then(() => {
+        this.classList.add('hidden');
+        document.getElementById('hero-success').classList.add('show');
+        sessionStorage.setItem('waitlist-joined', 'true');
+      }).catch(() => alert('Something went wrong. Please try again.'));
+    });
+
+    // Main waitlist form
+    document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      submitToNetlify(this).then(() => {
         document.querySelector('.form-fields').classList.add('hidden');
         document.getElementById('form-success').classList.add('show');
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        alert('Something went wrong. Please try again.');
-      });
+        sessionStorage.setItem('waitlist-joined', 'true');
+      }).catch(() => alert('Something went wrong. Please try again.'));
+    });
+
+    // Exit popup form
+    document.getElementById('exit-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      submitToNetlify(this).then(() => {
+        this.classList.add('hidden');
+        document.getElementById('exit-form-success').classList.add('show');
+        sessionStorage.setItem('waitlist-joined', 'true');
+        setTimeout(() => closeExitPopup(), 2000);
+      }).catch(() => alert('Something went wrong. Please try again.'));
     });
 
     // Smooth scroll for anchor links
@@ -1368,13 +1613,67 @@
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
     });
+
+    // Sticky bottom bar — show after scrolling past the hero, hide near the waitlist
+    const stickyBar = document.getElementById('sticky-bar');
+    const waitlistSection = document.getElementById('waitlist');
+
+    function updateStickyBar() {
+      const scrollY = window.scrollY;
+      const triggerPoint = window.innerHeight * 0.6;
+      const waitlistTop = waitlistSection.getBoundingClientRect().top + scrollY;
+      const hideZone = waitlistTop - window.innerHeight * 0.5;
+
+      if (scrollY > triggerPoint && scrollY < hideZone) {
+        stickyBar.classList.add('visible');
+      } else {
+        stickyBar.classList.remove('visible');
+      }
+    }
+
+    window.addEventListener('scroll', updateStickyBar, { passive: true });
+
+    // Exit intent popup
+    let exitShown = false;
+
+    function showExitPopup() {
+      if (exitShown || sessionStorage.getItem('waitlist-joined') === 'true' || sessionStorage.getItem('exit-dismissed') === 'true') return;
+      exitShown = true;
+      document.getElementById('exit-overlay').classList.add('show');
+    }
+
+    function closeExitPopup() {
+      document.getElementById('exit-overlay').classList.remove('show');
+      sessionStorage.setItem('exit-dismissed', 'true');
+    }
+
+    document.getElementById('exit-close').addEventListener('click', closeExitPopup);
+    document.getElementById('exit-overlay').addEventListener('click', function(e) {
+      if (e.target === this) closeExitPopup();
+    });
+
+    // Desktop: trigger on mouse leaving viewport toward top
+    document.addEventListener('mouseout', function(e) {
+      if (e.clientY <= 0) showExitPopup();
+    });
+
+    // Mobile: trigger on rapid scroll-up after spending 8+ seconds on page
+    let mobileReady = false;
+    let lastScrollY = 0;
+    setTimeout(() => { mobileReady = true; }, 8000);
+
+    window.addEventListener('scroll', function() {
+      if (!mobileReady || exitShown) return;
+      const currentY = window.scrollY;
+      if (currentY < lastScrollY - 100 && currentY < window.innerHeight) {
+        showExitPopup();
+      }
+      lastScrollY = currentY;
+    }, { passive: true });
   </script>
 </body>
 </html>
