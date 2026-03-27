@@ -222,6 +222,42 @@
       margin-bottom: 1.5rem;
     }
 
+    .incentive-badge {
+      display: inline-block;
+      background: rgba(74, 124, 89, 0.15);
+      color: var(--color-sage-dark);
+      padding: 0.6rem 1.15rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      border-left: 4px solid var(--color-sage);
+    }
+
+    .incentive-badge-light {
+      display: inline-block;
+      background: rgba(74, 124, 89, 0.15);
+      color: var(--color-sage-dark);
+      padding: 0.6rem 1.15rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      border-left: 4px solid var(--color-sage);
+    }
+
+    .incentive-badge-white {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      padding: 0.6rem 1.15rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      border-left: 4px solid rgba(255, 255, 255, 0.7);
+    }
+
     .hero-inline-form {
       display: flex;
       gap: 0.5rem;
@@ -1201,6 +1237,13 @@
         gap: 0.4rem;
       }
 
+      .incentive-badge,
+      .incentive-badge-light,
+      .incentive-badge-white {
+        font-size: 0.82rem;
+        padding: 0.4rem 0.85rem;
+      }
+
       .hero-inline-form {
         flex-direction: column;
       }
@@ -1230,17 +1273,16 @@
       <img src="logo.png" alt="Go Steady" class="logo-img">
       Go Steady
     </div>
-    <a href="#waitlist" class="nav-cta">Get Early Access</a>
+    <a href="#waitlist" class="nav-cta">Get $20 Off</a>
   </nav>
 
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
-      <div class="hero-badge">Coming Late 2026</div>
       <h1>Peace of Mind, <em>Delivered Step-by-Step.</em></h1>
       <p class="hero-subheading">Turn any walker into a discreet safety companion, no app required.</p>
 <p class="hero-body">Go Steady monitors and alerts on mobility trends — helping loved ones stay independent and caregivers stay informed.</p>
-        <p class="hero-shipping"><em><strong>Shipping Late 2026</strong></em></p>
+        <div class="incentive-badge">Get $20 off at launch — only for early signups</div>
         <form class="hero-inline-form" id="hero-form" name="waitlist-quick" method="POST" data-netlify="true">
           <input type="hidden" name="form-name" value="waitlist-quick">
           <input type="hidden" name="source" value="hero">
@@ -1249,7 +1291,7 @@
         </form>
         <div class="hero-inline-success" id="hero-success">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          You're on the list — we'll be in touch!
+          You're in! Your $20 discount is locked in.
         </div>
         <div class="hero-meta">
           <span>
@@ -1290,39 +1332,35 @@
     </div>
   </section>
 
-  <!-- Product Showcase -->
-  <section class="showcase">
-    <div class="showcase-inner">
-      <div class="showcase-image">
-        <img src="walker-wide.jpg" alt="Go Steady attached to a standard walker, showing the sleek design with green indicator ring">
+  <!-- Notifications Showcase -->
+  <section class="showcase notifications-showcase">
+    <div class="showcase-inner reverse">
+      <div class="showcase-image notification-video">
+        <video autoplay loop muted playsinline>
+          <source src="go-steady-movie1.mp4" type="video/mp4">
+        </video>
       </div>
       <div class="showcase-content">
-        <h2>Discreet design that doesn't draw attention</h2>
-        <p>Go Steady replaces the standard walker foot, blending seamlessly into your loved one's daily routine. They'll never feel "monitored"—and you'll always have peace of mind.</p>
+        <h2>Configure notifications for your peace of mind</h2>
+        <p>Choose how and when you want to be notified. Go Steady sends smart alerts directly to your phone — from low activity warnings to weekly summaries — so you're always in the loop without being overwhelmed.</p>
         <ul class="showcase-list hide-mobile">
           <li>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="20 6 9 17 4 12"/>
             </svg>
-            Activity tracking shows daily mobility patterns
+            Customizable notification thresholds
           </li>
           <li>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="20 6 9 17 4 12"/>
             </svg>
-            Instant sharing of activity alerts with caregivers
+            Push notifications or email digests
           </li>
           <li>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="20 6 9 17 4 12"/>
             </svg>
-            Green indicator ring confirms active connection
-          </li>
-          <li>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"/>
-            </svg>
-            Weather-resistant for indoor and outdoor use
+            Share notifications with multiple family members
           </li>
         </ul>
       </div>
@@ -1381,35 +1419,39 @@
     </div>
   </section>
 
-  <!-- Notifications Showcase -->
-  <section class="showcase notifications-showcase">
-    <div class="showcase-inner reverse">
-      <div class="showcase-image notification-video">
-        <video autoplay loop muted playsinline>
-          <source src="go-steady-movie1.mp4" type="video/mp4">
-        </video>
+  <!-- Product Showcase -->
+  <section class="showcase">
+    <div class="showcase-inner">
+      <div class="showcase-image">
+        <img src="walker-wide.jpg" alt="Go Steady attached to a standard walker, showing the sleek design with green indicator ring">
       </div>
       <div class="showcase-content">
-        <h2>Configure notifications for your peace of mind</h2>
-        <p>Choose how and when you want to be notified. Go Steady sends smart alerts directly to your phone — from low activity warnings to weekly summaries — so you're always in the loop without being overwhelmed.</p>
+        <h2>Discreet design that doesn't draw attention</h2>
+        <p>Go Steady replaces the standard walker foot, blending seamlessly into your loved one's daily routine. They'll never feel "monitored"—and you'll always have peace of mind.</p>
         <ul class="showcase-list hide-mobile">
           <li>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="20 6 9 17 4 12"/>
             </svg>
-            Customizable notification thresholds
+            Activity tracking shows daily mobility patterns
           </li>
           <li>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="20 6 9 17 4 12"/>
             </svg>
-            Push notifications or email digests
+            Instant sharing of activity alerts with caregivers
           </li>
           <li>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="20 6 9 17 4 12"/>
             </svg>
-            Share notifications with multiple family members
+            Green indicator ring confirms active connection
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            Weather-resistant for indoor and outdoor use
           </li>
         </ul>
       </div>
@@ -1459,13 +1501,13 @@
   <section class="waitlist" id="waitlist">
     <div class="waitlist-inner">
       <h2>Be first in line</h2>
-      <p class="waitlist-subtitle">Sign up to get updates and early access pricing</p>
-      <p class="waitlist-shipping">Expected shipping: Late 2026</p>
+      <p style="color: rgba(255,255,255,0.7); font-size: 1.05rem; margin-bottom: 1.25rem;">Launching Late 2026</p>
+      <div class="incentive-badge-white">Get $20 off at launch — only for early signups</div>
       
       <div class="waitlist-form">
         <div class="form-fields">
           <h3 class="form-title">Stay Updated</h3>
-          <p class="form-subtitle">No payment or commitment required. We'll notify you when Go Steady is ready.</p>
+          <p class="form-subtitle">Sign up to lock in $20 off. No payment or commitment required.</p>
           
           <form id="waitlist-form" name="waitlist" method="POST" data-netlify="true">
             <input type="hidden" name="form-name" value="waitlist">
@@ -1494,8 +1536,8 @@
             <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
             <polyline points="22 4 12 14.01 9 11.01"/>
           </svg>
-          <h3>You're on the list!</h3>
-          <p>We'll send you updates as we get closer to launch.</p>
+          <h3>You're in! $20 discount locked.</h3>
+          <p>We'll send you updates and your discount code as we get closer to launch.</p>
         </div>
       </div>
     </div>
@@ -1535,7 +1577,7 @@
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
         <div class="faq-answer">
-          <p>A $129 purchase price will be offered for those who sign up for early access.</p>
+          <p>Go Steady will launch at $149. Early signups receive $20 off — bringing your price to just $129. Sign up now to lock in the discount.</p>
         </div>
       </div>
 
@@ -1554,7 +1596,7 @@
 
   <!-- Sticky Bottom Bar -->
   <div class="sticky-bar" id="sticky-bar">
-    <span class="sticky-bar-text">Get early access to Go Steady</span>
+    <span class="sticky-bar-text">Sign up today and get $20 off at launch</span>
     <a href="#waitlist" class="sticky-bar-btn">Stay Updated</a>
   </div>
 
@@ -1564,8 +1606,9 @@
       <button class="exit-close" id="exit-close" aria-label="Close">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
-      <h3>Before you go...</h3>
-      <p>Join the waitlist to get notified when Go Steady is ready to ship — plus early access pricing.</p>
+      <h3>Don't miss out on $20 off</h3>
+      <div class="incentive-badge-light">Only for early signups</div>
+      <p>Sign up now to lock in $20 off when Go Steady launches. No payment required.</p>
       <form class="exit-form" id="exit-form" name="waitlist-quick" method="POST" data-netlify="true">
         <input type="hidden" name="form-name" value="waitlist-quick">
         <input type="hidden" name="source" value="exit-popup">
@@ -1574,9 +1617,9 @@
       </form>
       <div class="exit-form-success" id="exit-form-success">
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        <p>You're on the list!</p>
+        <p>You're in! Your $20 discount is locked in.</p>
       </div>
-      <p class="exit-note">No spam, no payment — just launch updates.</p>
+      <p class="exit-note">No spam, no payment — just launch updates and your discount.</p>
     </div>
   </div>
 
