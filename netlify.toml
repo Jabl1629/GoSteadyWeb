@@ -1,6 +1,12 @@
 [build]
   publish = "."
 
+# Serve logo.png when browsers request /favicon.ico
+[[redirects]]
+  from = "/favicon.ico"
+  to = "/logo.png"
+  status = 200
+
 # Redirect all traffic to index.html for SPA-like behavior if needed
 # [[redirects]]
 #   from = "/*"
