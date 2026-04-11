@@ -1644,7 +1644,7 @@
         document.getElementById('hero-success').classList.add('show');
         sessionStorage.setItem('waitlist-joined', 'true');
         if (typeof fbq === 'function') fbq('track', 'CompleteRegistration', {value: 0, currency: 'USD'});
-        setTimeout(() => { window.location.href = '/survey'; }, 1500);
+        setTimeout(() => { window.location.href = '/survey'; }, 500);
       }).catch(() => alert('Something went wrong. Please try again.'));
     });
 
@@ -1656,7 +1656,7 @@
         document.getElementById('form-success').classList.add('show');
         sessionStorage.setItem('waitlist-joined', 'true');
         if (typeof fbq === 'function') fbq('track', 'CompleteRegistration', {value: 0, currency: 'USD'});
-        setTimeout(() => { window.location.href = '/survey'; }, 1500);
+        setTimeout(() => { window.location.href = '/survey'; }, 500);
       }).catch(() => alert('Something went wrong. Please try again.'));
     });
 
