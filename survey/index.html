@@ -103,16 +103,81 @@
 
     /* Pilot Banner */
     .pilot-banner {
-      background: linear-gradient(135deg, var(--color-sage-dark) 0%, var(--color-sage) 100%);
+      background: linear-gradient(135deg, var(--color-sage-dark) 0%, var(--color-sage) 50%, var(--color-sage-light) 100%);
       color: white;
       text-align: center;
-      padding: 1rem 2rem;
-      font-size: 0.95rem;
-      line-height: 1.6;
+      padding: 2rem 2rem 2.5rem;
+      position: relative;
+      overflow: hidden;
     }
 
-    .pilot-banner strong {
-      font-weight: 700;
+    .pilot-banner::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(255,255,255,0.12) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(255,255,255,0.08) 0%, transparent 40%);
+      pointer-events: none;
+    }
+
+    .pilot-banner-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .pilot-banner-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .pilot-banner-headline {
+      font-family: var(--font-serif);
+      font-size: 1.65rem;
+      font-weight: 400;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+
+    .pilot-banner-headline em {
+      font-style: italic;
+      text-decoration: underline;
+      text-decoration-color: rgba(255, 255, 255, 0.5);
+      text-underline-offset: 4px;
+    }
+
+    .pilot-banner-sub {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      opacity: 0.9;
+      max-width: 520px;
+      margin: 0 auto 1.25rem;
+    }
+
+    .pilot-banner-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      opacity: 0.85;
+      animation: bounceDown 2s ease-in-out infinite;
+    }
+
+    @keyframes bounceDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
     }
 
     /* Product Hero */
@@ -523,6 +588,18 @@
         padding: 1rem 1.5rem;
       }
 
+      .pilot-banner {
+        padding: 1.5rem 1.5rem 2rem;
+      }
+
+      .pilot-banner-headline {
+        font-size: 1.35rem;
+      }
+
+      .pilot-banner-sub {
+        font-size: 0.9rem;
+      }
+
       .product-hero {
         flex-direction: column;
         align-items: center;
@@ -578,7 +655,12 @@
 
   <!-- Pilot Offer Banner -->
   <div class="pilot-banner">
-    <strong>Special Offer:</strong> We are looking for 10 users to join our first free pilot. Complete the survey to join and receive a GoSteady unit 100% free when we launch!
+    <div class="pilot-banner-content">
+      <div class="pilot-banner-badge">Limited — 10 Spots Only</div>
+      <div class="pilot-banner-headline">Get a GoSteady Unit <em>100% Free</em></div>
+      <p class="pilot-banner-sub">We're selecting 10 users for our first pilot program. Complete the short survey below to join and receive a complimentary GoSteady unit when we launch.</p>
+      <div class="pilot-banner-arrow">Scroll down to apply ↓</div>
+    </div>
   </div>
 
   <!-- Product Feature Hero -->
