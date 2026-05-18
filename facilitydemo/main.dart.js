@@ -74310,7 +74310,7 @@ Zy(){var s=this.c,r=this.d
 if(s===r)return s===1?"1 resident":""+s+" residents"
 return""+s+" of "+r+" residents"},
 H(a){var s=null,r=A.a0(a).p1.e,q=this.e,p=t.p
-return A.aug(A.b([A.bX(A.b([A.aF("Patient Census",s,s,s,r==null?s:r.qw(24,B.S),s,s),B.k7,new A.bN(B.me,A.aF(this.Zy(),s,s,s,B.yA,s,s),s),B.k8,new A.bN(B.DA,new A.Ls(q.f,q.gTb(),s),s)],p),B.cg,B.a0),B.bK,A.atr(B.F3,"Sort",q.gT9(),new A.afK(),B.FH,q.d,t.zH),A.atr(B.EY,"Filter",q.gT2(),new A.afL(),B.Gy,q.e,t.zR)],p),B.yR,12,16)}}
+return A.aug(A.b([A.bX(A.b([A.aF("Census",s,s,s,r==null?s:r.qw(24,B.S),s,s),B.k7,new A.bN(B.me,A.aF(this.Zy(),s,s,s,B.yA,s,s),s),B.k8,new A.bN(B.DA,new A.Ls(q.f,q.gTb(),s),s)],p),B.cg,B.a0),B.bK,A.atr(B.F3,"Sort",q.gT9(),new A.afK(),B.FH,q.d,t.zH),A.atr(B.EY,"Filter",q.gT2(),new A.afL(),B.Gy,q.e,t.zR)],p),B.yR,12,16)}}
 A.afK.prototype={
 $1(a){return a.ghv()},
 $S:481}
