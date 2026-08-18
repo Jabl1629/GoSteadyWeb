@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Go Steady — Smart Walker Companion for Peace of Mind</title>
+  <title>Go Steady — Smart Walker &amp; Rollator Companion for Peace of Mind</title>
+  <meta name="description" content="A smart walker and rollator attachment that quietly tracks activity — nothing to wear, charge, or maintain. Replaces the walker glide, or clips on as a cupholder.">
   <!-- Meta Pixel Code -->
   <script>
   !function(f,b,e,v,n,t,s)
@@ -344,10 +345,57 @@
       gap: 2.5rem;
     }
 
-    .hero-product-img {
-      height: 560px;
-      width: auto;
+    .hero-product-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
       flex-shrink: 0;
+    }
+
+    .hp-fig {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hp-fig img {
+      width: 250px;
+      height: 250px;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* Both product photos carry uneven transparent margins, so centring the frames
+       does not centre the products. The rollator's clamp juts left: its mass centroid
+       sits at x .554 but the cup barrel alone spans .38-.90 (centre .638), so the two
+       give different "centres". -10% splits them — the cup reads as centred without the
+       clamp overhanging far enough to look left-shifted against the walker. The Y values
+       put both products' bases on one line (alpha bases .848 / .832). Percentages of the
+       square frame, so they hold at every breakpoint. */
+    .hp-fig img,
+    .fit-media img {
+      transform: translate(var(--nx, 0), var(--ny, 0));
+    }
+
+    .p-walker {
+      --nx: 0;
+      --ny: 2.4%;
+    }
+
+    .p-rollator {
+      --nx: -10%;
+      --ny: 4%;
+    }
+
+    .hp-fig figcaption {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--color-text-soft);
+      text-align: center;
+      white-space: nowrap;
     }
 
     .hero-feature-panel {
@@ -589,6 +637,122 @@
       width: 100%;
       border-radius: 16px;
       box-shadow: 0 40px 80px rgba(45, 58, 46, 0.15);
+    }
+
+    /* Two Ways to Fit */
+    .fits {
+      padding: 5rem 4rem;
+      background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-warm-white) 100%);
+    }
+
+    .fits-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .fits .section-header {
+      margin-bottom: 3.5rem;
+    }
+
+    .fits-sub {
+      font-size: 1.05rem;
+      color: var(--color-text-soft);
+      line-height: 1.7;
+      max-width: 620px;
+      margin: 1.25rem auto 0;
+    }
+
+    .fits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .fit-card {
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: 24px;
+      padding: 2rem;
+      text-align: left;
+      transition: all 0.4s ease;
+    }
+
+    .fit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(45, 58, 46, 0.08);
+      border-color: var(--color-sage-light);
+    }
+
+    .fit-media {
+      background: radial-gradient(circle at 50% 45%, #FFFFFF 0%, var(--color-cream) 100%);
+      border: 1px solid var(--color-border);
+      border-radius: 18px;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.75rem;
+    }
+
+    .fit-media img {
+      width: 280px;
+      max-width: 100%;
+      height: 280px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .fit-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--color-sage);
+      margin-bottom: 0.6rem;
+    }
+
+    .fit-card h3 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--color-text);
+      margin-bottom: 0.85rem;
+    }
+
+    .fit-desc {
+      font-size: 1rem;
+      color: var(--color-text-soft);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .fit-card .showcase-list li {
+      font-size: 0.95rem;
+      margin-bottom: 0.85rem;
+      justify-content: flex-start;
+      text-align: left;
+    }
+
+    .fit-card .showcase-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .fits-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      text-align: center;
+      font-size: 0.98rem;
+      color: var(--color-text-soft);
+      margin-top: 2.5rem;
+    }
+
+    .fits-note svg {
+      color: var(--color-sage);
+      flex-shrink: 0;
     }
 
     /* How it Works */
@@ -1105,8 +1269,14 @@
         justify-content: center;
       }
 
-      .hero-product-img {
-        height: 420px;
+      .hero-product-stack {
+        flex-direction: row;
+        gap: 1.5rem;
+      }
+
+      .hp-fig img {
+        width: 185px;
+        height: 185px;
       }
 
       .hfp-title {
@@ -1178,6 +1348,16 @@
       .showcase-list li {
         justify-content: center;
       }
+
+      .fits {
+        padding: 4rem 2rem;
+      }
+
+      .fits-grid {
+        grid-template-columns: 1fr;
+        max-width: 560px;
+        margin: 0 auto;
+      }
     }
 
     @media (max-width: 768px) {
@@ -1213,14 +1393,46 @@
         padding: 4rem 1.5rem;
       }
 
+      .fits {
+        padding: 4rem 1.5rem;
+      }
+
+      .fit-media {
+        height: 240px;
+      }
+
+      .fit-media img {
+        width: 205px;
+        height: 205px;
+      }
+
       .hero-product {
         flex-direction: column;
         align-items: center;
         gap: 1.5rem;
       }
 
-      .hero-product-img {
-        height: 280px;
+      .hero-product-stack {
+        flex-direction: row;
+        gap: 1.25rem;
+      }
+
+      .hp-fig {
+        width: 150px;
+      }
+
+      .hp-fig img {
+        width: 140px;
+        height: 140px;
+      }
+
+      .hp-fig figcaption {
+        white-space: normal;
+        font-size: 0.68rem;
+        line-height: 1.35;
+        /* the longer caption wraps to two lines here and the shorter one does
+           not, so reserve both lines to keep the pair on a common baseline */
+        min-height: 2.7em;
       }
 
       .hero-feature-panel {
@@ -1272,7 +1484,7 @@
   <section class="hero">
     <div class="hero-content">
       <h1>Peace of Mind, <em>Delivered Step-by-Step.</em></h1>
-      <p class="hero-subheading">Turn any walker into a discreet safety companion, no app required.</p>
+      <p class="hero-subheading">A smart walker + rollator attachment that quietly helps you track activity — nothing to wear, charge, or maintain.</p>
 <p class="hero-body">Go Steady monitors and alerts on mobility trends — helping loved ones stay independent and caregivers stay informed.</p>
         <form class="hero-inline-form" id="hero-form" name="waitlist-quick" method="POST" data-netlify="true">
           <input type="hidden" name="form-name" value="waitlist-quick">
@@ -1292,10 +1504,25 @@
         </div>
     </div>
     <div class="hero-product">
-      <img src="product-closeup2.png" alt="Go Steady smart walker attachment with green indicator ring" class="hero-product-img">
+      <div class="hero-product-stack">
+        <figure class="hp-fig">
+          <picture>
+            <source srcset="product-walker.webp" type="image/webp">
+            <img src="product-walker.png" class="p-walker" alt="Go Steady walker attachment — a grey sensor that replaces the walker glide">
+          </picture>
+          <figcaption>Smart walker glide</figcaption>
+        </figure>
+        <figure class="hp-fig">
+          <picture>
+            <source srcset="product-rollator.webp" type="image/webp">
+            <img src="product-rollator.png" class="p-rollator" alt="Go Steady rollator attachment — a black cupholder that clips onto the frame">
+          </picture>
+          <figcaption>Smart rollator cupholder</figcaption>
+        </figure>
+      </div>
       <div class="hero-feature-panel">
-        <div class="hfp-eyebrow">Introducing</div>
-        <div class="hfp-title">GoSteady<br>Smart Walker<br>Attachment</div>
+        <div class="hfp-eyebrow">Now in two fits</div>
+        <div class="hfp-title">GoSteady</div>
         <div class="hfp-features">
           <div class="hfp-row">
             <div class="hfp-icon">📍</div>
@@ -1315,7 +1542,7 @@
             <div class="hfp-icon">📵</div>
             <div class="hfp-text">
               <strong>No Phone Needed</strong>
-              <span>For the walker user</span>
+              <span>For the person using it</span>
             </div>
           </div>
         </div>
@@ -1364,13 +1591,15 @@
       <div class="feature-card">
         <div class="feature-icon">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-            <path d="M16 7V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v3"/>
-            <line x1="12" y1="12" x2="12" y2="16"/>
+            <rect x="1" y="7" width="17" height="11" rx="2.5" ry="2.5"/>
+            <line x1="21.5" y1="11" x2="21.5" y2="14"/>
+            <line x1="5" y1="10.5" x2="5" y2="14.5"/>
+            <line x1="8.5" y1="10.5" x2="8.5" y2="14.5"/>
+            <line x1="12" y1="10.5" x2="12" y2="14.5"/>
           </svg>
         </div>
-        <h3>2 Year Battery</h3>
-        <p>Set it and forget it. Our advanced low-power design means no weekly charging hassles.</p>
+        <h3>1-Year Battery</h3>
+        <p>No charging, ever. Swap in fresh AA batteries once a year and forget about it.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
@@ -1379,8 +1608,8 @@
             <polyline points="12 6 12 12 16 14"/>
           </svg>
         </div>
-        <h3>Instant Install</h3>
-        <p>Snaps onto any standard walker in seconds. No tools, no modifications, no waiting.</p>
+        <h3>Easy to Set Up</h3>
+        <p>Snaps onto your walker or rollator in seconds. No tools, no modifications, no waiting.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
@@ -1390,62 +1619,101 @@
             <rect x="16" y="6" width="3" height="16" rx="1"/>
           </svg>
         </div>
-        <h3>No Bluetooth Required</h3>
-        <p>Works anywhere with cell coverage. No Wi-Fi setup, no Bluetooth pairing, no tech headaches.</p>
+        <h3>No Wi-Fi Needed</h3>
+        <p>Works on its own anywhere with cell coverage. No internet to set up, no Bluetooth to pair.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-            <polyline points="7.5 4.21 12 6.81 16.5 4.21"/>
-            <polyline points="7.5 19.79 7.5 14.6 3 12"/>
-            <polyline points="21 12 16.5 14.6 16.5 19.79"/>
-            <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-            <line x1="12" y1="22.08" x2="12" y2="12"/>
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
           </svg>
         </div>
-        <h3>Replaceable Caps</h3>
-        <p>Swap between smooth-glide or high-traction caps to match any floor surface or preference.</p>
+        <h3>Shareable GPS</h3>
+        <p>Optionally share their location with loved ones, so help can find them fast.</p>
       </div>
     </div>
   </section>
 
-  <!-- Product Showcase -->
-  <section class="showcase">
-    <div class="showcase-inner">
-      <div class="showcase-image">
-        <img src="walker-wide.jpg" alt="Go Steady attached to a standard walker, showing the sleek design with green indicator ring">
+  <!-- Two Ways to Fit -->
+  <section class="fits" id="fits">
+    <div class="fits-inner">
+      <div class="section-header">
+        <p class="section-label">Choose your fit</p>
+        <h2>One sensor, two ways to fit</h2>
+        <p class="fits-sub">Go Steady works with the walker or rollator your loved one already uses — no new equipment, no new habits. Pick the shape that matches their device.</p>
       </div>
-      <div class="showcase-content">
-        <h2>Discreet design that doesn't draw attention</h2>
-        <p>Go Steady replaces the standard walker foot, blending seamlessly into your loved one's daily routine. They'll never feel "monitored"—and you'll always have peace of mind.</p>
-        <ul class="showcase-list hide-mobile">
-          <li>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"/>
-            </svg>
-            Activity tracking shows daily mobility patterns
-          </li>
-          <li>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"/>
-            </svg>
-            Instant sharing of activity alerts with caregivers
-          </li>
-          <li>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"/>
-            </svg>
-            Green indicator ring confirms active connection
-          </li>
-          <li>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"/>
-            </svg>
-            Weather-resistant for indoor and outdoor use
-          </li>
-        </ul>
+
+      <div class="fits-grid">
+        <div class="fit-card">
+          <div class="fit-media">
+            <picture>
+              <source srcset="product-walker.webp" type="image/webp">
+              <img src="product-walker.png" class="p-walker" loading="lazy" decoding="async" alt="The Go Steady walker attachment, a grey sensor that replaces the walker glide">
+            </picture>
+          </div>
+          <p class="fit-label">For walkers</p>
+          <h3>Replaces the walker glide</h3>
+          <p class="fit-desc">It goes on where the existing foot comes off, sitting low and out of the way. Nothing about the walker looks different.</p>
+          <ul class="showcase-list">
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Universally compatible with standard walkers
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Discreet — reads as an ordinary walker foot
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Built for indoor and outdoor use
+            </li>
+          </ul>
+        </div>
+
+        <div class="fit-card">
+          <div class="fit-media">
+            <picture>
+              <source srcset="product-rollator.webp" type="image/webp">
+              <img src="product-rollator.png" class="p-rollator" loading="lazy" decoding="async" alt="The Go Steady rollator attachment, a black cupholder that clips onto the frame">
+            </picture>
+          </div>
+          <p class="fit-label">For rollators</p>
+          <h3>Clips on as a cupholder</h3>
+          <p class="fit-desc">Clamps onto the rollator frame and earns its keep — it holds a real cup while it quietly tracks activity.</p>
+          <ul class="showcase-list">
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Clamps to the frame in seconds — no tools
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Holds a real cup while it tracks
+            </li>
+            <li>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              Built for indoor and outdoor use
+            </li>
+          </ul>
+        </div>
       </div>
+
+      <p class="fits-note">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        Both fits share the same sensors, the same one-year battery, and the same app-free setup.
+      </p>
     </div>
   </section>
 
@@ -1574,11 +1842,11 @@
 
       <div class="faq-item">
         <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-          Will Go Steady fit my walker?
+          Will Go Steady fit my walker or rollator?
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         </button>
         <div class="faq-answer">
-          <p>GoSteady fits standard (1" tube) walkers. Our team can help confirm compatibility if you email us at support@gosteady.co</p>
+          <p>Go Steady comes in two fits. The walker version replaces the glide on standard (1" tube) walkers. The rollator version clamps onto the frame as a cupholder. Our team can help confirm compatibility for your specific device if you email us at support@gosteady.co</p>
         </div>
       </div>
 
