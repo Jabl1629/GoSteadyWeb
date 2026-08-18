@@ -755,6 +755,56 @@
       flex-shrink: 0;
     }
 
+    /* Demo link — ghost button, so the waitlist CTA stays the loud one */
+    .demo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
+      padding: 0.85rem 1.75rem;
+      border: 1px solid var(--color-sage);
+      border-radius: 100px;
+      color: var(--color-sage);
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .demo-link:hover {
+      background: var(--color-sage);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(74, 124, 89, 0.3);
+    }
+
+    .demo-link svg {
+      transition: transform 0.3s ease;
+    }
+
+    .demo-link:hover svg {
+      transform: translateX(3px);
+    }
+
+    /* the dashboard showcase is hide-mobile, so phones get the link here instead */
+    .fits-demo {
+      display: none;
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
     /* How it Works */
     /* Waitlist Section */
     .waitlist {
@@ -1397,6 +1447,10 @@
         padding: 4rem 1.5rem;
       }
 
+      .fits-demo {
+        display: block;
+      }
+
       .fit-media {
         height: 240px;
       }
@@ -1714,6 +1768,14 @@
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
         Both fits share the same sensors, the same one-year battery, and the same app-free setup.
       </p>
+
+      <div class="fits-demo">
+        <a href="/userdemo" class="demo-link" target="_blank" rel="noopener">
+          Try the live demo
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          <span class="visually-hidden">(opens in a new tab)</span>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -1752,6 +1814,11 @@
             Access to insights on mobile or desktop
           </li>
         </ul>
+        <a href="/userdemo" class="demo-link" target="_blank" rel="noopener">
+          Try the live demo
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          <span class="visually-hidden">(opens in a new tab)</span>
+        </a>
       </div>
     </div>
   </section>
