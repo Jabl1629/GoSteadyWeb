@@ -13,6 +13,12 @@
   to = "/get-in-touch.html"
   status = 200
 
+# Clean URL for the rollator cupholder landing page (paid-traffic destination)
+[[redirects]]
+  from = "/cupholder"
+  to = "/cupholder.html"
+  status = 200
+
 # SPA fallbacks for the Flutter demos (path URL strategy): deep links and
 # mid-demo reloads (e.g. /userdemo/d2c/preview/dashboard) must serve the
 # demo's index.html. No `force`, so real files (assets, main.dart.js)

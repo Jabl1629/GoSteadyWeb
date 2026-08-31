@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GoSteady — The Smart Rollator Cupholder</title>
+  <meta name="description" content="A cupholder for their rollator that quietly tracks how much they're moving, and shows you on your phone. Nothing to wear, nothing to charge, no app for them to learn.">
+  <!-- not for organic discovery yet: unfinished pricing page, paid traffic only -->
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-sage: #4A7C59;
+      --color-sage-light: #5D9A6F;
+      --color-sage-dark: #3A6147;
+      --color-cream: #F9F6F0;
+      --color-warm-white: #FFFCF7;
+      --color-text: #2D3A2E;
+      --color-text-soft: #5A6B5C;
+      --color-accent: #50C878;
+      --color-border: #E5E0D8;
+      --color-alert: #C85050;
+      --font-serif: 'Fraunces', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-warm-white);
+      color: var(--color-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 2rem; }
+
+    /* ---------- nav: deliberately exit-free for paid traffic ---------- */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 2rem;
+      background: rgba(255, 252, 247, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--color-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      color: var(--color-sage);
+      text-decoration: none;
+    }
+
+    .logo img { height: 30px; width: auto; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--color-sage);
+      color: white;
+      border: none;
+      border-radius: 100px;
+      padding: 1rem 2rem;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: var(--color-sage-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(74, 124, 89, 0.3);
+    }
+
+    .btn-sm { padding: 0.65rem 1.35rem; font-size: 0.92rem; }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--color-sage);
+      border: 1px solid var(--color-sage);
+    }
+
+    .btn-ghost:hover { background: var(--color-sage); color: white; }
+
+    /* ---------- hero ---------- */
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 4rem;
+      align-items: center;
+      padding: 4.5rem 0 5rem;
+    }
+
+    .eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--color-sage);
+      margin-bottom: 1.1rem;
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 4.6vw, 3.6rem);
+      font-weight: 400;
+      line-height: 1.12;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.4rem;
+    }
+
+    h1 em { font-style: italic; color: var(--color-sage); }
+
+    .hero-sub {
+      font-size: 1.2rem;
+      color: var(--color-text-soft);
+      line-height: 1.65;
+      margin-bottom: 2rem;
+      max-width: 34rem;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.1rem;
+    }
+
+    .hero-price {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      color: var(--color-text);
+    }
+
+    .hero-price span { font-size: 0.95rem; color: var(--color-text-soft); font-family: var(--font-sans); }
+
+    .reassure {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.5rem;
+      font-size: 0.92rem;
+      color: var(--color-text-soft);
+    }
+
+    .reassure div { display: flex; align-items: center; gap: 0.45rem; }
+    .reassure svg { color: var(--color-sage); flex-shrink: 0; }
+
+    .hero-media {
+      background: radial-gradient(circle at 50% 40%, #FFFFFF 0%, var(--color-cream) 100%);
+      border: 1px solid var(--color-border);
+      border-radius: 28px;
+      padding: 1.5rem;
+    }
+
+    /* the source photos are tall portraits; cap the height so the hero stays compact
+       and the headline is not pushed below the fold */
+    .hero-media img {
+      border-radius: 16px;
+      max-height: 500px;
+      width: auto;
+      margin: 0 auto;
+    }
+
+    /* ---------- generic section ---------- */
+    section { padding: 5rem 0; }
+
+    .band { background: var(--color-cream); border-block: 1px solid var(--color-border); }
+
+    .section-head { max-width: 40rem; margin-bottom: 3rem; }
+    .section-head.centered { margin-inline: auto; text-align: center; }
+
+    h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.85rem, 3.4vw, 2.6rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .lede { font-size: 1.08rem; color: var(--color-text-soft); line-height: 1.75; }
+
+    /* ---------- the wedge ---------- */
+    .wedge-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .wedge-media img {
+      border-radius: 24px;
+      border: 1px solid var(--color-border);
+      max-height: 520px;
+      width: auto;
+      margin: 0 auto;
+    }
+
+    .notif-video { display: flex; justify-content: center; }
+
+    .notif-video video {
+      height: 460px;
+      width: 320px;
+      object-fit: cover;
+      border-radius: 40px;
+      box-shadow: 0 30px 60px rgba(45, 58, 46, 0.2);
+    }
+
+    /* ---------- steps ---------- */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      counter-reset: step;
+    }
+
+    .step {
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      padding: 2rem;
+    }
+
+    .step-num {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--color-sage);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .step h3 {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+    }
+
+    .step p { color: var(--color-text-soft); font-size: 0.98rem; }
+
+    /* ---------- list ---------- */
+    .checks { list-style: none; }
+
+    .checks li {
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      font-size: 1.02rem;
+    }
+
+    .checks svg { color: var(--color-accent); flex-shrink: 0; margin-top: 4px; }
+
+    /* ---------- spec tiles ---------- */
+    .specs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .spec {
+      background: white;
+      border: 1px solid var(--color-border);
+      border-radius: 18px;
+      padding: 1.6rem;
+    }
+
+    .spec h4 {
+      font-family: var(--font-serif);
+      font-size: 1.08rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+
+    .spec p { font-size: 0.9rem; color: var(--color-text-soft); }
+
+    /* ---------- notice ---------- */
+    .notice {
+      border: 1px solid var(--color-border);
+      border-left: 4px solid var(--color-alert);
+      background: white;
+      border-radius: 14px;
+      padding: 1.5rem 1.75rem;
+      max-width: 46rem;
+      margin: 0 auto;
+    }
+
+    .notice strong { display: block; margin-bottom: 0.4rem; font-size: 1.02rem; }
+    .notice p { color: var(--color-text-soft); font-size: 0.96rem; }
+
+    /* ---------- reserve ---------- */
+    .reserve {
+      background: linear-gradient(135deg, var(--color-sage-dark) 0%, var(--color-sage) 55%, var(--color-sage-light) 100%);
+      color: white;
+      text-align: center;
+    }
+
+    .reserve h2 { color: white; }
+    .reserve .lede { color: rgba(255,255,255,0.9); }
+
+    .price-card {
+      background: white;
+      color: var(--color-text);
+      border-radius: 24px;
+      padding: 2.5rem;
+      max-width: 27rem;
+      margin: 2.5rem auto 0;
+      text-align: left;
+    }
+
+    .price-big {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+
+    .price-note { color: var(--color-text-soft); font-size: 0.95rem; margin-bottom: 1.75rem; }
+
+    .price-card .btn { width: 100%; margin-bottom: 1rem; }
+
+    .price-terms { font-size: 0.86rem; color: var(--color-text-soft); text-align: center; }
+
+    /* ---------- faq ---------- */
+    .faq-item { border-bottom: 1px solid var(--color-border); padding: 1.5rem 0; }
+    .faq-item:first-child { border-top: 1px solid var(--color-border); }
+
+    .faq-item h3 {
+      font-family: var(--font-serif);
+      font-size: 1.18rem;
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+    }
+
+    .faq-item p { color: var(--color-text-soft); font-size: 1rem; }
+
+    .faq-list { max-width: 46rem; margin: 0 auto; }
+
+    /* ---------- footer ---------- */
+    footer {
+      background: var(--color-text);
+      color: rgba(255,255,255,0.75);
+      padding: 3rem 0;
+      font-size: 0.92rem;
+    }
+
+    footer a { color: rgba(255,255,255,0.9); }
+
+    .foot-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .foot-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 0 3rem; }
+      /* image leads on small screens, but kept short so the headline and CTA
+         still land in the first screenful */
+      .hero-media { order: -1; padding: 1rem; }
+      .hero-media img { max-height: 300px; }
+      .wedge-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .steps { grid-template-columns: 1fr; }
+      .notif-video video { height: 400px; width: 275px; }
+      .specs { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 560px) {
+      .wrap { padding: 0 1.25rem; }
+      nav { padding: 0.9rem 1.25rem; }
+      section { padding: 3.5rem 0; }
+      .specs { grid-template-columns: 1fr; }
+      .price-card { padding: 1.75rem; }
+      .hero-sub { font-size: 1.08rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="logo" href="/cupholder">
+      <img src="logo.png" alt="">
+      Go Steady
+    </a>
+    <a href="#reserve" class="btn btn-sm">Reserve yours</a>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <div class="wrap">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">The GoSteady Cupholder</p>
+        <h1>Know they're up and moving. <em>Without calling to check.</em></h1>
+        <p class="hero-sub">
+          GoSteady is a cupholder for their rollator. It quietly tracks how much they're
+          moving and shows you on your phone — so you can stop guessing, and stop asking.
+          Nothing to wear, nothing to charge, no app for them to learn.
+        </p>
+
+        <div class="hero-cta-row">
+          <a href="#reserve" class="btn">Reserve yours — $99</a>
+          <span class="hero-price">Ships December 2026</span>
+        </div>
+
+        <div class="reassure">
+          <div>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Full refund any time before it ships
+          </div>
+          <div>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Fits standard rollators
+          </div>
+          <div>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            $20/mo starts when it ships
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-media">
+        <picture>
+          <source srcset="cup-detail.webp" type="image/webp">
+          <img src="cup-detail.jpg" width="1174" height="1400" alt="Close-up of the GoSteady cupholder holding a large insulated tumbler, clamped to a rollator frame, with a small green indicator light on the base">
+        </picture>
+      </div>
+    </header>
+  </div>
+
+  <!-- ============ THE WEDGE ============ -->
+  <section class="band">
+    <div class="wrap">
+      <div class="wedge-grid">
+        <div>
+          <p class="eyebrow">Why it actually gets used</p>
+          <h2>They get a cupholder. You get peace of mind.</h2>
+          <p class="lede" style="margin-bottom:1.75rem">
+            Most check-in devices ask your parent to wear something, charge something, or
+            learn something. Most of them end up in a drawer within a month.
+          </p>
+          <p class="lede" style="margin-bottom:1.75rem">
+            GoSteady starts as something they actually wanted — a sturdy place for their
+            coffee on the way to the mailbox. The activity tracking lives quietly in the
+            base. There's nothing for them to operate, and nothing to resent.
+          </p>
+          <ul class="checks">
+            <li>
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Holds a standard cup or a large tumbler
+            </li>
+            <li>
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Nothing to wear, clip on, or remember
+            </li>
+            <li>
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Visible, not hidden — no one is being watched behind their back
+            </li>
+          </ul>
+        </div>
+        <div class="wedge-media">
+          <picture>
+            <source srcset="cup-rollator-full.webp" type="image/webp">
+            <img src="cup-rollator-full.jpg" width="1174" height="1400" alt="A blue rollator with the GoSteady cupholder clamped to the frame, holding a travel tumbler">
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section>
+    <div class="wrap">
+      <div class="section-head centered">
+        <p class="eyebrow">How it works</p>
+        <h2>Three steps, then you stop thinking about it</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Clamp it on</h3>
+          <p>It attaches to the rollator frame with a thumb screw. No tools, about a minute. You can do it on your next visit.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>They use the rollator normally</h3>
+          <p>Coffee to the mailbox, water on a walk. Nothing about their routine changes, and there's nothing for them to charge or turn on.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>You check in from your phone</h3>
+          <p>Open the page and see how much they've moved today and this week — and whether that's normal for them.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHAT YOU SEE ============ -->
+  <section class="band">
+    <div class="wrap">
+      <div class="wedge-grid">
+        <div>
+          <p class="eyebrow">What you'll see</p>
+          <h2>Activity, trends, and a heads-up when things change</h2>
+          <p class="lede" style="margin-bottom:1.75rem">
+            GoSteady measures how much the rollator is moving — how often, how far, and at
+            what time of day. Over a couple of weeks it learns what a normal day looks like
+            for your parent, then tells you when a day stops looking normal.
+          </p>
+          <ul class="checks">
+            <li>
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              How much they moved today, and this week
+            </li>
+            <li>
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Whether today is unusually quiet compared to their own normal
+            </li>
+            <li>
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              A text or email when movement drops off for long enough to matter
+            </li>
+            <li>
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Optional location sharing, if you both want it on
+            </li>
+          </ul>
+          <p style="margin-top:2rem">
+            <a href="/userdemo" class="btn btn-ghost" target="_blank" rel="noopener">See the live demo &rarr;</a>
+          </p>
+        </div>
+        <div class="wedge-media">
+          <!-- ASSET SLOT: portal screenshots (phone-framed) + caregiver-with-phone photo -->
+          <img src="steady-desktop-view.png" alt="The GoSteady portal showing daily activity, weekly trends, and recent alerts">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ NOTIFICATIONS ============ -->
+  <section>
+    <div class="wrap">
+      <div class="wedge-grid">
+        <div class="notif-video">
+          <video autoplay loop muted playsinline aria-label="A phone showing GoSteady notification settings and an activity alert">
+            <source src="go-steady-movie1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div>
+          <p class="eyebrow">Staying in the loop</p>
+          <h2>Notifications set up for your peace of mind</h2>
+          <p class="lede" style="margin-bottom:1.75rem">
+            Choose how and when you hear from us. GoSteady sends alerts straight to your
+            phone &mdash; from a quiet-day warning to a weekly summary &mdash; so you stay
+            in the loop without being buried in pings.
+          </p>
+          <ul class="checks">
+            <li>
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Set your own threshold for what counts as a quiet day
+            </li>
+            <li>
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Text, push, or a weekly email digest &mdash; your choice
+            </li>
+            <li>
+              <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Share alerts with siblings and other family members
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE DEVICE ============ -->
+  <section class="band">
+    <div class="wrap">
+      <div class="section-head centered">
+        <p class="eyebrow">The device</p>
+        <h2>Built to be forgotten about</h2>
+      </div>
+      <div class="specs">
+        <div class="spec">
+          <h4>Charge it once a year</h4>
+          <p>Rechargeable, and a full charge lasts about a year of normal use.</p>
+        </div>
+        <div class="spec">
+          <h4>No Wi-Fi, no phone</h4>
+          <p>Cellular is built in. Their end needs no internet, no pairing, no account.</p>
+        </div>
+        <div class="spec">
+          <h4>Indoor and outdoor</h4>
+          <p>Weather-resistant, and works anywhere with cell coverage.</p>
+        </div>
+        <div class="spec">
+          <h4>Fits standard rollators</h4>
+          <p>Clamps to standard frame tubing. Every rollator style we've tried has fit.</p>
+        </div>
+      </div>
+
+      <div style="margin-top:3rem">
+        <div class="notice">
+          <strong>GoSteady is not an emergency device.</strong>
+          <p>
+            It is not a medical device, a fall detector, or an emergency-response system, and
+            it will not call for help. It shows you activity patterns so you can notice
+            changes early. If you need emergency response, use a medical alert service
+            alongside it.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRUST ============ -->
+  <section>
+    <div class="wrap">
+      <div class="section-head centered">
+        <p class="eyebrow">Who's behind it</p>
+        <h2>Being used by real families today</h2>
+        <p class="lede">
+          <!-- ASSET SLOT: beta caregiver quote + first name, city. Founder bio + photo. -->
+          [BETA CAREGIVER QUOTE — one or two sentences, first name and city]
+        </p>
+      </div>
+      <p class="lede" style="max-width:40rem;margin:0 auto;text-align:center">
+        [FOUNDER PARAGRAPH — who you are, why you built it, how to reach you.]
+        Questions before you order? Email
+        <a href="mailto:support@gosteady.co">support@gosteady.co</a> and you'll reach us directly.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ RESERVE ============ -->
+  <section class="reserve" id="reserve">
+    <div class="wrap">
+      <div class="section-head centered" style="margin-bottom:0">
+        <h2>Reserve your GoSteady</h2>
+        <p class="lede">
+          We're building a small first run. Reserve one now and we'll ship it in
+          December 2026.
+        </p>
+      </div>
+
+      <div class="price-card">
+        <div class="price-big">$99</div>
+        <p class="price-note">
+          One-time for the device, plus <strong>$20/month</strong> for the cellular
+          connection and the family portal. Monthly billing starts when your device
+          ships &mdash; not when you order.
+        </p>
+        <!-- TODO: swap href for the Stripe Payment Link once created. Inert until then. -->
+        <a href="#reserve" class="btn">Reserve yours</a>
+        <p class="price-terms">
+          Full refund any time before it ships. Ships December 2026.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section>
+    <div class="wrap">
+      <div class="section-head centered">
+        <h2>Before you order</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <h3>Will it fit my parent's rollator?</h3>
+          <p>Almost certainly. It clamps to standard rollator frame tubing, and every rollator style we've tried it on has fit. If you want to be sure, email a photo of the rollator to <a href="mailto:support@gosteady.co">support@gosteady.co</a> and we'll confirm before you order.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Is there a monthly fee?</h3>
+          <p>Yes. $20/month covers the cellular connection and the family portal. It starts when your device ships in December 2026, not when you order, and you can cancel any time. If you cancel, the device stops reporting activity &mdash; though it still works as a cupholder.</p>
+        </div>
+        <div class="faq-item">
+          <h3>When will it ship?</h3>
+          <p>December 2026. If that date slips, we'll email you and you can take a full refund, no questions asked.</p>
+        </div>
+        <div class="faq-item">
+          <h3>What if we don't like it?</h3>
+          <p>Return it within 30 days of delivery for a full refund. Before it ships, you can cancel any time for a full refund.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Does my parent need a smartphone or Wi-Fi?</h3>
+          <p>No. The device has its own cellular connection. There is nothing to pair, no account for them to make, and no app on their phone. You see the data on your phone or computer.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Does it track their location?</h3>
+          <p>[ANSWER — say plainly whether location is on by default, who can see it, whether the person using the rollator is told, and how to turn it off.]</p>
+        </div>
+        <div class="faq-item">
+          <h3>Does it detect falls or call for help?</h3>
+          <p>No. GoSteady is not a fall detector or an emergency-response system and will not call anyone for you. It shows activity patterns so you can notice changes early. For emergencies, pair it with a medical alert service.</p>
+        </div>
+        <div class="faq-item">
+          <h3>Will my parent know it's there?</h3>
+          <p>Yes, and we think that matters. It's a visible cupholder with a small light on it, not a hidden sensor. We'd encourage you to tell them what it does.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap foot-row">
+      <div>&copy; 2026 Go Steady LLC · Made in Colorado</div>
+      <div class="foot-links">
+        <a href="mailto:support@gosteady.co">support@gosteady.co</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/privacy.html">Privacy</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
