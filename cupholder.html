@@ -132,6 +132,13 @@
 
     h1 em { font-style: italic; color: var(--color-sage); }
 
+    .hero-title-primary,
+    .hero-title-secondary { display: block; }
+
+    .hero-title-loved { white-space: nowrap; }
+
+    .hero-title-secondary { margin-top: 0.08em; }
+
     .hero-sub {
       font-size: 1.2rem;
       color: var(--color-text-soft);
@@ -401,6 +408,10 @@
       section { padding: 3.5rem 0; }
       .specs { grid-template-columns: 1fr; }
       .price-card { padding: 1.75rem; }
+      h1 {
+        font-size: clamp(1.8125rem, 9.2vw, 2.25rem);
+        line-height: 1.08;
+      }
       .hero-sub { font-size: 1.08rem; }
     }
   </style>
@@ -420,7 +431,10 @@
     <header class="hero">
       <div>
         <p class="eyebrow">The GoSteady Cupholder</p>
-        <h1>Know they're up and moving. <em>Without calling to check.</em></h1>
+        <h1>
+          <span class="hero-title-primary">Independence for <span class="hero-title-loved">your loved one.</span></span>
+          <em class="hero-title-secondary">Peace of mind for you.</em>
+        </h1>
         <p class="hero-sub">
           GoSteady is a cupholder for their rollator. It quietly tracks how much they're
           moving and shows you on your phone — so you can stop guessing, and stop asking.
