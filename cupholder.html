@@ -22,7 +22,6 @@
       --color-text-soft: #5A6B5C;
       --color-accent: #50C878;
       --color-border: #E5E0D8;
-      --color-alert: #C85050;
       --font-serif: 'Fraunces', Georgia, serif;
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
@@ -374,20 +373,6 @@
 
     .checks svg { color: var(--color-accent); flex-shrink: 0; margin-top: 4px; }
 
-    /* ---------- notice ---------- */
-    .notice {
-      border: 1px solid var(--color-border);
-      border-left: 4px solid var(--color-alert);
-      background: white;
-      border-radius: 14px;
-      padding: 1.5rem 1.75rem;
-      max-width: 46rem;
-      margin: 0 auto;
-    }
-
-    .notice strong { display: block; margin-bottom: 0.4rem; font-size: 1.02rem; }
-    .notice p { color: var(--color-text-soft); font-size: 0.96rem; }
-
     /* ---------- reserve ---------- */
     .reserve {
       background: linear-gradient(135deg, var(--color-sage-dark) 0%, var(--color-sage) 55%, var(--color-sage-light) 100%);
@@ -445,6 +430,14 @@
     }
 
     footer a { color: rgba(255,255,255,0.9); }
+
+    .foot-disclaimer {
+      color: rgba(255,255,255,0.52);
+      font-size: 0.78rem;
+      line-height: 1.45;
+      margin-top: 0.65rem;
+      max-width: 35rem;
+    }
 
     .foot-row {
       display: flex;
@@ -658,21 +651,6 @@
 
   <!-- FUTURE: caregiver recording + product overview video, side by side -->
 
-  <!-- ============ IMPORTANT TO KNOW ============ -->
-  <section class="band">
-    <div class="wrap">
-      <div class="notice">
-        <strong>GoSteady is not an emergency device.</strong>
-        <p>
-          It is not a medical device, a fall detector, or an emergency-response system, and
-          it will not call for help. It shows you activity patterns so you can notice
-          changes early. If you need emergency response, use a medical alert service
-          alongside it.
-        </p>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ TRUST ============ -->
   <section>
     <div class="wrap">
@@ -764,7 +742,10 @@
 
   <footer>
     <div class="wrap foot-row">
-      <div>&copy; 2026 Go Steady LLC · Made in Colorado</div>
+      <div>
+        <div>&copy; 2026 Go Steady LLC · Made in Colorado</div>
+        <p class="foot-disclaimer">GoSteady is not a medical device or emergency-response system and does not detect falls or call for help.</p>
+      </div>
       <div class="foot-links">
         <a href="mailto:support@gosteady.co">support@gosteady.co</a>
         <a href="/terms.html">Terms</a>
