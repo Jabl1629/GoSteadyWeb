@@ -7,10 +7,26 @@
   <meta name="description" content="A discreet smart cupholder for wheeled walkers that tracks activity patterns and provides notifications when trends change.">
   <!-- not for organic discovery yet: unfinished pricing page, paid traffic only -->
   <meta name="robots" content="noindex">
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2755897781476379');
+  fbq('track', 'PageView');
+  </script>
+  <!-- End Meta Pixel Code -->
+  <script async src="https://plausible.io/js/pa-1F6kJUB_Hmb5mZjKjHFKC.js"></script>
+  <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
   <link rel="icon" type="image/png" href="/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <style>
     :root {
       --color-sage: #4A7C59;
@@ -487,13 +503,15 @@
   </style>
 </head>
 <body>
+  <noscript><img height="1" width="1" style="display:none" alt=""
+  src="https://www.facebook.com/tr?id=2755897781476379&amp;ev=PageView&amp;noscript=1"></noscript>
 
   <nav>
     <a class="logo" href="/cupholder">
       <img src="logo.png" alt="">
       Go Steady
     </a>
-    <a href="#reserve" class="btn btn-sm">Reserve yours</a>
+    <a href="/checkout" class="btn btn-sm" data-get-yours>Get yours</a>
   </nav>
 
   <!-- ============ HERO ============ -->
@@ -512,14 +530,14 @@
         </p>
 
         <div class="hero-cta-row">
-          <a href="#reserve" class="btn">Reserve yours — $99</a>
-          <span class="hero-price">Ships December 2026</span>
+          <a href="/checkout" class="btn" data-get-yours>Get yours — $99</a>
+          <span class="hero-price"><span>+ $20/month after activation</span></span>
         </div>
 
         <div class="reassure">
           <div>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            Full refund any time before it ships
+            30-day returns
           </div>
           <div>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -527,7 +545,7 @@
           </div>
           <div>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            $20/mo starts when it ships
+            Built-in cellular connection
           </div>
         </div>
       </div>
@@ -605,7 +623,7 @@
           </div>
           <div>
             <p class="simplicity-label">4 · Forget</p>
-            <h3>Charge it about once a year</h3>
+            <h3>No maintenance required</h3>
             <p>The rechargeable battery lasts about a year with normal use. It stays on the walker and works indoors or outdoors.</p>
           </div>
         </article>
@@ -670,14 +688,13 @@
     </div>
   </section>
 
-  <!-- ============ RESERVE ============ -->
+  <!-- ============ PURCHASE ============ -->
   <section class="reserve" id="reserve">
     <div class="wrap">
       <div class="section-head centered" style="margin-bottom:0">
-        <h2>Reserve your GoSteady</h2>
+        <h2>Get your GoSteady</h2>
         <p class="lede">
-          We're building a small first run. Reserve one now and we'll ship it in
-          December 2026.
+          Give them a useful cupholder. Give yourself a quieter way to stay informed.
         </p>
       </div>
 
@@ -686,12 +703,11 @@
         <p class="price-note">
           One-time for the device, plus <strong>$20/month</strong> for the cellular
           connection and the family portal. Monthly billing starts when your device
-          ships &mdash; not when you order.
+          is activated.
         </p>
-        <!-- TODO: swap href for the Stripe Payment Link once created. Inert until then. -->
-        <a href="#reserve" class="btn">Reserve yours</a>
+        <a href="/checkout" class="btn" data-get-yours>Get yours</a>
         <p class="price-terms">
-          Full refund any time before it ships. Ships December 2026.
+          30-day returns. Cancel service any time.
         </p>
       </div>
     </div>
@@ -710,15 +726,11 @@
         </div>
         <div class="faq-item">
           <h3>Is there a monthly fee?</h3>
-          <p>Yes. $20/month covers the cellular connection and the family portal. It starts when your device ships in December 2026, not when you order, and you can cancel any time. If you cancel, the device stops reporting activity &mdash; though it still works as a cupholder.</p>
-        </div>
-        <div class="faq-item">
-          <h3>When will it ship?</h3>
-          <p>December 2026. If that date slips, we'll email you and you can take a full refund, no questions asked.</p>
+          <p>Yes. $20/month covers the cellular connection and the family portal. It starts when your device is activated, and you can cancel any time. If you cancel, the device stops reporting activity &mdash; though it still works as a cupholder.</p>
         </div>
         <div class="faq-item">
           <h3>What if we don't like it?</h3>
-          <p>Return it within 30 days of delivery for a full refund. Before it ships, you can cancel any time for a full refund.</p>
+          <p>Return it within 30 days of delivery for a full refund.</p>
         </div>
         <div class="faq-item">
           <h3>Does my parent need a smartphone or Wi-Fi?</h3>
@@ -753,6 +765,21 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    document.querySelectorAll('[data-get-yours]').forEach(function(link) {
+      const destination = new URL(link.getAttribute('href'), window.location.origin);
+      const campaignParams = new URLSearchParams(window.location.search);
+      campaignParams.forEach(function(value, key) {
+        destination.searchParams.set(key, value);
+      });
+      link.href = destination.pathname + destination.search;
+
+      link.addEventListener('click', function() {
+        if (typeof plausible === 'function') plausible('Get Yours Click');
+      });
+    });
+  </script>
 
 </body>
 </html>
