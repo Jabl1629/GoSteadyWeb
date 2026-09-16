@@ -25,6 +25,17 @@
   to = "/checkout.html"
   status = 200
 
+# Caregiver-first V2 funnel kept separate for paid-traffic comparison
+[[redirects]]
+  from = "/cupholderV2"
+  to = "/cupholder-v2.html"
+  status = 200
+
+[[redirects]]
+  from = "/checkoutV2"
+  to = "/checkout-v2.html"
+  status = 200
+
 # SPA fallbacks for the Flutter demos (path URL strategy): deep links and
 # mid-demo reloads (e.g. /userdemo/d2c/preview/dashboard) must serve the
 # demo's index.html. No `force`, so real files (assets, main.dart.js)

@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GoSteady — Connected safety for rollator users</title>
+  <meta name="description" content="GoSteady helps families notice changes in rollator activity and is developing a one-touch family alert—without a wearable, home Wi-Fi, or cameras.">
+  <link rel="canonical" href="https://gosteady.co/cupholderV2">
+  <meta property="og:title" content="Peace of mind that moves with them — GoSteady">
+  <meta property="og:description" content="A connected rollator attachment for quieter family reassurance, at home and beyond the front door.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gosteady.co/cupholderV2">
+  <meta property="og:image" content="https://gosteady.co/gs-header-v3.png">
+  <meta name="theme-color" content="#17352b">
+  <link rel="icon" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&amp;display=swap" rel="stylesheet">
+
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2755897781476379');
+  fbq('track', 'PageView');
+  </script>
+  <script async src="https://plausible.io/js/pa-1F6kJUB_Hmb5mZjKjHFKC.js"></script>
+  <script>
+    window.plausible = window.plausible || function() {
+      (window.plausible.q = window.plausible.q || []).push(arguments);
+    };
+  </script>
+
+  <style>
+    :root {
+      --forest-950: #10271f;
+      --forest-900: #17352b;
+      --forest-800: #21493a;
+      --forest-700: #356b55;
+      --sage-500: #6c967d;
+      --sage-300: #b7ccbd;
+      --sage-150: #dce8df;
+      --sage-075: #eef4ef;
+      --cream: #f7f3eb;
+      --paper: #fffdf9;
+      --ink: #17231e;
+      --muted: #59675f;
+      --line: #d8ddd7;
+      --coral: #d97861;
+      --coral-pale: #f8e5df;
+      --gold: #e7c67b;
+      --serif: "Fraunces", Georgia, serif;
+      --sans: "DM Sans", system-ui, sans-serif;
+      --shadow-sm: 0 12px 34px rgba(16, 39, 31, 0.08);
+      --shadow-lg: 0 30px 80px rgba(16, 39, 31, 0.16);
+      --radius-sm: 14px;
+      --radius-md: 22px;
+      --radius-lg: 32px;
+      --max: 1200px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      margin: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+    .skip-link {
+      background: var(--forest-950);
+      color: white;
+      left: 1rem;
+      padding: .75rem 1rem;
+      position: fixed;
+      top: -5rem;
+      z-index: 100;
+    }
+    .skip-link:focus { top: 1rem; }
+    .wrap { margin: 0 auto; max-width: var(--max); padding-left: 28px; padding-right: 28px; }
+    .announcement {
+      background: var(--forest-950);
+      color: #edf4ef;
+      font-size: .78rem;
+      letter-spacing: .035em;
+      padding: .65rem 1rem;
+      text-align: center;
+    }
+    .announcement strong { color: white; }
+    .site-header {
+      background: rgba(255, 253, 249, .94);
+      border-bottom: 1px solid rgba(216, 221, 215, .75);
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(16px);
+    }
+    .nav {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      min-height: 76px;
+    }
+    .brand {
+      align-items: center;
+      display: inline-flex;
+      font-family: var(--serif);
+      font-size: 1.45rem;
+      font-weight: 600;
+      gap: .7rem;
+      text-decoration: none;
+    }
+    .brand img { height: 38px; width: 38px; }
+    .nav-links { align-items: center; display: flex; gap: 1.8rem; }
+    .nav-links > a:not(.button) {
+      color: var(--muted);
+      font-size: .92rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .nav-links > a:not(.button):hover { color: var(--forest-800); }
+    .button {
+      align-items: center;
+      background: var(--forest-800);
+      border: 1px solid var(--forest-800);
+      border-radius: 999px;
+      color: white;
+      display: inline-flex;
+      font-size: .95rem;
+      font-weight: 700;
+      gap: .55rem;
+      justify-content: center;
+      min-height: 48px;
+      padding: .85rem 1.45rem;
+      text-decoration: none;
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+    .button:hover { background: var(--forest-950); box-shadow: 0 12px 28px rgba(16, 39, 31, .18); transform: translateY(-2px); }
+    .button-secondary { background: transparent; color: var(--forest-800); }
+    .button-secondary:hover { background: var(--sage-075); }
+    .eyebrow {
+      color: var(--forest-700);
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      margin: 0 0 1rem;
+      text-transform: uppercase;
+    }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 500; letter-spacing: -.035em; margin: 0; }
+    h1 { font-size: clamp(3.25rem, 6.8vw, 6rem); line-height: .98; }
+    h2 { font-size: clamp(2.35rem, 4.5vw, 4rem); line-height: 1.03; }
+    h3 { font-size: 1.45rem; line-height: 1.15; }
+    p { line-height: 1.65; }
+
+    .hero { overflow: hidden; padding: 3.1rem 0 5rem; }
+    .hero-grid { align-items: center; display: grid; gap: clamp(2rem, 5vw, 5.5rem); grid-template-columns: .92fr 1.08fr; }
+    .hero-copy { max-width: 580px; }
+    .hero-copy h1 em { color: var(--forest-700); font-style: italic; font-weight: 400; }
+    .hero-dek { color: var(--muted); font-size: clamp(1.08rem, 1.7vw, 1.28rem); margin: 1.55rem 0 1.8rem; max-width: 38rem; }
+    .hero-actions { align-items: center; display: flex; flex-wrap: wrap; gap: 1rem 1.25rem; }
+    .hero-price { color: var(--muted); font-size: .92rem; line-height: 1.45; }
+    .hero-price strong { color: var(--ink); display: block; font-size: 1.05rem; }
+    .proof-row { display: flex; flex-wrap: wrap; gap: .7rem 1.25rem; margin-top: 1.65rem; }
+    .proof-row span { align-items: center; color: var(--muted); display: inline-flex; font-size: .82rem; font-weight: 600; gap: .45rem; }
+    .proof-row svg { color: var(--forest-700); }
+    .hero-visual { min-height: 620px; position: relative; }
+    .hero-photo {
+      border-radius: 180px 180px var(--radius-lg) var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      height: 620px;
+      margin-left: auto;
+      object-fit: cover;
+      object-position: center 38%;
+      width: min(100%, 520px);
+    }
+    .product-proof-card {
+      align-items: center;
+      background: rgba(255,255,255,.96);
+      border: 1px solid rgba(216,221,215,.9);
+      border-radius: var(--radius-md);
+      bottom: 2rem;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      gap: .75rem;
+      grid-template-columns: 92px 1fr;
+      left: -1.25rem;
+      padding: .8rem .95rem .8rem .8rem;
+      position: absolute;
+      width: 270px;
+    }
+    .product-proof-card img { border-radius: 15px; height: 96px; object-fit: cover; width: 92px; }
+    .product-proof-card strong { display: block; font-size: .88rem; margin-bottom: .15rem; }
+    .product-proof-card span { color: var(--muted); font-size: .73rem; line-height: 1.35; }
+    .notification {
+      background: rgba(255,255,255,.96);
+      border: 1px solid rgba(216,221,215,.9);
+      border-radius: 20px;
+      box-shadow: var(--shadow-sm);
+      padding: .95rem 1rem;
+      position: absolute;
+      right: -1rem;
+      top: 4rem;
+      width: 288px;
+    }
+    .notification-top { align-items: center; color: var(--muted); display: flex; font-size: .72rem; justify-content: space-between; margin-bottom: .55rem; }
+    .notification-brand { align-items: center; color: var(--ink); display: inline-flex; font-weight: 700; gap: .4rem; }
+    .notification-dot { background: var(--coral); border-radius: 50%; height: 10px; width: 10px; }
+    .notification p { font-size: .86rem; line-height: 1.4; margin: 0; }
+    .illustrative { color: var(--muted); font-size: .7rem; margin: .7rem 0 0; text-align: right; }
+
+    .trust-strip { background: var(--forest-950); color: white; }
+    .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .trust-item { border-left: 1px solid rgba(255,255,255,.15); padding: 1.6rem 1.35rem; }
+    .trust-item:first-child { border-left: 0; }
+    .trust-item strong { display: block; font-size: .98rem; margin-bottom: .22rem; }
+    .trust-item span { color: #b9c9c0; font-size: .78rem; line-height: 1.35; }
+
+    section { padding: clamp(5rem, 9vw, 8rem) 0; }
+    .section-head { max-width: 720px; }
+    .section-head.center { margin: 0 auto 3.5rem; text-align: center; }
+    .lede { color: var(--muted); font-size: 1.08rem; margin: 1.25rem 0 0; }
+
+    .connection { background: var(--cream); }
+    .connection-grid { align-items: center; display: grid; gap: clamp(2.5rem, 7vw, 7rem); grid-template-columns: 1fr 1fr; }
+    .story-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      padding: 1.1rem;
+    }
+    .story-scene { background: #dfeae2; border-radius: 23px; min-height: 420px; overflow: hidden; position: relative; }
+    .story-scene img { height: 420px; object-fit: cover; width: 100%; }
+    .calm-update {
+      background: rgba(255,255,255,.95);
+      border-radius: 18px;
+      bottom: 1rem;
+      box-shadow: var(--shadow-sm);
+      left: 1rem;
+      padding: .9rem 1rem;
+      position: absolute;
+      right: 1rem;
+    }
+    .calm-update small { color: var(--forest-700); display: block; font-weight: 700; margin-bottom: .25rem; }
+    .calm-update p { font-size: .86rem; line-height: 1.4; margin: 0; }
+
+    .benefit-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); margin-top: 3.5rem; }
+    .benefit-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      min-height: 330px;
+      overflow: hidden;
+      padding: 1.7rem;
+      position: relative;
+    }
+    .benefit-card:nth-child(1) { background: #e9f0ea; }
+    .benefit-card:nth-child(2) { background: #f7eee6; }
+    .benefit-card:nth-child(3) { background: #e8edec; }
+    .benefit-number { color: var(--forest-700); font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .benefit-card h3 { margin: 3.7rem 0 .8rem; max-width: 14rem; }
+    .benefit-card p { color: var(--muted); font-size: .91rem; margin: 0; }
+    .status-pill {
+      background: rgba(255,255,255,.82);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: .68rem;
+      font-weight: 700;
+      padding: .42rem .65rem;
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+    }
+    .benefit-icon { bottom: 1.35rem; color: var(--forest-800); position: absolute; right: 1.45rem; }
+
+    .steps { background: var(--forest-950); color: white; }
+    .steps .eyebrow { color: #9fc0aa; }
+    .steps .lede { color: #b8c8bf; }
+    .step-grid { display: grid; gap: 1px; grid-template-columns: repeat(4, 1fr); margin-top: 3.5rem; }
+    .step {
+      border-left: 1px solid rgba(255,255,255,.16);
+      min-height: 310px;
+      padding: 1rem 1.55rem 1.5rem;
+    }
+    .step:first-child { border-left: 0; padding-left: 0; }
+    .step-index { color: var(--gold); font-family: var(--serif); font-size: 2.6rem; }
+    .step h3 { color: white; margin: 3rem 0 .8rem; }
+    .step p { color: #b8c8bf; font-size: .88rem; margin: 0; }
+
+    .alerts { background: var(--paper); }
+    .alert-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); }
+    .phone-card {
+      background: #f3f1ec;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+    }
+    .phone-screen {
+      background: white;
+      border: 7px solid #1c2b24;
+      border-radius: 34px;
+      min-height: 380px;
+      overflow: hidden;
+      padding: 1.25rem .85rem;
+      position: relative;
+    }
+    .phone-status { color: var(--muted); display: flex; font-size: .62rem; font-weight: 700; justify-content: space-between; }
+    .phone-title { font-family: var(--serif); font-size: 1.3rem; margin: 2rem 0 1.4rem; }
+    .message {
+      background: var(--sage-075);
+      border: 1px solid var(--sage-150);
+      border-radius: 17px;
+      padding: 1rem;
+    }
+    .message.quiet { background: #fbf2e7; border-color: #edddc9; }
+    .message.direct { background: var(--coral-pale); border-color: #efcfc4; }
+    .message-label { color: var(--forest-700); font-size: .65rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .message.direct .message-label { color: #a54e3b; }
+    .message p { font-size: .83rem; line-height: 1.45; margin: .5rem 0 0; }
+    .message-action { color: var(--forest-800); display: block; font-size: .75rem; font-weight: 700; margin-top: .8rem; }
+    .phone-card > h3 { font-size: 1.12rem; margin: 1.15rem .4rem .4rem; }
+    .phone-card > p { color: var(--muted); font-size: .78rem; margin: 0 .4rem .35rem; }
+    .concept-map {
+      background-color: #edf1ed;
+      background-image: linear-gradient(rgba(33,73,58,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(33,73,58,.08) 1px, transparent 1px);
+      background-size: 22px 22px;
+      border-radius: 14px;
+      height: 110px;
+      margin-top: .8rem;
+      position: relative;
+    }
+    .map-pin {
+      background: var(--coral);
+      border: 4px solid white;
+      border-radius: 50% 50% 50% 0;
+      box-shadow: 0 5px 12px rgba(0,0,0,.16);
+      height: 25px;
+      left: 55%;
+      position: absolute;
+      top: 36%;
+      transform: rotate(-45deg);
+      width: 25px;
+    }
+    .map-note { bottom: .55rem; color: var(--muted); font-size: .58rem; left: .6rem; position: absolute; }
+
+    .privacy { background: var(--cream); }
+    .privacy-panel {
+      align-items: center;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      display: grid;
+      gap: 4rem;
+      grid-template-columns: .9fr 1.1fr;
+      padding: clamp(2rem, 5vw, 4rem);
+    }
+    .privacy-list { display: grid; gap: .85rem; }
+    .privacy-item { align-items: flex-start; display: flex; gap: .85rem; }
+    .privacy-item svg { color: var(--forest-700); flex: 0 0 auto; margin-top: .25rem; }
+    .privacy-item p { color: var(--muted); font-size: .9rem; margin: 0; }
+    .privacy-item strong { color: var(--ink); }
+
+    .proof-gallery { display: grid; gap: 1rem; grid-template-columns: 1.15fr .85fr .85fr; grid-template-rows: 250px 250px; }
+    .proof-image { border-radius: var(--radius-md); overflow: hidden; position: relative; }
+    .proof-image:first-child { grid-row: 1 / span 2; }
+    .proof-image img { height: 100%; object-fit: cover; width: 100%; }
+    .proof-image:first-child img { object-position: center 32%; }
+    .proof-image figcaption {
+      background: linear-gradient(transparent, rgba(11,27,21,.78));
+      bottom: 0;
+      color: white;
+      font-size: .75rem;
+      left: 0;
+      padding: 3rem 1rem .9rem;
+      position: absolute;
+      right: 0;
+    }
+    .proof-image.portal { grid-column: 2 / span 2; }
+    .proof-image.portal img { object-position: center top; }
+    .prototype-status {
+      border-bottom: 1px solid var(--line);
+      border-top: 1px solid var(--line);
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1.15fr repeat(3, 1fr);
+      margin-top: 2.5rem;
+      padding: 1.8rem 0;
+    }
+    .prototype-status > p { color: var(--muted); font-size: .82rem; margin: 0; }
+    .prototype-status strong { color: var(--ink); display: block; font-size: .88rem; margin-bottom: .25rem; }
+
+    .company { background: var(--forest-950); color: white; }
+    .company-grid { align-items: center; display: grid; gap: 4rem; grid-template-columns: 1.1fr .9fr; }
+    .company h2 { max-width: 700px; }
+    .company .lede { color: #b8c8bf; }
+    .company-card {
+      background: #214438;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+    }
+    .company-card p { color: #c9d6ce; font-size: .9rem; margin: .7rem 0 0; }
+    .company-card a { color: white; font-weight: 700; }
+    .company-facts { display: grid; gap: .8rem; margin-top: 1.4rem; }
+    .company-fact { border-top: 1px solid rgba(255,255,255,.13); padding-top: .8rem; }
+    .company-fact small { color: #9fb4a7; display: block; font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; }
+    .company-fact strong { display: block; font-size: .88rem; margin-top: .2rem; }
+
+    .pricing { background: var(--cream); }
+    .price-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      gap: 3rem;
+      grid-template-columns: .9fr 1.1fr;
+      margin: 0 auto;
+      max-width: 930px;
+      padding: clamp(2rem, 5vw, 4rem);
+    }
+    .price-name { color: var(--forest-700); font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .price-amount { font-family: var(--serif); font-size: 4.6rem; line-height: 1; margin: .6rem 0 .3rem; }
+    .price-amount span { color: var(--muted); font-family: var(--sans); font-size: .85rem; font-weight: 500; }
+    .monthly { color: var(--muted); font-size: .94rem; margin-bottom: 1.5rem; }
+    .price-list { display: grid; gap: .8rem; list-style: none; margin: 0; padding: 0; }
+    .price-list li { align-items: flex-start; display: flex; font-size: .88rem; gap: .65rem; }
+    .price-list svg { color: var(--forest-700); flex: 0 0 auto; margin-top: .15rem; }
+    .price-note { color: var(--muted); font-size: .75rem; margin: 1rem 0 0; }
+
+    .faq { background: var(--paper); }
+    .faq-grid { display: grid; gap: 0 4rem; grid-template-columns: 1fr 1fr; margin-top: 3rem; }
+    details { border-top: 1px solid var(--line); }
+    details:last-child { border-bottom: 1px solid var(--line); }
+    summary { cursor: pointer; font-family: var(--serif); font-size: 1.15rem; font-weight: 500; list-style: none; padding: 1.35rem 2rem 1.35rem 0; position: relative; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; font-family: var(--sans); font-size: 1.25rem; position: absolute; right: .15rem; top: 1.25rem; }
+    details[open] summary::after { content: "−"; }
+    details p { color: var(--muted); font-size: .88rem; margin: -.35rem 0 1.35rem; padding-right: 1.5rem; }
+
+    footer { background: #0b1d17; color: #b3c2ba; padding: 3.5rem 0 2rem; }
+    .footer-grid { display: grid; gap: 2rem; grid-template-columns: 1.3fr .7fr .7fr; }
+    .footer-brand { color: white; }
+    .footer-copy { font-size: .8rem; max-width: 430px; }
+    .footer-links { display: grid; gap: .6rem; }
+    .footer-links strong { color: white; font-size: .75rem; letter-spacing: .08em; margin-bottom: .35rem; text-transform: uppercase; }
+    .footer-links a { font-size: .8rem; text-decoration: none; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.13); display: flex; font-size: .72rem; justify-content: space-between; margin-top: 2.5rem; padding-top: 1.3rem; }
+
+    @media (max-width: 980px) {
+      .nav-links > a:not(.button) { display: none; }
+      .hero-grid, .connection-grid, .privacy-panel, .company-grid, .price-card { grid-template-columns: 1fr; }
+      .hero-copy { max-width: 720px; }
+      .hero-visual { margin: 0 auto; width: min(100%, 620px); }
+      .benefit-grid { grid-template-columns: 1fr; }
+      .benefit-card { min-height: 250px; }
+      .step-grid { grid-template-columns: 1fr 1fr; }
+      .step:nth-child(3) { border-left: 0; }
+      .alert-grid { grid-template-columns: 1fr 1fr; }
+      .alert-grid .phone-card:last-child { grid-column: 1 / span 2; max-width: 50%; }
+      .proof-gallery { grid-template-columns: 1fr 1fr; }
+      .proof-image:first-child { grid-row: auto; }
+      .proof-image.portal { grid-column: 1 / span 2; }
+      .prototype-status { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      .wrap { padding-left: 20px; padding-right: 20px; }
+      .announcement { font-size: .68rem; }
+      .nav { min-height: 66px; }
+      .brand { font-size: 1.25rem; }
+      .brand img { height: 33px; width: 33px; }
+      .nav .button { font-size: .78rem; min-height: 44px; padding: .72rem 1rem; }
+      h1 { font-size: clamp(3rem, 15vw, 4.6rem); }
+      h2 { font-size: clamp(2.15rem, 10vw, 3.2rem); }
+      .hero { padding: 2.5rem 0 4rem; }
+      .hero-grid { gap: 2.5rem; }
+      .hero-dek { font-size: 1.03rem; }
+      .hero-actions .button { width: 100%; }
+      .hero-price { width: 100%; }
+      .hero-visual { min-height: 515px; }
+      .hero-photo { border-radius: 100px 100px 24px 24px; height: 500px; width: calc(100% - 18px); }
+      .notification { left: 0; right: auto; top: 1.4rem; width: min(282px, 86%); }
+      .product-proof-card { bottom: .8rem; left: 0; width: 248px; }
+      .illustrative { text-align: left; }
+      .trust-grid { grid-template-columns: 1fr 1fr; }
+      .trust-item:nth-child(3) { border-left: 0; border-top: 1px solid rgba(255,255,255,.15); }
+      .trust-item:nth-child(4) { border-top: 1px solid rgba(255,255,255,.15); }
+      .connection-grid { gap: 2rem; }
+      .story-scene, .story-scene img { min-height: 340px; height: 340px; }
+      .step-grid { grid-template-columns: 1fr; }
+      .step, .step:first-child { border-left: 0; border-top: 1px solid rgba(255,255,255,.16); min-height: auto; padding: 1.5rem 0 2.2rem; }
+      .step:first-child { border-top: 0; }
+      .step h3 { margin: 1.3rem 0 .7rem; }
+      .alert-grid { grid-template-columns: 1fr; }
+      .alert-grid .phone-card:last-child { grid-column: auto; max-width: none; }
+      .phone-screen { min-height: 340px; }
+      .privacy-panel { gap: 2.5rem; }
+      .proof-gallery { grid-template-columns: 1fr; grid-template-rows: none; }
+      .proof-image { height: 330px; }
+      .proof-image.portal { grid-column: auto; }
+      .prototype-status { grid-template-columns: 1fr; }
+      .price-card { gap: 2rem; }
+      .price-amount { font-size: 4rem; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: .5rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=2755897781476379&amp;ev=PageView&amp;noscript=1"></noscript>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="announcement"><strong>GoSteady V2 preview</strong> · Family alert and alert-only location features are in development</div>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="/cupholderV2" aria-label="GoSteady home">
+        <img src="logo.png" alt="">
+        GoSteady
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#how-it-works">How it works</a>
+        <a href="#why-gosteady">Why GoSteady</a>
+        <a href="#questions">Questions</a>
+        <a class="button" data-v2-cta href="/checkoutV2">Check availability</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Connected safety for rollator users</p>
+          <h1>Peace of mind that <em>moves with them.</em></h1>
+          <p class="hero-dek">GoSteady helps you understand whether your parent’s rollator is moving through the day—and is being designed to give them one simple way to alert family when they want a check-in.</p>
+          <div class="hero-actions">
+            <a class="button" data-v2-cta href="/checkoutV2">
+              Check availability
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <div class="hero-price"><strong>$99 device + $20/month</strong>Monthly service starts at activation</div>
+          </div>
+          <div class="proof-row" aria-label="Product highlights">
+            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>No wearable</span>
+            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>No home Wi-Fi</span>
+            <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>No daily charging</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="hero-visual">
+            <img class="hero-photo" src="gosteady-lifestyle-v2.webp" width="1120" height="1400" alt="Illustrative image of an older woman confidently walking outdoors with a four-wheel rollator">
+            <div class="notification" aria-label="Example family notification">
+              <div class="notification-top"><span class="notification-brand"><span class="notification-dot"></span>GoSteady</span><span>10:42 AM</span></div>
+              <p><strong>Mom’s morning looks familiar.</strong><br>Her rollator recorded its usual movement.</p>
+            </div>
+            <div class="product-proof-card">
+              <img src="cup-detail.webp" alt="Actual GoSteady prototype mounted on a rollator">
+              <div><strong>Actual prototype</strong><span>Cellular activity sensor in a useful rollator cupholder.</span></div>
+            </div>
+          </div>
+          <p class="illustrative">Lifestyle image is illustrative. Product inset shows the current prototype.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust-strip" aria-label="GoSteady product facts">
+      <div class="wrap trust-grid">
+        <div class="trust-item"><strong>Built-in cellular</strong><span>Designed to work beyond home Wi-Fi, subject to coverage</span></div>
+        <div class="trust-item"><strong>Care Circle access</strong><span>Invite family members to share updates and respond together</span></div>
+        <div class="trust-item"><strong>Private by design</strong><span>No cameras, microphones, or room-by-room sensors</span></div>
+        <div class="trust-item"><strong>Made for rollators</strong><span>Attaches to equipment already used every day</span></div>
+      </div>
+    </div>
+
+    <section class="connection" id="why-gosteady">
+      <div class="wrap connection-grid">
+        <div class="story-card">
+          <div class="story-scene">
+            <img src="gosteady-lifestyle-v2.webp" alt="Illustrative view of independent everyday rollator use" loading="lazy">
+            <div class="calm-update"><small>Quiet reassurance</small><p>“Everything looks familiar this morning.” The family sees a useful signal, not a minute-by-minute feed.</p></div>
+          </div>
+        </div>
+        <div>
+          <p class="eyebrow">Connection without hovering</p>
+          <h2>Know a little sooner. Interrupt a little less.</h2>
+          <p class="lede">You want to know the day looks normal. They want to live it without feeling watched. GoSteady creates a quieter connection using the rollator already beside them.</p>
+          <p class="lede">Home monitoring is designed around the home. GoSteady is designed around the rollator—at breakfast, on a walk, and during everyday outings.</p>
+        </div>
+      </div>
+
+      <div class="wrap benefit-grid">
+        <article class="benefit-card">
+          <span class="benefit-number">01 · Mobile connection</span>
+          <h3>Goes beyond the front door</h3>
+          <p>Built-in cellular service keeps GoSteady connected at home and during ordinary outings wherever supported coverage is available.</p>
+          <svg class="benefit-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12.55a11 11 0 0 1 14.08 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
+        </article>
+        <article class="benefit-card">
+          <span class="benefit-number">02 · Meaningful changes</span>
+          <h3>Notices when the rhythm shifts</h3>
+          <p>Receive a factual alert when recorded rollator movement is lower than usual or has not appeared by a time you choose.</p>
+          <svg class="benefit-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 16 4-5 4 3 4-7"/></svg>
+        </article>
+        <article class="benefit-card">
+          <span class="status-pill">Planned for first release</span>
+          <span class="benefit-number">03 · Family alert</span>
+          <h3>Gives them a direct way to reach family</h3>
+          <p>The planned alert control is intended to notify selected contacts and share alert-only location with consent. It will not call 911 or a monitoring center.</p>
+          <svg class="benefit-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg>
+        </article>
+      </div>
+    </section>
+
+    <section class="steps" id="how-it-works">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Simple from day one</p>
+          <h2>One useful attachment. A quieter way to stay connected.</h2>
+          <p class="lede">Normal activity tracking is passive. The older adult does not need a smartphone, app, or new daily routine.</p>
+        </div>
+        <div class="step-grid">
+          <article class="step"><div class="step-index">01</div><h3>Attach it</h3><p>Clamp GoSteady to a compatible four-wheel rollator. No drilling or permanent changes.</p></article>
+          <article class="step"><div class="step-index">02</div><h3>Choose the family</h3><p>Select who can view updates and who should receive family-alert notifications.</p></article>
+          <article class="step"><div class="step-index">03</div><h3>Learn the rhythm</h3><p>GoSteady records movement of the rollator and builds a view of ordinary daily patterns.</p></article>
+          <article class="step"><div class="step-index">04</div><h3>Check in when it matters</h3><p>Family sees calm activity changes and, once validated, direct button alerts from the user.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="alerts" aria-labelledby="alerts-title">
+      <div class="wrap">
+        <div class="section-head center">
+          <p class="eyebrow">Updates designed for action</p>
+          <h2 id="alerts-title">Clear signals, without the alarm fatigue.</h2>
+          <p class="lede">GoSteady describes what the rollator recorded. It does not diagnose what happened or assume a health emergency.</p>
+        </div>
+        <div class="alert-grid">
+          <article class="phone-card">
+            <div class="phone-screen">
+              <div class="phone-status"><span>9:41</span><span>5G · 92%</span></div>
+              <div class="phone-title">Good morning, Lisa</div>
+              <div class="message"><span class="message-label">A familiar start</span><p>Dad’s GoSteady recorded its usual morning movement.</p><span class="message-action">View today’s activity →</span></div>
+            </div>
+            <h3>A normal day</h3><p>Reassurance without another phone call.</p>
+          </article>
+          <article class="phone-card">
+            <div class="phone-screen">
+              <div class="phone-status"><span>11:08</span><span>5G · 88%</span></div>
+              <div class="phone-title">Activity update</div>
+              <div class="message quiet"><span class="message-label">Quieter than usual</span><p>Dad’s GoSteady has recorded less rollator movement than usual this morning. Consider checking in.</p><span class="message-action">Call Dad →</span></div>
+            </div>
+            <h3>A quieter day</h3><p>A factual reason to check in—not a diagnosis.</p>
+          </article>
+          <article class="phone-card">
+            <div class="phone-screen">
+              <div class="phone-status"><span>3:16</span><span>5G · 84%</span></div>
+              <div class="phone-title">Family alert</div>
+              <div class="message direct"><span class="message-label">Planned alert experience</span><p>Dad pressed GoSteady. You and Maya would be notified so someone can call.</p><div class="concept-map"><span class="map-pin"></span><span class="map-note">Alert-only location concept · consent required</span></div><span class="message-action">Call Dad →</span></div>
+            </div>
+            <h3>A direct family alert</h3><p>Planned feature; not 911 or professional monitoring.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="privacy">
+      <div class="wrap privacy-panel">
+        <div>
+          <p class="eyebrow">Focused by design</p>
+          <h2>A lighter-touch way to stay informed.</h2>
+          <p class="lede">GoSteady measures movement of the rollator—not everything happening throughout the home.</p>
+        </div>
+        <div class="privacy-list">
+          <div class="privacy-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><p><strong>No cameras or microphones.</strong> There is no audio or video feed into the home.</p></div>
+          <div class="privacy-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><p><strong>No room-by-room sensor installation.</strong> The connection travels with the rollator.</p></div>
+          <div class="privacy-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><p><strong>No continuous location tracking.</strong> Location sharing is being explored only for user-initiated alerts and would require consent.</p></div>
+          <div class="privacy-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><p><strong>Use it openly.</strong> GoSteady should always be used with the knowledge and consent of the person using the rollator.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="proof-title">
+      <div class="wrap">
+        <div class="section-head center">
+          <p class="eyebrow">What exists today</p>
+          <h2 id="proof-title">A working platform, not just a rendering.</h2>
+          <p class="lede">The current prototype connects over cellular, records rollator activity, and powers a real family portal. The alert control and alert-only location flow remain in development.</p>
+        </div>
+        <div class="proof-gallery">
+          <figure class="proof-image"><img src="cup-rollator-full.webp" loading="lazy" alt="GoSteady prototype mounted on a blue four-wheel rollator"><figcaption>Actual prototype mounted on a four-wheel rollator</figcaption></figure>
+          <figure class="proof-image"><img src="cup-detail.webp" loading="lazy" alt="Close-up of the GoSteady cupholder and tool-free mounting clamp"><figcaption>Tool-free clamp and built-in status light</figcaption></figure>
+          <figure class="proof-image"><img src="product-rollator.webp" loading="lazy" alt="Close-up of the GoSteady rollator mounting system"><figcaption>Designed around rollator frame tubing</figcaption></figure>
+          <figure class="proof-image portal"><img src="demo-dashboard-preview.jpg" loading="lazy" alt="Current GoSteady family portal showing activity and device information"><figcaption>Current portal preview · illustrative demo data</figcaption></figure>
+        </div>
+        <div class="prototype-status" aria-label="Current development status">
+          <p><strong>Development status</strong>We are separating what works now from what still needs validation.</p>
+          <p><strong>Working</strong>Cellular device-to-cloud activity reporting</p>
+          <p><strong>Working</strong>Family portal and shared Care Circle access</p>
+          <p><strong>In development</strong>Reachable alert control and alert-only location</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="company">
+      <div class="wrap company-grid">
+        <div>
+          <p class="eyebrow">Who is behind GoSteady</p>
+          <h2>Built in Colorado for families balancing independence and concern.</h2>
+          <p class="lede">GoSteady LLC is developing a simpler connection between people who rely on rollators and the family members who care about them. We are building in public, testing with real hardware, and keeping family control and honest claim boundaries at the center.</p>
+        </div>
+        <aside class="company-card">
+          <h3>Questions before you order?</h3>
+          <p>Reach the GoSteady team directly at <a href="mailto:support@gosteady.co">support@gosteady.co</a>.</p>
+          <div class="company-facts">
+            <div class="company-fact"><small>Company</small><strong>Go Steady LLC</strong></div>
+            <div class="company-fact"><small>Location</small><strong>Colorado, USA</strong></div>
+            <div class="company-fact"><small>Current focus</small><strong>Direct-to-family rollator safety</strong></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+      <div class="wrap">
+        <div class="section-head center">
+          <p class="eyebrow">Simple pricing</p>
+          <h2>One product. One family plan.</h2>
+          <p class="lede">No professional-monitoring upsell and no activation fee hidden on this page.</p>
+        </div>
+        <div class="price-card">
+          <div>
+            <div class="price-name">GoSteady Family Connect</div>
+            <div class="price-amount">$99</div>
+            <div class="monthly">for the device, then <strong>$20/month after activation</strong></div>
+            <a class="button" data-v2-cta href="/checkoutV2">Check availability</a>
+            <p class="price-note">Monthly service can be cancelled any time. Availability details appear before payment.</p>
+          </div>
+          <ul class="price-list">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>GoSteady rollator attachment and tool-free clamp</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>Built-in cellular connectivity</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>Activity changes and quiet-day notifications</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>Family portal with Care Circle sharing</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>Planned family-alert control, subject to validation</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>30-day returns after delivery</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq" id="questions">
+      <div class="wrap">
+        <div class="section-head"><p class="eyebrow">Your questions, answered</p><h2>Know exactly what GoSteady is—and is not.</h2></div>
+        <div class="faq-grid">
+          <div>
+            <details open><summary>Does GoSteady detect falls?</summary><p>No. GoSteady records movement of the rollator. It does not detect falls, diagnose health conditions, or determine why activity changed.</p></details>
+            <details><summary>What will happen when the alert control is pressed?</summary><p>The planned Family Connect behavior is to notify the family members selected during setup so someone can call and check in. It will not contact 911 or a professional monitoring center, and there is no speaker or voice call on the device. This feature remains in development and must complete hardware and delivery validation before release.</p></details>
+            <details><summary>Will it share location?</summary><p>GoSteady does not currently collect GPS location. We are exploring consent-based location sharing only during a user-initiated family alert—not continuous tracking or route history. Privacy language and technical validation will be completed before that feature is released.</p></details>
+            <details><summary>Does the older adult need a smartphone or Wi-Fi?</summary><p>No. GoSteady has its own cellular connection. Family members use a phone or computer to view updates and manage notifications.</p></details>
+          </div>
+          <div>
+            <details open><summary>Does it work outside the home?</summary><p>GoSteady travels with the rollator and uses cellular connectivity rather than home Wi-Fi. Connectivity depends on supported cellular coverage.</p></details>
+            <details><summary>Does it need daily charging?</summary><p>No. GoSteady is being designed for long battery life without a daily charging routine. We will publish a specific battery interval and service process only after final production validation.</p></details>
+            <details><summary>Who receives the updates?</summary><p>Only family members or trusted contacts invited to the Care Circle receive GoSteady updates. The person using the rollator should know about and consent to the service.</p></details>
+            <details><summary>Will it fit the rollator?</summary><p>The current clamp is designed for common four-wheel rollator frame tubing, but final compatibility specifications are still being validated. Before fulfillment, we will offer a photo-confirmation option for any uncertain frame.</p></details>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div><a class="brand footer-brand" href="/cupholderV2"><img src="logo.png" alt="">GoSteady</a><p class="footer-copy">Connected rollator safety for families who want to stay informed without hovering. GoSteady is not a medical device, fall detector, or emergency-response service.</p></div>
+        <div class="footer-links"><strong>Product</strong><a href="#how-it-works">How it works</a><a href="#pricing">Pricing</a><a href="/userdemo/d2c/preview/dashboard">Portal demo</a><a href="mailto:support@gosteady.co">Support</a></div>
+        <div class="footer-links"><strong>Company</strong><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a><a href="#questions">Questions</a><a href="mailto:support@gosteady.co">support@gosteady.co</a></div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 Go Steady LLC · Colorado, USA</span><span>V2 positioning preview · Family alert features in development</span></div>
+    </div>
+  </footer>
+
+  <script>
+    const pageParams = new URLSearchParams(window.location.search);
+    pageParams.set('source', 'cupholder_v2');
+
+    document.querySelectorAll('[data-v2-cta]').forEach(function(link) {
+      const checkoutUrl = new URL(link.getAttribute('href'), window.location.origin);
+      pageParams.forEach(function(value, key) { checkoutUrl.searchParams.set(key, value); });
+      link.href = checkoutUrl.pathname + checkoutUrl.search;
+      link.addEventListener('click', function() {
+        plausible('V2 Primary CTA');
+        if (typeof fbq === 'function') fbq('trackCustom', 'V2PrimaryCTA');
+      });
+    });
+
+    plausible('V2 Landing Viewed');
+  </script>
+</body>
+</html>

@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — GoSteady Family Connect</title>
+  <meta name="description" content="Reserve GoSteady Family Connect for $99 plus $20 per month after activation.">
+  <meta name="robots" content="noindex,nofollow">
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2755897781476379');
+  fbq('track', 'PageView');
+  </script>
+  <!-- End Meta Pixel Code -->
+  <script async src="https://plausible.io/js/pa-1F6kJUB_Hmb5mZjKjHFKC.js"></script>
+  <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
+
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sage: #4A7C59;
+      --sage-dark: #3A6147;
+      --sage-pale: #EAF2EC;
+      --cream: #F9F6F0;
+      --warm-white: #FFFCF7;
+      --text: #2D3A2E;
+      --text-soft: #5A6B5C;
+      --border: #E5E0D8;
+      --error: #A53F3F;
+      --serif: 'Fraunces', Georgia, serif;
+      --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background: var(--warm-white);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .checkout-nav {
+      align-items: center;
+      background: rgba(255, 252, 247, 0.94);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+    }
+
+    .logo {
+      align-items: center;
+      color: var(--sage);
+      display: flex;
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      gap: 0.55rem;
+      text-decoration: none;
+    }
+
+    .logo img { height: 30px; width: auto; }
+
+    .secure-note {
+      align-items: center;
+      color: var(--text-soft);
+      display: flex;
+      font-size: 0.82rem;
+      gap: 0.4rem;
+    }
+
+    main {
+      display: grid;
+      gap: 4rem;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      margin: 0 auto;
+      max-width: 1040px;
+      padding: 3.25rem 2rem 5rem;
+    }
+
+    .checkout-main { min-width: 0; }
+
+    .progress {
+      align-items: center;
+      display: flex;
+      margin-bottom: 2.25rem;
+      max-width: 360px;
+    }
+
+    .progress-step {
+      align-items: center;
+      color: var(--text-soft);
+      display: flex;
+      font-size: 0.78rem;
+      font-weight: 600;
+      gap: 0.45rem;
+      white-space: nowrap;
+    }
+
+    .progress-step span {
+      align-items: center;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: inline-flex;
+      height: 26px;
+      justify-content: center;
+      width: 26px;
+    }
+
+    .progress-step.active { color: var(--sage-dark); }
+    .progress-step.active span { background: var(--sage); border-color: var(--sage); color: white; }
+
+    .progress-line { background: var(--border); height: 1px; margin: 0 0.75rem; width: 52px; }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 2.65rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 0.65rem;
+    }
+
+    .intro {
+      color: var(--text-soft);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .field { min-width: 0; }
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      display: block;
+      font-size: 0.84rem;
+      font-weight: 600;
+      margin-bottom: 0.42rem;
+    }
+
+    .optional { color: var(--text-soft); font-weight: 400; }
+
+    input, select {
+      appearance: none;
+      background: white;
+      border: 1px solid #D5D0C8;
+      border-radius: 10px;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 1rem;
+      padding: 0.85rem 0.9rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      width: 100%;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--sage);
+      box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.12);
+      outline: none;
+    }
+
+    input::placeholder { color: #9AA39B; }
+
+    .button {
+      align-items: center;
+      background: var(--sage);
+      border: 0;
+      border-radius: 999px;
+      color: white;
+      cursor: pointer;
+      display: inline-flex;
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 600;
+      justify-content: center;
+      margin-top: 1.5rem;
+      min-height: 52px;
+      padding: 0.9rem 1.75rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      width: 100%;
+    }
+
+    .button:hover { background: var(--sage-dark); box-shadow: 0 9px 24px rgba(74,124,89,0.22); transform: translateY(-1px); }
+    .button:disabled { cursor: wait; opacity: 0.65; transform: none; }
+
+    .button-secondary {
+      background: transparent;
+      border: 1px solid var(--sage);
+      color: var(--sage-dark);
+      margin-top: 0.75rem;
+    }
+
+    .button-secondary:hover { background: var(--sage-pale); box-shadow: none; color: var(--sage-dark); }
+
+    .privacy-note {
+      color: var(--text-soft);
+      font-size: 0.77rem;
+      line-height: 1.5;
+      margin-top: 0.85rem;
+      text-align: center;
+    }
+
+    .privacy-note a, .text-link { color: var(--sage-dark); }
+
+    .error-message {
+      background: #FFF3F1;
+      border: 1px solid #E9C4BE;
+      border-radius: 10px;
+      color: var(--error);
+      display: none;
+      font-size: 0.88rem;
+      margin-top: 1rem;
+      padding: 0.8rem 0.9rem;
+    }
+
+    .error-message.show { display: block; }
+
+    .order-summary {
+      align-self: start;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.4rem;
+      position: sticky;
+      top: 1.5rem;
+    }
+
+    .product-row { align-items: center; display: flex; gap: 1rem; }
+
+    .product-image {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      height: 92px;
+      overflow: hidden;
+      width: 78px;
+    }
+
+    .product-image img { height: 100%; object-fit: cover; width: 100%; }
+
+    .product-info { flex: 1; }
+    .product-info h2 { font-family: var(--serif); font-size: 1.08rem; font-weight: 500; line-height: 1.25; }
+    .product-info p { color: var(--text-soft); font-size: 0.78rem; margin-top: 0.2rem; }
+    .product-price { font-weight: 600; }
+
+    .summary-rule { border: 0; border-top: 1px solid var(--border); margin: 1.25rem 0; }
+    .summary-line { color: var(--text-soft); display: flex; font-size: 0.88rem; justify-content: space-between; margin-top: 0.7rem; }
+    .summary-line.total { color: var(--text); font-size: 1rem; font-weight: 600; margin-top: 0; }
+    .summary-line.promotion { color: var(--sage-dark); font-weight: 600; }
+    .subscription-note { color: var(--text-soft); font-size: 0.75rem; line-height: 1.45; margin-top: 1rem; }
+
+    .preorder-panel {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .preorder-banner {
+      background: var(--sage-pale);
+      border-bottom: 1px solid #CFE0D2;
+      padding: 1rem 1.25rem;
+    }
+
+    .preorder-banner strong {
+      align-items: center;
+      color: var(--sage-dark);
+      display: flex;
+      font-size: 0.86rem;
+      gap: 0.55rem;
+    }
+
+    .preorder-content { padding: 1.75rem; }
+    .preorder-content h1 { font-size: clamp(1.85rem, 5vw, 2.4rem); }
+    .preorder-copy { color: var(--text-soft); font-size: 1rem; line-height: 1.7; }
+
+    .preorder-details {
+      border-bottom: 1px solid var(--border);
+      border-top: 1px solid var(--border);
+      list-style: none;
+      margin: 1.5rem 0 0;
+      padding: 1.15rem 0;
+    }
+
+    .preorder-details li {
+      align-items: flex-start;
+      display: flex;
+      font-size: 0.9rem;
+      gap: 0.65rem;
+      margin: 0.55rem 0;
+    }
+
+    .check { color: var(--sage); flex: 0 0 auto; font-weight: 700; }
+
+    .choice-note {
+      color: var(--text-soft);
+      font-size: 0.78rem;
+      line-height: 1.45;
+      margin-top: 0.8rem;
+      text-align: center;
+    }
+
+    .confirmation {
+      padding: 1.5rem 0;
+      text-align: center;
+    }
+
+    .confirmation-icon {
+      align-items: center;
+      background: var(--sage-pale);
+      border-radius: 50%;
+      color: var(--sage);
+      display: flex;
+      font-size: 1.5rem;
+      height: 52px;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      width: 52px;
+    }
+
+    .confirmation h1 { font-size: 2rem; }
+    .confirmation p { color: var(--text-soft); margin: 0 auto 1.25rem; max-width: 28rem; }
+
+    .hidden { display: none !important; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      color: var(--text-soft);
+      font-size: 0.78rem;
+      padding: 1.5rem 2rem;
+      text-align: center;
+    }
+
+    footer a { color: var(--text-soft); }
+
+    @media (max-width: 800px) {
+      main { gap: 2rem; grid-template-columns: 1fr; padding-top: 2rem; }
+      .checkout-main { grid-row: 1; }
+      .order-summary { grid-row: 2; position: static; }
+    }
+
+    @media (max-width: 560px) {
+      .checkout-nav { padding: 0.85rem 1.15rem; }
+      .secure-note span { display: none; }
+      main { padding: 1.5rem 1.15rem 3.5rem; }
+      .form-grid { grid-template-columns: 1fr; }
+      .field { grid-column: 1 / -1; }
+      .progress { margin-bottom: 1.75rem; }
+      .progress-line { flex: 1; }
+      .preorder-content { padding: 1.35rem; }
+      .order-summary { padding: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+  <noscript><img height="1" width="1" style="display:none" alt=""
+  src="https://www.facebook.com/tr?id=2755897781476379&amp;ev=PageView&amp;noscript=1"></noscript>
+  <nav class="checkout-nav">
+    <a class="logo" href="/cupholderV2">
+      <img src="/logo.png" alt="">
+      GoSteady
+    </a>
+    <div class="secure-note" aria-label="Secure checkout">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+      <span>Secure checkout</span>
+    </div>
+  </nav>
+
+  <main>
+    <div class="checkout-main">
+      <div class="progress" aria-label="Checkout progress">
+        <div class="progress-step active" id="delivery-progress"><span>1</span> Delivery</div>
+        <div class="progress-line"></div>
+        <div class="progress-step" id="payment-progress"><span>2</span> Payment</div>
+      </div>
+
+      <section id="shipping-step">
+        <h1>Complete your order</h1>
+        <p class="intro">Enter your contact and delivery information to continue to secure payment.</p>
+
+        <form id="shipping-form" name="cupholder-v2-shipping-intent" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="cupholder-v2-shipping-intent">
+          <input type="hidden" name="bot-field">
+          <input type="hidden" name="checkout_id" id="checkout-id">
+          <input type="hidden" name="funnel_version" value="v2">
+          <input type="hidden" name="source_positioning" value="family_connect">
+          <input type="hidden" name="source_url" id="source-url">
+          <input type="hidden" name="referrer" id="referrer">
+          <input type="hidden" name="utm_source" id="utm-source">
+          <input type="hidden" name="utm_medium" id="utm-medium">
+          <input type="hidden" name="utm_campaign" id="utm-campaign">
+          <input type="hidden" name="utm_content" id="utm-content">
+          <input type="hidden" name="utm_term" id="utm-term">
+          <input type="hidden" name="fbclid" id="fbclid">
+          <input type="hidden" name="presented_price" value="99">
+          <input type="hidden" name="monthly_price" value="20">
+          <input type="hidden" name="currency" value="USD">
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="first-name">First name</label>
+              <input id="first-name" name="first_name" type="text" autocomplete="given-name" required>
+            </div>
+            <div class="field">
+              <label for="last-name">Last name</label>
+              <input id="last-name" name="last_name" type="text" autocomplete="family-name" required>
+            </div>
+            <div class="field full">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required>
+            </div>
+            <div class="field full">
+              <label for="phone">Phone <span class="optional">(optional)</span></label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
+            </div>
+            <div class="field full">
+              <label for="address-one">Address</label>
+              <input id="address-one" name="address_line_1" type="text" autocomplete="shipping address-line1" required>
+            </div>
+            <div class="field full">
+              <label for="address-two">Apartment, suite, etc. <span class="optional">(optional)</span></label>
+              <input id="address-two" name="address_line_2" type="text" autocomplete="shipping address-line2">
+            </div>
+            <div class="field full">
+              <label for="city">City</label>
+              <input id="city" name="city" type="text" autocomplete="shipping address-level2" required>
+            </div>
+            <div class="field">
+              <label for="region">State</label>
+              <input id="region" name="region" type="text" autocomplete="shipping address-level1" maxlength="30" required>
+            </div>
+            <div class="field">
+              <label for="postal-code">ZIP code</label>
+              <input id="postal-code" name="postal_code" type="text" autocomplete="shipping postal-code" inputmode="numeric" maxlength="10" required>
+            </div>
+          </div>
+
+          <button class="button" id="shipping-submit" type="submit">Continue to payment</button>
+          <p class="privacy-note">We use this information to complete your checkout. See our <a href="/privacy.html" target="_blank">Privacy Policy</a>.</p>
+          <div class="error-message" id="shipping-error" role="alert">We couldn't save your information. Please check your connection and try again.</div>
+        </form>
+      </section>
+
+      <section id="preorder-step" class="hidden" aria-live="polite">
+        <div class="preorder-panel">
+          <div class="preorder-banner">
+            <strong>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4M12 16h.01"></path></svg>
+              Availability update
+            </strong>
+          </div>
+          <div class="preorder-content">
+            <h1>GoSteady is in final development.</h1>
+            <p class="preorder-copy">We're preparing our first customer units for <strong>early 2027</strong>. Preorder today and your <strong>first two months of service are free</strong> after activation—a $40 value.</p>
+
+            <ul class="preorder-details">
+              <li><span class="check">✓</span><span><strong>$99 due today</strong> to reserve your GoSteady</span></li>
+              <li><span class="check">✓</span><span><strong>No monthly charge until activation</strong>, then your first 2 months are free</span></li>
+              <li><span class="check">✓</span><span>Fully refundable any time before shipment</span></li>
+              <li><span class="check">✓</span><span>Then $20/month; cancel any time</span></li>
+            </ul>
+
+            <p class="choice-note"><strong>Important:</strong> Family alert and alert-only location are planned features still undergoing validation. GoSteady does not contact 911 or provide professional emergency monitoring.</p>
+
+            <button class="button" id="continue-payment" type="button">Reserve for $99</button>
+            <button class="button button-secondary" id="notify-button" type="button">Keep me updated instead</button>
+            <p class="choice-note">You won't be charged unless you continue to the secure payment page and complete your preorder.</p>
+            <div class="error-message" id="payment-error" role="alert">Secure payment is not connected yet. Your interest has been saved, but no payment was taken.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="notify-confirmation" class="confirmation hidden" aria-live="polite">
+        <div class="confirmation-icon">✓</div>
+        <h1>We'll let you know.</h1>
+        <p>We've saved your information and will email you when GoSteady is ready to ship.</p>
+        <a class="text-link" href="/cupholderV2">Return to GoSteady</a>
+      </section>
+    </div>
+
+    <aside class="order-summary" aria-label="Order summary">
+      <div class="product-row">
+        <div class="product-image">
+          <img src="cup-detail.jpg" alt="GoSteady smart cupholder mounted on a rollator">
+        </div>
+        <div class="product-info">
+          <h2>GoSteady Family Connect</h2>
+          <p>Quantity: 1</p>
+        </div>
+        <div class="product-price">$99</div>
+      </div>
+      <hr class="summary-rule">
+      <div class="summary-line total"><span>Device</span><span>$99</span></div>
+      <div class="summary-line promotion hidden" id="preorder-bonus"><span>Preorder bonus</span><span>First 2 months free</span></div>
+      <div class="summary-line"><span>Monthly service</span><span id="monthly-price">$20/mo</span></div>
+      <p class="subscription-note">The monthly service includes cellular connectivity and the family portal. Billing starts when you activate your GoSteady—not when you order or while it is shipping.</p>
+    </aside>
+  </main>
+
+  <!-- Static form declaration lets Netlify register second-step choices. -->
+  <form name="cupholder-v2-preorder-choice" method="POST" data-netlify="true" class="hidden" aria-hidden="true">
+    <input type="hidden" name="form-name" value="cupholder-v2-preorder-choice">
+    <input type="hidden" name="checkout_id">
+    <input type="hidden" name="email">
+    <input type="hidden" name="choice">
+    <input type="hidden" name="funnel_version" value="v2">
+    <input type="hidden" name="source_positioning" value="family_connect">
+    <input type="hidden" name="device_price" value="99">
+    <input type="hidden" name="monthly_price" value="20">
+    <input type="hidden" name="preorder_bonus_months" value="2">
+    <input type="hidden" name="currency" value="USD">
+  </form>
+
+  <footer>
+    &copy; 2026 Go Steady LLC · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a>
+  </footer>
+
+  <script>
+    // Stripe sandbox Payment Link for GoSteady's $99 one-time preorder price.
+    // Card details must always be collected by the payment provider, never this page.
+    const PAYMENT_LINK_URL = 'https://buy.stripe.com/test_4gMfZigvC7uK0qi8GRcMM00';
+    const IS_LOCAL_PREVIEW = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname);
+    const params = new URLSearchParams(window.location.search);
+    const checkoutId = window.crypto && crypto.randomUUID
+      ? crypto.randomUUID()
+      : 'gs-' + Date.now() + '-' + Math.random().toString(16).slice(2);
+
+    function track(name, metaEvent, metaData) {
+      if (typeof plausible === 'function') plausible(name);
+      if (metaEvent && typeof fbq === 'function') fbq('track', metaEvent, metaData || {});
+    }
+
+    function encodeForm(data) {
+      return new URLSearchParams(data).toString();
+    }
+
+    function submitForm(data) {
+      // Netlify Dev does not emulate form capture. Keep local interaction QA usable
+      // while preserving the real POST behavior on deployed previews and production.
+      if (IS_LOCAL_PREVIEW) return Promise.resolve();
+
+      return fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encodeForm(data)
+      }).then(function(response) {
+        if (!response.ok) throw new Error('Form submission failed');
+        return response;
+      });
+    }
+
+    document.getElementById('checkout-id').value = checkoutId;
+    document.getElementById('source-url').value = window.location.href;
+    document.getElementById('referrer').value = document.referrer;
+
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid'].forEach(function(key) {
+      const input = document.getElementById(key.replaceAll('_', '-'));
+      if (input) input.value = params.get(key) || '';
+    });
+
+    track('V2 Checkout Started', 'InitiateCheckout', { value: 99, currency: 'USD', content_name: 'GoSteady Family Connect' });
+
+    const shippingForm = document.getElementById('shipping-form');
+    const shippingSubmit = document.getElementById('shipping-submit');
+    const shippingError = document.getElementById('shipping-error');
+    const shippingStep = document.getElementById('shipping-step');
+    const preorderStep = document.getElementById('preorder-step');
+    const deliveryProgress = document.getElementById('delivery-progress');
+    const paymentProgress = document.getElementById('payment-progress');
+    const preorderBonus = document.getElementById('preorder-bonus');
+    const monthlyPrice = document.getElementById('monthly-price');
+
+    shippingForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      shippingError.classList.remove('show');
+      shippingSubmit.disabled = true;
+      shippingSubmit.textContent = 'Saving…';
+
+      const data = new FormData(shippingForm);
+      submitForm(data).then(function() {
+        sessionStorage.setItem('gosteady-checkout-email', data.get('email'));
+        track('V2 Details Submitted', 'AddShippingInfo', { value: 99, currency: 'USD' });
+
+        shippingStep.classList.add('hidden');
+        preorderStep.classList.remove('hidden');
+        deliveryProgress.classList.remove('active');
+        paymentProgress.classList.add('active');
+        preorderBonus.classList.remove('hidden');
+        monthlyPrice.textContent = 'Then $20/mo';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        track('V2 Availability Disclosed');
+      }).catch(function() {
+        shippingError.classList.add('show');
+      }).finally(function() {
+        shippingSubmit.disabled = false;
+        shippingSubmit.textContent = 'Continue to payment';
+      });
+    });
+
+    function submitChoice(choice) {
+      return submitForm(new URLSearchParams({
+        'form-name': 'cupholder-v2-preorder-choice',
+        checkout_id: checkoutId,
+        email: document.getElementById('email').value,
+        choice: choice,
+        funnel_version: 'v2',
+        source_positioning: 'family_connect',
+        device_price: '99',
+        monthly_price: '20',
+        preorder_bonus_months: '2',
+        currency: 'USD'
+      }));
+    }
+
+    document.getElementById('continue-payment').addEventListener('click', function() {
+      const button = this;
+      const paymentError = document.getElementById('payment-error');
+      paymentError.classList.remove('show');
+      button.disabled = true;
+      button.textContent = 'Opening secure payment…';
+
+      submitChoice('continue_to_payment').catch(function() {
+        // Do not block checkout if analytics capture fails.
+      }).finally(function() {
+        track('V2 Preorder Accepted');
+
+        if (!PAYMENT_LINK_URL) {
+          paymentError.classList.add('show');
+          button.disabled = false;
+          button.textContent = 'Reserve for $99';
+          return;
+        }
+
+        const paymentUrl = new URL(PAYMENT_LINK_URL);
+        paymentUrl.searchParams.set('prefilled_email', document.getElementById('email').value);
+        paymentUrl.searchParams.set('client_reference_id', checkoutId);
+        window.location.href = paymentUrl.toString();
+      });
+    });
+
+    document.getElementById('notify-button').addEventListener('click', function() {
+      const button = this;
+      button.disabled = true;
+      button.textContent = 'Saving…';
+
+      submitChoice('notify_when_available').then(function() {
+        track('V2 Availability Notify Requested', 'Lead', { value: 0, currency: 'USD' });
+        preorderStep.classList.add('hidden');
+        document.getElementById('notify-confirmation').classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }).catch(function() {
+        document.getElementById('payment-error').textContent = "We couldn't save your choice. Please try again.";
+        document.getElementById('payment-error').classList.add('show');
+        button.disabled = false;
+        button.textContent = 'Keep me updated instead';
+      });
+    });
+  </script>
+</body>
+</html>
