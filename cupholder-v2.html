@@ -332,61 +332,88 @@
     .is-scene .feature-grid li:nth-child(4) { right: max(0px, calc(50% - 470px)); top: 57%; }
     .is-scene .feature-note { bottom: 3.5%; left: 50%; margin: 0; opacity: 0; position: absolute; transform: translate3d(-50%, 10px, 0); width: min(620px, 70%); will-change: opacity, transform; }
 
-    .alerts { background: var(--paper); }
-    .alert-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); }
-    .phone-card {
-      background: #f3f1ec;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-      padding: 1rem;
+    /* ---------- updates: three scenarios as a tab list, one lock-screen phone ---------- */
+    .updates { background: var(--paper); padding-bottom: 0; }
+    .updates-grid {
+      align-items: end;
+      display: grid;
+      gap: clamp(3rem, 6vw, 5.5rem);
+      grid-template-columns: minmax(0, 1.05fr) minmax(300px, .95fr);
     }
-    .phone-screen {
-      background: white;
-      border: 7px solid #1c2b24;
-      border-radius: 34px;
-      min-height: 380px;
+    .updates-copy { padding-bottom: clamp(5rem, 9vw, 8rem); }
+    .updates-copy h2 { margin: 0 0 1.25rem; }
+    .updates-copy .lede { margin: 0 0 2.25rem; max-width: 34rem; }
+
+    .scenario-tabs { border-top: 1px solid var(--line); display: grid; max-width: 34rem; }
+    .scenario-tab {
+      appearance: none;
+      background: none;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      display: grid;
+      font: inherit;
+      gap: .3rem;
+      padding: 1.15rem 0 1.15rem 1.25rem;
+      position: relative;
+      text-align: left;
+    }
+    .scenario-tab::before { background: transparent; content: ""; height: calc(100% - 1.5rem); left: 0; position: absolute; top: .75rem; transition: background .25s ease; width: 2px; }
+    .scenario-tab[aria-selected="true"]::before { background: var(--forest-700); }
+    .scenario-tab-title { color: var(--muted); font-size: 1.08rem; font-weight: 700; letter-spacing: -.01em; transition: color .25s ease; }
+    .scenario-tab[aria-selected="true"] .scenario-tab-title { color: var(--ink); }
+    .scenario-tab-text { color: var(--muted); font-size: .94rem; line-height: 1.55; }
+    .scenario-tab:hover .scenario-tab-title { color: var(--ink); }
+    .scenario-tab:focus-visible { border-radius: 6px; outline: 2px solid var(--forest-700); outline-offset: 4px; }
+
+    /* the phone is deliberately taller than its box and runs off the section's bottom edge */
+    .updates-visual { align-items: flex-start; display: flex; justify-content: center; max-height: 700px; overflow: hidden; }
+    .phone {
+      aspect-ratio: 9 / 19;
+      background:
+        radial-gradient(120% 80% at 18% 0%, rgba(183,204,189,.55) 0%, rgba(183,204,189,0) 55%),
+        linear-gradient(180deg, #2f5d4a 0%, #17352b 55%, #10271f 100%);
+      border: 8px solid #1c2b24;
+      border-radius: 52px;
+      box-shadow: var(--shadow-lg);
+      color: white;
+      flex-shrink: 0;
       overflow: hidden;
-      padding: 1.25rem .85rem;
       position: relative;
+      width: min(100%, 380px);
     }
-    .phone-status { color: var(--muted); display: flex; font-size: .62rem; font-weight: 700; justify-content: space-between; }
-    .phone-title { font-family: var(--serif); font-size: 1.3rem; margin: 2rem 0 1.4rem; }
-    .message {
-      background: var(--sage-075);
-      border: 1px solid var(--sage-150);
-      border-radius: 17px;
-      padding: 1rem;
-    }
-    .message.quiet { background: #fbf2e7; border-color: #edddc9; }
-    .message.direct { background: var(--coral-pale); border-color: #efcfc4; }
-    .message-label { color: var(--forest-700); font-size: .65rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-    .message.direct .message-label { color: #a54e3b; }
-    .message p { font-size: .83rem; line-height: 1.45; margin: .5rem 0 0; }
-    .message-action { color: var(--forest-800); display: block; font-size: .75rem; font-weight: 700; margin-top: .8rem; }
-    .phone-card > h3 { font-size: 1.12rem; margin: 1.15rem .4rem .4rem; }
-    .phone-card > p { color: var(--muted); font-size: .78rem; margin: 0 .4rem .35rem; }
-    .concept-map {
-      background-color: #edf1ed;
-      background-image: linear-gradient(rgba(33,73,58,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(33,73,58,.08) 1px, transparent 1px);
-      background-size: 22px 22px;
-      border-radius: 14px;
-      height: 110px;
-      margin-top: .8rem;
-      position: relative;
-    }
-    .map-pin {
-      background: var(--coral);
-      border: 4px solid white;
-      border-radius: 50% 50% 50% 0;
-      box-shadow: 0 5px 12px rgba(0,0,0,.16);
-      height: 25px;
-      left: 55%;
+    .phone-island { background: #000; border-radius: 999px; height: 30px; left: 50%; position: absolute; top: 14px; transform: translateX(-50%); width: 108px; z-index: 3; }
+    .phone-lock { padding-top: 70px; text-align: center; }
+    .phone-date { display: block; font-size: .95rem; font-weight: 500; letter-spacing: .01em; opacity: .9; }
+    .phone-time { display: block; font-size: 4.6rem; font-weight: 500; letter-spacing: -.03em; line-height: 1; margin-top: .25rem; }
+
+    .notif {
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      background: rgba(255,255,255,.93);
+      border-radius: 22px;
+      box-shadow: 0 14px 34px rgba(16,39,31,.22);
+      color: var(--ink);
+      left: 14px;
+      opacity: 0;
+      overflow: hidden;
+      padding: .95rem 1rem 0;
       position: absolute;
-      top: 36%;
-      transform: rotate(-45deg);
-      width: 25px;
+      right: 14px;
+      top: 238px;
+      transform: translateY(10px);
+      transition: opacity .38s ease, transform .38s ease, visibility 0s linear .38s;
+      visibility: hidden;
     }
-    .map-note { bottom: .55rem; color: var(--muted); font-size: .58rem; left: .6rem; position: absolute; }
+    .notif.is-active { opacity: 1; transform: none; transition-delay: 0s; visibility: visible; }
+    .notif-head { align-items: center; display: flex; gap: .55rem; margin-bottom: .55rem; }
+    .notif-head img { background: white; border-radius: 8px; height: 30px; width: 30px; }
+    .notif-app { font-size: .84rem; font-weight: 700; }
+    .notif-time { color: var(--muted); font-size: .76rem; margin-left: auto; }
+    .notif-title { font-size: .95rem; font-weight: 700; margin: 0 0 .2rem; }
+    .notif-body { color: #2b3a33; font-size: .9rem; line-height: 1.45; margin: 0 0 .8rem; }
+    .notif-actions { display: grid; margin: 0 -1rem; }
+    .notif-actions span { border-top: 1px solid rgba(23,35,30,.1); color: var(--forest-700); font-size: .9rem; font-weight: 600; padding: .68rem 1rem; text-align: center; }
 
     .privacy { background: var(--cream); }
     .privacy-panel {
@@ -473,8 +500,9 @@
       .definition-text { margin: 0 auto; max-width: 620px; }
       .feature-block { text-align: left; }
       .feature-grid { grid-template-columns: 1fr 1fr; }
-      .alert-grid { grid-template-columns: 1fr 1fr; }
-      .alert-grid .phone-card:last-child { grid-column: 1 / span 2; max-width: 50%; }
+      .updates-grid { align-items: start; grid-template-columns: 1fr; }
+      .updates-copy { padding-bottom: 0; }
+      .updates-visual { margin-top: 1rem; max-height: 520px; }
     }
 
     @media (max-width: 680px) {
@@ -503,9 +531,10 @@
       .feature-grid li { border-top: 1px solid rgba(89,103,95,.18); padding: 1.4rem 0; }
       .feature-grid li::before { display: none; }
       .feature-note { margin-top: 1.5rem; text-align: left; }
-      .alert-grid { grid-template-columns: 1fr; }
-      .alert-grid .phone-card:last-child { grid-column: auto; max-width: none; }
-      .phone-screen { min-height: 340px; }
+      .updates-visual { max-height: 470px; }
+      .phone { border-radius: 46px; width: min(100%, 300px); }
+      .phone-time { font-size: 4rem; }
+      .notif { top: 214px; }
       .privacy-panel { gap: 2.5rem; }
       .price-card { gap: 2rem; }
       .price-amount { font-size: 4rem; }
@@ -622,38 +651,55 @@
       </div>
     </section>
 
-    <section class="alerts" aria-labelledby="alerts-title">
-      <div class="wrap">
-        <div class="section-head center">
-          <p class="eyebrow">Updates designed for action</p>
-          <h2 id="alerts-title">Clear signals, without the alarm fatigue.</h2>
-          <p class="lede">From familiar mornings to a direct request for help, the Care Circle sees what matters at a glance.</p>
+    <section class="updates" id="updates" aria-labelledby="updates-title" data-updates>
+      <div class="wrap updates-grid">
+        <div class="updates-copy">
+          <p class="eyebrow">Updates in plain language</p>
+          <h2 id="updates-title">Quiet on normal days. Clear when something changes.</h2>
+          <p class="lede">Every update reads the way you’d want a neighbor to put it: what happened, whether it’s normal for them, and what to do next &mdash; if anything.</p>
+
+          <div class="scenario-tabs" role="tablist" aria-label="Example updates" aria-orientation="vertical">
+            <button class="scenario-tab" role="tab" id="tab-normal" aria-selected="true" aria-controls="panel-normal" data-time="7:52">
+              <span class="scenario-tab-title">A normal day</span>
+              <span class="scenario-tab-text">Most days, this is all you’ll hear. Enough to stop wondering, not enough to bother you.</span>
+            </button>
+            <button class="scenario-tab" role="tab" id="tab-quiet" aria-selected="false" aria-controls="panel-quiet" data-time="11:08" tabindex="-1">
+              <span class="scenario-tab-title">A quieter day</span>
+              <span class="scenario-tab-text">When a day doesn’t look like their normal, you get a plain heads-up and a suggested next step. Not a siren.</span>
+            </button>
+            <button class="scenario-tab" role="tab" id="tab-help" aria-selected="false" aria-controls="panel-help" data-time="3:16" tabindex="-1">
+              <span class="scenario-tab-title">They asked for help</span>
+              <span class="scenario-tab-text">One press on the cupholder reaches everyone in the Care Circle at once, with their location attached.</span>
+            </button>
+          </div>
         </div>
-        <div class="alert-grid">
-          <article class="phone-card">
-            <div class="phone-screen">
-              <div class="phone-status"><span>9:41</span><span>5G · 92%</span></div>
-              <div class="phone-title">Good morning, Lisa</div>
-              <div class="message"><span class="message-label">A familiar start</span><p>Dad’s GoSteady recorded its usual morning movement.</p><span class="message-action">View today’s activity →</span></div>
+
+        <div class="updates-visual">
+          <div class="phone">
+            <div class="phone-island" aria-hidden="true"></div>
+            <div class="phone-lock" aria-hidden="true">
+              <span class="phone-date">Tuesday, September 30</span>
+              <span class="phone-time" data-phone-time>7:52</span>
             </div>
-            <h3>A normal day</h3><p>Reassurance without another phone call.</p>
-          </article>
-          <article class="phone-card">
-            <div class="phone-screen">
-              <div class="phone-status"><span>11:08</span><span>5G · 88%</span></div>
-              <div class="phone-title">Activity update</div>
-              <div class="message quiet"><span class="message-label">Quieter than usual</span><p>Dad’s GoSteady has recorded less rollator movement than usual this morning. Consider checking in.</p><span class="message-action">Call Dad →</span></div>
-            </div>
-            <h3>A quieter day</h3><p>A useful reason to check in.</p>
-          </article>
-          <article class="phone-card">
-            <div class="phone-screen">
-              <div class="phone-status"><span>3:16</span><span>5G · 84%</span></div>
-              <div class="phone-title">Family alert</div>
-              <div class="message direct"><span class="message-label">Family alert</span><p>Dad pressed GoSteady. You and Maya were notified so someone can call.</p><div class="concept-map"><span class="map-pin"></span><span class="map-note">Location shared with Care Circle</span></div><span class="message-action">Call Dad →</span></div>
-            </div>
-            <h3>A direct family alert</h3><p>One press alerts chosen contacts and shares GoSteady’s location.</p>
-          </article>
+            <article class="notif is-active" id="panel-normal" role="tabpanel" aria-labelledby="tab-normal">
+              <div class="notif-head"><img src="logo.png" alt=""><span class="notif-app">GoSteady</span><span class="notif-time">now</span></div>
+              <p class="notif-title">A familiar morning</p>
+              <p class="notif-body">Dad’s rollator has been moving since 7:40, like most mornings. Nothing you need to do.</p>
+              <div class="notif-actions"><span>See today’s activity</span></div>
+            </article>
+            <article class="notif" id="panel-quiet" role="tabpanel" aria-labelledby="tab-quiet" aria-hidden="true">
+              <div class="notif-head"><img src="logo.png" alt=""><span class="notif-app">GoSteady</span><span class="notif-time">now</span></div>
+              <p class="notif-title">Quieter than usual</p>
+              <p class="notif-body">Less movement than most mornings so far. Might be worth a call.</p>
+              <div class="notif-actions"><span>Call Dad</span><span>Remind me at noon</span></div>
+            </article>
+            <article class="notif" id="panel-help" role="tabpanel" aria-labelledby="tab-help" aria-hidden="true">
+              <div class="notif-head"><img src="logo.png" alt=""><span class="notif-app">GoSteady</span><span class="notif-time">now</span></div>
+              <p class="notif-title">Dad asked for help</p>
+              <p class="notif-body">He pressed the button on his GoSteady. Maya was notified too, with his location.</p>
+              <div class="notif-actions"><span>Call Dad</span><span>Open location</span></div>
+            </article>
+          </div>
         </div>
       </div>
     </section>
@@ -964,6 +1010,71 @@
       sceneWide.addEventListener('change', syncScene);
       sceneReducedMotion.addEventListener('change', syncScene);
       syncScene();
+    }
+
+    const updates = document.querySelector('[data-updates]');
+
+    if (updates) {
+      const scenarioTabs = Array.from(updates.querySelectorAll('[role="tab"]'));
+      const scenarioPanels = Array.from(updates.querySelectorAll('[role="tabpanel"]'));
+      const phoneClock = updates.querySelector('[data-phone-time]');
+      const updatesReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let scenarioIndex = 0;
+      let scenarioTimer = null;
+      let scenarioTouched = false;
+
+      function showScenario(index) {
+        scenarioIndex = index;
+        scenarioTabs.forEach(function(tab, i) {
+          const on = i === index;
+          tab.setAttribute('aria-selected', on ? 'true' : 'false');
+          tab.tabIndex = on ? 0 : -1;
+        });
+        scenarioPanels.forEach(function(panel, i) {
+          const on = i === index;
+          panel.classList.toggle('is-active', on);
+          panel.setAttribute('aria-hidden', on ? 'false' : 'true');
+        });
+        if (phoneClock && scenarioTabs[index].dataset.time) phoneClock.textContent = scenarioTabs[index].dataset.time;
+      }
+
+      function stopScenarios() {
+        if (scenarioTimer) window.clearInterval(scenarioTimer);
+        scenarioTimer = null;
+      }
+
+      // Rotate gently while the section is on screen; the first touch ends it for good.
+      function startScenarios() {
+        if (scenarioTouched || updatesReducedMotion.matches || scenarioTimer) return;
+        scenarioTimer = window.setInterval(function() {
+          showScenario((scenarioIndex + 1) % scenarioTabs.length);
+        }, 5500);
+      }
+
+      scenarioTabs.forEach(function(tab, i) {
+        tab.addEventListener('click', function() {
+          scenarioTouched = true;
+          stopScenarios();
+          showScenario(i);
+        });
+        tab.addEventListener('keydown', function(event) {
+          if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+          event.preventDefault();
+          const next = (i + (event.key === 'ArrowDown' ? 1 : -1) + scenarioTabs.length) % scenarioTabs.length;
+          scenarioTouched = true;
+          stopScenarios();
+          showScenario(next);
+          scenarioTabs[next].focus();
+        });
+      });
+
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) { if (entry.isIntersecting) startScenarios(); else stopScenarios(); });
+        }, { threshold: .35 }).observe(updates);
+      }
+
+      showScenario(0);
     }
 
     plausible('V2 Landing Viewed');
