@@ -270,115 +270,67 @@
     .section-head.center { margin: 0 auto 3.5rem; text-align: center; }
     .lede { color: var(--muted); font-size: 1.08rem; margin: 1.25rem 0 0; }
 
-    .connection { background: var(--cream); overflow: hidden; }
-    .connection-canvas {
+    /* ---------- definition: the resting frame is the static grid (photo | sentence);
+       on wide screens a scroll scene moves the photo to centre and brings the four
+       features in around it. Nothing in the scene changes layout, only transform/opacity,
+       so the first frame is identical to the non-animated version. ---------- */
+    .definition { background: var(--cream); scroll-margin-top: 76px; }
+    .definition-grid {
       align-items: center;
       display: grid;
-      gap: clamp(2.5rem, 7vw, 6rem);
-      grid-template-areas:
-        "device definition"
-        "features features"
-        "note note";
-      grid-template-columns: minmax(280px, .75fr) minmax(0, 1.25fr);
+      gap: clamp(3.5rem, 6vw, 5.5rem) clamp(3rem, 7vw, 6.5rem);
+      grid-template-areas: "media text" "features features";
+      grid-template-columns: minmax(280px, .85fr) minmax(0, 1.15fr);
       max-width: 1080px;
-    }
-    .connection-device-shell { grid-area: device; min-height: 350px; overflow: hidden; position: relative; }
-    .connection-device-shell::after {
-      background: rgba(16,39,31,.12);
-      border-radius: 50%;
-      bottom: 1.8rem;
-      filter: blur(13px);
-      content: "";
-      height: 14px;
-      left: 50%;
-      position: absolute;
-      transform: translateX(-50%);
-      width: 66%;
-    }
-    .connection-device {
-      bottom: -3.25rem;
-      filter: drop-shadow(0 12px 14px rgba(16,39,31,.08));
-      height: auto;
-      left: 50%;
-      max-width: none;
-      position: absolute;
-      transform: translateX(-50%);
-      width: min(78%, 300px);
-      z-index: 1;
-    }
-    .connection-definition { grid-area: definition; max-width: 620px; }
-    .connection-definition h2 { font-family: var(--sans); font-size: clamp(1.7rem, 2.7vw, 2.15rem); font-weight: 400; letter-spacing: -.025em; line-height: 1.18; margin: 0; }
-
-    .feature-callouts {
-      border-top: 1px solid rgba(89,103,95,.18);
-      display: grid;
-      gap: 2.75rem clamp(2rem, 5vw, 4.5rem);
-      grid-area: features;
-      grid-template-areas: "battery cellular" "routine family";
-      grid-template-columns: 1fr 1fr;
-      padding-top: clamp(4.5rem, 8vw, 7rem);
-    }
-    .feature-callout { align-self: center; max-width: 285px; }
-    .feature-callout::before { background: var(--sage-300); content: ""; display: block; height: 1px; margin-bottom: 1rem; width: 34px; }
-    .feature-callout h3 { font-family: var(--sans); font-size: 1.2rem; font-weight: 700; letter-spacing: -.015em; margin: 0 0 .55rem; }
-    .feature-callout p { color: var(--muted); font-size: .94rem; line-height: 1.55; margin: 0; }
-    .feature-battery { grid-area: battery; }
-    .feature-cellular { grid-area: cellular; }
-    .feature-routine { grid-area: routine; }
-    .feature-family { grid-area: family; }
-    .feature-note { color: var(--muted); font-size: .74rem; grid-area: note; line-height: 1.5; margin: .25rem auto 0; max-width: 620px; text-align: center; }
-
-    .connection.is-scroll-enhanced { overflow: visible; padding: 0; }
-    .is-scroll-enhanced .connection-track { height: 190svh; min-height: 1180px; }
-    .is-scroll-enhanced .connection-sticky {
-      height: calc(100svh - 76px);
-      min-height: 590px;
-      overflow: hidden;
-      position: sticky;
-      top: 76px;
-    }
-    .is-scroll-enhanced .connection-canvas {
-      display: block;
-      height: 100%;
-      max-width: 1200px;
-      position: relative;
       scroll-margin-top: 76px;
     }
-    .is-scroll-enhanced .connection-device-shell {
-      height: 400px;
-      left: 50%;
-      min-height: 0;
-      overflow: visible;
-      position: absolute;
-      top: 50%;
-      transform: translate3d(-50%, -50%, 0);
-      transform-origin: center;
-      width: 310px;
-      will-change: transform;
-      z-index: 2;
+    .definition-media { grid-area: media; margin: 0; }
+    .definition-media img {
+      filter: drop-shadow(0 18px 22px rgba(16,39,31,.10));
+      height: auto;
+      margin: 0 auto;
+      width: min(100%, 400px);
     }
-    .is-scroll-enhanced .connection-device-shell::after { bottom: 1.35rem; width: 72%; }
-    .is-scroll-enhanced .connection-device {
-      bottom: -2.5rem;
-      left: 50%;
-      width: min(82%, 300px);
+    .definition-text {
+      font-family: var(--sans);
+      font-size: clamp(1.9rem, 3vw, 2.7rem);
+      font-weight: 400;
+      grid-area: text;
+      letter-spacing: -.025em;
+      line-height: 1.15;
+      margin: 0;
+      max-width: 560px;
     }
-    .is-scroll-enhanced .connection-definition {
-      left: 52%;
-      max-width: 525px;
-      position: absolute;
-      top: 50%;
-      transform: translate3d(0, -50%, 0);
-      will-change: opacity, transform;
-      z-index: 3;
+    .feature-block { grid-area: features; }
+    .feature-grid {
+      border-top: 1px solid rgba(89,103,95,.18);
+      display: grid;
+      gap: 2.5rem clamp(2rem, 4vw, 3.5rem);
+      grid-template-columns: repeat(4, 1fr);
+      list-style: none;
+      margin: 0;
+      padding: clamp(3rem, 5vw, 4.5rem) 0 0;
     }
-    .is-scroll-enhanced .feature-callouts { border: 0; display: block; inset: 0; padding: 0; pointer-events: none; position: absolute; z-index: 3; }
-    .is-scroll-enhanced .feature-callout { max-width: 240px; opacity: 0; position: absolute; text-align: left; width: 240px; will-change: opacity, transform; }
-    .is-scroll-enhanced .feature-battery { left: max(0px, calc(50% - 400px)); top: 20%; }
-    .is-scroll-enhanced .feature-cellular { right: max(0px, calc(50% - 400px)); top: 20%; }
-    .is-scroll-enhanced .feature-routine { left: max(0px, calc(50% - 400px)); top: 57%; }
-    .is-scroll-enhanced .feature-family { right: max(0px, calc(50% - 400px)); top: 57%; }
-    .is-scroll-enhanced .feature-note { bottom: 3.5%; left: 50%; margin: 0; opacity: 0; position: absolute; transform: translate3d(-50%, 10px, 0); width: min(620px, 70%); will-change: opacity, transform; z-index: 3; }
+    .feature-grid li::before { background: var(--sage-300); content: ""; display: block; height: 1px; margin-bottom: 1rem; width: 34px; }
+    .feature-grid h3 { font-family: var(--sans); font-size: 1.12rem; font-weight: 700; letter-spacing: -.015em; margin: 0 0 .5rem; }
+    .feature-grid p { color: var(--muted); font-size: .94rem; line-height: 1.55; margin: 0; }
+    .feature-note { color: var(--muted); font-size: .8rem; line-height: 1.5; margin: 2.5rem auto 0; max-width: 620px; text-align: center; }
+
+    /* scroll scene (wide screens, motion allowed) */
+    .definition.is-scene { padding: 0; }
+    .is-scene .definition-track { height: 190svh; min-height: 1180px; }
+    .is-scene .definition-sticky { height: calc(100svh - 76px); min-height: 590px; overflow: hidden; position: sticky; top: 76px; }
+    .is-scene .definition-grid { align-content: center; grid-template-areas: "media text"; height: 100%; position: relative; }
+    .is-scene .definition-media { position: relative; will-change: transform; z-index: 2; }
+    .is-scene .definition-text { will-change: opacity, transform; }
+    .is-scene .feature-block { inset: 0; pointer-events: none; position: absolute; z-index: 3; }
+    .is-scene .feature-grid { border: 0; display: block; margin: 0; padding: 0; }
+    .is-scene .feature-grid li { max-width: 250px; opacity: 0; position: absolute; width: 250px; will-change: opacity, transform; }
+    .is-scene .feature-grid li:nth-child(1) { left: max(0px, calc(50% - 470px)); top: 20%; }
+    .is-scene .feature-grid li:nth-child(2) { right: max(0px, calc(50% - 470px)); top: 20%; }
+    .is-scene .feature-grid li:nth-child(3) { left: max(0px, calc(50% - 470px)); top: 57%; }
+    .is-scene .feature-grid li:nth-child(4) { right: max(0px, calc(50% - 470px)); top: 57%; }
+    .is-scene .feature-note { bottom: 3.5%; left: 50%; margin: 0; opacity: 0; position: absolute; transform: translate3d(-50%, 10px, 0); width: min(620px, 70%); will-change: opacity, transform; }
 
     .alerts { background: var(--paper); }
     .alert-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); }
@@ -516,16 +468,11 @@
       .hero-grid, .privacy-panel, .company-grid, .price-card { grid-template-columns: 1fr; }
       .hero-copy { max-width: 720px; }
       .hero-visual { margin: 0 auto; width: min(100%, 620px); }
-      .connection-canvas {
-        grid-template-areas: "definition definition" "device device" "features features" "note note";
-        grid-template-columns: 1fr 1fr;
-        max-width: 720px;
-      }
-      .connection-definition { margin: 0 auto; max-width: 620px; text-align: center; }
-      .connection-device-shell { margin: 0 auto; max-width: 440px; width: 100%; }
-      .connection-device { width: min(72%, 280px); }
-      .feature-callouts { grid-template-areas: "battery cellular" "routine family"; grid-template-columns: 1fr 1fr; }
-      .feature-callout { justify-self: stretch; max-width: none; text-align: left; }
+      .definition-grid { grid-template-areas: "text" "media" "features"; grid-template-columns: 1fr; max-width: 720px; row-gap: 2.25rem; text-align: center; }
+      .definition-media img { width: min(72%, 340px); }
+      .definition-text { margin: 0 auto; max-width: 620px; }
+      .feature-block { text-align: left; }
+      .feature-grid { grid-template-columns: 1fr 1fr; }
       .alert-grid { grid-template-columns: 1fr 1fr; }
       .alert-grid .phone-card:last-child { grid-column: 1 / span 2; max-width: 50%; }
     }
@@ -550,13 +497,12 @@
       .notification-watch { bottom: 4rem; top: auto; width: 236px; }
       .hero-carousel-controls { right: 1.1rem; }
       .illustrative { text-align: left; }
-      .connection-canvas { gap: 2rem; grid-template-areas: "definition" "device" "features" "note"; grid-template-columns: 1fr; }
-      .connection-device-shell { min-height: 320px; }
-      .connection-device { bottom: -3rem; width: min(72%, 250px); }
-      .feature-callouts { gap: 0; grid-template-areas: "battery" "cellular" "routine" "family"; grid-template-columns: 1fr; padding-top: 2rem; }
-      .feature-callout { border-top: 1px solid rgba(89,103,95,.18); padding: 1.4rem 0; }
-      .feature-callout::before { display: none; }
-      .feature-note { margin-top: 1.25rem; text-align: left; }
+      .definition-grid { row-gap: 1.75rem; }
+      .definition-media img { width: min(72%, 280px); }
+      .feature-grid { border-top: 0; gap: 0; grid-template-columns: 1fr; padding-top: .5rem; }
+      .feature-grid li { border-top: 1px solid rgba(89,103,95,.18); padding: 1.4rem 0; }
+      .feature-grid li::before { display: none; }
+      .feature-note { margin-top: 1.5rem; text-align: left; }
       .alert-grid { grid-template-columns: 1fr; }
       .alert-grid .phone-card:last-child { grid-column: auto; max-width: none; }
       .phone-screen { min-height: 340px; }
@@ -654,35 +600,23 @@
       </div>
     </section>
 
-    <section class="connection" id="why-gosteady" data-feature-experience>
-      <div class="connection-track" data-feature-track>
-        <div class="connection-sticky" data-feature-sticky>
-          <div class="wrap connection-canvas" id="how-it-works" data-feature-canvas>
-            <div class="connection-definition" data-feature-definition>
-              <h2>GoSteady is a walker&#8209;mounted safety system within a useful, discreet cupholder.</h2>
+    <section class="definition" id="why-gosteady" data-scene>
+      <div class="definition-track" data-scene-track>
+        <div class="definition-sticky" data-scene-sticky>
+          <div class="wrap definition-grid" id="how-it-works" data-scene-canvas>
+            <figure class="definition-media" data-scene-device>
+              <img src="Assets/closeup.webp" width="859" height="1024" alt="Close-up of the GoSteady cupholder mounted to rollator tubing">
+            </figure>
+            <h2 class="definition-text" data-scene-text>GoSteady is a walker&#8209;mounted safety system within a useful, discreet cupholder.</h2>
+            <div class="feature-block" data-scene-features>
+              <ul class="feature-grid" aria-label="GoSteady features">
+                <li data-scene-callout data-side="left"><h3>Up to a year per charge</h3><p>Stays on the walker. Nothing to charge daily.</p></li>
+                <li data-scene-callout data-side="right"><h3>Built-in cellular</h3><p>Works out of the box. No Wi‑Fi, Bluetooth, or phone pairing.</p></li>
+                <li data-scene-callout data-side="left"><h3>Learns their routine</h3><p>Senses walker movement and flags meaningful changes.</p></li>
+                <li data-scene-callout data-side="right"><h3>One press reaches family</h3><p>Alerts chosen contacts, with GPS location attached.</p></li>
+              </ul>
+              <p class="feature-note" data-scene-note>Everything stays with the walker, while updates go directly to their Care Circle.</p>
             </div>
-            <div class="connection-device-shell" data-feature-device>
-              <img class="connection-device" src="Assets/closeup.webp" width="859" height="1024" alt="Close-up of the GoSteady cupholder mounted to rollator tubing" loading="lazy">
-            </div>
-            <div class="feature-callouts" data-feature-callouts role="region" aria-label="GoSteady features">
-              <article class="feature-callout feature-battery" data-feature-callout data-feature-side="left">
-                <h3>Up to a year per charge</h3>
-                <p>Stays on the walker. Nothing to charge daily.</p>
-              </article>
-              <article class="feature-callout feature-cellular" data-feature-callout data-feature-side="right">
-                <h3>Built-in cellular</h3>
-                <p>Works out of the box. No Wi‑Fi, Bluetooth, or phone pairing.</p>
-              </article>
-              <article class="feature-callout feature-routine" data-feature-callout data-feature-side="left">
-                <h3>Learns their routine</h3>
-                <p>Senses walker movement and flags meaningful changes.</p>
-              </article>
-              <article class="feature-callout feature-family" data-feature-callout data-feature-side="right">
-                <h3>One press reaches family</h3>
-                <p>Alerts chosen contacts, with GPS location attached.</p>
-              </article>
-            </div>
-            <p class="feature-note" data-feature-note>Everything stays with the walker, while updates go directly to their Care Circle.</p>
           </div>
         </div>
       </div>
@@ -921,102 +855,115 @@
       startHeroRotation();
     }
 
-    const featureExperience = document.querySelector('[data-feature-experience]');
+    const scene = document.querySelector('[data-scene]');
 
-    if (featureExperience) {
-      const featureTrack = featureExperience.querySelector('[data-feature-track]');
-      const featureSticky = featureExperience.querySelector('[data-feature-sticky]');
-      const featureCanvas = featureExperience.querySelector('[data-feature-canvas]');
-      const featureDevice = featureExperience.querySelector('[data-feature-device]');
-      const featureDefinition = featureExperience.querySelector('[data-feature-definition]');
-      const featureCallouts = Array.from(featureExperience.querySelectorAll('[data-feature-callout]'));
-      const featureNote = featureExperience.querySelector('[data-feature-note]');
-      const featureWideLayout = window.matchMedia('(min-width: 981px)');
-      const featureReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (scene) {
+      const sceneTrack = scene.querySelector('[data-scene-track]');
+      const sceneSticky = scene.querySelector('[data-scene-sticky]');
+      const sceneCanvas = scene.querySelector('[data-scene-canvas]');
+      const sceneDevice = scene.querySelector('[data-scene-device]');
+      const sceneText = scene.querySelector('[data-scene-text]');
+      const sceneCallouts = Array.from(scene.querySelectorAll('[data-scene-callout]'));
+      const sceneNote = scene.querySelector('[data-scene-note]');
+      const sceneWide = window.matchMedia('(min-width: 981px)');
+      const sceneReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
       const calloutTimings = [[.34, .51], [.43, .60], [.52, .69], [.61, .78]];
-      let featureFrame = null;
-      let featureEnhanced = false;
+      let sceneFrame = null;
+      let sceneEnhanced = false;
+      let sceneShiftX = 0;
 
-      function clampFeature(value) {
+      function clampScene(value) {
         return Math.min(1, Math.max(0, value));
       }
 
-      function smoothFeature(start, end, value) {
-        const progress = clampFeature((value - start) / (end - start));
-        return progress * progress * (3 - (2 * progress));
+      function smoothScene(start, end, value) {
+        const t = clampScene((value - start) / (end - start));
+        return t * t * (3 - (2 * t));
       }
 
-      function renderFeatureExperience() {
-        featureFrame = null;
-        if (!featureEnhanced) return;
+      // The photo starts wherever the static grid puts it. Measure the distance from
+      // there to the canvas centre, so the first frame matches the non-animated layout
+      // exactly and the move lands dead centre at any width.
+      function measureScene() {
+        sceneDevice.style.transform = '';
+        const canvasRect = sceneCanvas.getBoundingClientRect();
+        const deviceRect = sceneDevice.getBoundingClientRect();
+        sceneShiftX = (canvasRect.left + (canvasRect.width / 2)) - (deviceRect.left + (deviceRect.width / 2));
+      }
 
-        const trackRect = featureTrack.getBoundingClientRect();
-        const stickyTop = parseFloat(window.getComputedStyle(featureSticky).top) || 0;
-        const scrollDistance = Math.max(1, featureTrack.offsetHeight - featureSticky.offsetHeight);
-        const progress = clampFeature((stickyTop - trackRect.top) / scrollDistance);
-        const deviceMove = smoothFeature(.06, .58, progress);
-        const definitionFade = smoothFeature(.10, .39, progress);
-        const startOffset = featureCanvas.clientWidth * -.265;
-        const startVerticalOffset = featureSticky.offsetHeight * -.30;
-        const verticalOffset = startVerticalOffset * (1 - deviceMove);
-        const deviceScale = .96 + (.08 * deviceMove);
+      function renderScene() {
+        sceneFrame = null;
+        if (!sceneEnhanced) return;
 
-        featureExperience.dataset.featureProgress = progress.toFixed(2);
-        featureDevice.style.transform = 'translate3d(-50%, -50%, 0) translate3d(' + (startOffset * (1 - deviceMove)) + 'px, ' + verticalOffset + 'px, 0) scale(' + deviceScale + ')';
-        featureDefinition.style.opacity = String(1 - definitionFade);
-        featureDefinition.style.transform = 'translate3d(' + (22 * definitionFade) + 'px, -50%, 0) translateY(' + verticalOffset + 'px)';
+        const trackRect = sceneTrack.getBoundingClientRect();
+        const stickyTop = parseFloat(window.getComputedStyle(sceneSticky).top) || 0;
+        const distance = Math.max(1, sceneTrack.offsetHeight - sceneSticky.offsetHeight);
+        const progress = clampScene((stickyTop - trackRect.top) / distance);
+        const move = smoothScene(.08, .55, progress);
+        const fade = smoothScene(.10, .40, progress);
 
-        featureCallouts.forEach(function(callout, index) {
+        scene.dataset.sceneProgress = progress.toFixed(2);
+        sceneDevice.style.transform = 'translate3d(' + (sceneShiftX * move) + 'px, 0, 0) scale(' + (1 - (.04 * move)) + ')';
+        sceneText.style.opacity = String(1 - fade);
+        sceneText.style.transform = 'translate3d(' + (22 * fade) + 'px, 0, 0)';
+
+        sceneCallouts.forEach(function(callout, index) {
           const timing = calloutTimings[index];
-          const reveal = smoothFeature(timing[0], timing[1], progress);
-          const direction = callout.dataset.featureSide === 'left' ? 1 : -1;
+          const reveal = smoothScene(timing[0], timing[1], progress);
+          const direction = callout.dataset.side === 'left' ? 1 : -1;
           callout.style.opacity = String(reveal);
           callout.style.transform = 'translate3d(' + (direction * 24 * (1 - reveal)) + 'px, ' + (12 * (1 - reveal)) + 'px, 0)';
         });
 
-        const noteReveal = smoothFeature(.72, .88, progress);
-        featureNote.style.opacity = String(noteReveal);
-        featureNote.style.transform = 'translate3d(-50%, ' + (10 * (1 - noteReveal)) + 'px, 0)';
+        const noteReveal = smoothScene(.72, .88, progress);
+        sceneNote.style.opacity = String(noteReveal);
+        sceneNote.style.transform = 'translate3d(-50%, ' + (10 * (1 - noteReveal)) + 'px, 0)';
       }
 
-      function requestFeatureRender() {
-        if (!featureFrame) featureFrame = window.requestAnimationFrame(renderFeatureExperience);
+      function requestScene() {
+        if (!sceneFrame) sceneFrame = window.requestAnimationFrame(renderScene);
       }
 
-      function clearFeatureStyles() {
-        delete featureExperience.dataset.featureProgress;
-        featureDevice.removeAttribute('style');
-        featureDefinition.removeAttribute('style');
-        featureCallouts.forEach(function(callout) { callout.removeAttribute('style'); });
-        featureNote.removeAttribute('style');
+      function resizeScene() {
+        measureScene();
+        requestScene();
       }
 
-      function syncFeatureExperience() {
-        const shouldEnhance = featureWideLayout.matches && !featureReducedMotion.matches;
-        if (shouldEnhance === featureEnhanced) {
-          if (shouldEnhance) requestFeatureRender();
+      function clearScene() {
+        delete scene.dataset.sceneProgress;
+        sceneDevice.removeAttribute('style');
+        sceneText.removeAttribute('style');
+        sceneCallouts.forEach(function(callout) { callout.removeAttribute('style'); });
+        sceneNote.removeAttribute('style');
+      }
+
+      function syncScene() {
+        const shouldEnhance = sceneWide.matches && !sceneReducedMotion.matches;
+        if (shouldEnhance === sceneEnhanced) {
+          if (shouldEnhance) requestScene();
           return;
         }
 
-        featureEnhanced = shouldEnhance;
-        featureExperience.classList.toggle('is-scroll-enhanced', featureEnhanced);
+        sceneEnhanced = shouldEnhance;
+        scene.classList.toggle('is-scene', sceneEnhanced);
 
-        if (featureEnhanced) {
-          window.addEventListener('scroll', requestFeatureRender, { passive: true });
-          window.addEventListener('resize', requestFeatureRender, { passive: true });
-          renderFeatureExperience();
+        if (sceneEnhanced) {
+          measureScene();
+          window.addEventListener('scroll', requestScene, { passive: true });
+          window.addEventListener('resize', resizeScene, { passive: true });
+          renderScene();
         } else {
-          window.removeEventListener('scroll', requestFeatureRender);
-          window.removeEventListener('resize', requestFeatureRender);
-          if (featureFrame) window.cancelAnimationFrame(featureFrame);
-          featureFrame = null;
-          clearFeatureStyles();
+          window.removeEventListener('scroll', requestScene);
+          window.removeEventListener('resize', resizeScene);
+          if (sceneFrame) window.cancelAnimationFrame(sceneFrame);
+          sceneFrame = null;
+          clearScene();
         }
       }
 
-      featureWideLayout.addEventListener('change', syncFeatureExperience);
-      featureReducedMotion.addEventListener('change', syncFeatureExperience);
-      syncFeatureExperience();
+      sceneWide.addEventListener('change', syncScene);
+      sceneReducedMotion.addEventListener('change', syncScene);
+      syncScene();
     }
 
     plausible('V2 Landing Viewed');
