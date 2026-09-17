@@ -306,19 +306,40 @@
     .connection-definition { max-width: 620px; }
     .connection-definition h2 { font-family: var(--sans); font-size: clamp(1.7rem, 2.7vw, 2.15rem); font-weight: 400; letter-spacing: -.025em; line-height: 1.18; margin: 0; }
 
-    .steps { background: var(--forest-950); color: white; }
-    .steps .eyebrow { color: #9fc0aa; }
-    .steps .lede { color: #b8c8bf; }
-    .step-grid { display: grid; gap: 1px; grid-template-columns: repeat(4, 1fr); margin-top: 3.5rem; }
-    .step {
-      border-left: 1px solid rgba(255,255,255,.16);
-      min-height: 310px;
-      padding: 1rem 1.55rem 1.5rem;
+    .feature-constellation {
+      border-top: 1px solid rgba(89,103,95,.18);
+      display: grid;
+      gap: 2.75rem clamp(2rem, 5vw, 4.5rem);
+      grid-template-areas:
+        "battery device cellular"
+        "routine device family"
+        "note note note";
+      grid-template-columns: minmax(0, 1fr) minmax(250px, 320px) minmax(0, 1fr);
+      grid-template-rows: 1fr 1fr auto;
+      margin-top: clamp(4.5rem, 8vw, 7rem);
+      padding-top: clamp(4.5rem, 8vw, 7rem);
     }
-    .step:first-child { border-left: 0; padding-left: 0; }
-    .step-index { color: var(--gold); font-family: var(--serif); font-size: 2.6rem; }
-    .step h3 { color: white; margin: 3rem 0 .8rem; }
-    .step p { color: #b8c8bf; font-size: .88rem; margin: 0; }
+    .feature-callout { align-self: center; max-width: 285px; }
+    .feature-callout::before { background: var(--sage-300); content: ""; display: block; height: 1px; margin-bottom: 1rem; width: 34px; }
+    .feature-callout h3 { font-family: var(--sans); font-size: 1.2rem; font-weight: 700; letter-spacing: -.015em; margin: 0 0 .55rem; }
+    .feature-callout p { color: var(--muted); font-size: .94rem; line-height: 1.55; margin: 0; }
+    .feature-battery { grid-area: battery; justify-self: end; text-align: right; }
+    .feature-cellular { grid-area: cellular; }
+    .feature-routine { grid-area: routine; justify-self: end; text-align: right; }
+    .feature-family { grid-area: family; }
+    .feature-battery::before, .feature-routine::before { margin-left: auto; }
+    .feature-device-shell { align-items: center; display: flex; grid-area: device; justify-content: center; min-height: 500px; position: relative; }
+    .feature-device-shell::after { background: rgba(16,39,31,.12); border-radius: 50%; bottom: 4.6rem; content: ""; filter: blur(14px); height: 14px; left: 50%; position: absolute; transform: translateX(-50%); width: 66%; }
+    .feature-device { filter: drop-shadow(0 16px 18px rgba(16,39,31,.09)); height: auto; position: relative; width: min(100%, 300px); z-index: 1; }
+    .feature-note { color: var(--muted); font-size: .74rem; grid-area: note; line-height: 1.5; margin: .25rem auto 0; max-width: 620px; text-align: center; }
+    .feature-constellation.is-animated .feature-device { opacity: .75; transform: translateX(-70px) scale(.94); }
+    .feature-constellation.is-animated .feature-callout { opacity: 0; transform: translateY(12px); }
+    .feature-constellation.is-animated .feature-device, .feature-constellation.is-animated .feature-callout { transition: opacity .65s ease, transform .75s cubic-bezier(.22,.61,.36,1); }
+    .feature-constellation.is-animated.is-visible .feature-device, .feature-constellation.is-animated.is-visible .feature-callout { opacity: 1; transform: none; }
+    .feature-constellation.is-animated.is-visible .feature-battery { transition-delay: .08s; }
+    .feature-constellation.is-animated.is-visible .feature-cellular { transition-delay: .16s; }
+    .feature-constellation.is-animated.is-visible .feature-routine { transition-delay: .24s; }
+    .feature-constellation.is-animated.is-visible .feature-family { transition-delay: .32s; }
 
     .alerts { background: var(--paper); }
     .alert-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); }
@@ -487,8 +508,19 @@
       .hero-visual { margin: 0 auto; width: min(100%, 620px); }
       .connection-grid { max-width: 720px; }
       .connection-visual { margin: 0 auto; max-width: 440px; width: 100%; }
-      .step-grid { grid-template-columns: 1fr 1fr; }
-      .step:nth-child(3) { border-left: 0; }
+      .feature-constellation {
+        grid-template-areas:
+          "device device"
+          "battery cellular"
+          "routine family"
+          "note note";
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .feature-device-shell { min-height: 390px; }
+      .feature-device { width: min(72%, 280px); }
+      .feature-callout { justify-self: stretch; max-width: none; text-align: left; }
+      .feature-battery::before, .feature-routine::before { margin-left: 0; }
       .alert-grid { grid-template-columns: 1fr 1fr; }
       .alert-grid .phone-card:last-child { grid-column: 1 / span 2; max-width: 50%; }
       .proof-gallery { grid-template-columns: 1fr 1fr; }
@@ -523,10 +555,17 @@
       .connection-grid { gap: 2rem; }
       .connection-visual { min-height: 300px; }
       .connection-product { bottom: -3rem; width: min(76%, 270px); }
-      .step-grid { grid-template-columns: 1fr; }
-      .step, .step:first-child { border-left: 0; border-top: 1px solid rgba(255,255,255,.16); min-height: auto; padding: 1.5rem 0 2.2rem; }
-      .step:first-child { border-top: 0; }
-      .step h3 { margin: 1.3rem 0 .7rem; }
+      .feature-constellation {
+        gap: 0;
+        grid-template-areas: "device" "battery" "cellular" "routine" "family" "note";
+        grid-template-columns: 1fr;
+      }
+      .feature-device-shell { min-height: 330px; }
+      .feature-device { width: min(72%, 250px); }
+      .feature-device-shell::after { bottom: 3.5rem; }
+      .feature-callout { border-top: 1px solid rgba(89,103,95,.18); padding: 1.4rem 0; }
+      .feature-callout::before { display: none; }
+      .feature-note { margin-top: 1.25rem; text-align: left; }
       .alert-grid { grid-template-columns: 1fr; }
       .alert-grid .phone-card:last-child { grid-column: auto; max-width: none; }
       .phone-screen { min-height: 340px; }
@@ -646,21 +685,27 @@
           <h2>GoSteady is a walker&#8209;mounted safety system within a useful, discreet cupholder.</h2>
         </div>
       </div>
-    </section>
-
-    <section class="steps" id="how-it-works">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow">Simple from day one</p>
-          <h2>One useful attachment. A quieter way to stay connected.</h2>
-          <p class="lede">Normal activity tracking is passive. The older adult does not need a smartphone, app, or new daily routine.</p>
+      <div class="wrap feature-constellation" id="how-it-works" data-feature-constellation role="region" aria-label="GoSteady features">
+        <article class="feature-callout feature-battery">
+          <h3>Up to a year per charge</h3>
+          <p>Stays on the walker. Nothing to charge daily.</p>
+        </article>
+        <article class="feature-callout feature-cellular">
+          <h3>Built-in cellular</h3>
+          <p>Works out of the box. No Wi‑Fi, Bluetooth, or phone pairing.</p>
+        </article>
+        <div class="feature-device-shell" aria-hidden="true">
+          <img class="feature-device" src="Assets/closeup.webp" width="859" height="1024" alt="" loading="lazy">
         </div>
-        <div class="step-grid">
-          <article class="step"><div class="step-index">01</div><h3>Attach it</h3><p>Clamp GoSteady to a compatible four-wheel rollator. No drilling or permanent changes.</p></article>
-          <article class="step"><div class="step-index">02</div><h3>Choose the family</h3><p>Select who can view updates and who should receive family-alert notifications.</p></article>
-          <article class="step"><div class="step-index">03</div><h3>Learn the rhythm</h3><p>GoSteady records movement of the rollator and builds a view of ordinary daily patterns.</p></article>
-          <article class="step"><div class="step-index">04</div><h3>Check in when it matters</h3><p>Family sees calm activity changes and, once validated, direct button alerts from the user.</p></article>
-        </div>
+        <article class="feature-callout feature-routine">
+          <h3>Learns their routine</h3>
+          <p>Senses walker movement and flags meaningful changes.</p>
+        </article>
+        <article class="feature-callout feature-family">
+          <h3>One press reaches family</h3>
+          <p>Alerts chosen contacts, with GPS location attached.</p>
+        </article>
+        <p class="feature-note">Family alert and alert-only GPS location are planned for first release and remain in development. GoSteady does not contact 911 or a professional monitoring center.</p>
       </div>
     </section>
 
@@ -791,12 +836,12 @@
           <div>
             <details open><summary>Does GoSteady detect falls?</summary><p>No. GoSteady records movement of the rollator. It does not detect falls, diagnose health conditions, or determine why activity changed.</p></details>
             <details><summary>What will happen when the alert control is pressed?</summary><p>The planned Family Connect behavior is to notify the family members selected during setup so someone can call and check in. It will not contact 911 or a professional monitoring center, and there is no speaker or voice call on the device. This feature remains in development and must complete hardware and delivery validation before release.</p></details>
-            <details><summary>Will it share location?</summary><p>GoSteady does not currently collect GPS location. We are exploring consent-based location sharing only during a user-initiated family alert—not continuous tracking or route history. Privacy language and technical validation will be completed before that feature is released.</p></details>
+            <details><summary>Will it share location?</summary><p>The planned family-alert feature will allow GoSteady’s GPS location to be attached to a user-initiated alert sent to chosen contacts. It will not provide continuous tracking or route history. This feature remains in development and must complete privacy and technical validation before release.</p></details>
             <details><summary>Does the older adult need a smartphone or Wi-Fi?</summary><p>No. GoSteady has its own cellular connection. Family members use a phone or computer to view updates and manage notifications.</p></details>
           </div>
           <div>
             <details open><summary>Does it work outside the home?</summary><p>GoSteady travels with the rollator and uses cellular connectivity rather than home Wi-Fi. Connectivity depends on supported cellular coverage.</p></details>
-            <details><summary>Does it need daily charging?</summary><p>No. GoSteady is being designed for long battery life without a daily charging routine. We will publish a specific battery interval and service process only after final production validation.</p></details>
+            <details><summary>Does it need daily charging?</summary><p>No. GoSteady is designed for up to a year per charge under normal use, so it can stay on the walker without a daily charging routine. Actual battery life will vary with use, cellular conditions, and final production configuration.</p></details>
             <details><summary>Who receives the updates?</summary><p>Only family members or trusted contacts invited to the Care Circle receive GoSteady updates. The person using the rollator should know about and consent to the service.</p></details>
             <details><summary>Will it fit the rollator?</summary><p>The current clamp is designed for common four-wheel rollator frame tubing, but final compatibility specifications are still being validated. Before fulfillment, we will offer a photo-confirmation option for any uncertain frame.</p></details>
           </div>
@@ -917,6 +962,22 @@
 
       syncHeroToggle();
       startHeroRotation();
+    }
+
+    const featureConstellation = document.querySelector('[data-feature-constellation]');
+
+    if (featureConstellation && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      featureConstellation.classList.add('is-animated');
+
+      const featureObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (!entry.isIntersecting) return;
+          featureConstellation.classList.add('is-visible');
+          featureObserver.unobserve(featureConstellation);
+        });
+      }, { threshold: .24, rootMargin: '0px 0px -8% 0px' });
+
+      featureObserver.observe(featureConstellation);
     }
 
     plausible('V2 Landing Viewed');
