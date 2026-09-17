@@ -174,14 +174,27 @@
     .proof-row span { align-items: center; color: var(--muted); display: inline-flex; font-size: .82rem; font-weight: 600; gap: .45rem; }
     .proof-row svg { color: var(--forest-700); }
     .hero-visual { min-height: 620px; position: relative; }
-    .hero-photo {
+    .hero-scenes {
       border-radius: 180px 180px var(--radius-lg) var(--radius-lg);
       box-shadow: var(--shadow-lg);
       height: 620px;
       margin-left: auto;
-      object-fit: cover;
-      object-position: center 38%;
+      overflow: hidden;
+      position: relative;
       width: min(100%, 520px);
+    }
+    .hero-scene {
+      inset: 0;
+      opacity: 0;
+      position: absolute;
+      transition: opacity .9s ease;
+    }
+    .hero-scene.is-active { opacity: 1; z-index: 1; }
+    .hero-photo {
+      height: 100%;
+      object-fit: cover;
+      object-position: center 42%;
+      width: 100%;
     }
     .product-proof-card {
       align-items: center;
@@ -197,6 +210,7 @@
       padding: .8rem .95rem .8rem .8rem;
       position: absolute;
       width: 270px;
+      z-index: 5;
     }
     .product-proof-card img { border-radius: 15px; height: 96px; object-fit: cover; width: 92px; }
     .product-proof-card strong { display: block; font-size: .88rem; margin-bottom: .15rem; }
@@ -206,16 +220,64 @@
       border: 1px solid rgba(216,221,215,.9);
       border-radius: 20px;
       box-shadow: var(--shadow-sm);
+      left: -1rem;
+      opacity: 0;
       padding: .95rem 1rem;
+      pointer-events: none;
       position: absolute;
-      right: -1rem;
       top: 4rem;
+      transform: translateY(8px);
+      transition: opacity .45s ease, transform .45s ease;
       width: 288px;
+      z-index: 4;
     }
+    .notification.is-active { opacity: 1; transform: translateY(0); }
+    .notification-positive { border-color: rgba(108,150,125,.48); }
+    .notification-positive .notification-dot { background: var(--forest-700); }
+    .notification-watch { background: rgba(255,251,240,.97); border-color: rgba(231,198,123,.8); }
+    .notification-watch .notification-dot { background: #c89d3e; }
+    .notification-check { background: rgba(255,247,243,.97); border-color: rgba(217,120,97,.58); }
+    .notification-check .notification-dot { background: var(--coral); }
     .notification-top { align-items: center; color: var(--muted); display: flex; font-size: .72rem; justify-content: space-between; margin-bottom: .55rem; }
     .notification-brand { align-items: center; color: var(--ink); display: inline-flex; font-weight: 700; gap: .4rem; }
-    .notification-dot { background: var(--coral); border-radius: 50%; height: 10px; width: 10px; }
+    .notification-dot { border-radius: 50%; height: 10px; width: 10px; }
     .notification p { font-size: .86rem; line-height: 1.4; margin: 0; }
+    .hero-carousel-controls {
+      align-items: center;
+      background: rgba(16,39,31,.82);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      bottom: 1rem;
+      display: flex;
+      gap: .42rem;
+      padding: .42rem .5rem;
+      position: absolute;
+      right: .8rem;
+      z-index: 5;
+      backdrop-filter: blur(10px);
+    }
+    .hero-carousel-dot, .hero-carousel-toggle {
+      align-items: center;
+      background: transparent;
+      border: 0;
+      color: white;
+      cursor: pointer;
+      display: inline-flex;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+    }
+    .hero-carousel-dot { height: 22px; width: 22px; }
+    .hero-carousel-dot::before {
+      background: rgba(255,255,255,.52);
+      border-radius: 999px;
+      content: "";
+      height: 7px;
+      transition: width .2s ease, background .2s ease;
+      width: 7px;
+    }
+    .hero-carousel-dot[aria-current="true"]::before { background: white; width: 18px; }
+    .hero-carousel-toggle { border-left: 1px solid rgba(255,255,255,.28); font-size: .72rem; height: 22px; margin-left: .1rem; padding-left: .52rem; width: 28px; }
     .illustrative { color: var(--muted); font-size: .7rem; margin: .7rem 0 0; text-align: right; }
 
     .trust-strip { background: var(--forest-950); color: white; }
@@ -387,7 +449,7 @@
     }
     .proof-image.portal { grid-column: 2 / span 2; }
     .proof-image.portal img { object-position: center top; }
-    .prototype-status {
+    .development-status {
       border-bottom: 1px solid var(--line);
       border-top: 1px solid var(--line);
       display: grid;
@@ -396,8 +458,8 @@
       margin-top: 2.5rem;
       padding: 1.8rem 0;
     }
-    .prototype-status > p { color: var(--muted); font-size: .82rem; margin: 0; }
-    .prototype-status strong { color: var(--ink); display: block; font-size: .88rem; margin-bottom: .25rem; }
+    .development-status > p { color: var(--muted); font-size: .82rem; margin: 0; }
+    .development-status strong { color: var(--ink); display: block; font-size: .88rem; margin-bottom: .25rem; }
 
     .company { background: var(--forest-950); color: white; }
     .company-grid { align-items: center; display: grid; gap: 4rem; grid-template-columns: 1.1fr .9fr; }
@@ -471,7 +533,7 @@
       .proof-gallery { grid-template-columns: 1fr 1fr; }
       .proof-image:first-child { grid-row: auto; }
       .proof-image.portal { grid-column: 1 / span 2; }
-      .prototype-status { grid-template-columns: 1fr 1fr; }
+      .development-status { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 680px) {
@@ -489,9 +551,10 @@
       .hero-actions .button { width: 100%; }
       .hero-price { width: 100%; }
       .hero-visual { min-height: 515px; }
-      .hero-photo { border-radius: 100px 100px 24px 24px; height: 500px; width: calc(100% - 18px); }
-      .notification { left: 0; right: auto; top: 1.4rem; width: min(282px, 86%); }
+      .hero-scenes { border-radius: 100px 100px 24px 24px; height: 500px; width: calc(100% - 18px); }
+      .notification { left: 0; top: 1.4rem; width: min(282px, 86%); }
       .product-proof-card { bottom: .8rem; left: 0; width: 248px; }
+      .hero-carousel-controls { bottom: 11rem; right: 1.1rem; }
       .illustrative { text-align: left; }
       .trust-grid { grid-template-columns: 1fr 1fr; }
       .trust-item:nth-child(3) { border-left: 0; border-top: 1px solid rgba(255,255,255,.15); }
@@ -509,7 +572,7 @@
       .proof-gallery { grid-template-columns: 1fr; grid-template-rows: none; }
       .proof-image { height: 330px; }
       .proof-image.portal { grid-column: auto; }
-      .prototype-status { grid-template-columns: 1fr; }
+      .development-status { grid-template-columns: 1fr; }
       .price-card { gap: 2rem; }
       .price-amount { font-size: 4rem; }
       .faq-grid { grid-template-columns: 1fr; }
@@ -565,18 +628,45 @@
         </div>
 
         <div>
-          <div class="hero-visual">
-            <img class="hero-photo" src="gosteady-lifestyle-v2.webp" width="1120" height="1400" alt="Illustrative image of an older woman confidently walking outdoors with a four-wheel rollator">
-            <div class="notification" aria-label="Example family notification">
-              <div class="notification-top"><span class="notification-brand"><span class="notification-dot"></span>GoSteady</span><span>10:42 AM</span></div>
-              <p><strong>Mom’s morning looks familiar.</strong><br>Her rollator recorded its usual movement.</p>
+          <div class="hero-visual" data-hero-carousel aria-label="Three examples of GoSteady activity updates">
+            <div class="hero-scenes">
+              <div class="hero-scene is-active" data-hero-scene aria-hidden="false">
+                <img class="hero-photo" src="Assets/scenario-1.webp" width="1120" height="1400" alt="Illustrative image of an older woman confidently walking outdoors with GoSteady on her rollator" fetchpriority="high">
+              </div>
+              <div class="hero-scene" data-hero-scene aria-hidden="true">
+                <img class="hero-photo" src="Assets/scenario-2.webp" width="1120" height="1400" alt="Illustrative image of an older woman using her rollator in a softly lit hallway overnight">
+              </div>
+              <div class="hero-scene" data-hero-scene aria-hidden="true">
+                <img class="hero-photo" src="Assets/scenario-3.webp" width="1120" height="1400" alt="Illustrative image of a GoSteady-equipped rollator beside a couch in the morning">
+              </div>
             </div>
+
+            <div class="notification notification-positive is-active" data-hero-notification role="status" aria-atomic="true" aria-hidden="false">
+              <div class="notification-top"><span class="notification-brand"><span class="notification-dot"></span>GoSteady</span><span>Weekly update</span></div>
+              <p><strong>A more active week</strong><br>Mom’s rollator activity was 20% higher this week.</p>
+            </div>
+            <div class="notification notification-watch" data-hero-notification role="status" aria-atomic="true" aria-hidden="true">
+              <div class="notification-top"><span class="notification-brand"><span class="notification-dot"></span>GoSteady</span><span>7:15 AM</span></div>
+              <p><strong>Overnight pattern changed</strong><br>Mom’s GoSteady recorded more overnight movement than usual on 3 nights this week. Consider checking in this morning.</p>
+            </div>
+            <div class="notification notification-check" data-hero-notification role="status" aria-atomic="true" aria-hidden="true">
+              <div class="notification-top"><span class="notification-brand"><span class="notification-dot"></span>GoSteady</span><span>11:00 AM</span></div>
+              <p><strong>Morning activity missing</strong><br>Mom’s GoSteady hasn’t recorded rollator movement by 11:00 AM. Consider checking in.</p>
+            </div>
+
             <div class="product-proof-card">
-              <img src="cup-detail.webp" alt="Actual GoSteady prototype mounted on a rollator">
-              <div><strong>Actual prototype</strong><span>Cellular activity sensor in a useful rollator cupholder.</span></div>
+              <img src="cup-detail.webp" alt="GoSteady device mounted on a rollator">
+              <div><strong>GoSteady, discreetly built in</strong><span>Cellular-connected safety inside a useful rollator cupholder.</span></div>
+            </div>
+
+            <div class="hero-carousel-controls" role="group" aria-label="Choose a GoSteady activity example">
+              <button class="hero-carousel-dot" type="button" data-hero-slide="0" aria-current="true" aria-label="Show the more active week example"></button>
+              <button class="hero-carousel-dot" type="button" data-hero-slide="1" aria-current="false" aria-label="Show the overnight pattern example"></button>
+              <button class="hero-carousel-dot" type="button" data-hero-slide="2" aria-current="false" aria-label="Show the missing morning activity example"></button>
+              <button class="hero-carousel-toggle" type="button" data-hero-toggle aria-label="Pause hero rotation">Ⅱ</button>
             </div>
           </div>
-          <p class="illustrative">Lifestyle image is illustrative. Product inset shows the current prototype.</p>
+          <p class="illustrative">Scenario imagery is illustrative. Product inset shows the GoSteady device.</p>
         </div>
       </div>
     </section>
@@ -702,15 +792,15 @@
         <div class="section-head center">
           <p class="eyebrow">What exists today</p>
           <h2 id="proof-title">A working platform, not just a rendering.</h2>
-          <p class="lede">The current prototype connects over cellular, records rollator activity, and powers a real family portal. The alert control and alert-only location flow remain in development.</p>
+          <p class="lede">GoSteady connects over cellular, records rollator activity, and powers a real family portal. The alert control and alert-only location flow remain in development.</p>
         </div>
         <div class="proof-gallery">
-          <figure class="proof-image"><img src="cup-rollator-full.webp" loading="lazy" alt="GoSteady prototype mounted on a blue four-wheel rollator"><figcaption>Actual prototype mounted on a four-wheel rollator</figcaption></figure>
+          <figure class="proof-image"><img src="cup-rollator-full.webp" loading="lazy" alt="GoSteady mounted on a blue four-wheel rollator"><figcaption>GoSteady mounted on a four-wheel rollator</figcaption></figure>
           <figure class="proof-image"><img src="cup-detail.webp" loading="lazy" alt="Close-up of the GoSteady cupholder and tool-free mounting clamp"><figcaption>Tool-free clamp and built-in status light</figcaption></figure>
           <figure class="proof-image"><img src="product-rollator.webp" loading="lazy" alt="Close-up of the GoSteady rollator mounting system"><figcaption>Designed around rollator frame tubing</figcaption></figure>
           <figure class="proof-image portal"><img src="demo-dashboard-preview.jpg" loading="lazy" alt="Current GoSteady family portal showing activity and device information"><figcaption>Current portal preview · illustrative demo data</figcaption></figure>
         </div>
-        <div class="prototype-status" aria-label="Current development status">
+        <div class="development-status" aria-label="Current development status">
           <p><strong>Development status</strong>We are separating what works now from what still needs validation.</p>
           <p><strong>Working</strong>Cellular device-to-cloud activity reporting</p>
           <p><strong>Working</strong>Family portal and shared Care Circle access</p>
@@ -810,6 +900,95 @@
         if (typeof fbq === 'function') fbq('trackCustom', 'V2PrimaryCTA');
       });
     });
+
+    const heroCarousel = document.querySelector('[data-hero-carousel]');
+
+    if (heroCarousel) {
+      const heroScenes = Array.from(heroCarousel.querySelectorAll('[data-hero-scene]'));
+      const heroNotifications = Array.from(heroCarousel.querySelectorAll('[data-hero-notification]'));
+      const heroDots = Array.from(heroCarousel.querySelectorAll('[data-hero-slide]'));
+      const heroToggle = heroCarousel.querySelector('[data-hero-toggle]');
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let activeHeroScene = 0;
+      let heroTimer = null;
+      let heroPaused = reducedMotion.matches;
+
+      function showHeroScene(nextIndex) {
+        activeHeroScene = (nextIndex + heroScenes.length) % heroScenes.length;
+
+        heroScenes.forEach(function(scene, index) {
+          const isActive = index === activeHeroScene;
+          scene.classList.toggle('is-active', isActive);
+          scene.setAttribute('aria-hidden', String(!isActive));
+        });
+
+        heroNotifications.forEach(function(notification, index) {
+          const isActive = index === activeHeroScene;
+          notification.classList.toggle('is-active', isActive);
+          notification.setAttribute('aria-hidden', String(!isActive));
+        });
+
+        heroDots.forEach(function(dot, index) {
+          dot.setAttribute('aria-current', String(index === activeHeroScene));
+        });
+      }
+
+      function stopHeroRotation() {
+        window.clearInterval(heroTimer);
+        heroTimer = null;
+      }
+
+      function startHeroRotation() {
+        stopHeroRotation();
+        if (heroPaused || document.hidden) return;
+        heroTimer = window.setInterval(function() {
+          showHeroScene(activeHeroScene + 1);
+        }, 6500);
+      }
+
+      function syncHeroToggle() {
+        heroToggle.textContent = heroPaused ? '▶' : 'Ⅱ';
+        heroToggle.setAttribute('aria-label', heroPaused ? 'Play hero rotation' : 'Pause hero rotation');
+      }
+
+      heroDots.forEach(function(dot) {
+        dot.addEventListener('click', function() {
+          showHeroScene(Number(dot.dataset.heroSlide));
+          stopHeroRotation();
+        });
+      });
+
+      heroToggle.addEventListener('click', function() {
+        heroPaused = !heroPaused;
+        syncHeroToggle();
+        startHeroRotation();
+      });
+
+      heroCarousel.addEventListener('mouseenter', stopHeroRotation);
+      heroCarousel.addEventListener('mouseleave', function() {
+        if (!heroCarousel.contains(document.activeElement)) startHeroRotation();
+      });
+      heroCarousel.addEventListener('focusin', stopHeroRotation);
+      heroCarousel.addEventListener('focusout', function() {
+        window.setTimeout(function() {
+          if (!heroCarousel.contains(document.activeElement)) startHeroRotation();
+        }, 0);
+      });
+
+      document.addEventListener('visibilitychange', function() {
+        if (document.hidden) stopHeroRotation();
+        else if (!heroCarousel.contains(document.activeElement)) startHeroRotation();
+      });
+
+      reducedMotion.addEventListener('change', function(event) {
+        heroPaused = event.matches;
+        syncHeroToggle();
+        startHeroRotation();
+      });
+
+      syncHeroToggle();
+      startHeroRotation();
+    }
 
     plausible('V2 Landing Viewed');
   </script>
