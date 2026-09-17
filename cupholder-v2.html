@@ -957,12 +957,14 @@
         const deviceMove = smoothFeature(.06, .58, progress);
         const definitionFade = smoothFeature(.10, .39, progress);
         const startOffset = featureCanvas.clientWidth * -.265;
+        const startVerticalOffset = featureSticky.offsetHeight * -.30;
+        const verticalOffset = startVerticalOffset * (1 - deviceMove);
         const deviceScale = .96 + (.08 * deviceMove);
 
         featureExperience.dataset.featureProgress = progress.toFixed(2);
-        featureDevice.style.transform = 'translate3d(-50%, -50%, 0) translateX(' + (startOffset * (1 - deviceMove)) + 'px) scale(' + deviceScale + ')';
+        featureDevice.style.transform = 'translate3d(-50%, -50%, 0) translate3d(' + (startOffset * (1 - deviceMove)) + 'px, ' + verticalOffset + 'px, 0) scale(' + deviceScale + ')';
         featureDefinition.style.opacity = String(1 - definitionFade);
-        featureDefinition.style.transform = 'translate3d(' + (22 * definitionFade) + 'px, -50%, 0)';
+        featureDefinition.style.transform = 'translate3d(' + (22 * definitionFade) + 'px, -50%, 0) translateY(' + verticalOffset + 'px)';
 
         featureCallouts.forEach(function(callout, index) {
           const timing = calloutTimings[index];
