@@ -277,58 +277,31 @@
     .section-head.center { margin: 0 auto 3.5rem; text-align: center; }
     .lede { color: var(--muted); font-size: 1.08rem; margin: 1.25rem 0 0; }
 
-    .connection { background: var(--cream); }
-    .connection-grid { align-items: center; display: grid; gap: clamp(2.5rem, 7vw, 7rem); grid-template-columns: 1fr 1fr; }
-    .story-card {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-sm);
-      overflow: hidden;
-      padding: 1.1rem;
-    }
-    .story-scene { background: #dfeae2; border-radius: 23px; min-height: 420px; overflow: hidden; position: relative; }
-    .story-scene img { height: 420px; object-fit: cover; width: 100%; }
-    .calm-update {
-      background: rgba(255,255,255,.95);
-      border-radius: 18px;
-      bottom: 1rem;
-      box-shadow: var(--shadow-sm);
-      left: 1rem;
-      padding: .9rem 1rem;
+    .connection { background: var(--cream); overflow: hidden; }
+    .connection-grid { align-items: center; display: grid; gap: clamp(3rem, 8vw, 8rem); grid-template-columns: minmax(300px, .85fr) minmax(0, 1.15fr); }
+    .connection-visual { isolation: isolate; min-height: 470px; overflow: hidden; position: relative; }
+    .connection-visual::before {
+      background: #e3ece6;
+      border-radius: 48% 52% 45% 55%;
+      content: "";
+      inset: 4.5rem .5rem 1.25rem;
       position: absolute;
-      right: 1rem;
+      transform: rotate(-4deg);
+      z-index: -1;
     }
-    .calm-update small { color: var(--forest-700); display: block; font-weight: 700; margin-bottom: .25rem; }
-    .calm-update p { font-size: .86rem; line-height: 1.4; margin: 0; }
-
-    .benefit-grid { display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); margin-top: 3.5rem; }
-    .benefit-card {
-      border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-      min-height: 330px;
-      overflow: hidden;
-      padding: 1.7rem;
-      position: relative;
-    }
-    .benefit-card:nth-child(1) { background: #e9f0ea; }
-    .benefit-card:nth-child(2) { background: #f7eee6; }
-    .benefit-card:nth-child(3) { background: #e8edec; }
-    .benefit-number { color: var(--forest-700); font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-    .benefit-card h3 { margin: 3.7rem 0 .8rem; max-width: 14rem; }
-    .benefit-card p { color: var(--muted); font-size: .91rem; margin: 0; }
-    .status-pill {
-      background: rgba(255,255,255,.82);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      font-size: .68rem;
-      font-weight: 700;
-      padding: .42rem .65rem;
+    .connection-product {
+      bottom: -4.75rem;
+      height: auto;
+      left: 50%;
+      max-width: none;
       position: absolute;
-      right: 1rem;
-      top: 1rem;
+      transform: translateX(-50%);
+      width: min(100%, 440px);
     }
-    .benefit-icon { bottom: 1.35rem; color: var(--forest-800); position: absolute; right: 1.45rem; }
+    .connection-definition { max-width: 690px; }
+    .connection-definition .eyebrow { margin-bottom: 1.3rem; }
+    .connection-definition h2 { font-size: clamp(2.65rem, 4.7vw, 4.45rem); line-height: 1.04; }
+    .connection-definition h2 span { color: var(--forest-700); }
 
     .steps { background: var(--forest-950); color: white; }
     .steps .eyebrow { color: #9fc0aa; }
@@ -509,8 +482,7 @@
       .hero-grid, .connection-grid, .privacy-panel, .company-grid, .price-card { grid-template-columns: 1fr; }
       .hero-copy { max-width: 720px; }
       .hero-visual { margin: 0 auto; width: min(100%, 620px); }
-      .benefit-grid { grid-template-columns: 1fr; }
-      .benefit-card { min-height: 250px; }
+      .connection-visual { margin: 0 auto; max-width: 540px; width: 100%; }
       .step-grid { grid-template-columns: 1fr 1fr; }
       .step:nth-child(3) { border-left: 0; }
       .alert-grid { grid-template-columns: 1fr 1fr; }
@@ -545,7 +517,8 @@
       .trust-item:nth-child(3) { border-left: 0; border-top: 1px solid rgba(255,255,255,.15); }
       .trust-item:nth-child(4) { border-top: 1px solid rgba(255,255,255,.15); }
       .connection-grid { gap: 2rem; }
-      .story-scene, .story-scene img { min-height: 340px; height: 340px; }
+      .connection-visual { min-height: 370px; }
+      .connection-product { bottom: -4rem; width: min(100%, 370px); }
       .step-grid { grid-template-columns: 1fr; }
       .step, .step:first-child { border-left: 0; border-top: 1px solid rgba(255,255,255,.16); min-height: auto; padding: 1.5rem 0 2.2rem; }
       .step:first-child { border-top: 0; }
@@ -662,40 +635,13 @@
 
     <section class="connection" id="why-gosteady">
       <div class="wrap connection-grid">
-        <div class="story-card">
-          <div class="story-scene">
-            <img src="gosteady-lifestyle-v2.webp" alt="Illustrative view of independent everyday rollator use" loading="lazy">
-            <div class="calm-update"><small>Quiet reassurance</small><p>“Everything looks familiar this morning.” The family sees a useful signal, not a minute-by-minute feed.</p></div>
-          </div>
+        <div class="connection-visual">
+          <img class="connection-product" src="Assets/closeup.webp" width="859" height="1024" alt="Close-up of the GoSteady cupholder mounted to rollator tubing" loading="lazy">
         </div>
-        <div>
-          <p class="eyebrow">Connection without hovering</p>
-          <h2>Know a little sooner. Interrupt a little less.</h2>
-          <p class="lede">You want to know the day looks normal. They want to live it without feeling watched. GoSteady creates a quieter connection using the rollator already beside them.</p>
-          <p class="lede">Home monitoring is designed around the home. GoSteady is designed around the rollator—at breakfast, on a walk, and during everyday outings.</p>
+        <div class="connection-definition">
+          <p class="eyebrow">What is GoSteady?</p>
+          <h2>GoSteady is a <span>cellular-connected safety system</span> within a useful walker-mounted cupholder.</h2>
         </div>
-      </div>
-
-      <div class="wrap benefit-grid">
-        <article class="benefit-card">
-          <span class="benefit-number">01 · Mobile connection</span>
-          <h3>Goes beyond the front door</h3>
-          <p>Built-in cellular service keeps GoSteady connected at home and during ordinary outings wherever supported coverage is available.</p>
-          <svg class="benefit-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12.55a11 11 0 0 1 14.08 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg>
-        </article>
-        <article class="benefit-card">
-          <span class="benefit-number">02 · Meaningful changes</span>
-          <h3>Notices when the rhythm shifts</h3>
-          <p>Receive a factual alert when recorded rollator movement is lower than usual or has not appeared by a time you choose.</p>
-          <svg class="benefit-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 16 4-5 4 3 4-7"/></svg>
-        </article>
-        <article class="benefit-card">
-          <span class="status-pill">Planned for first release</span>
-          <span class="benefit-number">03 · Family alert</span>
-          <h3>Gives them a direct way to reach family</h3>
-          <p>The planned alert control is intended to notify selected contacts and share alert-only location with consent. It will not call 911 or a monitoring center.</p>
-          <svg class="benefit-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg>
-        </article>
       </div>
     </section>
 
