@@ -196,25 +196,6 @@
       object-position: center 42%;
       width: 100%;
     }
-    .product-proof-card {
-      align-items: center;
-      background: rgba(255,255,255,.96);
-      border: 1px solid rgba(216,221,215,.9);
-      border-radius: var(--radius-md);
-      bottom: 2rem;
-      box-shadow: var(--shadow-sm);
-      display: grid;
-      gap: .75rem;
-      grid-template-columns: 92px 1fr;
-      left: -1.25rem;
-      padding: .8rem .95rem .8rem .8rem;
-      position: absolute;
-      width: 270px;
-      z-index: 5;
-    }
-    .product-proof-card img { border-radius: 15px; height: 96px; object-fit: cover; width: 92px; }
-    .product-proof-card strong { display: block; font-size: .88rem; margin-bottom: .15rem; }
-    .product-proof-card span { color: var(--muted); font-size: .73rem; line-height: 1.35; }
     .notification {
       background: rgba(255,255,255,.96);
       border: 1px solid rgba(216,221,215,.9);
@@ -239,8 +220,9 @@
     .notification-check { background: rgba(255,247,243,.97); border-color: rgba(217,120,97,.58); }
     .notification-check .notification-dot { background: var(--coral); }
     @media (min-width: 681px) {
-      .notification-watch { left: auto; right: 14.25rem; top: 1.5rem; width: 304px; }
-      .notification-check { left: auto; right: -.75rem; top: .75rem; width: 276px; }
+      .notification-watch, .notification-check { bottom: 2rem; left: -1.25rem; right: auto; top: auto; }
+      .notification-watch { width: 304px; }
+      .notification-check { width: 276px; }
     }
     .notification-top { align-items: center; color: var(--muted); display: flex; font-size: .72rem; justify-content: space-between; margin-bottom: .55rem; }
     .notification-brand { align-items: center; color: var(--ink); display: inline-flex; font-weight: 700; gap: .4rem; }
@@ -557,9 +539,9 @@
       .hero-visual { min-height: 515px; }
       .hero-scenes { border-radius: 100px 100px 24px 24px; height: 500px; width: calc(100% - 18px); }
       .notification { left: 0; top: 1.4rem; width: min(282px, 86%); }
+      .notification-watch, .notification-check { bottom: 4rem; top: auto; }
       .notification-watch { width: 236px; }
-      .product-proof-card { bottom: .8rem; left: 0; width: 248px; }
-      .hero-carousel-controls { bottom: 11rem; right: 1.1rem; }
+      .hero-carousel-controls { right: 1.1rem; }
       .illustrative { text-align: left; }
       .trust-grid { grid-template-columns: 1fr 1fr; }
       .trust-item:nth-child(3) { border-left: 0; border-top: 1px solid rgba(255,255,255,.15); }
@@ -659,11 +641,6 @@
               <p><strong>Morning activity missing</strong><br>Mom’s GoSteady hasn’t recorded rollator movement by 11:00 AM. Consider checking in.</p>
             </div>
 
-            <div class="product-proof-card">
-              <img src="cup-detail.webp" alt="GoSteady device mounted on a rollator">
-              <div><strong>GoSteady, discreetly built in</strong><span>Cellular-connected safety inside a useful rollator cupholder.</span></div>
-            </div>
-
             <div class="hero-carousel-controls" role="group" aria-label="Choose a GoSteady activity example">
               <button class="hero-carousel-dot" type="button" data-hero-slide="0" aria-current="true" aria-label="Show the more active week example"></button>
               <button class="hero-carousel-dot" type="button" data-hero-slide="1" aria-current="false" aria-label="Show the overnight pattern example"></button>
@@ -671,7 +648,7 @@
               <button class="hero-carousel-toggle" type="button" data-hero-toggle aria-label="Pause hero rotation">Ⅱ</button>
             </div>
           </div>
-          <p class="illustrative">Scenario imagery is illustrative. Product inset shows the GoSteady device.</p>
+          <p class="illustrative">Scenario imagery is illustrative.</p>
         </div>
       </div>
     </section>
