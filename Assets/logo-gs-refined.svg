@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-labelledby="title desc">
+  <title id="title">GoSteady GS monogram</title>
+  <desc id="desc">A rounded capital G surrounding a clearly drawn capital S.</desc>
+  <g fill="none" stroke="#21493a" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M77 24C69 15 58 11 46 12C26 14 12 30 12 51C12 72 28 88 49 88C67 88 81 77 87 63V53H61" stroke-width="12"/>
+    <path d="M65 34H48C41 34 37 38 37 44C37 50 41 53 48 53H56C64 53 68 57 68 63C68 70 63 74 56 74H37" stroke-width="9"/>
+  </g>
+</svg>

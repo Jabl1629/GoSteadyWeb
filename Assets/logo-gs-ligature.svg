@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124 100" role="img" aria-labelledby="title desc">
+  <title id="title">GoSteady soft GS ligature</title>
+  <desc id="desc">A softly drawn capital G and S joined at their central terminals.</desc>
+  <g fill="none" stroke="#21493a" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M55 24C49 16 39 12 30 14C16 17 8 32 8 50C8 70 23 84 42 84C55 84 64 77 68 67V55H48"/>
+    <path d="M109 27H83C74 27 68 32 68 40C68 48 74 52 83 52H94C103 52 109 57 109 66C109 75 102 81 92 81H70"/>
+  </g>
+</svg>

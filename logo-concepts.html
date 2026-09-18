@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GoSteady GS Logo Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Fraunces:opsz,wght@9..144,500;9..144,600&amp;display=swap" rel="stylesheet">
+  <style>
+    :root { --cream: #f7f3eb; --forest: #21493a; --ink: #17231e; --muted: #68746e; --line: #d8ddd7; --paper: #fffdf9; }
+    * { box-sizing: border-box; }
+    body { background: var(--cream); color: var(--ink); font-family: "DM Sans", sans-serif; margin: 0; }
+    .wrap { margin: 0 auto; max-width: 1200px; padding-left: 32px; padding-right: 32px; }
+    .lab-intro { padding: clamp(48px, 7vw, 86px) 0 44px; }
+    .eyebrow { color: var(--forest); font-size: 12px; font-weight: 700; letter-spacing: .14em; margin: 0 0 12px; text-transform: uppercase; }
+    h1, h2 { font-family: "Fraunces", serif; font-weight: 500; letter-spacing: -.04em; margin: 0; }
+    h1 { font-size: clamp(44px, 6vw, 72px); line-height: 1; }
+    h2 { font-size: clamp(30px, 4vw, 42px); }
+    .intro { color: var(--muted); font-size: 17px; line-height: 1.6; margin: 20px 0 0; max-width: 720px; }
+    .concepts { display: grid; gap: 30px; padding-bottom: 80px; }
+    .concept { background: var(--paper); border: 1px solid var(--line); border-radius: 28px; overflow: hidden; }
+    .concept-head { align-items: end; display: flex; gap: 28px; justify-content: space-between; padding: 28px 32px 22px; }
+    .concept-copy { max-width: 650px; }
+    .concept-copy p { color: var(--muted); font-size: 14px; line-height: 1.55; margin: 8px 0 0; }
+    .verdict { color: var(--forest); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .site-frame { background: var(--cream); border-bottom: 1px solid var(--line); border-top: 1px solid var(--line); }
+    .site-nav { align-items: center; background: rgba(255,253,249,.96); border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; min-height: 76px; padding: 0 34px; }
+    .brand { align-items: center; display: inline-flex; gap: 10px; text-decoration: none; }
+    .brand img { height: 38px; object-fit: contain; width: auto; }
+    .brand .square { width: 38px; }
+    .wordmark { font-family: "Fraunces", serif; font-size: 25px; font-weight: 600; letter-spacing: -.035em; }
+    .nav-links { align-items: center; display: flex; font-size: 12px; font-weight: 600; gap: 24px; }
+    .nav-button { background: var(--forest); border-radius: 999px; color: white; padding: 10px 16px; }
+    .site-hero { align-items: center; display: grid; gap: 40px; grid-template-columns: 1fr .8fr; min-height: 280px; padding: 32px 48px; }
+    .hero-copy h3 { font-family: "Fraunces", serif; font-size: clamp(36px, 5vw, 56px); font-weight: 500; letter-spacing: -.045em; line-height: 1; margin: 0; max-width: 640px; }
+    .hero-copy h3 em { color: #356b55; font-style: italic; font-weight: 400; }
+    .hero-copy p { color: var(--muted); font-size: 14px; line-height: 1.55; margin: 16px 0 0; max-width: 510px; }
+    .hero-image { border-radius: 90px 90px 18px 18px; height: 210px; overflow: hidden; }
+    .hero-image img { height: 100%; object-fit: cover; object-position: center 34%; width: 100%; }
+    .test-strip { align-items: flex-end; display: flex; gap: clamp(24px, 5vw, 54px); justify-content: center; min-height: 145px; padding: 26px 30px 30px; }
+    .size { color: var(--muted); display: grid; font-size: 11px; gap: 10px; justify-items: center; }
+    .size img { display: block; height: var(--size); object-fit: contain; width: auto; max-width: calc(var(--size) * 1.3); }
+    .s16 { --size: 16px; } .s24 { --size: 24px; } .s38 { --size: 38px; } .s64 { --size: 64px; }
+    .notes { border-top: 1px solid var(--line); display: grid; gap: 12px; grid-template-columns: 1fr 1fr; padding: 20px 32px 24px; }
+    .note { color: var(--muted); font-size: 13px; line-height: 1.45; }
+    .note strong { color: var(--forest); display: block; font-size: 10px; letter-spacing: .1em; margin-bottom: 4px; text-transform: uppercase; }
+    @media (max-width: 760px) {
+      .wrap { padding-left: 18px; padding-right: 18px; }
+      .concept-head { align-items: flex-start; flex-direction: column; }
+      .site-nav { min-height: 66px; padding: 0 20px; }
+      .nav-links span:not(.nav-button) { display: none; }
+      .site-hero { grid-template-columns: 1fr; padding: 32px 24px; }
+      .hero-image { display: none; }
+      .notes { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="lab-intro"><div class="wrap"><p class="eyebrow">GoSteady logo lab · GS only</p><h1>Three monograms, in context.</h1><p class="intro">Each direction is shown at the current 38px navigation size inside the real visual language of the V2 landing page, followed by actual-size favicon tests.</p></div></section>
+
+    <div class="wrap concepts">
+      <article class="concept">
+        <header class="concept-head"><div class="concept-copy"><h2>01 · Nested GS</h2><p>A rounded G containing a positive S. Both initials remain substantial, though the interior is busiest at very small sizes.</p></div><span class="verdict">Compact · Ownable</span></header>
+        <div class="site-frame">
+          <div class="site-nav"><div class="brand"><img class="square" src="Assets/logo-gs-refined.svg" alt="Nested GS logo"><span class="wordmark">GoSteady</span></div><div class="nav-links"><span>How it works</span><span>Why GoSteady</span><span>Questions</span><span class="nav-button">Check availability</span></div></div>
+          <div class="site-hero"><div class="hero-copy"><h3>Peace of mind that <em>moves with them.</em></h3><p>Connected rollator safety for families who want to stay informed without hovering.</p></div><div class="hero-image"><img src="Assets/scenario-1.webp" alt="Older woman walking outdoors with her rollator"></div></div>
+        </div>
+        <div class="test-strip" aria-label="Nested GS actual-size tests"><div class="size s16"><img src="Assets/logo-gs-refined.svg" alt=""><span>16 px</span></div><div class="size s24"><img src="Assets/logo-gs-refined.svg" alt=""><span>24 px</span></div><div class="size s38"><img src="Assets/logo-gs-refined.svg" alt=""><span>38 px</span></div><div class="size s64"><img src="Assets/logo-gs-refined.svg" alt=""><span>64 px</span></div></div>
+        <div class="notes"><div class="note"><strong>Strength</strong>The most compact, icon-like option.</div><div class="note"><strong>Watch</strong>The S becomes texture rather than a letter at 16px.</div></div>
+      </article>
+
+      <article class="concept">
+        <header class="concept-head"><div class="concept-copy"><h2>02 · Soft Ligature</h2><p>A clearly drawn G and S that meet at one central hinge. It gives up the square badge silhouette in exchange for immediate legibility.</p></div><span class="verdict">Clear · Contemporary</span></header>
+        <div class="site-frame">
+          <div class="site-nav"><div class="brand"><img src="Assets/logo-gs-ligature.svg" alt="Soft GS ligature"><span class="wordmark">GoSteady</span></div><div class="nav-links"><span>How it works</span><span>Why GoSteady</span><span>Questions</span><span class="nav-button">Check availability</span></div></div>
+          <div class="site-hero"><div class="hero-copy"><h3>Peace of mind that <em>moves with them.</em></h3><p>Connected rollator safety for families who want to stay informed without hovering.</p></div><div class="hero-image"><img src="Assets/scenario-1.webp" alt="Older woman walking outdoors with her rollator"></div></div>
+        </div>
+        <div class="test-strip" aria-label="Soft GS ligature actual-size tests"><div class="size s16"><img src="Assets/logo-gs-ligature.svg" alt=""><span>16 px</span></div><div class="size s24"><img src="Assets/logo-gs-ligature.svg" alt=""><span>24 px</span></div><div class="size s38"><img src="Assets/logo-gs-ligature.svg" alt=""><span>38 px</span></div><div class="size s64"><img src="Assets/logo-gs-ligature.svg" alt=""><span>64 px</span></div></div>
+        <div class="notes"><div class="note"><strong>Strength</strong>Both initials survive at every practical size.</div><div class="note"><strong>Watch</strong>The wider silhouette is less useful as a square app icon.</div></div>
+      </article>
+
+      <article class="concept">
+        <header class="concept-head"><div class="concept-copy"><h2>03 · Editorial GS</h2><p>A type-led monogram that borrows its tone from the wordmark. This treats GS as an editorial signature rather than a technology badge.</p></div><span class="verdict">Warm · Brand-aligned</span></header>
+        <div class="site-frame">
+          <div class="site-nav"><div class="brand"><img src="Assets/logo-gs-editorial.svg" alt="Editorial GS monogram"><span class="wordmark">GoSteady</span></div><div class="nav-links"><span>How it works</span><span>Why GoSteady</span><span>Questions</span><span class="nav-button">Check availability</span></div></div>
+          <div class="site-hero"><div class="hero-copy"><h3>Peace of mind that <em>moves with them.</em></h3><p>Connected rollator safety for families who want to stay informed without hovering.</p></div><div class="hero-image"><img src="Assets/scenario-1.webp" alt="Older woman walking outdoors with her rollator"></div></div>
+        </div>
+        <div class="test-strip" aria-label="Editorial GS actual-size tests"><div class="size s16"><img src="Assets/logo-gs-editorial.svg" alt=""><span>16 px</span></div><div class="size s24"><img src="Assets/logo-gs-editorial.svg" alt=""><span>24 px</span></div><div class="size s38"><img src="Assets/logo-gs-editorial.svg" alt=""><span>38 px</span></div><div class="size s64"><img src="Assets/logo-gs-editorial.svg" alt=""><span>64 px</span></div></div>
+        <div class="notes"><div class="note"><strong>Strength</strong>The most natural companion to Fraunces and the cream-paper system.</div><div class="note"><strong>Watch</strong>Needs final outlined letterforms after the typographic direction is chosen.</div></div>
+      </article>
+    </div>
+  </main>
+</body>
+</html>
