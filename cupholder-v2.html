@@ -6,7 +6,7 @@
   <title>GoSteady — Connected safety for rollator users</title>
   <meta name="description" content="GoSteady helps families notice changes in rollator activity and gives rollator users a one-touch way to reach family—without a wearable, home Wi-Fi, or cameras.">
   <link rel="canonical" href="https://gosteady.co/cupholderV2">
-  <meta property="og:title" content="Peace of mind that moves with them — GoSteady">
+  <meta property="og:title" content="Peace of mind delivered step-by-step — GoSteady">
   <meta property="og:description" content="A connected rollator attachment for quieter family reassurance, at home and beyond the front door.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://gosteady.co/cupholderV2">
@@ -165,7 +165,7 @@
     .hero { overflow: hidden; padding: 3.1rem 0 3.25rem; }
     .hero-grid { align-items: center; display: grid; gap: clamp(2rem, 5vw, 5.5rem); grid-template-columns: .92fr 1.08fr; }
     .hero-copy { max-width: 580px; }
-    .hero-copy h1 em { color: var(--forest-700); font-style: italic; font-weight: 400; }
+    .hero-copy h1 em { color: var(--forest-700); font-style: italic; font-weight: 400; white-space: nowrap; }
     .hero-dek { color: var(--muted); font-size: clamp(1.08rem, 1.7vw, 1.28rem); margin: 1.55rem 0 1.8rem; max-width: 38rem; }
     .hero-actions { align-items: center; display: flex; flex-wrap: wrap; gap: 1rem 1.25rem; }
     .hero-price { color: var(--muted); font-size: .92rem; line-height: 1.45; }
@@ -442,41 +442,99 @@
     .phone-btn svg { height: 5.5cqw; width: 5.5cqw; }
     .phone-home { background: rgba(255,255,255,.85); border-radius: 999px; bottom: 3.1cqw; height: 1.5cqw; left: 50%; position: absolute; transform: translateX(-50%); width: 36.8cqw; z-index: 2; }
 
-    .privacy { background: var(--cream); }
-    .privacy-panel {
-      align-items: center;
+    /* ---------- setup: three same-sized tiles — the clamp, the phone's camera reading the
+       QR code, and the portal on the phone. The phones reuse the lock-screen phone shell, so
+       everything inside them is sized from the phone's width (cqw) and the tile sets the
+       phone's width, so the same markup works at every layout. ---------- */
+    .setup { background: var(--cream); scroll-margin-top: 76px; }
+    .setup .section-head { max-width: 800px; }
+    .setup h2 { font-size: clamp(2.1rem, 3.6vw, 3.25rem); }
+    .setup .lede { margin-left: auto; margin-right: auto; max-width: 36rem; }
+    .setup-steps { display: grid; gap: clamp(1.5rem, 3vw, 2.5rem); grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; margin: 0; padding: 0; }
+    .setup-step { display: grid; gap: 1.4rem; }
+    .setup-copy { padding: 0 .25rem; }
+    .setup-label { color: var(--forest-700); font-size: .74rem; font-weight: 700; letter-spacing: .12em; margin: 0 0 .55rem; text-transform: uppercase; }
+    .setup-step h3 { font-size: 1.5rem; margin: 0 0 .5rem; }
+    .setup-step p { color: var(--muted); font-size: .95rem; line-height: 1.6; margin: 0; }
+    .setup-copy a { color: var(--forest-700); display: inline-block; font-size: .92rem; font-weight: 700; margin-top: .85rem; text-decoration: none; }
+    .setup-copy a:hover { text-decoration: underline; }
+    .setup-tile {
+      aspect-ratio: 10 / 11;
       background: var(--paper);
+      background-image: radial-gradient(90% 70% at 50% 28%, #fff 0%, rgba(255,255,255,0) 72%);
       border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      display: grid;
-      gap: 4rem;
-      grid-template-columns: .9fr 1.1fr;
-      padding: clamp(2rem, 5vw, 4rem);
-    }
-    .privacy-list { display: grid; gap: .85rem; }
-    .privacy-item { align-items: flex-start; display: flex; gap: .85rem; }
-    .privacy-item svg { color: var(--forest-700); flex: 0 0 auto; margin-top: .25rem; }
-    .privacy-item p { color: var(--muted); font-size: .9rem; margin: 0; }
-    .privacy-item strong { color: var(--ink); }
-
-    .company { background: var(--forest-950); color: white; }
-    .company-grid { align-items: center; display: grid; gap: 4rem; grid-template-columns: 1.1fr .9fr; }
-    .company h2 { max-width: 700px; }
-    .company .lede { color: #b8c8bf; }
-    .company-card {
-      background: #214438;
-      border: 1px solid rgba(255,255,255,.14);
       border-radius: var(--radius-md);
-      padding: 2rem;
+      container-type: inline-size;
+      overflow: hidden;
+      position: relative;
     }
-    .company-card p { color: #c9d6ce; font-size: .9rem; margin: .7rem 0 0; }
-    .company-card a { color: white; font-weight: 700; }
-    .company-facts { display: grid; gap: .8rem; margin-top: 1.4rem; }
-    .company-fact { border-top: 1px solid rgba(255,255,255,.13); padding-top: .8rem; }
-    .company-fact small { color: #9fb4a7; display: block; font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; }
-    .company-fact strong { display: block; font-size: .88rem; margin-top: .2rem; }
+    .setup-tile--clamp img { filter: drop-shadow(0 18px 22px rgba(16,39,31,.12)); height: 80%; left: 50%; max-width: 88%; object-fit: contain; position: absolute; top: 50%; transform: translate(-50%, -50%); width: auto; }
+    .setup-tile .phone { border-radius: 11.5cqw; border-width: 1.7cqw; box-shadow: 0 0 0 .5cqw #2b3431, 0 26px 50px rgba(16,39,31,.24); left: 50%; position: absolute; top: 9cqw; transform: translateX(-50%); width: 62cqw; }
 
-    .pricing { background: var(--cream); }
+    /* camera: black chrome top and bottom, the viewfinder in between, the code on a card */
+    .cam-view { background: radial-gradient(120% 80% at 50% 18%, #efeae0 0%, #ddd6c8 55%, #c9c1b0 100%); height: 136cqw; left: 0; position: absolute; right: 0; top: 24cqw; }
+    .cam-card { background: #fff; border-radius: 3.2cqw; box-shadow: 0 5cqw 12cqw rgba(30,30,20,.18); left: 50%; padding: 3.2cqw 3.2cqw 2.4cqw; position: absolute; top: 36cqw; transform: translateX(-50%); width: 44cqw; }
+    .cam-card svg { display: block; height: auto; width: 100%; }
+    .cam-card span { color: #59675f; display: block; font-size: 2.9cqw; font-weight: 700; letter-spacing: .12em; margin-top: 2.6cqw; text-align: center; text-transform: uppercase; }
+    .cam-frame { border: 1.3cqw solid #ffd60a; border-radius: 3.4cqw; height: 40cqw; left: 50%; position: absolute; top: 38cqw; transform: translateX(-50%); width: 40cqw; }
+    .cam-link { align-items: center; background: #ffd60a; border-radius: 999px; box-shadow: 0 3cqw 8cqw rgba(30,30,20,.2); color: #1c1c1a; display: inline-flex; font-size: 3.9cqw; font-weight: 600; gap: 1.8cqw; left: 50%; padding: 2.3cqw 4.2cqw 2.3cqw 3.6cqw; position: absolute; top: 93cqw; transform: translateX(-50%); white-space: nowrap; }
+    .cam-link svg { height: 4.2cqw; width: 4.2cqw; }
+    .cam-bar { bottom: 0; height: 56.7cqw; left: 0; position: absolute; right: 0; }
+    .cam-modes { color: rgba(255,255,255,.8); display: flex; font-size: 3.2cqw; font-weight: 600; gap: 6cqw; justify-content: center; letter-spacing: .08em; padding-top: 6cqw; text-transform: uppercase; }
+    .cam-modes .is-on { color: #ffd60a; }
+    .cam-controls { align-items: center; display: flex; justify-content: space-between; margin-top: 6cqw; padding: 0 11cqw; }
+    .cam-thumb { background: linear-gradient(135deg, #8a8f86, #4b524d); border-radius: 2cqw; height: 11cqw; width: 11cqw; }
+    .cam-shutter { background: #fff; background-clip: content-box; border: 1.3cqw solid #fff; border-radius: 50%; box-sizing: border-box; height: 20cqw; padding: 1.5cqw; width: 20cqw; }
+    .cam-flip { background: rgba(255,255,255,.18); border-radius: 50%; height: 11cqw; width: 11cqw; }
+
+    /* portal: the family view, light UI with dark status icons */
+    .portal { background: #f4f1ea; color: #17231e; inset: 0; padding: 19cqw 5cqw 0; position: absolute; }
+    .setup-tile--portal .phone-status { color: #17231e; }
+    .portal-clock { font-size: 4.3cqw; font-weight: 600; left: 9.5cqw; letter-spacing: -.01em; position: absolute; top: 5.4cqw; }
+    .portal-top { align-items: center; display: flex; justify-content: space-between; margin-bottom: 4cqw; }
+    .portal-top > span:first-child { font-family: var(--serif); font-size: 4.7cqw; font-weight: 500; }
+    .portal-icons { color: #4a5a52; display: flex; gap: 3.2cqw; }
+    .portal-icons svg { height: 4.9cqw; width: 4.9cqw; }
+    .portal-card { background: #fff; border: 1px solid rgba(23,35,30,.07); border-radius: 5cqw; box-shadow: 0 1cqw 3cqw rgba(23,35,30,.05); padding: 4.6cqw 5cqw; }
+    .portal-hero strong { display: block; font-family: var(--serif); font-size: 7cqw; font-weight: 500; letter-spacing: -.03em; line-height: 1.12; }
+    .portal-hero p { color: #59675f; font-size: 4.1cqw; line-height: 1.4; margin: 1.8cqw 0 0; }
+    .portal-circle { align-items: center; display: flex; gap: 3.4cqw; margin-top: 3.4cqw; }
+    .portal-avatars { display: flex; flex-shrink: 0; }
+    .portal-avatars span { align-items: center; background: var(--sage-150); border: .8cqw solid #fff; border-radius: 50%; box-sizing: border-box; color: var(--forest-800); display: inline-flex; font-size: 3.4cqw; font-weight: 700; height: 9.6cqw; justify-content: center; width: 9.6cqw; }
+    .portal-avatars span + span { margin-left: -2.6cqw; }
+    .portal-avatars span:nth-child(2) { background: #f1dfc7; color: #7a5a2c; }
+    .portal-avatars span:nth-child(3) { background: #d7e3ef; color: #2f4a62; }
+    .portal-avatars svg { height: 4.6cqw; width: 4.6cqw; }
+    .portal-circle strong { display: block; font-size: 4.4cqw; }
+    .portal-circle small { color: #59675f; display: block; font-size: 3.7cqw; line-height: 1.35; margin-top: .5cqw; }
+    .portal-circle > svg { color: #8a958f; flex-shrink: 0; height: 4.2cqw; margin-left: auto; width: 4.2cqw; }
+    .portal-stats { display: grid; gap: 2.6cqw; grid-template-columns: repeat(3, 1fr); margin-top: 3.4cqw; }
+    .portal-stats div { background: #fff; border: 1px solid rgba(23,35,30,.07); border-radius: 4cqw; padding: 3.4cqw 3cqw; }
+    .portal-stats strong { display: block; font-size: 6.3cqw; letter-spacing: -.02em; line-height: 1; }
+    .portal-stats small { color: #59675f; display: block; font-size: 3.4cqw; margin-top: 1.4cqw; }
+    .portal-add { align-items: center; background: var(--forest-800); border-radius: 999px; color: #fff; display: flex; font-size: 4.3cqw; font-weight: 700; gap: 2cqw; height: 12cqw; justify-content: center; margin-top: 3.4cqw; }
+    .portal-add svg { height: 4.6cqw; width: 4.6cqw; }
+    .portal-week { margin-top: 3.4cqw; }
+    .portal-week-head { align-items: baseline; display: flex; font-size: 3.9cqw; justify-content: space-between; margin-bottom: 3.4cqw; }
+    .portal-week-head span { color: #59675f; font-size: 3.5cqw; }
+    .portal-bars { align-items: end; display: grid; gap: 2.4cqw; grid-template-columns: repeat(7, 1fr); height: 24cqw; }
+    .portal-bars i { background: var(--sage-300); border-radius: 1.4cqw 1.4cqw .6cqw .6cqw; display: block; height: var(--h); }
+    .portal-bars .is-today { background: var(--forest-700); }
+    .portal-days { color: #8a958f; display: grid; font-size: 3.1cqw; font-weight: 600; grid-template-columns: repeat(7, 1fr); margin-top: 1.8cqw; text-align: center; }
+
+    /* reveal: each step rises in as it enters the viewport; the camera then "reads" the code,
+       the yellow frame settling onto it before the link appears. JS adds .js-reveal, so
+       without JS everything is simply visible. */
+    .js-reveal .setup-step { opacity: 0; transform: translate3d(0, 18px, 0); transition: opacity .7s ease, transform .7s ease; }
+    .js-reveal .setup-step:nth-child(2) { transition-delay: .12s; }
+    .js-reveal .setup-step:nth-child(3) { transition-delay: .24s; }
+    .js-reveal .setup-step.is-in { opacity: 1; transform: none; }
+    .js-reveal .cam-frame { opacity: 0; transform: translateX(-50%) scale(1.18); transition: opacity .45s ease .75s, transform .45s ease .75s; }
+    .js-reveal .cam-link { opacity: 0; transform: translate(-50%, 6px); transition: opacity .4s ease 1.15s, transform .4s ease 1.15s; }
+    .js-reveal .setup-step.is-in .cam-frame { opacity: 1; transform: translateX(-50%) scale(1); }
+    .js-reveal .setup-step.is-in .cam-link { opacity: 1; transform: translate(-50%, 0); }
+
+    .pricing { background: var(--paper); }
     .price-card {
       background: var(--paper);
       border: 1px solid var(--line);
@@ -498,7 +556,7 @@
     .price-list svg { color: var(--forest-700); flex: 0 0 auto; margin-top: .15rem; }
     .price-note { color: var(--muted); font-size: .75rem; margin: 1rem 0 0; }
 
-    .faq { background: var(--paper); }
+    .faq { background: var(--cream); }
     .faq-grid { display: grid; gap: 0 4rem; grid-template-columns: 1fr 1fr; margin-top: 3rem; }
     details { border-top: 1px solid var(--line); }
     details:last-child { border-bottom: 1px solid var(--line); }
@@ -519,7 +577,7 @@
 
     @media (max-width: 980px) {
       .nav-links > a:not(.button) { display: none; }
-      .hero-grid, .privacy-panel, .company-grid, .price-card { grid-template-columns: 1fr; }
+      .hero-grid, .price-card { grid-template-columns: 1fr; }
       .hero-copy { max-width: 720px; }
       .hero-visual { margin: 0 auto; width: min(100%, 620px); }
       .definition-grid { grid-template-areas: "text" "media" "features"; grid-template-columns: 1fr; max-width: 720px; row-gap: 2.25rem; text-align: center; }
@@ -537,6 +595,9 @@
       .step-chip[data-chip="quiet"] { background: var(--wall-quiet); }
       .step-chip[data-chip="help"] { background: var(--wall-help); }
       .step-chip .notif { left: auto; opacity: 1; position: static; right: auto; top: auto; transform: none; visibility: visible; }
+      .setup-steps { gap: 2rem; grid-template-columns: 1fr; margin: 0 auto; max-width: 720px; }
+      .setup-step { align-items: center; gap: 1.75rem; grid-template-columns: minmax(0, 46%) minmax(0, 1fr); }
+      .setup-tile { aspect-ratio: 1; }
     }
 
     @media (max-width: 680px) {
@@ -566,7 +627,12 @@
       .feature-grid li::before { display: none; }
       .feature-note { margin-top: 1.5rem; text-align: left; }
       .step-chip { max-width: none; }
-      .privacy-panel { gap: 2.5rem; }
+      .setup-steps { gap: 2.5rem; }
+      .setup-step { gap: 1.1rem; grid-template-columns: 1fr; }
+      .setup-tile { aspect-ratio: 4 / 3; }
+      .setup-tile .phone { top: 6cqw; width: 50cqw; }
+      .setup-step h3 { font-size: 1.4rem; }
+      .setup-line { display: block; }
       .price-card { gap: 2rem; }
       .price-amount { font-size: 4rem; }
       .faq-grid { grid-template-columns: 1fr; }
@@ -577,6 +643,7 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition-duration: .01ms !important; }
+      .js-reveal .cam-frame, .js-reveal .cam-link { transition-delay: 0s !important; }
     }
   </style>
 </head>
@@ -605,7 +672,7 @@
       <div class="wrap hero-grid">
         <div class="hero-copy">
           <p class="eyebrow">Connected safety for rollator users</p>
-          <h1>Peace of mind that <em>moves with them.</em></h1>
+          <h1>Peace of mind delivered <em>step-by-step.</em></h1>
           <p class="hero-dek">GoSteady helps you understand whether your parent’s rollator is moving through the day—and gives them one simple way to alert family when they want a check-in.</p>
           <div class="hero-actions">
             <a class="button" data-v2-cta href="/checkoutV2">
@@ -779,38 +846,114 @@
       </div>
     </section>
 
-    <section class="privacy">
-      <div class="wrap privacy-panel">
-        <div>
-          <p class="eyebrow">Focused by design</p>
-          <h2>A lighter-touch way to stay informed.</h2>
-          <p class="lede">GoSteady measures movement of the rollator—not everything happening throughout the home.</p>
+    <section class="setup" id="setup" aria-labelledby="setup-title">
+      <div class="wrap">
+        <div class="section-head center">
+          <p class="eyebrow">Simple from day one</p>
+          <h2 id="setup-title"><span class="setup-line">Clamp it on.</span> <span class="setup-line">Scan the code.</span> <span class="setup-line">Done.</span></h2>
+          <p class="lede">Attaching takes about a minute and activation is a single scan. There’s no app to download, nothing to pair, and no Wi&#8209;Fi to set up.</p>
         </div>
-        <div class="privacy-list">
-          <div class="privacy-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><p><strong>No cameras or microphones.</strong> There is no audio or video feed into the home.</p></div>
-          <div class="privacy-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><p><strong>No room-by-room sensor installation.</strong> The connection travels with the rollator.</p></div>
-          <div class="privacy-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><p><strong>No continuous location tracking.</strong> Location is shared only with user-initiated alerts and requires consent.</p></div>
-          <div class="privacy-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><p><strong>Use it openly.</strong> GoSteady should always be used with the knowledge and consent of the person using the rollator.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="company">
-      <div class="wrap company-grid">
-        <div>
-          <p class="eyebrow">Who is behind GoSteady</p>
-          <h2>Built in Colorado for families balancing independence and concern.</h2>
-          <p class="lede">GoSteady LLC builds a simpler connection between people who rely on rollators and the family members who care about them—with independence, privacy, and family control at the center.</p>
-        </div>
-        <aside class="company-card">
-          <h3>Questions before you order?</h3>
-          <p>Reach the GoSteady team directly at <a href="mailto:support@gosteady.co">support@gosteady.co</a>.</p>
-          <div class="company-facts">
-            <div class="company-fact"><small>Company</small><strong>Go Steady LLC</strong></div>
-            <div class="company-fact"><small>Location</small><strong>Colorado, USA</strong></div>
-            <div class="company-fact"><small>Current focus</small><strong>Direct-to-family rollator safety</strong></div>
-          </div>
-        </aside>
+        <ol class="setup-steps" data-setup-steps role="list">
+          <li class="setup-step" data-setup-step>
+            <div class="setup-tile setup-tile--clamp">
+              <img src="product-rollator.webp" width="1000" height="1000" loading="lazy" alt="The GoSteady cupholder with its tool-free thumb-screw clamp">
+            </div>
+            <div class="setup-copy">
+              <p class="setup-label">1 · Attach</p>
+              <h3>Installs in about a minute</h3>
+              <p>The thumb&#8209;screw clamp fits standard rollator tubing. No tools, no drilling, nothing permanent.</p>
+            </div>
+          </li>
+          <li class="setup-step" data-setup-step>
+            <div class="setup-tile setup-tile--camera" role="img" aria-label="A phone’s camera reading the GoSteady QR code and offering a link to gosteady.co">
+              <div class="phone" aria-hidden="true">
+                <div class="cam-view">
+                  <div class="cam-card">
+                    <svg viewBox="0 0 70 70" role="presentation">
+                      <rect width="70" height="70" rx="4" fill="#fff"/>
+                      <g fill="#17231e">
+                        <path d="M4 4h24v24H4zM9 9v14h14V9zM14 14h4v4h-4z" fill-rule="evenodd"/>
+                        <path d="M42 4h24v24H42zM47 9v14h14V9zM52 14h4v4h-4z" fill-rule="evenodd"/>
+                        <path d="M4 42h24v24H4zM9 47v14h14V47zM14 52h4v4h-4z" fill-rule="evenodd"/>
+                        <path d="M34 4h4v8h-4zM30 16h8v4h-8zM34 24h4v10h-4zM42 32h8v4h-8zM54 32h4v8h-4zM62 32h4v4h-4zM30 40h8v4h-8zM42 42h4v8h-4zM50 40h8v4h-8zM62 42h4v12h-4zM34 50h4v8h-4zM46 52h8v4h-8zM42 60h4v6h-4zM52 60h8v4h-8zM62 58h4v8h-4z"/>
+                      </g>
+                    </svg>
+                    <span>GoSteady</span>
+                  </div>
+                  <div class="cam-frame"></div>
+                  <div class="cam-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2.2 5.6-4.8 1.4 2.2-5.6z" fill="currentColor" stroke="none"/></svg><span>gosteady.co</span></div>
+                </div>
+                <div class="cam-bar">
+                  <div class="cam-modes"><span>Video</span><span class="is-on">Photo</span><span>Portrait</span></div>
+                  <div class="cam-controls"><span class="cam-thumb"></span><span class="cam-shutter"></span><span class="cam-flip"></span></div>
+                </div>
+                <div class="phone-island"></div>
+                <div class="phone-status">
+                  <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx=".8"/><rect x="4.5" y="5" width="3" height="6" rx=".8"/><rect x="9" y="2.5" width="3" height="8.5" rx=".8"/><rect x="13.5" y="0" width="3" height="11" rx=".8"/></svg>
+                  <svg width="16" height="11" viewBox="0 0 16 11" fill="currentColor"><path d="M8 10.6 3.4 6a6.5 6.5 0 0 1 9.2 0Z"/><path d="M1 3.6a9.9 9.9 0 0 1 14 0l-1.6 1.6a7.6 7.6 0 0 0-10.8 0Z" opacity=".55"/></svg>
+                  <svg width="26" height="12" viewBox="0 0 26 12" fill="currentColor"><rect x=".5" y=".5" width="21" height="11" rx="3.2" fill="none" stroke="currentColor" opacity=".45"/><rect x="2" y="2" width="16" height="8" rx="1.8"/><rect x="23" y="4" width="2" height="4" rx="1" opacity=".45"/></svg>
+                </div>
+              </div>
+            </div>
+            <div class="setup-copy">
+              <p class="setup-label">2 · Activate</p>
+              <h3>One scan. Setup done.</h3>
+              <p>Point your phone’s camera at the QR code and follow the link. No app download, no Bluetooth pairing, no Wi&#8209;Fi setup.</p>
+            </div>
+          </li>
+          <li class="setup-step" data-setup-step>
+            <div class="setup-tile setup-tile--portal" role="img" aria-label="The GoSteady portal on a phone: three steady days in a row, the Care Circle with an Add button, today’s movement, and a week of activity">
+              <div class="phone" aria-hidden="true">
+                <div class="portal">
+                  <span class="portal-clock">9:41</span>
+                  <div class="portal-top">
+                    <span>Tuesday, Sep 1</span>
+                    <span class="portal-icons">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17" cy="9" r="2.6"/><path d="M15.5 14.2a5 5 0 0 1 6 4.8"/></svg>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+                    </span>
+                  </div>
+                  <div class="portal-card portal-hero">
+                    <strong>3 steady days in a row.</strong>
+                    <p>Moving since 7:40 this morning, like most days.</p>
+                  </div>
+                  <div class="portal-card portal-circle">
+                    <div class="portal-avatars">
+                      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span>
+                      <span>M</span>
+                      <span>T</span>
+                    </div>
+                    <div><strong>Care Circle</strong><small>You, Maya and Tom see the same updates</small></div>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+                  </div>
+                  <div class="portal-add"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Add to Care Circle</div>
+                  <div class="portal-stats">
+                    <div><strong>42</strong><small>active min</small></div>
+                    <div><strong>7:40</strong><small>first moved</small></div>
+                    <div><strong>Quiet</strong><small>overnight</small></div>
+                  </div>
+                  <div class="portal-card portal-week">
+                    <div class="portal-week-head"><strong>Activity, last 7 days</strong><span>Above his usual</span></div>
+                    <div class="portal-bars"><i style="--h:52%"></i><i style="--h:40%"></i><i style="--h:64%"></i><i style="--h:58%"></i><i style="--h:76%"></i><i style="--h:84%"></i><i class="is-today" style="--h:72%"></i></div>
+                    <div class="portal-days"><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span><span>M</span><span>T</span></div>
+                  </div>
+                </div>
+                <div class="phone-island"></div>
+                <div class="phone-status">
+                  <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx=".8"/><rect x="4.5" y="5" width="3" height="6" rx=".8"/><rect x="9" y="2.5" width="3" height="8.5" rx=".8"/><rect x="13.5" y="0" width="3" height="11" rx=".8"/></svg>
+                  <svg width="16" height="11" viewBox="0 0 16 11" fill="currentColor"><path d="M8 10.6 3.4 6a6.5 6.5 0 0 1 9.2 0Z"/><path d="M1 3.6a9.9 9.9 0 0 1 14 0l-1.6 1.6a7.6 7.6 0 0 0-10.8 0Z" opacity=".55"/></svg>
+                  <svg width="26" height="12" viewBox="0 0 26 12" fill="currentColor"><rect x=".5" y=".5" width="21" height="11" rx="3.2" fill="none" stroke="currentColor" opacity=".45"/><rect x="2" y="2" width="16" height="8" rx="1.8"/><rect x="23" y="4" width="2" height="4" rx="1" opacity=".45"/></svg>
+                </div>
+              </div>
+            </div>
+            <div class="setup-copy">
+              <p class="setup-label">3 · Check in</p>
+              <h3>Track and share right away</h3>
+              <p>Activity shows up on any phone or computer, and inviting family to the Care Circle takes a tap. Cellular is already built in.</p>
+              <a href="/userdemo/d2c/preview/dashboard" target="_blank" rel="noopener">Try the interactive demo &rarr;</a>
+            </div>
+          </li>
+        </ol>
       </div>
     </section>
 
@@ -1143,6 +1286,21 @@
       }
 
       showScenario('normal');
+    }
+
+    const setupStepsList = Array.from(document.querySelectorAll('[data-setup-step]'));
+
+    if (setupStepsList.length && 'IntersectionObserver' in window) {
+      // Steps are hidden only once JS is running, so a no-JS visit sees them as-is.
+      document.querySelector('[data-setup-steps]').classList.add('js-reveal');
+      const setupObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-in');
+          setupObserver.unobserve(entry.target);
+        });
+      }, { rootMargin: '0px 0px -12% 0px', threshold: .2 });
+      setupStepsList.forEach(function(step) { setupObserver.observe(step); });
     }
 
     plausible('V2 Landing Viewed');
