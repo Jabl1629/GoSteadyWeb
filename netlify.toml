@@ -1,10 +1,10 @@
 [build]
   publish = "."
 
-# Serve logo.png when browsers request /favicon.ico
+# Serve the GS mark when browsers request /favicon.ico
 [[redirects]]
   from = "/favicon.ico"
-  to = "/logo.png"
+  to = "/Assets/logo-gs-selected.png"
   status = 200
 
 # Clean URL for the get-in-touch form (linked from the user demo's banner)
@@ -13,11 +13,16 @@
   to = "/get-in-touch.html"
   status = 200
 
-# Clean URL for the rollator cupholder landing page (paid-traffic destination)
+# The original cupholder landing page is retired; send its traffic to the homepage
 [[redirects]]
   from = "/cupholder"
-  to = "/cupholder.html"
-  status = 200
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/cupholder.html"
+  to = "/"
+  status = 301
 
 # Clean URL for the direct-to-consumer checkout funnel
 [[redirects]]
@@ -25,11 +30,16 @@
   to = "/checkout.html"
   status = 200
 
-# Caregiver-first V2 funnel kept separate for paid-traffic comparison
+# The V2 page is now the homepage; keep its old URLs alive as permanent redirects
 [[redirects]]
   from = "/cupholderV2"
-  to = "/cupholder-v2.html"
-  status = 200
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/cupholder-v2.html"
+  to = "/"
+  status = 301
 
 [[redirects]]
   from = "/checkoutV2"
