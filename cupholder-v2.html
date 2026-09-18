@@ -338,20 +338,20 @@
        coral) and the notification is translucent glass over it. ---------- */
     .updates {
       --wall-normal:
-        radial-gradient(70% 55% at 22% 12%, rgba(160,216,188,.72) 0%, rgba(160,216,188,0) 70%),
-        radial-gradient(60% 50% at 86% 44%, rgba(90,144,182,.55) 0%, rgba(90,144,182,0) 70%),
-        radial-gradient(80% 60% at 50% 104%, rgba(6,18,16,.95) 0%, rgba(6,18,16,0) 70%),
-        linear-gradient(180deg, #18342f 0%, #0e211e 100%);
+        radial-gradient(70% 55% at 22% 12%, rgba(178,226,200,.8) 0%, rgba(178,226,200,0) 70%),
+        radial-gradient(60% 50% at 86% 44%, rgba(120,170,205,.6) 0%, rgba(120,170,205,0) 70%),
+        radial-gradient(80% 60% at 50% 104%, rgba(6,18,16,.55) 0%, rgba(6,18,16,0) 70%),
+        linear-gradient(180deg, #2c5148 0%, #1c3a33 100%);
       --wall-quiet:
-        radial-gradient(70% 55% at 78% 12%, rgba(238,188,106,.74) 0%, rgba(238,188,106,0) 70%),
-        radial-gradient(60% 50% at 16% 52%, rgba(216,150,118,.48) 0%, rgba(216,150,118,0) 70%),
-        radial-gradient(80% 60% at 50% 104%, rgba(18,14,10,.95) 0%, rgba(18,14,10,0) 70%),
-        linear-gradient(180deg, #2c2f28 0%, #171915 100%);
+        radial-gradient(70% 55% at 78% 12%, rgba(242,198,122,.8) 0%, rgba(242,198,122,0) 70%),
+        radial-gradient(60% 50% at 16% 52%, rgba(222,160,128,.52) 0%, rgba(222,160,128,0) 70%),
+        radial-gradient(80% 60% at 50% 104%, rgba(18,14,10,.55) 0%, rgba(18,14,10,0) 70%),
+        linear-gradient(180deg, #4a4a3e 0%, #2c2c25 100%);
       --wall-help:
-        radial-gradient(70% 55% at 76% 10%, rgba(224,128,104,.76) 0%, rgba(224,128,104,0) 70%),
-        radial-gradient(60% 50% at 18% 50%, rgba(238,170,158,.42) 0%, rgba(238,170,158,0) 70%),
-        radial-gradient(80% 60% at 50% 104%, rgba(22,12,10,.95) 0%, rgba(22,12,10,0) 70%),
-        linear-gradient(180deg, #302624 0%, #1a1413 100%);
+        radial-gradient(70% 55% at 76% 10%, rgba(230,140,116,.8) 0%, rgba(230,140,116,0) 70%),
+        radial-gradient(60% 50% at 18% 50%, rgba(240,178,166,.46) 0%, rgba(240,178,166,0) 70%),
+        radial-gradient(80% 60% at 50% 104%, rgba(22,12,10,.55) 0%, rgba(22,12,10,0) 70%),
+        linear-gradient(180deg, #4d3c38 0%, #2c2320 100%);
       background: var(--paper);
     }
     .updates-grid {
@@ -410,8 +410,8 @@
     .notif {
       -webkit-backdrop-filter: blur(26px) saturate(170%);
       backdrop-filter: blur(26px) saturate(170%);
-      background: linear-gradient(180deg, rgba(255,255,255,.72) 0%, rgba(255,255,255,.58) 100%);
-      border: 1px solid rgba(255,255,255,.55);
+      background: linear-gradient(180deg, rgba(255,255,255,.92) 0%, rgba(255,255,255,.86) 100%);
+      border: 1px solid rgba(255,255,255,.7);
       border-radius: 7.4cqw;
       box-shadow: inset 0 1px 0 rgba(255,255,255,.75), 0 18px 40px rgba(0,0,0,.22);
       color: #15211c;
@@ -431,9 +431,9 @@
     .notif-head { align-items: center; display: flex; gap: 2.7cqw; margin-bottom: 2.5cqw; }
     .notif-head img { background: white; border-radius: 2.5cqw; box-shadow: 0 1px 3px rgba(0,0,0,.15); height: 9.2cqw; width: 9.2cqw; }
     .notif-app { font-size: 4cqw; font-weight: 700; }
-    .notif-time { color: rgba(21,33,28,.62); font-size: 3.7cqw; margin-left: auto; }
+    .notif-time { color: rgba(21,33,28,.68); font-size: 3.7cqw; margin-left: auto; }
     .notif-title { font-size: 4.7cqw; font-weight: 700; margin: 0 0 1cqw; }
-    .notif-body { color: rgba(21,33,28,.86); font-size: 4.4cqw; line-height: 1.45; margin: 0 0 3.7cqw; }
+    .notif-body { color: rgba(21,33,28,.94); font-size: 4.4cqw; line-height: 1.45; margin: 0 0 3.7cqw; }
     .notif-actions { display: grid; margin: 0 -4.9cqw; }
     .notif-actions span { border-top: 1px solid rgba(21,33,28,.12); color: #1f4d3b; font-size: 4.4cqw; font-weight: 600; padding: 3.2cqw 4.9cqw; text-align: center; }
 
@@ -595,6 +595,9 @@
       .step-chip[data-chip="quiet"] { background: var(--wall-quiet); }
       .step-chip[data-chip="help"] { background: var(--wall-help); }
       .step-chip .notif { left: auto; opacity: 1; position: static; right: auto; top: auto; transform: none; visibility: visible; }
+      /* the chip lives inside a scenario step, whose paragraph rule would otherwise recolour and resize the notification text */
+      .scenario-step .step-chip .notif-title { color: #15211c; font-size: 4.7cqw; margin: 0 0 1cqw; max-width: none; }
+      .scenario-step .step-chip .notif-body { color: rgba(21,33,28,.94); font-size: 4.4cqw; line-height: 1.45; margin: 0 0 3.7cqw; max-width: none; }
       .setup-steps { gap: 2rem; grid-template-columns: 1fr; margin: 0 auto; max-width: 720px; }
       .setup-step { align-items: center; gap: 1.75rem; grid-template-columns: minmax(0, 46%) minmax(0, 1fr); }
       .setup-tile { aspect-ratio: 1; }
@@ -673,7 +676,7 @@
         <div class="hero-copy">
           <p class="eyebrow">Connected safety for rollator users</p>
           <h1>Peace of mind delivered <em>step-by-step.</em></h1>
-          <p class="hero-dek">GoSteady helps you understand whether your parent’s rollator is moving through the day—and gives them one simple way to alert family when they want a check-in.</p>
+          <p class="hero-dek">GoSteady provides proactive activity insights and safety features, all from a discreet and effortless walker attachment.</p>
           <div class="hero-actions">
             <a class="button" data-v2-cta href="/checkoutV2">
               Check availability
