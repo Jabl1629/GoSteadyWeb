@@ -314,7 +314,6 @@
     .feature-grid li::before { background: var(--sage-300); content: ""; display: block; height: 1px; margin-bottom: 1rem; width: 34px; }
     .feature-grid h3 { font-family: var(--sans); font-size: 1.12rem; font-weight: 700; letter-spacing: -.015em; margin: 0 0 .5rem; }
     .feature-grid p { color: var(--muted); font-size: .94rem; line-height: 1.55; margin: 0; }
-    .feature-note { color: var(--muted); font-size: .8rem; line-height: 1.5; margin: 2.5rem auto 0; max-width: 620px; text-align: center; }
 
     /* scroll scene (wide screens, motion allowed) */
     .definition.is-scene { padding: 0; }
@@ -330,7 +329,6 @@
     .is-scene .feature-grid li:nth-child(2) { right: max(0px, calc(50% - 470px)); top: 20%; }
     .is-scene .feature-grid li:nth-child(3) { left: max(0px, calc(50% - 470px)); top: 57%; }
     .is-scene .feature-grid li:nth-child(4) { right: max(0px, calc(50% - 470px)); top: 57%; }
-    .is-scene .feature-note { bottom: 3.5%; left: 50%; margin: 0; opacity: 0; position: absolute; transform: translate3d(-50%, 10px, 0); width: min(620px, 70%); will-change: opacity, transform; }
 
     /* ---------- updates: scroll-driven scenarios beside a sticky lock-screen phone ----------
        The scenario nearest the middle of the viewport is the active one, so reading down the
@@ -628,7 +626,6 @@
       .feature-grid { border-top: 0; gap: 0; grid-template-columns: 1fr; padding-top: .5rem; }
       .feature-grid li { border-top: 1px solid rgba(89,103,95,.18); padding: 1.4rem 0; }
       .feature-grid li::before { display: none; }
-      .feature-note { margin-top: 1.5rem; text-align: left; }
       .step-chip { max-width: none; }
       .setup-steps { gap: 2.5rem; }
       .setup-step { gap: 1.1rem; grid-template-columns: 1fr; }
@@ -745,7 +742,6 @@
                 <li data-scene-callout data-side="left"><h3>Learns their routine</h3><p>Senses walker movement and flags meaningful changes.</p></li>
                 <li data-scene-callout data-side="right"><h3>One press reaches family</h3><p>Alerts chosen contacts, with GPS location attached.</p></li>
               </ul>
-              <p class="feature-note" data-scene-note>Everything stays with the walker, while updates go directly to their Care Circle.</p>
             </div>
           </div>
         </div>
@@ -1131,7 +1127,6 @@
       const sceneDevice = scene.querySelector('[data-scene-device]');
       const sceneText = scene.querySelector('[data-scene-text]');
       const sceneCallouts = Array.from(scene.querySelectorAll('[data-scene-callout]'));
-      const sceneNote = scene.querySelector('[data-scene-note]');
       const sceneWide = window.matchMedia('(min-width: 981px)');
       const sceneReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
       const calloutTimings = [[.34, .51], [.43, .60], [.52, .69], [.61, .78]];
@@ -1181,10 +1176,6 @@
           callout.style.opacity = String(reveal);
           callout.style.transform = 'translate3d(' + (direction * 24 * (1 - reveal)) + 'px, ' + (12 * (1 - reveal)) + 'px, 0)';
         });
-
-        const noteReveal = smoothScene(.72, .88, progress);
-        sceneNote.style.opacity = String(noteReveal);
-        sceneNote.style.transform = 'translate3d(-50%, ' + (10 * (1 - noteReveal)) + 'px, 0)';
       }
 
       function requestScene() {
@@ -1201,7 +1192,6 @@
         sceneDevice.removeAttribute('style');
         sceneText.removeAttribute('style');
         sceneCallouts.forEach(function(callout) { callout.removeAttribute('style'); });
-        sceneNote.removeAttribute('style');
       }
 
       function syncScene() {
