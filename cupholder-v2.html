@@ -88,15 +88,6 @@
     }
     .skip-link:focus { top: 1rem; }
     .wrap { margin: 0 auto; max-width: var(--max); padding-left: 28px; padding-right: 28px; }
-    .announcement {
-      background: var(--forest-950);
-      color: #edf4ef;
-      font-size: .78rem;
-      letter-spacing: .035em;
-      padding: .65rem 1rem;
-      text-align: center;
-    }
-    .announcement strong { color: white; }
     .site-header {
       background: rgba(255, 253, 249, .94);
       border-bottom: 1px solid rgba(216, 221, 215, .75);
@@ -532,7 +523,7 @@
     .js-reveal .setup-step.is-in .cam-frame { opacity: 1; transform: translateX(-50%) scale(1); }
     .js-reveal .setup-step.is-in .cam-link { opacity: 1; transform: translate(-50%, 0); }
 
-    .pricing { background: var(--paper); }
+    .pricing { background: var(--paper); scroll-margin-top: 76px; }
     .price-card {
       background: var(--paper);
       border: 1px solid var(--line);
@@ -554,7 +545,7 @@
     .price-list svg { color: var(--forest-700); flex: 0 0 auto; margin-top: .15rem; }
     .price-note { color: var(--muted); font-size: .75rem; margin: 1rem 0 0; }
 
-    .faq { background: var(--cream); }
+    .faq { background: var(--cream); scroll-margin-top: 76px; }
     .faq-grid { display: grid; gap: 0 4rem; grid-template-columns: 1fr 1fr; margin-top: 3rem; }
     details { border-top: 1px solid var(--line); }
     details:last-child { border-bottom: 1px solid var(--line); }
@@ -604,7 +595,6 @@
 
     @media (max-width: 680px) {
       .wrap { padding-left: 20px; padding-right: 20px; }
-      .announcement { font-size: .68rem; }
       .nav { min-height: 66px; }
       .brand { font-size: 1.25rem; }
       .brand img { height: 33px; width: 33px; }
@@ -652,7 +642,6 @@
   <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=2755897781476379&amp;ev=PageView&amp;noscript=1"></noscript>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="announcement"><strong>Built-in cellular</strong> · No Wi‑Fi, Bluetooth, or phone pairing</div>
   <header class="site-header">
     <div class="wrap nav">
       <a class="brand" href="/cupholderV2" aria-label="GoSteady home">
@@ -661,7 +650,8 @@
       </a>
       <nav class="nav-links" aria-label="Main navigation">
         <a href="#how-it-works">How it works</a>
-        <a href="#why-gosteady">Why GoSteady</a>
+        <a href="#setup">Setup</a>
+        <a href="#pricing">Pricing</a>
         <a href="#questions">Questions</a>
         <a class="button" data-v2-cta href="/checkoutV2">Check availability</a>
       </nav>
@@ -728,10 +718,10 @@
       </div>
     </section>
 
-    <section class="definition" id="why-gosteady" data-scene>
+    <section class="definition" id="how-it-works" data-scene>
       <div class="definition-track" data-scene-track>
         <div class="definition-sticky" data-scene-sticky>
-          <div class="wrap definition-grid" id="how-it-works" data-scene-canvas>
+          <div class="wrap definition-grid" data-scene-canvas>
             <figure class="definition-media" data-scene-device>
               <img src="Assets/closeup.webp" width="859" height="1024" alt="Close-up of the GoSteady cupholder mounted to rollator tubing">
             </figure>
