@@ -613,7 +613,10 @@
       .hero-visual { min-height: 515px; }
       .hero-scenes { border-radius: 100px 100px 24px 24px; height: 500px; width: calc(100% - 18px); }
       .notification { left: 0; top: 1.4rem; width: min(282px, 86%); }
-      .notification-watch { bottom: 4rem; top: auto; width: 236px; }
+      .notification-watch { bottom: 5rem; top: auto; width: 236px; }
+      /* In the daytime-walk photo her face sits top-right, exactly where the card
+         lands on a narrow screen. Anchor this one to the bottom-left, over the path. */
+      .notification-positive { bottom: 5rem; left: -10px; top: auto; width: min(262px, 80%); }
       .hero-carousel-controls { right: 1.1rem; }
       .illustrative { text-align: left; }
       .definition-grid { row-gap: 1.75rem; }
@@ -703,7 +706,7 @@
             </div>
             <div class="notification notification-watch" data-hero-notification role="status" aria-atomic="true" aria-hidden="true">
               <div class="notification-top"><span class="notification-brand"><span class="notification-dot"></span>GoSteady</span><span>7:15 AM</span></div>
-              <p><strong>Overnight pattern changed</strong><br>Mom’s GoSteady recorded more overnight movement than usual on 3 nights this week. Consider checking in this morning.</p>
+              <p><strong>Overnight pattern changed</strong><br>GoSteady detected 5 overnight motion sessions. Consider checking in this morning.</p>
             </div>
             <div class="notification notification-check" data-hero-notification role="status" aria-atomic="true" aria-hidden="true">
               <div class="notification-top"><span class="notification-brand"><span class="notification-dot"></span>GoSteady</span><span>11:00 AM</span></div>
