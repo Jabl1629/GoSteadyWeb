@@ -306,7 +306,9 @@
       margin: 0;
       padding: clamp(3rem, 5vw, 4.5rem) 0 0;
     }
-    .feature-grid li::before { background: var(--sage-300); content: ""; display: block; height: 1px; margin-bottom: 1rem; width: 34px; }
+    /* One step darker than the rule the icons sit above, so they stay quiet but hold their shape. */
+    .feature-icon { color: #a3bba9; display: block; height: 24px; margin-bottom: .95rem; width: 24px; }
+    .feature-grid h3::before { background: var(--sage-300); content: ""; display: block; height: 1px; margin-bottom: 1rem; width: 34px; }
     .feature-grid h3 { font-family: var(--sans); font-size: 1.12rem; font-weight: 700; letter-spacing: -.015em; margin: 0 0 .5rem; }
     .feature-grid p { color: var(--muted); font-size: .94rem; line-height: 1.55; margin: 0; }
 
@@ -623,7 +625,8 @@
       .definition-media img { width: min(72%, 280px); }
       .feature-grid { border-top: 0; gap: 0; grid-template-columns: 1fr; padding-top: .5rem; }
       .feature-grid li { border-top: 1px solid rgba(89,103,95,.18); padding: 1.4rem 0; }
-      .feature-grid li::before { display: none; }
+      .feature-grid h3::before { display: none; }
+      .feature-icon { height: 22px; margin-bottom: .8rem; width: 22px; }
       .step-chip { max-width: none; }
       .setup-steps { gap: 2.5rem; }
       .setup-step { gap: 1.1rem; grid-template-columns: 1fr; }
@@ -735,10 +738,10 @@
             <h2 class="definition-text" data-scene-text>GoSteady is a walker&#8209;mounted safety system within a useful, discreet cupholder.</h2>
             <div class="feature-block" data-scene-features>
               <ul class="feature-grid" aria-label="GoSteady features">
-                <li data-scene-callout data-side="left"><h3>Up to a year per charge</h3><p>Stays on the walker. Nothing to charge daily.</p></li>
-                <li data-scene-callout data-side="right"><h3>Built-in cellular</h3><p>Works out of the box. No Wi‑Fi, Bluetooth, or phone pairing.</p></li>
-                <li data-scene-callout data-side="left"><h3>Learns their routine</h3><p>Senses walker movement and flags meaningful changes.</p></li>
-                <li data-scene-callout data-side="right"><h3>One press reaches family</h3><p>Alerts chosen contacts, with GPS location attached.</p></li>
+                <li data-scene-callout data-side="left"><svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7.2" width="17" height="9.6" rx="3"/><path d="M21.4 10.8v2.4"/><rect x="4.4" y="9.6" width="10.4" height="4.8" rx="1.8" fill="currentColor" stroke="none"/></svg><h3>Up to a year per charge</h3><p>Stays on the walker. Nothing to charge daily.</p></li>
+                <li data-scene-callout data-side="right"><svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2.1" fill="currentColor" stroke="none"/><path d="M7.9 7.9a5.8 5.8 0 0 0 0 8.2"/><path d="M16.1 16.1a5.8 5.8 0 0 0 0-8.2"/><path d="M5 5a9.9 9.9 0 0 0 0 14"/><path d="M19 19a9.9 9.9 0 0 0 0-14"/></svg><h3>Built-in cellular</h3><p>Works out of the box. No Wi‑Fi, Bluetooth, or phone pairing.</p></li>
+                <li data-scene-callout data-side="left"><svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 15.5c2.4 0 2.4-7 4.8-7s2.4 7 4.8 7 2.4-7 4.8-7"/><circle cx="20.3" cy="8.5" r="2" fill="currentColor" stroke="none"/></svg><h3>Learns their routine</h3><p>Senses walker movement and flags meaningful changes.</p></li>
+                <li data-scene-callout data-side="right"><svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.2" cy="8.4" r="3.1"/><path d="M3.4 19.2a5.8 5.8 0 0 1 11.6 0"/><circle cx="17.6" cy="9.6" r="2.3"/><path d="M16.4 14a5 5 0 0 1 4.2 5.2"/></svg><h3>One press reaches family</h3><p>Alerts chosen contacts, with GPS location attached.</p></li>
               </ul>
             </div>
           </div>
