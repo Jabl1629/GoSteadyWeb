@@ -258,7 +258,6 @@
     }
     .hero-carousel-dot[aria-current="true"]::before { background: white; width: 18px; }
     .hero-carousel-toggle { border-left: 1px solid rgba(255,255,255,.28); font-size: .72rem; height: 22px; margin-left: .1rem; padding-left: .52rem; width: 28px; }
-    .illustrative { color: var(--muted); font-size: .7rem; margin: .7rem 0 0; text-align: right; }
 
     section { padding: clamp(5rem, 9vw, 8rem) 0; }
     .section-head { max-width: 720px; }
@@ -429,6 +428,10 @@
     .notif-time { color: rgba(21,33,28,.68); font-size: 3.7cqw; margin-left: auto; }
     .notif-title { font-size: 4.7cqw; font-weight: 700; margin: 0 0 1cqw; }
     .notif-body { color: rgba(21,33,28,.94); font-size: 4.4cqw; line-height: 1.45; margin: 0 0 3.7cqw; }
+    /* Only the help alert carries a map: location is shared with a user-initiated alert and nothing else. */
+    .notif-map { border-radius: 3.4cqw; height: 28cqw; margin: 0 0 3.7cqw; overflow: hidden; position: relative; }
+    .notif-map-art { display: block; height: 100%; width: 100%; }
+    .notif-map-where { -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); background: rgba(255,255,255,.84); border-radius: 999px; bottom: 2.6cqw; color: #15211c; font-size: 3.4cqw; font-weight: 600; left: 2.6cqw; padding: 1.1cqw 2.6cqw; position: absolute; }
     .notif-actions { display: grid; margin: 0 -4.9cqw; }
     .notif-actions span { border-top: 1px solid rgba(21,33,28,.12); color: #1f4d3b; font-size: 4.4cqw; font-weight: 600; padding: 3.2cqw 4.9cqw; text-align: center; }
 
@@ -620,7 +623,6 @@
          lands on a narrow screen. Anchor this one to the bottom-left, over the path. */
       .notification-positive { bottom: 5rem; left: -10px; top: auto; width: min(262px, 80%); }
       .hero-carousel-controls { right: 1.1rem; }
-      .illustrative { text-align: left; }
       .definition-grid { row-gap: 1.75rem; }
       .definition-media img { width: min(72%, 280px); }
       .feature-grid { border-top: 0; gap: 0; grid-template-columns: 1fr; padding-top: .5rem; }
@@ -723,7 +725,6 @@
               <button class="hero-carousel-toggle" type="button" data-hero-toggle aria-label="Pause hero rotation">Ⅱ</button>
             </div>
           </div>
-          <p class="illustrative">Scenario imagery is illustrative.</p>
         </div>
       </div>
     </section>
@@ -793,7 +794,7 @@
                   <article class="notif is-active" data-notif="help">
                     <div class="notif-head"><img src="/Assets/logo-gs-selected.png" alt=""><span class="notif-app">GoSteady</span><span class="notif-time">now</span></div>
                     <p class="notif-title">Dad asked for help</p>
-                    <p class="notif-body">He pressed the button on his GoSteady. Maya was notified too, with his location.</p>
+                    <p class="notif-body">He pressed the button on his GoSteady. Maya was notified too, with his location.</p><div class="notif-map" aria-hidden="true"><svg class="notif-map-art" viewBox="0 0 200 70" preserveAspectRatio="xMidYMid slice"><rect width="200" height="70" fill="#e9e4d8"/><rect x="4" y="2" width="46" height="24" rx="3" fill="#d9e4d2"/><rect x="152" y="40" width="46" height="28" rx="3" fill="#d9e4d2"/><rect x="112" y="-2" width="40" height="18" rx="3" fill="#dfe7ee"/><g stroke="#fcfaf5" stroke-linecap="round" fill="none"><path d="M-4 34h208" stroke-width="8"/><path d="M62 -4v78" stroke-width="7"/><path d="M-4 12h208" stroke-width="4"/><path d="M140 -4v78" stroke-width="4"/><path d="M-4 58h208" stroke-width="4"/><path d="M18 34 46 70" stroke-width="3.5"/></g><circle cx="100" cy="31" r="16" fill="#d97861" opacity=".15"/><path d="M100 22.5a8.2 8.2 0 0 1 8.2 8.2c0 6-8.2 13.8-8.2 13.8s-8.2-7.8-8.2-13.8a8.2 8.2 0 0 1 8.2-8.2z" fill="#d97861"/><circle cx="100" cy="30.7" r="3.1" fill="#fff"/></svg><span class="notif-map-where">Oak St &amp; 4th Ave</span></div>
                     <div class="notif-actions"><span>Call Dad</span><span>Open location</span></div>
                   </article>
                 </div>
@@ -833,7 +834,7 @@
             <article class="notif" data-notif="help" aria-hidden="true">
               <div class="notif-head"><img src="/Assets/logo-gs-selected.png" alt=""><span class="notif-app">GoSteady</span><span class="notif-time">now</span></div>
               <p class="notif-title">Dad asked for help</p>
-              <p class="notif-body">He pressed the button on his GoSteady. Maya was notified too, with his location.</p>
+              <p class="notif-body">He pressed the button on his GoSteady. Maya was notified too, with his location.</p><div class="notif-map" aria-hidden="true"><svg class="notif-map-art" viewBox="0 0 200 70" preserveAspectRatio="xMidYMid slice"><rect width="200" height="70" fill="#e9e4d8"/><rect x="4" y="2" width="46" height="24" rx="3" fill="#d9e4d2"/><rect x="152" y="40" width="46" height="28" rx="3" fill="#d9e4d2"/><rect x="112" y="-2" width="40" height="18" rx="3" fill="#dfe7ee"/><g stroke="#fcfaf5" stroke-linecap="round" fill="none"><path d="M-4 34h208" stroke-width="8"/><path d="M62 -4v78" stroke-width="7"/><path d="M-4 12h208" stroke-width="4"/><path d="M140 -4v78" stroke-width="4"/><path d="M-4 58h208" stroke-width="4"/><path d="M18 34 46 70" stroke-width="3.5"/></g><circle cx="100" cy="31" r="16" fill="#d97861" opacity=".15"/><path d="M100 22.5a8.2 8.2 0 0 1 8.2 8.2c0 6-8.2 13.8-8.2 13.8s-8.2-7.8-8.2-13.8a8.2 8.2 0 0 1 8.2-8.2z" fill="#d97861"/><circle cx="100" cy="30.7" r="3.1" fill="#fff"/></svg><span class="notif-map-where">Oak St &amp; 4th Ave</span></div>
               <div class="notif-actions"><span>Call Dad</span><span>Open location</span></div>
             </article>
             <div class="phone-bottom" aria-hidden="true">
