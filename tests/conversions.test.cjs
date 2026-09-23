@@ -44,6 +44,27 @@ test('duplicate address submissions are sent once', async () => {
   const deps = setup(); await c.processAddress(address(), deps);
   assert.equal(await c.processAddress(address(), deps), 'duplicate'); assert.equal(deps.sent.length, 1);
 });
+test('address conversion preserves the quoted offer, including earlier open checkouts', async () => {
+  for (const price of ['99', '199']) {
+    const deps = setup();
+    await c.processAddress(address({ presented_price: price }), deps);
+    assert.equal(deps.sent[0].event.custom_data.value, Number(price));
+    assert.equal(deps.sent[0].event.custom_data.offer_version,
+      price === '199' ? 'founding_family_199_2026_09' : 'deposit_49_balance_50');
+    assert.equal((await deps.store.get('attribution/checkout-fixture-123')).offer.device_price, Number(price));
+  }
+  const deps = setup();
+  assert.equal(await c.processAddress(address({ device_price: '99999' }), deps), 'ignored');
+  assert.equal(deps.sent.length, 0);
+});
+test('address retry keeps the original quote when a visitor sees a later price', async () => {
+  const deps = setup(); const send = deps.send;
+  deps.send = async () => { throw Error('offline'); };
+  await assert.rejects(c.processAddress(address({ presented_price: '99' }), deps));
+  deps.send = send;
+  await c.processAddress(address({ device_price: '199' }), deps);
+  assert.equal(deps.sent[0].event.custom_data.value, 99);
+});
 test('concurrent deliveries cannot both acquire the event lease', async () => {
   const deps = setup();
   await Promise.allSettled([c.processAddress(address(), deps), c.processAddress(address(), deps)]);
@@ -80,6 +101,23 @@ test('Stripe duplicate events and completed/async events share one receipt', asy
   const deps = setup(); await c.processPayment(payment({client_reference_id: null}), deps);
   assert.equal(await c.processPayment(payment({client_reference_id: null}, { id: 'evt_other', type: 'checkout.session.async_payment_succeeded' }), deps), 'duplicate');
   assert.equal(deps.sent.length, 1);
+});
+test('both Founding Family links report only the paid deposit and use Stripe offer metadata', async () => {
+  for (const [link, plan] of [
+    ['plink_1UIwWXQ2TfGTSvqAuINb79n3', 'monthly'],
+    ['plink_1UIwWcQ2TfGTSvqACjfPpIAH', 'annual']
+  ]) {
+    const deps = setup();
+    // The paid session is authoritative even if earlier address attribution was $99.
+    await c.processAddress(address({ presented_price: '99' }), deps);
+    assert.equal(await c.processPayment(payment({ payment_link: link,
+      metadata: { device_price_usd: '199', service_plan: plan } }), deps), 'sent');
+    const data = deps.sent[1].event.custom_data;
+    assert.equal(data.value, 49);
+    assert.equal(data.device_price, 199);
+    assert.equal(data.offer_version, 'founding_family_199_2026_09');
+    assert.equal(data.service_plan, plan);
+  }
 });
 for (const [label, overrides] of Object.entries({
   unpaid: { payment_status: 'unpaid' }, free: { payment_status: 'no_payment_required' },

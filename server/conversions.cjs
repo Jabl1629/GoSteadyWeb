@@ -6,7 +6,16 @@ const stripe = new Stripe(undefined, {
   authenticator: async () => { throw new Error('Stripe API access is not configured'); }
 });
 const FORMS = new Set(['cupholder-shipping-intent', 'cupholder-v2-shipping-intent']);
-const LIVE_LINKS = new Set(['plink_1UIfmtQ2TfGTSvqAOF27Vt8v', 'plink_1UIsKMQ2TfGTSvqAa8gJbV1b']);
+// Keep the earlier offer eligible for delayed payment notifications and retries.
+const LIVE_LINKS = new Set([
+  'plink_1UIfmtQ2TfGTSvqAOF27Vt8v', 'plink_1UIsKMQ2TfGTSvqAa8gJbV1b',
+  'plink_1UIwWXQ2TfGTSvqAuINb79n3', 'plink_1UIwWcQ2TfGTSvqACjfPpIAH'
+]);
+function quotedOffer(price) {
+  if (String(price) === '199') return { device_price: 199, offer_version: 'founding_family_199_2026_09' };
+  if (price == null || String(price) === '99') return { device_price: 99, offer_version: 'deposit_49_balance_50' };
+  return null;
+}
 const hash = value => createHash('sha256').update(value).digest('hex');
 const validId = value => typeof value === 'string' && /^[a-zA-Z0-9_-]{8,200}$/.test(value);
 const epoch = () => Math.floor(Date.now() / 1000);
@@ -95,7 +104,9 @@ async function processAddress(data, deps) {
   }
   const userData = matchingData(data);
   if (!userData.em) return 'ignored';
-  const record = { user_data: userData, source_url: url, created_at: deps.now() };
+  const offer = quotedOffer(data.device_price ?? data.presented_price);
+  if (!offer) return 'ignored';
+  const record = { user_data: userData, source_url: url, created_at: deps.now(), offer };
   await deps.store.setJSON(key, record, { onlyIfNew: true });
   const stored = await deps.store.get(key, { type: 'json', consistency: 'strong' });
   if (stored.opt_out) return 'opted-out';
@@ -104,7 +115,8 @@ async function processAddress(data, deps) {
     event_name: 'AddShippingInfo', event_id: `shipping_${data.checkout_id}`,
     event_time: stored.created_at, action_source: 'website', event_source_url: url,
     user_data: stored.user_data,
-    custom_data: { currency: 'USD', value: 99, service_plan: data.service_plan === 'annual' ? 'annual' : 'monthly' }
+    custom_data: { currency: 'USD', value: (stored.offer || quotedOffer()).device_price,
+      ...(stored.offer || quotedOffer()), service_plan: data.service_plan === 'annual' ? 'annual' : 'monthly' }
   }, deps, { test });
 }
 
@@ -144,6 +156,7 @@ async function processPayment(event, deps) {
     action_source: 'website', event_source_url: record?.source_url || 'https://gosteady.co/checkoutV2',
     user_data: userData,
     custom_data: { currency: 'USD', value: 49, content_name: 'GoSteady refundable reservation deposit',
+      ...quotedOffer(session.metadata?.device_price_usd),
       service_plan: session.metadata?.service_plan === 'annual' ? 'annual' : 'monthly' }
   }, deps, { test });
 }

@@ -38,7 +38,7 @@ https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-
 
 | Event | Proof | Value | Deduplication |
 | --- | --- | --- | --- |
-| `AddShippingInfo` | Verified Netlify address-form submission | $99 device interest | `shipping_<checkout_id>` shared with browser |
+| `AddShippingInfo` | Verified Netlify address-form submission | $199 device interest (legacy $99 retained) | `shipping_<checkout_id>` shared with browser |
 | `Purchase` | Signed Stripe Checkout event, status complete and payment_status paid | $49 actually paid | `deposit_<checkout_session_id>` |
 
 Both checkout pages and both live deposit Payment Links are supported. Browser

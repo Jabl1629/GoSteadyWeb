@@ -4,9 +4,9 @@ Updated September 23, 2026.
 
 ## Customer offer
 
-- Device total: $99 USD.
+- Founding Family device total: $199 USD; planned retail: $249 USD.
 - Refundable deposit collected now: $49 USD.
-- Remaining balance: $50 USD, collected before shipment after contacting the customer.
+- Remaining balance: $150 USD, collected before shipment after contacting the customer.
 - Estimated shipping: December 2026.
 - First two months of service are free after activation, then the selected plan:
   $20/month (cancel any time) or $200/year (cancel renewal any time).
@@ -15,20 +15,22 @@ Updated September 23, 2026.
 - Reservation payments are fully refundable before shipment. Contact: support@gosteady.co.
 
 Checkout begins with box contents and monthly/annual service selection. The
-device remains $99. The preorder status, deposit split, and bonus are
-disclosed after address submission, as required by the experiment design.
+device is $199. The homepage labels $249 as planned retail and shows the
+required Family Plan separately ($20/month or $200/year). The preorder status
+and deposit split are disclosed after address submission. The two free service
+months are also explained in the homepage Family Plan section.
 
 ## Live Stripe configuration
 
 - Account: `acct_1UFcrKQ2TfGTSvqA` (GoSteady LLC).
-- Product: `gosteady_family_connect_reservation_49`.
-- One-time price: `price_1UIfmRQ2TfGTSvqAtVHXRWEt` (4900 cents USD, quantity 1).
-- Payment Link: `plink_1UIfmtQ2TfGTSvqAOF27Vt8v`.
-- URL: https://buy.stripe.com/7sY7sN1wae664qz2x6bsc01
-- Annual-choice deposit product: `gosteady_reservation_49_annual_service`.
-- Annual-choice one-time deposit price: `price_1UIsJuQ2TfGTSvqAx2Ctqozi` ($49).
-- Annual-choice Payment Link: `plink_1UIsKMQ2TfGTSvqAa8gJbV1b`.
-- Annual-choice URL: https://buy.stripe.com/dRm3cxb6K2no6yH2x6bsc02
+- Product: `gosteady_founding_family_199_monthly`.
+- One-time price: `price_1UIwVtQ2TfGTSvqAnLz2pdLI` (4900 cents USD, quantity 1).
+- Payment Link: `plink_1UIwWXQ2TfGTSvqAuINb79n3`.
+- URL: https://buy.stripe.com/cNi14p4Im3rs3mv7Rqbsc03
+- Annual-choice deposit product: `gosteady_founding_family_199_annual`.
+- Annual-choice one-time deposit price: `price_1UIwWBQ2TfGTSvqAxNlmF0Vp` ($49).
+- Annual-choice Payment Link: `plink_1UIwWcQ2TfGTSvqACjfPpIAH`.
+- Annual-choice URL: https://buy.stripe.com/dRm6oJ1waaTU4qz0oYbsc04
 - Future service billing product: `gosteady_family_connect_service`.
 - Monthly recurring price: `price_1UIsIeQ2TfGTSvqA4AXf0teS` ($20/month).
 - Annual recurring price: `price_1UIsJ0Q2TfGTSvqAd1daXPm9` ($200/year).
@@ -40,12 +42,23 @@ disclosed after address submission, as required by the experiment design.
 Stripe hosts the payment form and the post-payment confirmation. There are no
 server secrets or card fields on the website. The link creates a customer for
 the reservation and includes the offer terms in Checkout and PaymentIntent
-metadata. No subscription or automatic $50 balance charge is created.
+metadata. No subscription or automatic $150 balance charge is created.
 Both deposit links charge $49 once. They record `service_plan`,
 `service_interval`, `service_price_usd`, and the future `service_price_id` on
 Checkout Sessions and PaymentIntents, and show plan-specific terms and confirmation.
 Recurring prices are catalog entries for activation; they are not attached to
 the deposit links and do not start a trial or subscription now.
+
+## Earlier reservations
+
+The earlier $99 device / $49 deposit / $50 balance offer has separate Stripe
+products, prices, and links. Its existing records are unchanged. Honor the
+terms recorded on each paid Session and PaymentIntent rather than applying
+the new website price to all customers. Earlier links:
+`plink_1UIfmtQ2TfGTSvqAOF27Vt8v` (monthly) and
+`plink_1UIsKMQ2TfGTSvqAa8gJbV1b` (annual).
+The earlier links are retired when the new offer is deployed. They remain in
+the server webhook allowlist for delayed payment notifications.
 
 ## Measurement and fulfillment
 
@@ -62,13 +75,13 @@ The website deliberately does not emit `Purchase` from a `reserved=1` URL.
 The website passes its `checkout_id` as Stripe's `client_reference_id`; match
 the Checkout Session to the corresponding Netlify address form. The separate
 `cupholder-v2-preorder-choice` form also includes `deposit_amount=49`,
-`balance_due=50`, and `offer_version=deposit_49_balance_50`. A payment can still
+`balance_due=150`, and `offer_version=founding_family_199_2026_09`. A payment can still
 proceed if that secondary analytics submission fails, so use Stripe as the
 paid-reservation record. Match by Checkout Session reference first, not by
 email alone (customers may change their email in Stripe).
 
 Before fulfillment, contact each customer, confirm the delivery address, and
-collect the $50 balance. Balance collection and the activation-based service
+collect the $150 balance. Balance collection and the activation-based service
 subscription are separate future operations; this reservation checkout does
 not schedule them. Apply the two-month benefit when creating service billing
 at activation using the selected recurring price, and review tax registration
@@ -113,3 +126,8 @@ The confirmation showed the annual terms. The test payment was fully refunded.
 The expanded automated suite passes 22 checks across both checkout routes,
 including plan changes, annual routing, attribution, step-specific analytics,
 back-navigation deduplication, analytics/storage failures, and local-preview safety.
+
+Founding Family price update: 52 automated checks pass, including both new live
+link IDs, $199 address values, legacy $99 attribution, and $49 paid-deposit
+values. Local desktop/mobile layouts and the live monthly/annual Stripe pages
+were checked; no new card payment was made for this pricing-only update.

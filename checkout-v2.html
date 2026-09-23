@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checkout — GoSteady Family Connect</title>
-  <meta name="description" content="Reserve GoSteady with a $49 refundable deposit toward the $99 device. First two months of service free after activation, then $20/month.">
+  <meta name="description" content="Reserve GoSteady with a $49 refundable deposit toward the $199 device. First two months of service free after activation, then $20/month.">
   <meta name="robots" content="noindex,nofollow">
 
   <!-- Meta Pixel Code -->
@@ -460,12 +460,12 @@
           </div>
           <div aria-live="polite" aria-atomic="true">
             <div class="plan-price-row"><span class="plan-price" id="plan-display-price">$20</span><span class="plan-unit" id="plan-display-unit">/ month</span></div>
-            <p class="plan-billing" id="plan-billing">Billed monthly after activation. Cancel any time.</p>
+            <p class="plan-billing" id="plan-billing">First two months free after activation, then billed monthly. Cancel any time.</p>
           </div>
           <p class="plan-includes"><span class="check" aria-hidden="true">✓</span> Cellular connectivity and access to the family portal</p>
         </fieldset>
         <button class="button" id="continue-delivery" type="button">Continue to delivery <span aria-hidden="true">→</span></button>
-        <p class="privacy-note">Your device is $99. Service starts when you activate it.</p>
+        <p class="privacy-note">Founding family device price: $199. Service starts after activation.</p>
       </section>
 
       <section id="shipping-step" class="hidden">
@@ -496,7 +496,9 @@
           <input type="hidden" name="utm_content" id="utm-content">
           <input type="hidden" name="utm_term" id="utm-term">
           <input type="hidden" name="fbclid" id="fbclid">
-          <input type="hidden" name="presented_price" value="99">
+          <input type="hidden" name="presented_price" value="199">
+          <input type="hidden" name="device_price" id="shipping-device-price" value="199">
+          <input type="hidden" name="offer_version" id="shipping-offer-version" value="founding_family_199_2026_09">
           <input type="hidden" name="monthly_price" value="20">
           <input type="hidden" name="currency" value="USD">
 
@@ -559,9 +561,9 @@
             <p class="preorder-copy">Our first customer units are estimated to ship in <strong>December 2026</strong>. Preorder today and your <strong>first two months of service are free</strong> after activation.</p>
 
             <ul class="preorder-details">
-              <li><span class="check">✓</span><span><strong>$49 refundable deposit today</strong> toward your $99 GoSteady</span></li>
+              <li><span class="check">✓</span><span><strong>$49 refundable deposit today</strong> toward your $199 GoSteady</span></li>
               <li><span class="check">✓</span><span><strong>No service charge until activation</strong>, then your first 2 months are free</span></li>
-              <li><span class="check">✓</span><span><strong>$50 remaining before shipment</strong>—we’ll contact you to complete payment</span></li>
+              <li><span class="check">✓</span><span><strong>$150 remaining before shipment</strong>—we’ll contact you to complete payment</span></li>
               <li><span class="check">✓</span><span>Fully refundable any time before shipment</span></li>
               <li><span class="check">✓</span><span id="preorder-service-terms">Then $20/month; cancel any time</span></li>
             </ul>
@@ -606,16 +608,16 @@
           <h2>GoSteady Family Connect</h2>
           <p>Quantity: 1</p>
         </div>
-        <div class="product-price">$99</div>
+        <div class="product-price">$199</div>
       </div>
       <hr class="summary-rule">
-      <div class="summary-line total"><span>Device total</span><span>$99</span></div>
+      <div class="summary-line total"><span>Founding family price</span><span>$199</span></div>
       <div class="summary-line hidden" id="deposit-summary"><span>Deposit due today</span><span>$49</span></div>
-      <div class="summary-line hidden" id="balance-summary"><span>Before shipment</span><span>$50</span></div>
+      <div class="summary-line hidden" id="balance-summary"><span>Before shipment</span><span>$150</span></div>
       <div class="summary-line promotion hidden" id="preorder-bonus"><span>Preorder bonus</span><span>First 2 months free</span></div>
       <div class="summary-line"><span id="service-summary-label">Monthly service</span><span id="monthly-price">$20/mo</span></div>
       <p class="summary-service-detail" id="service-summary-detail">Billed monthly · cancel any time</p>
-      <p class="subscription-note" id="service-billing-note">Service includes cellular connectivity and the family portal. Billed $20 monthly, starting at activation.</p>
+      <p class="subscription-note" id="service-billing-note">Your first two months of service are free after activation. Then $20 is billed monthly. Cancel any time.</p>
       <button class="edit-plan" id="edit-service-plan" type="button">Change service plan</button>
     </aside>
   </main>
@@ -641,10 +643,10 @@
     <input type="hidden" name="choice">
     <input type="hidden" name="funnel_version" value="v2">
     <input type="hidden" name="source_positioning" value="family_connect">
-    <input type="hidden" name="device_price" value="99">
+    <input type="hidden" name="device_price" value="199">
     <input type="hidden" name="deposit_amount" value="49">
-    <input type="hidden" name="balance_due" value="50">
-    <input type="hidden" name="offer_version" value="deposit_49_balance_50">
+    <input type="hidden" name="balance_due" value="150">
+    <input type="hidden" name="offer_version" value="founding_family_199_2026_09">
     <input type="hidden" name="monthly_price" value="20">
     <input type="hidden" name="preorder_bonus_months" value="2">
     <input type="hidden" name="currency" value="USD">
@@ -685,11 +687,12 @@
   </footer>
 
   <script>
-    // Live Stripe Payment Link: $49 deposit toward the $99 device; $50 before shipment.
+    // Live Stripe Payment Link: $49 deposit toward the $199 device; $150 before shipment.
     // Card details must always be collected by the payment provider, never this page.
-    const PAYMENT_LINK_URL = 'https://buy.stripe.com/7sY7sN1wae664qz2x6bsc01';
-    const ANNUAL_PAYMENT_LINK_URL = 'https://buy.stripe.com/dRm3cxb6K2no6yH2x6bsc02';
+    const PAYMENT_LINK_URL = 'https://buy.stripe.com/cNi14p4Im3rs3mv7Rqbsc03';
+    const ANNUAL_PAYMENT_LINK_URL = 'https://buy.stripe.com/dRm6oJ1waaTU4qz0oYbsc04';
     const FLOW_VERSION = 'plans_2026_09';
+    const OFFER_VERSION = 'founding_family_199_2026_09';
     const IS_LOCAL_PREVIEW = window.location.hostname !== 'gosteady.co';
     const params = new URLSearchParams(window.location.search);
     const checkoutId = window.crypto && crypto.randomUUID
@@ -699,7 +702,7 @@
     // Analytics must never interrupt address capture or the payment handoff.
     function track(name, metaEvent, metaData, customMetaEvent, eventId) {
       if (IS_LOCAL_PREVIEW) return;
-      const props = Object.assign({ service_plan: selectedPlan, flow_version: FLOW_VERSION }, metaData || {});
+      const props = Object.assign({ service_plan: selectedPlan, flow_version: FLOW_VERSION, offer_version: OFFER_VERSION, device_price: 199 }, metaData || {});
       try { if (typeof plausible === 'function') plausible(name, { props: props }); } catch (_) {}
       try {
         if (metaEvent && typeof fbq === 'function' && !metaOptOut()) {
@@ -724,7 +727,9 @@
         service_interval: plan === 'annual' ? 'year' : 'month',
         service_price: plan === 'annual' ? '200' : '20',
         annual_price: '200',
-        flow_version: FLOW_VERSION
+        flow_version: FLOW_VERSION,
+        offer_version: OFFER_VERSION,
+        device_price: '199'
       };
     }
     function attributionDetails() {
@@ -814,19 +819,16 @@
       document.getElementById('plan-display-price').textContent = annual ? '$200' : '$20';
       document.getElementById('plan-display-unit').textContent = annual ? '/ year' : '/ month';
       document.getElementById('plan-billing').textContent = annual
-        ? 'Equivalent to $16.67/month. Billed $200 yearly after activation.'
-        : 'Billed monthly after activation. Cancel any time.';
+        ? 'First two months free after activation, then $200/year. Equivalent to $16.67/month.'
+        : 'First two months free after activation, then billed monthly. Cancel any time.';
       document.getElementById('service-summary-label').textContent = annual ? 'Annual service' : 'Monthly service';
       monthlyPrice.textContent = (offerDisclosed ? 'Then ' : '') + (annual ? '$200/yr' : '$20/mo');
       document.getElementById('service-summary-detail').textContent = annual
         ? '$16.67/month equivalent · save $40 a year' : 'Billed monthly · cancel any time';
-      document.getElementById('service-billing-note').textContent = offerDisclosed
-        ? 'Your first two months of service are free after activation. ' + (annual
+      document.getElementById('service-billing-note').textContent =
+        'Your first two months of service are free after activation. ' + (annual
           ? 'Then $200 is billed for a full year of service. Cancel renewal any time.'
-          : 'Then $20 is billed monthly. Cancel any time.')
-        : 'Service includes cellular connectivity and the family portal. ' + (annual
-          ? 'Billed $200 yearly, starting at activation. Cancel renewal any time.'
-          : 'Billed $20 monthly, starting at activation.');
+          : 'Then $20 is billed monthly. Cancel any time.');
       document.getElementById('preorder-service-terms').textContent = annual
         ? 'Then $200/year; cancel renewal any time' : 'Then $20/month; cancel any time';
     }
@@ -875,7 +877,7 @@
     document.getElementById('edit-service-plan').addEventListener('click', function() { showCheckoutStep(0); });
     document.getElementById('back-to-delivery').addEventListener('click', function() { showCheckoutStep(1); });
     updateServicePlan();
-    trackOnce('V2 Plan Viewed', 'InitiateCheckout', { value: 99, currency: 'USD', content_name: 'GoSteady Family Connect' });
+    trackOnce('V2 Plan Viewed', 'InitiateCheckout', { value: 199, currency: 'USD', content_name: 'GoSteady Family Connect' });
 
 
     // ---- Post-decision question: appetite for professional monitoring (Tier 2 signal) ----
@@ -909,10 +911,10 @@
         monitoring_add_price: '25',
         funnel_version: 'v2',
         source_positioning: 'family_connect',
-        device_price: '99',
+        device_price: '199',
         deposit_amount: '49',
-        balance_due: '50',
-        offer_version: 'deposit_49_balance_50',
+        balance_due: '150',
+        offer_version: 'founding_family_199_2026_09',
         monthly_price: '20',
         stripe_session_id: params.get('session_id') || ''
       }));
@@ -953,7 +955,7 @@
       Object.entries(serviceDetails(submittedPlan)).forEach(function(entry) { data.set(entry[0], entry[1]); });
       submitForm(data).then(function() {
         try { sessionStorage.setItem('gosteady-checkout-email', data.get('email')); } catch (_) {}
-        trackOnce('V2 Details Submitted', 'AddShippingInfo', { value: 99, currency: 'USD' }, false, 'shipping_' + checkoutId);
+        trackOnce('V2 Details Submitted', 'AddShippingInfo', { value: 199, currency: 'USD' }, false, 'shipping_' + checkoutId);
         trackOnce(planEvent('Details Submitted'));
 
         shippingStep.classList.add('hidden');
@@ -987,10 +989,10 @@
         choice: choice,
         funnel_version: 'v2',
         source_positioning: 'family_connect',
-        device_price: '99',
+        device_price: '199',
         deposit_amount: '49',
-        balance_due: '50',
-        offer_version: 'deposit_49_balance_50',
+        balance_due: '150',
+        offer_version: 'founding_family_199_2026_09',
         monthly_price: '20',
         preorder_bonus_months: '2',
         currency: 'USD'

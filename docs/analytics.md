@@ -55,8 +55,8 @@ CTA links carry those parameters into checkout. Netlify stores them with the
 address and subsequent choice. Stripe's `client_reference_id` matches the
 Netlify `checkout_id`, linking paid deposits back to that source record.
 
-Browser event properties include plan and flow version but no email, address,
-or phone. Meta's AddShippingInfo event ID includes the random checkout identifier
+Browser event properties include plan, flow version, device price, and offer
+version but no email, address, or phone. Meta's AddShippingInfo event ID includes the random checkout identifier
 so browser and server submissions can be deduplicated. Analytics exceptions and
 unavailable browser storage cannot block form capture or payment. Nonproduction previews suppress
 checkout events, Meta initialization, form submissions, and payment navigation.
@@ -69,3 +69,19 @@ production. See [conversions-api.md](conversions-api.md) for the evidence and
 configuration. It reports gross successful $49 deposits; use Stripe for
 refunds and net paid reservations. Filter experiments from this deployment
 forward when comparing the new flow to the older address-first checkout.
+
+## Founding Family price baseline — September 23, 2026
+
+The active offer is `founding_family_199_2026_09`: $199 device, $49 deposit,
+$150 balance. Homepage landing, CTA, and checkout events include `device_price` and
+`offer_version`; Netlify address, choice, and survey records retain both.
+Stripe Session and PaymentIntent metadata use `device_price_usd=199` and
+`offer=founding_family_199_2026_09`. The funnel version stays `plans_2026_09`
+because its steps have not changed.
+
+Meta InitiateCheckout and AddShippingInfo use the $199 quoted device value.
+Purchase continues to use the actual $49 payment. Server events retain the
+older $99 quote for earlier forms and use Stripe metadata for paid offers.
+This is a new baseline, not a randomized price experiment. On Plausible Starter,
+compare deployment date ranges; use the saved offer metadata for precise
+cohorts, since Starter does not include custom-property reports.

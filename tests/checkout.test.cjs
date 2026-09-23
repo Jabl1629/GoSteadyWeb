@@ -77,12 +77,13 @@ for (const file of ['checkout.html', 'checkout-v2.html']) {
     const c = checkout(file);
     await c.act('continue-payment');
     const url = new URL(c.location.href);
-    assert.equal(url.origin+url.pathname, 'https://buy.stripe.com/7sY7sN1wae664qz2x6bsc01');
+    assert.equal(url.origin+url.pathname, 'https://buy.stripe.com/cNi14p4Im3rs3mv7Rqbsc03');
     assert.equal(url.searchParams.get('client_reference_id'), 'review-checkout-uuid');
     assert.equal(url.searchParams.get('prefilled_email'), 'review@example.com');
     assert.equal(c.requests[0].get('deposit_amount'), '49');
-    assert.equal(c.requests[0].get('balance_due'), '50');
-    assert.equal(c.requests[0].get('device_price'), '99');
+    assert.equal(c.requests[0].get('balance_due'), '150');
+    assert.equal(c.requests[0].get('device_price'), '199');
+    assert.equal(c.requests[0].get('offer_version'), 'founding_family_199_2026_09');
     assert.equal(c.requests[0].get('preorder_bonus_months'), '2');
     const event = c.events.find(e => e.includes('AddPaymentInfo'));
     assert.equal(event.at(-1).value, 49);
@@ -120,7 +121,7 @@ for (const file of ['checkout.html', 'checkout-v2.html']) {
     await c.act('back-to-plan');
     assert.equal(c.elements.get('plan-annual').checked, true);
     await c.act('continue-payment');
-    assert.equal(new URL(c.location.href).pathname, '/dRm3cxb6K2no6yH2x6bsc02');
+    assert.equal(new URL(c.location.href).pathname, '/dRm6oJ1waaTU4qz0oYbsc04');
     assert.equal(c.requests[0].get('service_plan'), 'annual');
     assert.equal(c.requests[0].get('service_price'), '200');
     assert.equal(c.requests.at(-1).get('service_interval'), 'year');
@@ -152,6 +153,10 @@ for (const file of ['checkout.html', 'checkout-v2.html']) {
     assert.equal(c.events.filter(e => e.includes('AddShippingInfo')).length, 1);
     const metaShipping = c.events.find(e => e.includes('AddShippingInfo'));
     assert.equal(metaShipping[4].eventID, 'shipping_review-checkout-uuid');
+    assert.equal(metaShipping[3].value, 199);
+    assert.equal(metaShipping[3].offer_version, 'founding_family_199_2026_09');
+    assert.equal(c.requests[0].get('device_price'), '199');
+    assert.equal(c.requests[0].get('offer_version'), 'founding_family_199_2026_09');
     assert.equal(count('Monthly Details Submitted'), 1);
     assert.equal(c.events.some(e => JSON.stringify(e).includes('review@example.com')), false);
   });
@@ -171,7 +176,7 @@ for (const file of ['checkout.html', 'checkout-v2.html']) {
     await c.act('plan-monthly', 'change');
     await c.act('continue-payment');
     await c.act('continue-payment');
-    assert.equal(new URL(c.location.href).pathname, '/7sY7sN1wae664qz2x6bsc01');
+    assert.equal(new URL(c.location.href).pathname, '/cNi14p4Im3rs3mv7Rqbsc03');
     assert.equal(c.requests.length, 1);
     assert.equal(c.requests[0].get('service_plan'), 'monthly');
     assert.equal(c.requests[0].get('service_price'), '20');

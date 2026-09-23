@@ -169,8 +169,14 @@
     .hero-copy h1 em { color: var(--forest-700); font-style: italic; font-weight: 400; white-space: nowrap; }
     .hero-dek { color: var(--muted); font-size: clamp(1.08rem, 1.7vw, 1.28rem); margin: 1.55rem 0 1.8rem; max-width: 38rem; }
     .hero-actions { align-items: center; display: flex; flex-wrap: wrap; gap: 1rem 1.25rem; }
-    .hero-price { color: var(--muted); font-size: .92rem; line-height: 1.45; }
-    .hero-price strong { color: var(--ink); display: block; font-size: 1.05rem; }
+    .hero-offer { width: 100%; }
+    .founding-label { color: var(--forest-700); font-size: .76rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+    .hero-price { align-items: center; display: flex; gap: 1rem; margin-top: .25rem; }
+    .hero-price strong { color: var(--ink); font-family: var(--serif); font-size: 2.75rem; font-weight: 500; line-height: 1.1; }
+    .retail-price { color: var(--muted); display: inline-flex; flex-direction: column; font-size: .7rem; line-height: 1.4; }
+    .retail-price s { font-size: 1.2rem; text-decoration-thickness: 1px; }
+    .hero-plan-note { color: var(--muted); font-size: .84rem; line-height: 1.65; margin: -.2rem 0 0; width: 100%; }
+    .hero-plan-note a { color: inherit; text-underline-offset: 3px; }
     .hero-watch { align-items: center; color: var(--forest-800); display: inline-flex; font-size: .9rem; font-weight: 700; gap: .65rem; margin-top: 1.35rem; min-height: 44px; text-decoration: none; }
     .hero-watch:hover { text-decoration: underline; text-underline-offset: 4px; }
     .hero-watch svg { flex: 0 0 auto; height: 26px; width: 26px; }
@@ -579,13 +585,23 @@
       padding: clamp(2rem, 5vw, 4rem);
     }
     .price-name { color: var(--forest-700); font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-    .price-amount { font-family: var(--serif); font-size: 4.6rem; line-height: 1; margin: .6rem 0 .3rem; }
-    .price-amount span { color: var(--muted); font-family: var(--sans); font-size: .85rem; font-weight: 500; }
-    .monthly { color: var(--muted); font-size: .94rem; margin-bottom: 1.5rem; }
+    .price-amount { align-items: center; display: flex; font-family: var(--serif); font-size: 4.6rem; gap: 1.25rem; line-height: 1; margin: 1rem 0 .65rem; }
+    .price-amount strong { font-weight: 500; }
+    .price-amount .retail-price { font-family: var(--sans); }
+    .device-price-note { color: var(--muted); font-size: .9rem; margin: 0 0 1.5rem; }
+    .device-includes { align-self: center; }
+    .device-includes h3 { font-size: 1.5rem; margin-bottom: 1.25rem; }
     .price-list { display: grid; gap: .8rem; list-style: none; margin: 0; padding: 0; }
     .price-list li { align-items: flex-start; display: flex; font-size: .88rem; gap: .65rem; }
     .price-list svg { color: var(--forest-700); flex: 0 0 auto; margin-top: .15rem; }
     .price-note { color: var(--muted); font-size: .75rem; margin: 1rem 0 0; }
+    .family-plan { background: var(--sage-075); border: 1px solid var(--line); border-radius: var(--radius-lg); display: grid; gap: 2rem 3rem; grid-template-columns: .9fr 1.1fr; margin: 1rem auto 0; max-width: 930px; padding: clamp(2rem, 5vw, 4rem); scroll-margin-top: 100px; }
+    .family-plan h3 { font-size: 1.65rem; }
+    .family-plan-price { font-size: 1.02rem; margin: .85rem 0 .45rem; }
+    .family-plan-price strong { color: var(--forest-800); font-weight: 700; }
+    .family-plan-copy { color: var(--muted); font-size: .85rem; margin: 0; }
+    .family-plan-bonus { color: var(--forest-800); font-size: .83rem; font-weight: 600; margin: 1rem 0 0; }
+    .family-plan .price-list { align-content: center; }
 
     .faq { background: var(--cream); scroll-margin-top: 76px; }
     .faq-grid { display: grid; gap: 0 4rem; grid-template-columns: 1fr 1fr; margin-top: 3rem; }
@@ -610,7 +626,7 @@
     @media (max-width: 980px) {
       .setup-watch { grid-template-columns: 1fr; margin-left: auto; margin-right: auto; max-width: 720px; }
       .nav-links > a:not(.button) { display: none; }
-      .hero-grid, .price-card { grid-template-columns: 1fr; }
+      .hero-grid, .price-card, .family-plan { grid-template-columns: 1fr; }
       .hero-copy { max-width: 720px; }
       .hero-visual { margin: 0 auto; width: min(100%, 620px); }
       .definition-grid { grid-template-areas: "text" "media" "features"; grid-template-columns: 1fr; max-width: 720px; row-gap: 2.25rem; text-align: center; }
@@ -719,11 +735,15 @@
           <h1>Peace of mind delivered <em>step-by-step.</em></h1>
           <p class="hero-dek">GoSteady provides proactive activity insights and safety features, all from a discreet and effortless walker attachment.</p>
           <div class="hero-actions">
+            <div class="hero-offer">
+              <span class="founding-label">Founding family pricing</span>
+              <div class="hero-price"><span class="retail-price"><s>$249</s>Planned retail</span><strong>$199</strong></div>
+            </div>
             <a class="button" data-v2-cta href="/checkoutV2">
-              Check availability
+              Get founding family pricing
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
-            <div class="hero-price"><strong>$99 device + $20/month</strong>Monthly service starts at activation</div>
+            <p class="hero-plan-note">Requires a <a href="#family-plan">Family Plan</a>: $20/month or $200/year.<br>Service starts after activation. Cellular included.</p>
           </div>
           <div class="proof-row" aria-label="Product highlights">
             <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>No wearable</span>
@@ -1018,25 +1038,39 @@
     <section class="pricing" id="pricing">
       <div class="wrap">
         <div class="section-head center">
-          <p class="eyebrow">Simple pricing</p>
-          <h2>One product. One family plan.</h2>
-          <p class="lede">One straightforward plan with cellular service included.</p>
+          <p class="eyebrow">Founding family pricing</p>
+          <h2>One device. One family plan.</h2>
+          <p class="lede">Be one of the first families to bring GoSteady home.</p>
         </div>
         <div class="price-card">
           <div>
-            <div class="price-name">GoSteady Family Connect</div>
-            <div class="price-amount">$99</div>
-            <div class="monthly">for the device, then <strong>$20/month after activation</strong></div>
-            <a class="button" data-v2-cta href="/checkoutV2">Check availability</a>
-            <p class="price-note">Monthly service can be cancelled any time. Availability details appear before payment.</p>
+            <div class="price-name">Your GoSteady device</div>
+            <div class="price-amount"><span class="retail-price"><s>$249</s>Planned retail</span><strong>$199</strong></div>
+            <p class="device-price-note">Founding family price. Family Plan required.</p>
+            <a class="button" data-v2-cta href="/checkoutV2">Get founding family pricing</a>
+            <p class="price-note">Availability and payment details appear before payment.</p>
           </div>
+          <div class="device-includes">
+          <h3>A familiar place for a little reassurance.</h3>
           <ul class="price-list">
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>GoSteady rollator attachment and tool-free clamp</span></li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>Built-in cellular connectivity</span></li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>Activity changes and quiet-day notifications</span></li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>Family portal with Care Circle sharing</span></li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>One-press family alert with GPS location</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>Quick start guide for an easy setup</span></li>
             <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>30-day returns after delivery</span></li>
+          </ul>
+          </div>
+        </div>
+        <div class="family-plan" id="family-plan">
+          <div>
+            <h3>The GoSteady Family Plan</h3>
+            <p class="family-plan-price"><strong>$20/month</strong> or <strong>$200/year</strong></p>
+            <p class="family-plan-copy">Required for connected features. Cellular data is included—no separate carrier plan or home Wi-Fi needed.</p>
+            <p class="family-plan-bonus">Founding families get their first two months free after activation.</p>
+            <p class="price-note">Then billed on your selected plan. Cancel monthly service or annual renewal any time.</p>
+          </div>
+          <ul class="price-list">
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>Activity updates and quiet-day notifications</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>Family portal with Care Circle sharing</span></li>
+            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>One-press family alerts with GPS location</span></li>
           </ul>
         </div>
       </div>
@@ -1094,8 +1128,9 @@
       pageParams.forEach(function(value, key) { checkoutUrl.searchParams.set(key, value); });
       link.href = checkoutUrl.pathname + checkoutUrl.search;
       link.addEventListener('click', function() {
-        plausible('V2 Primary CTA');
-        if (typeof fbq === 'function') fbq('trackCustom', 'V2PrimaryCTA');
+        const offer = { offer_version: 'founding_family_199_2026_09', device_price: 199 };
+        plausible('V2 Primary CTA', { props: offer });
+        if (typeof fbq === 'function') fbq('trackCustom', 'V2PrimaryCTA', offer);
       });
     });
 
@@ -1366,7 +1401,7 @@
       setupStepsList.forEach(function(step) { setupObserver.observe(step); });
     }
 
-    plausible('V2 Landing Viewed');
+    plausible('V2 Landing Viewed', { props: { offer_version: 'founding_family_199_2026_09', device_price: 199 } });
   </script>
 </body>
 </html>
