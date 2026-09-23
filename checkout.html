@@ -9,6 +9,7 @@
 
   <!-- Meta Pixel Code -->
   <script>
+  if (!/^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname)) {
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -19,6 +20,7 @@
   'https://connect.facebook.net/en_US/fbevents.js');
   fbq('init', '2755897781476379');
   fbq('track', 'PageView');
+  }
   </script>
   <!-- End Meta Pixel Code -->
   <script async src="https://plausible.io/js/pa-1F6kJUB_Hmb5mZjKjHFKC.js"></script>
@@ -371,6 +373,7 @@
       .order-summary { padding: 1.1rem; }
     }
   </style>
+  <link rel="stylesheet" href="/checkout-options.css">
 </head>
 <body>
   <noscript><img height="1" width="1" style="display:none" alt=""
@@ -392,16 +395,56 @@
   <main>
     <div class="checkout-main">
       <div class="progress" aria-label="Checkout progress">
-        <div class="progress-step active" id="delivery-progress"><span>1</span> Delivery</div>
+        <div class="progress-step active" id="plan-progress" aria-current="step"><span>1</span> Your plan</div>
         <div class="progress-line"></div>
-        <div class="progress-step" id="payment-progress"><span>2</span> Payment</div>
+        <div class="progress-step" id="delivery-progress"><span>2</span> Delivery</div>
+        <div class="progress-line"></div>
+        <div class="progress-step" id="payment-progress"><span>3</span> Payment</div>
       </div>
 
-      <section id="shipping-step">
-        <h1>Complete your order</h1>
+      <section id="plan-step" class="plan-step" aria-labelledby="plan-heading">
+        <p class="step-eyebrow">GoSteady Family Connect</p>
+        <div class="included-card">
+          <img class="packaging-image" src="/Assets/gosteady-packaging.png" width="600" height="600" alt="GoSteady box with the message Peace of mind, step by step">
+          <div>
+            <h1 class="step-eyebrow" id="plan-heading" tabindex="-1">What’s included</h1>
+            <ul class="included-list">
+              <li><span class="check" aria-hidden="true">✓</span><div><strong>GoSteady device</strong><small>The smart cupholder for their walker or rollator.</small></div></li>
+              <li><span class="check" aria-hidden="true">✓</span><div><strong>Quick start guide</strong><small>A few simple steps to get connected.</small></div></li>
+            </ul>
+          </div>
+        </div>
+
+        <fieldset class="plan-section">
+          <legend>Choose your service plan</legend>
+          <p class="plan-description">The same reassurance. Two ways to pay.</p>
+          <div class="billing-switch">
+            <input class="plan-radio" id="plan-monthly" type="radio" name="service-plan" value="monthly" checked>
+            <label class="plan-option" for="plan-monthly">Pay monthly</label>
+            <input class="plan-radio" id="plan-annual" type="radio" name="service-plan" value="annual">
+            <label class="plan-option" for="plan-annual">Pay annually <span class="saving-badge">Save $40 / year</span></label>
+          </div>
+          <div aria-live="polite" aria-atomic="true">
+            <div class="plan-price-row"><span class="plan-price" id="plan-display-price">$20</span><span class="plan-unit" id="plan-display-unit">/ month</span></div>
+            <p class="plan-billing" id="plan-billing">Billed monthly after activation. Cancel any time.</p>
+          </div>
+          <p class="plan-includes"><span class="check" aria-hidden="true">✓</span> Cellular connectivity and access to the family portal</p>
+        </fieldset>
+        <button class="button" id="continue-delivery" type="button">Continue to delivery <span aria-hidden="true">→</span></button>
+        <p class="privacy-note">Your device is $99. Service starts when you activate it.</p>
+      </section>
+
+      <section id="shipping-step" class="hidden">
+        <button class="back-link" id="back-to-plan" type="button">← Back to your plan</button>
+        <h1>Your delivery details</h1>
         <p class="intro">Enter your contact and delivery information to continue to secure payment.</p>
 
         <form id="shipping-form" name="cupholder-shipping-intent" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="service_plan" id="shipping-service-plan">
+          <input type="hidden" name="service_interval" id="shipping-service-interval">
+          <input type="hidden" name="service_price" id="shipping-service-price">
+          <input type="hidden" name="annual_price" id="shipping-annual-price">
+          <input type="hidden" name="flow_version" id="shipping-flow-version">
           <input type="hidden" name="form-name" value="cupholder-shipping-intent">
           <input type="hidden" name="bot-field">
           <input type="hidden" name="checkout_id" id="checkout-id">
@@ -463,6 +506,7 @@
       </section>
 
       <section id="preorder-step" class="hidden" aria-live="polite">
+        <button class="back-link" id="back-to-delivery" type="button">← Back to delivery</button>
         <div class="preorder-panel">
           <div class="preorder-banner">
             <strong>
@@ -472,14 +516,14 @@
           </div>
           <div class="preorder-content">
             <h1>GoSteady is available for preorder.</h1>
-            <p class="preorder-copy">Our first production run is estimated to ship in <strong>December 2026</strong>. Preorder today and your <strong>first two months of service are free</strong>—a $40 value.</p>
+            <p class="preorder-copy">Our first production run is estimated to ship in <strong>December 2026</strong>. Preorder today and your <strong>first two months of service are free</strong> after activation.</p>
 
             <ul class="preorder-details">
               <li><span class="check">✓</span><span><strong>$49 refundable deposit today</strong> toward your $99 GoSteady</span></li>
               <li><span class="check">✓</span><span><strong>First 2 months of service free</strong> after activation</span></li>
               <li><span class="check">✓</span><span><strong>$50 remaining before shipment</strong>—we’ll contact you to complete payment</span></li>
               <li><span class="check">✓</span><span>Fully refundable any time before shipment</span></li>
-              <li><span class="check">✓</span><span>Then $20/month; cancel any time</span></li>
+              <li><span class="check">✓</span><span id="preorder-service-terms">Then $20/month; cancel any time</span></li>
             </ul>
 
             <button class="button" id="continue-payment" type="button">Reserve for $49</button>
@@ -499,6 +543,7 @@
     </div>
 
     <aside class="order-summary" aria-label="Order summary">
+      <p class="summary-label">Your GoSteady</p>
       <div class="product-row">
         <div class="product-image">
           <img src="cup-detail.jpg" alt="GoSteady smart cupholder mounted on a rollator">
@@ -514,13 +559,28 @@
       <div class="summary-line hidden" id="deposit-summary"><span>Deposit due today</span><span>$49</span></div>
       <div class="summary-line hidden" id="balance-summary"><span>Before shipment</span><span>$50</span></div>
       <div class="summary-line promotion hidden" id="preorder-bonus"><span>Preorder bonus</span><span>First 2 months free</span></div>
-      <div class="summary-line"><span>Monthly service</span><span id="monthly-price">$20/mo</span></div>
-      <p class="subscription-note">The monthly service includes cellular connectivity and the family portal. It starts when you activate your GoSteady—not while it is shipping.</p>
+      <div class="summary-line"><span id="service-summary-label">Monthly service</span><span id="monthly-price">$20/mo</span></div>
+      <p class="summary-service-detail" id="service-summary-detail">Billed monthly · cancel any time</p>
+      <p class="subscription-note" id="service-billing-note">Service includes cellular connectivity and the family portal. Billed $20 monthly, starting at activation.</p>
+      <button class="edit-plan" id="edit-service-plan" type="button">Change service plan</button>
     </aside>
   </main>
 
   <!-- Static form declaration lets Netlify register second-step choices. -->
   <form name="cupholder-preorder-choice" method="POST" data-netlify="true" class="hidden" aria-hidden="true">
+          <input type="hidden" name="service_plan">
+          <input type="hidden" name="service_interval">
+          <input type="hidden" name="service_price">
+          <input type="hidden" name="annual_price">
+          <input type="hidden" name="flow_version">
+    <input type="hidden" name="source_url">
+    <input type="hidden" name="referrer">
+    <input type="hidden" name="utm_source">
+    <input type="hidden" name="utm_medium">
+    <input type="hidden" name="utm_campaign">
+    <input type="hidden" name="utm_content">
+    <input type="hidden" name="utm_term">
+    <input type="hidden" name="fbclid">
     <input type="hidden" name="form-name" value="cupholder-preorder-choice">
     <input type="hidden" name="checkout_id">
     <input type="hidden" name="email">
@@ -542,15 +602,48 @@
     // Live Stripe Payment Link: $49 deposit toward the $99 device; $50 before shipment.
     // Card details must always be collected by the payment provider, never this page.
     const PAYMENT_LINK_URL = 'https://buy.stripe.com/7sY7sN1wae664qz2x6bsc01';
+    const ANNUAL_PAYMENT_LINK_URL = 'https://buy.stripe.com/dRm3cxb6K2no6yH2x6bsc02';
+    const FLOW_VERSION = 'plans_2026_09';
     const IS_LOCAL_PREVIEW = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname);
     const params = new URLSearchParams(window.location.search);
     const checkoutId = window.crypto && crypto.randomUUID
       ? crypto.randomUUID()
       : 'gs-' + Date.now() + '-' + Math.random().toString(16).slice(2);
 
-    function track(name, metaEvent, metaData) {
-      if (typeof plausible === 'function') plausible(name);
-      if (metaEvent && typeof fbq === 'function') fbq('track', metaEvent, metaData || {});
+    // Analytics must never interrupt address capture or the payment handoff.
+    function track(name, metaEvent, metaData, customMetaEvent) {
+      if (IS_LOCAL_PREVIEW) return;
+      const props = Object.assign({ service_plan: selectedPlan, flow_version: FLOW_VERSION }, metaData || {});
+      try { if (typeof plausible === 'function') plausible(name, { props: props }); } catch (_) {}
+      try {
+        if (metaEvent && typeof fbq === 'function')
+          fbq(customMetaEvent ? 'trackCustom' : 'track', metaEvent, Object.assign({}, props, metaData || {}));
+      } catch (_) {}
+    }
+    const trackedMilestones = new Set();
+    function trackOnce(name, metaEvent, metaData, customMetaEvent) {
+      if (trackedMilestones.has(name)) return;
+      trackedMilestones.add(name);
+      track(name, metaEvent, metaData, customMetaEvent);
+    }
+    function planEvent(milestone) {
+      return '' + (selectedPlan === 'annual' ? 'Annual ' : 'Monthly ') + milestone;
+    }
+    function serviceDetails(plan) {
+      return {
+        service_plan: plan,
+        service_interval: plan === 'annual' ? 'year' : 'month',
+        service_price: plan === 'annual' ? '200' : '20',
+        annual_price: '200',
+        flow_version: FLOW_VERSION
+      };
+    }
+    function attributionDetails() {
+      const data = { source_url: window.location.href, referrer: document.referrer };
+      ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid'].forEach(function(key) {
+        data[key] = params.get(key) || '';
+      });
+      return data;
     }
 
     function encodeForm(data) {
@@ -581,7 +674,6 @@
       if (input) input.value = params.get(key) || '';
     });
 
-    track('Checkout Started', 'InitiateCheckout', { value: 99, currency: 'USD', content_name: 'GoSteady Smart Walker Attachment' });
 
     const shippingForm = document.getElementById('shipping-form');
     const shippingSubmit = document.getElementById('shipping-submit');
@@ -593,6 +685,90 @@
     const preorderBonus = document.getElementById('preorder-bonus');
     const monthlyPrice = document.getElementById('monthly-price');
 
+    // Keep displayed terms, form records, and the selected Stripe link aligned.
+    const planStep = document.getElementById('plan-step');
+    const planProgress = document.getElementById('plan-progress');
+    const monthlyOption = document.getElementById('plan-monthly');
+    const annualOption = document.getElementById('plan-annual');
+    let selectedPlan = 'monthly';
+    let offerDisclosed = false;
+    const planStorageKey = 'gosteady-service-plan';
+    let openingPayment = false;
+
+    function updateServicePlan() {
+      const annual = selectedPlan === 'annual';
+      monthlyOption.checked = !annual;
+      annualOption.checked = annual;
+      Object.entries(serviceDetails(selectedPlan)).forEach(function(entry) {
+        document.getElementById('shipping-' + entry[0].replaceAll('_', '-')).value = entry[1];
+      });
+      document.getElementById('plan-display-price').textContent = annual ? '$200' : '$20';
+      document.getElementById('plan-display-unit').textContent = annual ? '/ year' : '/ month';
+      document.getElementById('plan-billing').textContent = annual
+        ? 'Equivalent to $16.67/month. Billed $200 yearly after activation.'
+        : 'Billed monthly after activation. Cancel any time.';
+      document.getElementById('service-summary-label').textContent = annual ? 'Annual service' : 'Monthly service';
+      monthlyPrice.textContent = (offerDisclosed ? 'Then ' : '') + (annual ? '$200/yr' : '$20/mo');
+      document.getElementById('service-summary-detail').textContent = annual
+        ? '$16.67/month equivalent · save $40 a year' : 'Billed monthly · cancel any time';
+      document.getElementById('service-billing-note').textContent = offerDisclosed
+        ? 'Your first two months of service are free after activation. ' + (annual
+          ? 'Then $200 is billed for a full year of service. Cancel renewal any time.'
+          : 'Then $20 is billed monthly. Cancel any time.')
+        : 'Service includes cellular connectivity and the family portal. ' + (annual
+          ? 'Billed $200 yearly, starting at activation. Cancel renewal any time.'
+          : 'Billed $20 monthly, starting at activation.');
+      document.getElementById('preorder-service-terms').textContent = annual
+        ? 'Then $200/year; cancel renewal any time' : 'Then $20/month; cancel any time';
+    }
+
+    function showCheckoutStep(step) {
+      if (openingPayment || shippingSubmit.disabled) return;
+      const stages = [planStep, shippingStep, preorderStep];
+      const indicators = [planProgress, deliveryProgress, paymentProgress];
+      stages.forEach(function(section, index) {
+        if (index === step) section.classList.remove('hidden');
+        else section.classList.add('hidden');
+      });
+      indicators.forEach(function(indicator, index) {
+        if (index === step) {
+          indicator.classList.add('active');
+          indicator.setAttribute('aria-current', 'step');
+        } else {
+          indicator.classList.remove('active');
+          indicator.removeAttribute('aria-current');
+        }
+      });
+      const heading = stages[step].querySelector('h1');
+      if (heading) { heading.setAttribute('tabindex', '-1'); heading.focus({ preventScroll: true }); }
+      if (step === 1) trackOnce('Checkout Started', 'CheckoutDeliveryViewed', {}, true);
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    try {
+      if (sessionStorage.getItem(planStorageKey) === 'annual') selectedPlan = 'annual';
+    } catch (_) { /* Selection still works when browser storage is unavailable. */ }
+    [monthlyOption, annualOption].forEach(function(option) {
+      option.addEventListener('change', function() {
+        if (!option.checked || openingPayment) return;
+        selectedPlan = option.value;
+        try { sessionStorage.setItem(planStorageKey, selectedPlan); } catch (_) {}
+        updateServicePlan();
+        track('Service Plan Changed', 'ServicePlanChanged', {}, true);
+      });
+    });
+    document.getElementById('continue-delivery').addEventListener('click', function() {
+      if (openingPayment) return;
+      trackOnce(planEvent('Plan Continued'), 'ServicePlanSelected', {}, true);
+      showCheckoutStep(1);
+    });
+    document.getElementById('back-to-plan').addEventListener('click', function() { showCheckoutStep(0); });
+    document.getElementById('edit-service-plan').addEventListener('click', function() { showCheckoutStep(0); });
+    document.getElementById('back-to-delivery').addEventListener('click', function() { showCheckoutStep(1); });
+    updateServicePlan();
+    trackOnce('Plan Viewed', 'InitiateCheckout', { value: 99, currency: 'USD', content_name: 'GoSteady Family Connect' });
+
+
     shippingForm.addEventListener('submit', function(event) {
       event.preventDefault();
       shippingError.classList.remove('show');
@@ -600,9 +776,12 @@
       shippingSubmit.textContent = 'Saving…';
 
       const data = new FormData(shippingForm);
+      const submittedPlan = selectedPlan;
+      Object.entries(serviceDetails(submittedPlan)).forEach(function(entry) { data.set(entry[0], entry[1]); });
       submitForm(data).then(function() {
-        sessionStorage.setItem('gosteady-checkout-email', data.get('email'));
-        track('Shipping Completed', 'AddShippingInfo', { value: 99, currency: 'USD' });
+        try { sessionStorage.setItem('gosteady-checkout-email', data.get('email')); } catch (_) {}
+        trackOnce('Shipping Completed', 'AddShippingInfo', { value: 99, currency: 'USD' });
+        trackOnce(planEvent('Details Submitted'));
 
         shippingStep.classList.add('hidden');
         preorderStep.classList.remove('hidden');
@@ -611,9 +790,12 @@
         preorderBonus.classList.remove('hidden');
         document.getElementById('deposit-summary').classList.remove('hidden');
         document.getElementById('balance-summary').classList.remove('hidden');
-        monthlyPrice.textContent = 'Then $20/mo';
+        offerDisclosed = true;
+        updateServicePlan();
+        shippingSubmit.disabled = false;
+        showCheckoutStep(2);
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        track('Preorder Disclosed');
+        trackOnce('Preorder Disclosed');
       }).catch(function() {
         shippingError.classList.add('show');
       }).finally(function() {
@@ -625,6 +807,8 @@
     function submitChoice(choice) {
       return submitForm(new URLSearchParams({
         'form-name': 'cupholder-preorder-choice',
+        ...attributionDetails(),
+        ...serviceDetails(selectedPlan),
         checkout_id: checkoutId,
         email: document.getElementById('email').value,
         choice: choice,
@@ -642,23 +826,33 @@
       const button = this;
       const paymentError = document.getElementById('payment-error');
       paymentError.classList.remove('show');
+      if (openingPayment) return;
+      if (IS_LOCAL_PREVIEW) {
+        paymentError.textContent = 'Preview complete. No payment was taken and no reservation was placed.';
+        paymentError.classList.add('show');
+        return;
+      }
       button.disabled = true;
       button.textContent = 'Opening secure payment…';
+      openingPayment = true;
+      const selectedPaymentLink = selectedPlan === 'annual' ? ANNUAL_PAYMENT_LINK_URL : PAYMENT_LINK_URL;
 
       submitChoice('continue_to_payment').catch(function() {
         // Do not block checkout if analytics capture fails.
       }).finally(function() {
         track('Preorder Accepted');
 
-        if (!/^https:\/\/buy\.stripe\.com\/(?!test_)[A-Za-z0-9]+$/.test(PAYMENT_LINK_URL)) {
+        if (!/^https:\/\/buy\.stripe\.com\/(?!test_)[A-Za-z0-9]+$/.test(selectedPaymentLink)) {
           paymentError.classList.add('show');
+          openingPayment = false;
           button.disabled = false;
           button.textContent = 'Reserve for $49';
           return;
         }
 
         track('Deposit Checkout Opened', 'AddPaymentInfo', { value: 49, currency: 'USD', content_name: 'GoSteady refundable deposit' });
-        const paymentUrl = new URL(PAYMENT_LINK_URL);
+        trackOnce(planEvent('Deposit Checkout Opened'));
+        const paymentUrl = new URL(selectedPaymentLink);
         paymentUrl.searchParams.set('prefilled_email', document.getElementById('email').value);
         paymentUrl.searchParams.set('client_reference_id', checkoutId);
         window.location.href = paymentUrl.toString();
@@ -674,6 +868,7 @@
         track('Availability Notify Requested', 'Lead', { value: 0, currency: 'USD' });
         preorderStep.classList.add('hidden');
         document.getElementById('notify-confirmation').classList.remove('hidden');
+        document.getElementById('edit-service-plan').classList.add('hidden');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }).catch(function() {
         document.getElementById('payment-error').textContent = "We couldn't save your choice. Please try again.";

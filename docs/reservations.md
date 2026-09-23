@@ -1,6 +1,6 @@
 # GoSteady reservation offer
 
-Updated September 22, 2026.
+Updated September 23, 2026.
 
 ## Customer offer
 
@@ -8,11 +8,14 @@ Updated September 22, 2026.
 - Refundable deposit collected now: $49 USD.
 - Remaining balance: $50 USD, collected before shipment after contacting the customer.
 - Estimated shipping: December 2026.
-- First two months of service are free after activation, then $20/month; cancel any time.
+- First two months of service are free after activation, then the selected plan:
+  $20/month (cancel any time) or $200/year (cancel renewal any time).
+- Annual billing starts after the two free months and covers a full year.
+  $200/year is approximately $16.67/month and saves $40 against 12 monthly payments.
 - Reservation payments are fully refundable before shipment. Contact: support@gosteady.co.
 
-The homepage and address-entry step still show the $99 device price and $20
-monthly service price. The preorder status, deposit split, and bonus are
+Checkout begins with box contents and monthly/annual service selection. The
+device remains $99. The preorder status, deposit split, and bonus are
 disclosed after address submission, as required by the experiment design.
 
 ## Live Stripe configuration
@@ -22,6 +25,13 @@ disclosed after address submission, as required by the experiment design.
 - One-time price: `price_1UIfmRQ2TfGTSvqAtVHXRWEt` (4900 cents USD, quantity 1).
 - Payment Link: `plink_1UIfmtQ2TfGTSvqAOF27Vt8v`.
 - URL: https://buy.stripe.com/7sY7sN1wae664qz2x6bsc01
+- Annual-choice deposit product: `gosteady_reservation_49_annual_service`.
+- Annual-choice one-time deposit price: `price_1UIsJuQ2TfGTSvqAx2Ctqozi` ($49).
+- Annual-choice Payment Link: `plink_1UIsKMQ2TfGTSvqAa8gJbV1b`.
+- Annual-choice URL: https://buy.stripe.com/dRm3cxb6K2no6yH2x6bsc02
+- Future service billing product: `gosteady_family_connect_service`.
+- Monthly recurring price: `price_1UIsIeQ2TfGTSvqA4AXf0teS` ($20/month).
+- Annual recurring price: `price_1UIsJ0Q2TfGTSvqAd1daXPm9` ($200/year).
 - The previous $99 live link `plink_1UIfdwQ2TfGTSvqAvsDU5Tqw` is inactive.
 - Live charges and payouts were enabled with no verification requirements outstanding.
 - Automatic tax is off; no live tax registrations were recorded when checked.
@@ -31,6 +41,11 @@ Stripe hosts the payment form and the post-payment confirmation. There are no
 server secrets or card fields on the website. The link creates a customer for
 the reservation and includes the offer terms in Checkout and PaymentIntent
 metadata. No subscription or automatic $50 balance charge is created.
+Both deposit links charge $49 once. They record `service_plan`,
+`service_interval`, `service_price_usd`, and the future `service_price_id` on
+Checkout Sessions and PaymentIntents, and show plan-specific terms and confirmation.
+Recurring prices are catalog entries for activation; they are not attached to
+the deposit links and do not start a trial or subscription now.
 
 ## Measurement and fulfillment
 
@@ -40,7 +55,7 @@ legacy equivalent) and Meta `AddPaymentInfo` describe the $49 checkout handoff,
 not a successful payment.
 
 Count paid deposits from successful, non-refunded **live Stripe payments** for
-this payment link. Wait for successful payment if an asynchronous payment
+these two payment links. Wait for successful payment if an asynchronous payment
 method is used. An opened/completed checkout alone is not sufficient evidence.
 The website deliberately does not emit `Purchase` from a `reserved=1` URL.
 
@@ -56,7 +71,16 @@ Before fulfillment, contact each customer, confirm the delivery address, and
 collect the $50 balance. Balance collection and the activation-based service
 subscription are separate future operations; this reservation checkout does
 not schedule them. Apply the two-month benefit when creating service billing
-at activation. Honor refund requests through Stripe before shipment.
+at activation using the selected recurring price, and review tax registration
+and collection before enabling service billing. Automatic tax remains off.
+Honor refund requests through Stripe before shipment.
+
+All Netlify checkout forms now declare and save `service_plan`, `service_interval`,
+`service_price`, `annual_price`, and `flow_version=plans_2026_09`. Choice and
+monitoring forms also retain source URL, referrer, UTMs, and fbclid. A customer
+can change plans after first submitting their address; the later choice record
+and Stripe Session contain their final choice. See [analytics.md](analytics.md)
+for the updated event map. Local previews do not submit forms or open payments.
 
 The optional monitoring survey still appears after the notification-only
 choice. Paid customers stay on Stripe's confirmation page, so the website's
@@ -69,3 +93,21 @@ Run `node --test tests/checkout.test.cjs` to verify the two checkout routes,
 failure behavior, deposit metadata, live-link guard, and rejection of fake paid
 return URLs. Browser QA covered address entry, the disclosed offer, and the
 live Stripe handoff with the correct $49 total. No real payment was made during QA.
+
+Sandbox card payments, declines, 3D Secure cancellation/retry, and full refunds
+were also tested successfully. See [the sandbox QA record](stripe-sandbox-qa-2026-09-22.md)
+for results, test object IDs, and scope limits.
+
+September 23 annual-plan verification: hosted sandbox Checkout captured exactly
+$49 with `service_plan=annual`, `service_interval=year`, and `service_price_usd=200`
+on both Session and PaymentIntent. No subscription or future-use setup was created.
+The confirmation showed the annual terms. The test payment was fully refunded.
+
+- Sandbox link: `plink_1UIsP0L5ztGHn39eKvnfBhDD`.
+- Session: `cs_test_a1VaUdJ0RGMsBr5CtZvYrxQI1DCUcXceyfm4HMPWj4A3k7EnSAjQKlLEou`.
+- PaymentIntent: `pi_3UIsQoL5ztGHn39e0mAC9Vcp`.
+- Refund: `re_3UIsQoL5ztGHn39e0BAJTXim` (`succeeded`, $49).
+
+The expanded automated suite passes 22 checks across both checkout routes,
+including plan changes, annual routing, attribution, step-specific analytics,
+back-navigation deduplication, analytics/storage failures, and local-preview safety.
