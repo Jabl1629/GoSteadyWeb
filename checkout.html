@@ -475,16 +475,17 @@
             <p class="preorder-copy">Our first production run is estimated to ship in <strong>December 2026</strong>. Preorder today and your <strong>first two months of service are free</strong>—a $40 value.</p>
 
             <ul class="preorder-details">
-              <li><span class="check">✓</span><span><strong>$99 due today</strong> to reserve your GoSteady</span></li>
+              <li><span class="check">✓</span><span><strong>$49 refundable deposit today</strong> toward your $99 GoSteady</span></li>
               <li><span class="check">✓</span><span><strong>First 2 months of service free</strong> after activation</span></li>
+              <li><span class="check">✓</span><span><strong>$50 remaining before shipment</strong>—we’ll contact you to complete payment</span></li>
               <li><span class="check">✓</span><span>Fully refundable any time before shipment</span></li>
               <li><span class="check">✓</span><span>Then $20/month; cancel any time</span></li>
             </ul>
 
-            <button class="button" id="continue-payment" type="button">Reserve for $99</button>
+            <button class="button" id="continue-payment" type="button">Reserve for $49</button>
             <button class="button button-secondary" id="notify-button" type="button">Email me when it's ready to ship</button>
-            <p class="choice-note">You won't be charged unless you continue to the secure payment page and complete your preorder.</p>
-            <div class="error-message" id="payment-error" role="alert">Secure payment is not connected yet. Your interest has been saved, but no payment was taken.</div>
+            <p class="choice-note">You won't be charged unless you continue to the secure payment page and pay your $49 deposit.</p>
+            <div class="error-message" id="payment-error" role="alert">Secure payment is temporarily unavailable. No payment was taken. Please try again or contact support@gosteady.co.</div>
           </div>
         </div>
       </section>
@@ -509,7 +510,9 @@
         <div class="product-price">$99</div>
       </div>
       <hr class="summary-rule">
-      <div class="summary-line total"><span>Device</span><span>$99</span></div>
+      <div class="summary-line total"><span>Device total</span><span>$99</span></div>
+      <div class="summary-line hidden" id="deposit-summary"><span>Deposit due today</span><span>$49</span></div>
+      <div class="summary-line hidden" id="balance-summary"><span>Before shipment</span><span>$50</span></div>
       <div class="summary-line promotion hidden" id="preorder-bonus"><span>Preorder bonus</span><span>First 2 months free</span></div>
       <div class="summary-line"><span>Monthly service</span><span id="monthly-price">$20/mo</span></div>
       <p class="subscription-note">The monthly service includes cellular connectivity and the family portal. It starts when you activate your GoSteady—not while it is shipping.</p>
@@ -523,6 +526,9 @@
     <input type="hidden" name="email">
     <input type="hidden" name="choice">
     <input type="hidden" name="device_price" value="99">
+    <input type="hidden" name="deposit_amount" value="49">
+    <input type="hidden" name="balance_due" value="50">
+    <input type="hidden" name="offer_version" value="deposit_49_balance_50">
     <input type="hidden" name="monthly_price" value="20">
     <input type="hidden" name="preorder_bonus_months" value="2">
     <input type="hidden" name="currency" value="USD">
@@ -533,9 +539,9 @@
   </footer>
 
   <script>
-    // Stripe sandbox Payment Link for GoSteady's $99 one-time preorder price.
+    // Live Stripe Payment Link: $49 deposit toward the $99 device; $50 before shipment.
     // Card details must always be collected by the payment provider, never this page.
-    const PAYMENT_LINK_URL = 'https://buy.stripe.com/test_4gMfZigvC7uK0qi8GRcMM00';
+    const PAYMENT_LINK_URL = 'https://buy.stripe.com/7sY7sN1wae664qz2x6bsc01';
     const IS_LOCAL_PREVIEW = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname);
     const params = new URLSearchParams(window.location.search);
     const checkoutId = window.crypto && crypto.randomUUID
@@ -603,6 +609,8 @@
         deliveryProgress.classList.remove('active');
         paymentProgress.classList.add('active');
         preorderBonus.classList.remove('hidden');
+        document.getElementById('deposit-summary').classList.remove('hidden');
+        document.getElementById('balance-summary').classList.remove('hidden');
         monthlyPrice.textContent = 'Then $20/mo';
         window.scrollTo({ top: 0, behavior: 'smooth' });
         track('Preorder Disclosed');
@@ -621,6 +629,9 @@
         email: document.getElementById('email').value,
         choice: choice,
         device_price: '99',
+        deposit_amount: '49',
+        balance_due: '50',
+        offer_version: 'deposit_49_balance_50',
         monthly_price: '20',
         preorder_bonus_months: '2',
         currency: 'USD'
@@ -639,13 +650,14 @@
       }).finally(function() {
         track('Preorder Accepted');
 
-        if (!PAYMENT_LINK_URL) {
+        if (!/^https:\/\/buy\.stripe\.com\/(?!test_)[A-Za-z0-9]+$/.test(PAYMENT_LINK_URL)) {
           paymentError.classList.add('show');
           button.disabled = false;
-          button.textContent = 'Reserve for $99';
+          button.textContent = 'Reserve for $49';
           return;
         }
 
+        track('Deposit Checkout Opened', 'AddPaymentInfo', { value: 49, currency: 'USD', content_name: 'GoSteady refundable deposit' });
         const paymentUrl = new URL(PAYMENT_LINK_URL);
         paymentUrl.searchParams.set('prefilled_email', document.getElementById('email').value);
         paymentUrl.searchParams.set('client_reference_id', checkoutId);

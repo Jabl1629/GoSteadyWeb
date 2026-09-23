@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checkout — GoSteady Family Connect</title>
-  <meta name="description" content="Reserve GoSteady Family Connect for $99 plus $20 per month after activation.">
+  <meta name="description" content="Reserve GoSteady with a $49 refundable deposit toward the $99 device. First two months of service free after activation, then $20/month.">
   <meta name="robots" content="noindex,nofollow">
 
   <!-- Meta Pixel Code -->
@@ -508,21 +508,22 @@
           </div>
           <div class="preorder-content">
             <h1>GoSteady is in final development.</h1>
-            <p class="preorder-copy">We're preparing our first customer units for <strong>early 2027</strong>. Preorder today and your <strong>first two months of service are free</strong> after activation—a $40 value.</p>
+            <p class="preorder-copy">Our first customer units are estimated to ship in <strong>December 2026</strong>. Preorder today and your <strong>first two months of service are free</strong> after activation—a $40 value.</p>
 
             <ul class="preorder-details">
-              <li><span class="check">✓</span><span><strong>$99 due today</strong> to reserve your GoSteady</span></li>
+              <li><span class="check">✓</span><span><strong>$49 refundable deposit today</strong> toward your $99 GoSteady</span></li>
               <li><span class="check">✓</span><span><strong>No monthly charge until activation</strong>, then your first 2 months are free</span></li>
+              <li><span class="check">✓</span><span><strong>$50 remaining before shipment</strong>—we’ll contact you to complete payment</span></li>
               <li><span class="check">✓</span><span>Fully refundable any time before shipment</span></li>
               <li><span class="check">✓</span><span>Then $20/month; cancel any time</span></li>
             </ul>
 
             <p class="choice-note"><strong>Important:</strong> Family alert and alert-only location are planned features still undergoing validation. GoSteady does not contact 911 or provide professional emergency monitoring.</p>
 
-            <button class="button" id="continue-payment" type="button">Reserve for $99</button>
+            <button class="button" id="continue-payment" type="button">Reserve for $49</button>
             <button class="button button-secondary" id="notify-button" type="button">Keep me updated instead</button>
-            <p class="choice-note">You won't be charged unless you continue to the secure payment page and complete your preorder.</p>
-            <div class="error-message" id="payment-error" role="alert">Secure payment is not connected yet. Your interest has been saved, but no payment was taken.</div>
+            <p class="choice-note">You won't be charged unless you continue to the secure payment page and pay your $49 deposit.</p>
+            <div class="error-message" id="payment-error" role="alert">Secure payment is temporarily unavailable. No payment was taken. Please try again or contact support@gosteady.co.</div>
           </div>
         </div>
       </section>
@@ -531,13 +532,6 @@
         <div class="confirmation-icon">✓</div>
         <h1>We'll let you know.</h1>
         <p>We've saved your information and will email you when GoSteady is ready to ship.</p>
-        <a class="text-link" href="/">Return to GoSteady</a>
-      </section>
-
-      <section id="reserved-confirmation" class="confirmation hidden" aria-live="polite">
-        <div class="confirmation-icon">✓</div>
-        <h1>You're reserved.</h1>
-        <p>Thank you. Your receipt is on its way by email, and we'll be in touch as the first units get close to shipping. Your reservation is fully refundable any time before shipment.</p>
         <a class="text-link" href="/">Return to GoSteady</a>
       </section>
 
@@ -566,7 +560,9 @@
         <div class="product-price">$99</div>
       </div>
       <hr class="summary-rule">
-      <div class="summary-line total"><span>Device</span><span>$99</span></div>
+      <div class="summary-line total"><span>Device total</span><span>$99</span></div>
+      <div class="summary-line hidden" id="deposit-summary"><span>Deposit due today</span><span>$49</span></div>
+      <div class="summary-line hidden" id="balance-summary"><span>Before shipment</span><span>$50</span></div>
       <div class="summary-line promotion hidden" id="preorder-bonus"><span>Preorder bonus</span><span>First 2 months free</span></div>
       <div class="summary-line"><span>Monthly service</span><span id="monthly-price">$20/mo</span></div>
       <p class="subscription-note">The monthly service includes cellular connectivity and the family portal. Billing starts when you activate your GoSteady—not when you order or while it is shipping.</p>
@@ -582,6 +578,9 @@
     <input type="hidden" name="funnel_version" value="v2">
     <input type="hidden" name="source_positioning" value="family_connect">
     <input type="hidden" name="device_price" value="99">
+    <input type="hidden" name="deposit_amount" value="49">
+    <input type="hidden" name="balance_due" value="50">
+    <input type="hidden" name="offer_version" value="deposit_49_balance_50">
     <input type="hidden" name="monthly_price" value="20">
     <input type="hidden" name="preorder_bonus_months" value="2">
     <input type="hidden" name="currency" value="USD">
@@ -597,6 +596,9 @@
     <input type="hidden" name="funnel_version">
     <input type="hidden" name="source_positioning">
     <input type="hidden" name="device_price">
+    <input type="hidden" name="deposit_amount">
+    <input type="hidden" name="balance_due">
+    <input type="hidden" name="offer_version">
     <input type="hidden" name="monthly_price">
     <input type="hidden" name="stripe_session_id">
   </form>
@@ -606,9 +608,9 @@
   </footer>
 
   <script>
-    // Stripe sandbox Payment Link for GoSteady's $99 one-time preorder price.
+    // Live Stripe Payment Link: $49 deposit toward the $99 device; $50 before shipment.
     // Card details must always be collected by the payment provider, never this page.
-    const PAYMENT_LINK_URL = 'https://buy.stripe.com/test_4gMfZigvC7uK0qi8GRcMM00';
+    const PAYMENT_LINK_URL = 'https://buy.stripe.com/7sY7sN1wae664qz2x6bsc01';
     const IS_LOCAL_PREVIEW = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname);
     const params = new URLSearchParams(window.location.search);
     const checkoutId = window.crypto && crypto.randomUUID
@@ -648,8 +650,7 @@
       if (input) input.value = params.get(key) || '';
     });
 
-    const isPaidReturn = params.get('reserved') === '1';
-    if (!isPaidReturn) track('V2 Checkout Started', 'InitiateCheckout', { value: 99, currency: 'USD', content_name: 'GoSteady Family Connect' });
+    track('V2 Checkout Started', 'InitiateCheckout', { value: 99, currency: 'USD', content_name: 'GoSteady Family Connect' });
 
     const shippingForm = document.getElementById('shipping-form');
     const shippingSubmit = document.getElementById('shipping-submit');
@@ -690,6 +691,9 @@
         funnel_version: 'v2',
         source_positioning: 'family_connect',
         device_price: '99',
+        deposit_amount: '49',
+        balance_due: '50',
+        offer_version: 'deposit_49_balance_50',
         monthly_price: '20',
         stripe_session_id: params.get('session_id') || ''
       }));
@@ -716,18 +720,8 @@
       });
     });
 
-    // Stripe sends paid customers back here with ?reserved=1&session_id=... (set on the Payment Link).
-    if (isPaidReturn) {
-      shippingStep.classList.add('hidden');
-      deliveryProgress.classList.remove('active');
-      paymentProgress.classList.add('active');
-      preorderBonus.classList.remove('hidden');
-      monthlyPrice.textContent = 'Then $20/mo';
-      const reservedConfirmation = document.getElementById('reserved-confirmation');
-      reservedConfirmation.classList.remove('hidden');
-      track('V2 Preorder Completed', 'Purchase', { value: 99, currency: 'USD', content_name: 'GoSteady Family Connect' });
-      showMonitoringQuestion(reservedConfirmation, 'reserved_paid');
-    }
+    // Paid reservations are confirmed and recorded by Stripe. A URL parameter
+    // is not proof of payment; never emit Purchase from an unverified return URL.
 
     shippingForm.addEventListener('submit', function(event) {
       event.preventDefault();
@@ -745,6 +739,8 @@
         deliveryProgress.classList.remove('active');
         paymentProgress.classList.add('active');
         preorderBonus.classList.remove('hidden');
+        document.getElementById('deposit-summary').classList.remove('hidden');
+        document.getElementById('balance-summary').classList.remove('hidden');
         monthlyPrice.textContent = 'Then $20/mo';
         window.scrollTo({ top: 0, behavior: 'smooth' });
         track('V2 Availability Disclosed');
@@ -765,6 +761,9 @@
         funnel_version: 'v2',
         source_positioning: 'family_connect',
         device_price: '99',
+        deposit_amount: '49',
+        balance_due: '50',
+        offer_version: 'deposit_49_balance_50',
         monthly_price: '20',
         preorder_bonus_months: '2',
         currency: 'USD'
@@ -783,14 +782,15 @@
       }).finally(function() {
         track('V2 Preorder Accepted');
 
-        if (!PAYMENT_LINK_URL) {
+        if (!/^https:\/\/buy\.stripe\.com\/(?!test_)[A-Za-z0-9]+$/.test(PAYMENT_LINK_URL)) {
           paymentError.classList.add('show');
           button.disabled = false;
-          button.textContent = 'Reserve for $99';
+          button.textContent = 'Reserve for $49';
           showMonitoringQuestion(document.querySelector('.preorder-content'), 'continue_to_payment');
           return;
         }
 
+        track('V2 Deposit Checkout Opened', 'AddPaymentInfo', { value: 49, currency: 'USD', content_name: 'GoSteady refundable deposit' });
         const paymentUrl = new URL(PAYMENT_LINK_URL);
         paymentUrl.searchParams.set('prefilled_email', document.getElementById('email').value);
         paymentUrl.searchParams.set('client_reference_id', checkoutId);
