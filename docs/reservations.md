@@ -85,9 +85,9 @@ for the updated event map. Local previews do not submit forms or open payments.
 The optional monitoring survey still appears after the notification-only
 choice. Paid customers stay on Stripe's confirmation page, so the website's
 post-payment survey and browser Purchase event are not active. Server-verified
-purchase reporting is implemented but disabled until the Meta credential and
-end-to-end sandbox verification are complete. See [conversions-api.md](conversions-api.md)
-for the current activation status and existing webhook endpoint IDs.
+purchase reporting passed end-to-end sandbox verification and is enabled for
+production. See [conversions-api.md](conversions-api.md) for the test evidence,
+configuration, and existing webhook endpoint IDs.
 
 ## Verification
 

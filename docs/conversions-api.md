@@ -1,42 +1,22 @@
 # Meta server conversion integration
 
-Prepared September 23, 2026. Activation and live acceptance must be verified
-before treating the direct integration as operational.
+Verified September 23, 2026. Both the browser/server address event and an
+actual Stripe sandbox deposit reached Meta Test Events successfully. The
+user generated the Meta token in their regular browser and saved it directly
+as a production-only Netlify secret. The token never entered source control.
+The Dataset Quality API setup route was explicitly approved by the user.
 
-Release state: Meta-enabled web connection is active. This release includes
-the direct integration behind `META_CAPI_ENABLED=false` in production. Both
-Stripe endpoints remain disabled until the end-to-end test succeeds.
-49 automated checks pass. Hosted preview checks confirm webhook GET=405, a correctly
-signed unpaid sandbox fixture=200/ignored, unsigned/tampered/stale requests=400,
-external form-event calls=403, and server source/package files=404. These are
-signature and handler checks, not a completed sandbox payment test. The latest
-preview deploy is `6ab4226ecc42f44a17bf22b3`, at
-`https://conversion-qa--gosteadyweb.netlify.app`.
+Production uses `META_CAPI_ENABLED=true`, `META_CAPI_ACCESS_TOKEN` (secret),
+and `STRIPE_WEBHOOK_SECRET` (secret). Temporary Meta test routing, sandbox
+link IDs, and the sandbox signing secret are removed after QA. Manual CLI
+alias deployments use the branch-deploy runtime context and cannot enable
+production reporting.
 
-Meta's standard token generator returned an application error repeatedly.
-The user approved the Dataset Quality API route on September 23, including
-its current inability to opt out. Generating a token through that route also
-failed twice with Meta's "Ouch! Something went wrong..." application error.
-No token was returned or copied; Quality API activation is not yet confirmed.
-The user has been asked to try the token generator in their regular browser
-and save any resulting credential directly in Netlify as the production
-secret `META_CAPI_ACCESS_TOKEN`.
+Existing Stripe endpoints (do not duplicate):
+- Live: `we_1UIvOfQ2TfGTSvqA9Md1vGK6`; enabled after final deployment.
+- Sandbox: `we_1UIvNNL5ztGHn39elNEr9t6n`; disabled after QA.
 
-Both Stripe endpoints now exist and are **disabled** until activation:
-- Live: `we_1UIvOfQ2TfGTSvqA9Md1vGK6`.
-- Sandbox: `we_1UIvNNL5ztGHn39elNEr9t6n`.
-
-Their separate signing secrets are stored as Netlify secret variables. The
-live secret is production-only; the sandbox secret is currently configured
-for production, deploy-preview and branch-deploy to support testing. Manual
-CLI alias deployments use the branch-deploy runtime context even when the
-build is run with `--context deploy-preview`.
-
-Remaining: obtain Meta credential, configure its token and test settings,
-deploy the runtime configuration, enable the sandbox endpoint, verify address deduplication
-and a sandbox payment in Meta Test Events, remove temporary test settings,
-disable the sandbox endpoint and enable the live endpoint. Then record final
-activation details here. Ads remain unpublished.
+Ads remain unpublished. No live card payment was made during this verification.
 
 ## Connections and cost
 
@@ -127,6 +107,8 @@ For sandbox verification only:
   reference into Meta Test Events. All other production addresses remain live.
 - Remove the optional test configuration and disable the sandbox webhook
   after testing. Never send a fabricated live Purchase for verification.
+  The sandbox signing secret is not retained after QA; rotate/recreate the
+  sandbox endpoint's signing credential if another hosted test is needed.
 
 Production values must not be configured for preview contexts. Netlify's
 Personal plan supports secret variables but not per-feature variable scopes;
@@ -138,9 +120,41 @@ build code never reads or embeds these values.
 preferences, raw-body signature verification, duplicate and concurrent
 delivery, retry recovery, asynchronous payments and sandbox isolation.
 `netlify build` bundles the functions and registers the background handler
-and hourly schedule. Complete one sandbox payment and inspect Meta Test
-Events before enabling live payment reporting. Confirm the browser and
-server address event IDs match and Meta reports deduplication.
+and hourly schedule. The suite passed 49 checks. Hosted checks additionally
+confirmed webhook GET=405, a correctly signed unpaid sandbox fixture=200/ignored,
+unsigned/tampered/stale requests=400, external form-event calls=403, and server
+source/package files=404.
+
+End-to-end QA used production deployment `6ab429bb090b128fd942a880` with
+temporary sandbox routing and Meta Test Events code `TEST41311`:
+
+- Checkout reference: `24b53c45-1380-4fcd-a804-2f7c571cbddc`.
+- Address entered through the actual website UI with `utm_source=qa`,
+  `utm_medium=test`, and `utm_campaign=capi_verification`.
+- Browser `AddShippingInfo` arrived at 13:32:50 MDT. The same address was
+  resubmitted after the server configuration deployment. Its server event
+  arrived at 13:36:03 and Meta explicitly marked it **Deduplicated**, sharing
+  `shipping_24b53c45-1380-4fcd-a804-2f7c571cbddc` with the browser.
+- Netlify form submissions: `6ab4296123513217a888813c` and
+  `6ab42a2141b9cc0f49c9dc9e`. Both are labeled GoSteady Conversion QA.
+- Sandbox Checkout Session:
+  `cs_test_a1Kirq8Y8K9CXZcoz6rsDfXKsq5YjWvcvGP4N3Cq4yQmIW5asQN2znTAbT`.
+- Stripe confirmed `status=complete`, `payment_status=paid`, and
+  `amount_total=4900` with the same checkout reference.
+- Meta received **Purchase / Processed / Server** at 13:38:51 MDT with
+  value **49 USD**, content name **GoSteady refundable reservation deposit**,
+  and matching keys Email, Browser id, and User agent. The event ID is
+  `deposit_<the Checkout Session above>`.
+- Netlify Blobs contains `state=sent` receipts for both QA events. Successful
+  receipts retain no matching data.
+- PaymentIntent: `pi_3UIw0DL5ztGHn39e0fTJlPTB`.
+- Full sandbox refund: `re_3UIw0DL5ztGHn39e0d3Qbjt4`, $49, `succeeded`.
+
+This confirms receipt and address deduplication, not attribution to a paid ad:
+the controlled test did not come from an ad click. Purchase retries/concurrent
+delivery and asynchronous-payment filtering were verified in automated tests,
+not by manually resending a hosted Stripe event. Exclude the marked QA session
+from interest/conversion analysis.
 
 Before ads launch, verify Meta receipt in Test Events, Stripe webhook delivery
 responses and Netlify function logs. These are separate from publishing ads;

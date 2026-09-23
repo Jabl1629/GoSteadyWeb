@@ -64,8 +64,8 @@ checkout events, Meta initialization, form submissions, and payment navigation.
 Address completion occurs before preorder disclosure and measures initial
 interest, not acceptance of the preorder. No browser `Purchase` event is emitted.
 Paid deposits are successful, non-refunded Stripe charges. A server-verified
-Purchase webhook is implemented but remains disabled pending the Meta access
-token and end-to-end sandbox verification. See [conversions-api.md](conversions-api.md)
-for activation status. It reports gross successful $49 deposits; use Stripe for
+Purchase webhook passed end-to-end sandbox verification and is enabled for
+production. See [conversions-api.md](conversions-api.md) for the evidence and
+configuration. It reports gross successful $49 deposits; use Stripe for
 refunds and net paid reservations. Filter experiments from this deployment
 forward when comparing the new flow to the older address-first checkout.
