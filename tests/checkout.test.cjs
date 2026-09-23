@@ -150,6 +150,8 @@ for (const file of ['checkout.html', 'checkout-v2.html']) {
     await c.act('back-to-delivery');
     await c.act('shipping-form', 'submit');
     assert.equal(c.events.filter(e => e.includes('AddShippingInfo')).length, 1);
+    const metaShipping = c.events.find(e => e.includes('AddShippingInfo'));
+    assert.equal(metaShipping[4].eventID, 'shipping_review-checkout-uuid');
     assert.equal(count('Monthly Details Submitted'), 1);
     assert.equal(c.events.some(e => JSON.stringify(e).includes('review@example.com')), false);
   });

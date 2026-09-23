@@ -1,5 +1,13 @@
 [build]
-  publish = "."
+  command = "npm run build"
+  publish = "dist"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+  external_node_modules = ["stripe", "@netlify/blobs"]
+  # The existing Netlify tracer cannot resolve Stripe 22's nested exports map.
+  included_files = ["node_modules/stripe/cjs/**", "node_modules/stripe/package.json"]
 
 # Serve the GS mark when browsers request /favicon.ico
 [[redirects]]

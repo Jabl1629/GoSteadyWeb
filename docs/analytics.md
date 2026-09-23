@@ -55,13 +55,17 @@ CTA links carry those parameters into checkout. Netlify stores them with the
 address and subsequent choice. Stripe's `client_reference_id` matches the
 Netlify `checkout_id`, linking paid deposits back to that source record.
 
-Browser events include plan and flow-version properties but no email, address,
-phone, or checkout identifier. Analytics exceptions and unavailable browser
-storage cannot block form capture or payment. Localhost previews suppress
+Browser event properties include plan and flow version but no email, address,
+or phone. Meta's AddShippingInfo event ID includes the random checkout identifier
+so browser and server submissions can be deduplicated. Analytics exceptions and
+unavailable browser storage cannot block form capture or payment. Nonproduction previews suppress
 checkout events, Meta initialization, form submissions, and payment navigation.
 
 Address completion occurs before preorder disclosure and measures initial
 interest, not acceptance of the preorder. No browser `Purchase` event is emitted.
-Paid deposits are successful, non-refunded Stripe charges; no server-verified
-Purchase webhook has been implemented. Filter experiments from this deployment
+Paid deposits are successful, non-refunded Stripe charges. A server-verified
+Purchase webhook is implemented but remains disabled pending the Meta access
+token and end-to-end sandbox verification. See [conversions-api.md](conversions-api.md)
+for activation status. It reports gross successful $49 deposits; use Stripe for
+refunds and net paid reservations. Filter experiments from this deployment
 forward when comparing the new flow to the older address-first checkout.

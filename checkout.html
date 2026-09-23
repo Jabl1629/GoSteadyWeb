@@ -9,7 +9,7 @@
 
   <!-- Meta Pixel Code -->
   <script>
-  if (!/^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname)) {
+  if (window.location.hostname === 'gosteady.co' && !navigator.globalPrivacyControl) {
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -448,6 +448,10 @@
           <input type="hidden" name="form-name" value="cupholder-shipping-intent">
           <input type="hidden" name="bot-field">
           <input type="hidden" name="checkout_id" id="checkout-id">
+          <input type="hidden" name="fbp">
+          <input type="hidden" name="fbc">
+          <input type="hidden" name="client_user_agent">
+          <input type="hidden" name="meta_opt_out">
           <input type="hidden" name="source_url" id="source-url">
           <input type="hidden" name="referrer" id="referrer">
           <input type="hidden" name="utm_source" id="utm-source">
@@ -604,27 +608,30 @@
     const PAYMENT_LINK_URL = 'https://buy.stripe.com/7sY7sN1wae664qz2x6bsc01';
     const ANNUAL_PAYMENT_LINK_URL = 'https://buy.stripe.com/dRm3cxb6K2no6yH2x6bsc02';
     const FLOW_VERSION = 'plans_2026_09';
-    const IS_LOCAL_PREVIEW = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname);
+    const IS_LOCAL_PREVIEW = window.location.hostname !== 'gosteady.co';
     const params = new URLSearchParams(window.location.search);
     const checkoutId = window.crypto && crypto.randomUUID
       ? crypto.randomUUID()
       : 'gs-' + Date.now() + '-' + Math.random().toString(16).slice(2);
 
     // Analytics must never interrupt address capture or the payment handoff.
-    function track(name, metaEvent, metaData, customMetaEvent) {
+    function track(name, metaEvent, metaData, customMetaEvent, eventId) {
       if (IS_LOCAL_PREVIEW) return;
       const props = Object.assign({ service_plan: selectedPlan, flow_version: FLOW_VERSION }, metaData || {});
       try { if (typeof plausible === 'function') plausible(name, { props: props }); } catch (_) {}
       try {
-        if (metaEvent && typeof fbq === 'function')
-          fbq(customMetaEvent ? 'trackCustom' : 'track', metaEvent, Object.assign({}, props, metaData || {}));
+        if (metaEvent && typeof fbq === 'function' && !metaOptOut()) {
+          const args = [customMetaEvent ? 'trackCustom' : 'track', metaEvent, Object.assign({}, props, metaData || {})];
+          if (eventId) args.push({ eventID: eventId });
+          fbq.apply(null, args);
+        }
       } catch (_) {}
     }
     const trackedMilestones = new Set();
-    function trackOnce(name, metaEvent, metaData, customMetaEvent) {
+    function trackOnce(name, metaEvent, metaData, customMetaEvent, eventId) {
       if (trackedMilestones.has(name)) return;
       trackedMilestones.add(name);
-      track(name, metaEvent, metaData, customMetaEvent);
+      track(name, metaEvent, metaData, customMetaEvent, eventId);
     }
     function planEvent(milestone) {
       return '' + (selectedPlan === 'annual' ? 'Annual ' : 'Monthly ') + milestone;
@@ -643,6 +650,26 @@
       ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid'].forEach(function(key) {
         data[key] = params.get(key) || '';
       });
+      return data;
+    }
+
+    function metaOptOut() {
+      return typeof navigator !== 'undefined' && navigator.globalPrivacyControl === true;
+    }
+    function metaAttribution() {
+      const data = { meta_opt_out: String(metaOptOut()) };
+      if (metaOptOut()) return data;
+      try {
+        const cookies = Object.fromEntries((document.cookie || '').split(';').map(function(part) {
+          const split = part.trim().indexOf('=');
+          return split < 0 ? ['', ''] : [part.trim().slice(0, split), decodeURIComponent(part.trim().slice(split + 1))];
+        }));
+        data.fbp = cookies._fbp || '';
+        data.fbc = cookies._fbc || '';
+      } catch (_) {}
+      const clickId = params.get('fbclid') || '';
+      if (!data.fbc && /^[A-Za-z0-9_-]{1,500}$/.test(clickId)) data.fbc = 'fb.1.' + Date.now() + '.' + clickId;
+      data.client_user_agent = typeof navigator === 'undefined' ? '' : navigator.userAgent;
       return data;
     }
 
@@ -776,11 +803,12 @@
       shippingSubmit.textContent = 'Saving…';
 
       const data = new FormData(shippingForm);
+      Object.entries(metaAttribution()).forEach(function(entry) { data.set(entry[0], entry[1]); });
       const submittedPlan = selectedPlan;
       Object.entries(serviceDetails(submittedPlan)).forEach(function(entry) { data.set(entry[0], entry[1]); });
       submitForm(data).then(function() {
         try { sessionStorage.setItem('gosteady-checkout-email', data.get('email')); } catch (_) {}
-        trackOnce('Shipping Completed', 'AddShippingInfo', { value: 99, currency: 'USD' });
+        trackOnce('Shipping Completed', 'AddShippingInfo', { value: 99, currency: 'USD' }, false, 'shipping_' + checkoutId);
         trackOnce(planEvent('Details Submitted'));
 
         shippingStep.classList.add('hidden');
