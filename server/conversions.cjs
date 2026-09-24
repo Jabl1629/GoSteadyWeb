@@ -161,4 +161,4 @@ async function processPayment(event, deps) {
   }, deps, { test });
 }
 
-module.exports = { stripe, hash, sourceURL, matchingData, runtimeConfig, sendToMeta, deliverOnce, processAddress, verifyStripe, processPayment };
+module.exports = { LIVE_LINKS, stripe, hash, sourceURL, matchingData, runtimeConfig, sendToMeta, deliverOnce, processAddress, verifyStripe, processPayment };

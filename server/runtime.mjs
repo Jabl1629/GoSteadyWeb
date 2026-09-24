@@ -9,3 +9,14 @@ export function dependencies(context) {
     send: (event, test) => conversions.sendToMeta(event, config, fetch, test)
   };
 }
+
+export async function redditDependencies(context) {
+  const { default: reddit } = await import('./reddit-conversions.cjs');
+  const config = reddit.runtimeConfig(process.env, context.deploy.context);
+  return {
+    config, store: getStore({ name: 'gosteady-reddit-conversions', consistency: 'strong' }),
+    legacyStore: getStore({ name: 'gosteady-conversions', consistency: 'strong' }),
+    now: () => Math.floor(Date.now() / 1000),
+    send: (event, test) => reddit.sendToReddit(event, config, fetch, test)
+  };
+}
