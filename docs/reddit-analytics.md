@@ -70,9 +70,22 @@ The existing ad destination now includes `utm_source=reddit`,
 `utm_medium=paid_social`, `utm_campaign=gs_reddit_test_20260924`, and
 `utm_content=multi_asset`. Budget and optimization were not changed.
 
-Server delivery remains **disabled** (`REDDIT_CAPI_ENABLED=false`) pending
-explicit user approval of the Reddit token-generation terms. No successful CAPI
-verification is claimed. The first token's UI displayed a truncated value, which
-was unusable; an unused token named GoSteady Netlify conversions remains in Reddit.
-Generate a valid replacement with user approval, save it as the Netlify secret,
-verify test-routed AddressCompleted and Purchase, enable CAPI, and redeploy.
+Server delivery was enabled after explicit user approval of Reddit's token terms.
+The token named `GoSteady website production` is stored only in Netlify's production
+secret `REDDIT_CAPI_ACCESS_TOKEN`; `REDDIT_CAPI_ENABLED=true` activates delivery.
+The earlier unused token named `GoSteady Netlify conversions` remains in Reddit.
+
+At 17:29:50 MDT, the actual Reddit v3 transport returned HTTP 200 for isolated
+AddressCompleted and Purchase fixtures, and Reddit Event Testing displayed both as
+**CAPI / Healthy / Direct integration**. The Purchase fixture was USD 49. These
+requests used test ID `t2_iaer4azvx`, not production conversion reporting. No card
+was charged and this was not an end-to-end Stripe sandbox payment. Stripe signature
+verification and paid-only filtering remain covered by the automated tests.
+
+The test ID is not configured in production. Live reporting only sends eligible
+paid Stripe deposits and successfully saved addresses. Campaign budget and click
+optimization remain unchanged.
+
+Activation deployed successfully in production as `6ab5b2acf75dd2f8b58f35b5`.
+Reddit's expanded Purchase test confirmed value 49, currency USD, item count 1,
+Pixel ID `a2_jqogsii64m2e`, and source URL `https://gosteady.co/checkoutV2`.
