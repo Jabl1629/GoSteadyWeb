@@ -1,10 +1,14 @@
 /* Shared product and service-plan step for both checkout entry points. */
 main { max-width: 1120px; gap: 3.5rem; grid-template-columns: minmax(0, 1fr) 340px; }
+/* The first step ends at its CTA; the order summary returns on delivery/payment. */
+main:has(#plan-step:not(.hidden)) { max-width: 800px; grid-template-columns: minmax(0, 1fr); padding-bottom: 2.5rem; }
+main:has(#plan-step:not(.hidden)) .order-summary { display: none; }
 .progress { max-width: 420px; }
 .progress-line { flex: 1; }
 .step-eyebrow { color: var(--sage-dark); font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: .65rem; }
-.included-card { display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; gap: 1rem; border: 1px solid var(--border); border-radius: 18px; background: var(--cream); padding: .6rem 1.5rem .6rem .4rem; }
-.packaging-image { display: block; width: 100%; height: 220px; object-fit: cover; }
+.included-card { display: grid; grid-template-columns: 1.2fr 1fr; align-items: center; overflow: hidden; border: 1px solid var(--border); border-radius: 18px; background: var(--cream); }
+.included-copy { padding: 1.35rem 1.35rem 1.35rem .65rem; }
+.packaging-image { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: contain; mix-blend-mode: multiply; }
 .included-list { list-style: none; display: grid; gap: 1.2rem; }
 .included-list li { display: grid; grid-template-columns: 19px 1fr; column-gap: .5rem; }
 .included-list strong { font-size: .9rem; font-weight: 600; }
@@ -26,7 +30,18 @@ main { max-width: 1120px; gap: 3.5rem; grid-template-columns: minmax(0, 1fr) 340
 .plan-price { font-family: var(--serif); font-size: 2.45rem; font-weight: 400; line-height: 1.2; letter-spacing: -.04em; }
 .plan-unit { color: var(--text-soft); font-size: .86rem; }
 .plan-billing { font-size: .83rem; color: var(--text-soft); margin-top: .3rem; min-height: 1.5em; }
-.plan-includes { color: var(--text-soft); font-size: .78rem; margin-top: .8rem; display: flex; align-items: center; gap: .45rem; }
+.device-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem .5rem; margin-top: 1rem; padding-top: .85rem; border-top: 1px solid var(--border); }
+.device-price strong { font-size: 1.12rem; font-weight: 600; }
+.device-price span { color: var(--text-soft); font-size: .69rem; }
+.plan-benefits { list-style: none; display: grid; gap: 1rem; margin: 1.25rem 0; }
+.plan-benefits li { display: grid; grid-template-columns: 38px 1fr; gap: .85rem; align-items: start; }
+.benefit-icon { display: grid; place-items: center; width: 38px; height: 38px; color: var(--sage-dark); background: var(--sage-pale); border-radius: 12px; }
+.benefit-icon svg { width: 23px; height: 23px; }
+.plan-benefits strong { display: block; font-size: .9rem; font-weight: 600; line-height: 1.45; }
+.plan-benefits p { color: var(--text-soft); font-size: .8rem; line-height: 1.5; margin-top: .15rem; }
+.plan-connectivity { display: flex; align-items: baseline; gap: .5rem; color: var(--text-soft); font-size: .77rem; line-height: 1.6; padding: .85rem 1rem; background: var(--sage-pale); border-radius: 10px; }
+.plan-connectivity strong { color: var(--sage-dark); font-weight: 600; }
+.billing-label { font-size: .8rem; font-weight: 600; margin: 1.5rem 0 .7rem; }
 .plan-step h1.step-eyebrow { font-family: var(--sans); font-size: .7rem; font-weight: 700; line-height: 1.5; margin-bottom: .65rem; }
 .plan-step .button { margin-top: 1.4rem; gap: .75rem; }
 .back-link, .edit-plan { background: none; border: 0; cursor: pointer; font: inherit; color: var(--sage-dark); text-decoration: underline; text-underline-offset: 3px; }
@@ -44,11 +59,13 @@ h1:focus { outline: none; }
   .order-summary { position: static; }
 }
 @media (max-width: 560px) {
-  .included-card { gap: .5rem; padding: .35rem 1rem .35rem .15rem; grid-template-columns: 1fr 1.05fr; }
-  .included-list { gap: .9rem; }
+  .included-card { grid-template-columns: 1fr; }
+  .included-copy { padding: .5rem 1.15rem 1.15rem; }
+  .included-list { grid-template-columns: 1fr 1fr; gap: .9rem; }
+  .device-price { margin-top: .9rem; padding-top: .7rem; }
   .included-list strong { font-size: .8rem; }
   .included-list small { font-size: .7rem; }
-  .packaging-image { height: 180px; object-fit: contain; }
+  .packaging-image { max-height: 230px; }
   .plan-section { margin-top: 1.5rem; }
   .plan-option { font-size: .8rem; }
   .progress-step { font-size: .73rem; gap: .35rem; }
