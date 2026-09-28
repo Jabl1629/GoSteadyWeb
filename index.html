@@ -568,36 +568,44 @@
     .js-reveal .setup-step.is-in .cam-link { opacity: 1; transform: translate(-50%, 0); }
 
     .pricing { background: var(--paper); scroll-margin-top: 76px; }
-    .price-card {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-sm);
-      display: grid;
-      gap: 3rem;
-      grid-template-columns: .9fr 1.1fr;
-      margin: 0 auto;
-      max-width: 930px;
-      padding: clamp(2rem, 5vw, 4rem);
-    }
-    .price-name { color: var(--forest-700); font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
-    .price-amount { align-items: center; display: flex; font-family: var(--serif); font-size: 4.6rem; gap: 1.25rem; line-height: 1; margin: 1rem 0 .65rem; }
+    .pricing .section-head { max-width: 850px; }
+    .pricing .section-head h2 { font-size: clamp(2.15rem, 4.2vw, 3.5rem); }
+    .founding-offer { border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); margin: 0 auto; max-width: 1040px; overflow: hidden; }
+    .offer-top { display: grid; grid-template-columns: 1.05fr 1fr; }
+    .offer-product { background: var(--cream); display: flex; flex-direction: column; justify-content: center; padding: 1.5rem 1.5rem 2rem; }
+    .offer-product img { aspect-ratio: 3 / 2; height: auto; mix-blend-mode: multiply; width: 100%; }
+    .offer-includes { margin: .3rem auto 0; max-width: 360px; }
+    .offer-includes h3 { color: var(--forest-700); font-family: var(--sans); font-size: .72rem; font-weight: 700; letter-spacing: .12em; margin-bottom: .75rem; text-transform: uppercase; }
+    .offer-includes ul { display: grid; gap: .55rem; list-style: none; margin: 0; padding: 0; }
+    .offer-includes li { align-items: flex-start; display: flex; font-size: .88rem; gap: .5rem; line-height: 1.5; }
+    .offer-includes svg { color: var(--forest-700); flex: 0 0 auto; margin-top: .1rem; }
+    .offer-price { align-self: center; padding: clamp(1.5rem, 3.5vw, 3rem); }
+    .price-name { color: var(--forest-700); font-size: .73rem; font-weight: 700; letter-spacing: .12em; margin: 0; text-transform: uppercase; }
+    .price-amount { align-items: center; display: flex; font-family: var(--serif); font-size: 4.6rem; gap: 1.25rem; line-height: 1; margin: .8rem 0 .7rem; }
     .price-amount strong { font-weight: 500; }
     .price-amount .retail-price { font-family: var(--sans); }
-    .device-price-note { color: var(--muted); font-size: .9rem; margin: 0 0 1.5rem; }
-    .device-includes { align-self: center; }
-    .device-includes h3 { font-size: 1.5rem; margin-bottom: 1.25rem; }
-    .price-list { display: grid; gap: .8rem; list-style: none; margin: 0; padding: 0; }
-    .price-list li { align-items: flex-start; display: flex; font-size: .88rem; gap: .65rem; }
-    .price-list svg { color: var(--forest-700); flex: 0 0 auto; margin-top: .15rem; }
-    .price-note { color: var(--muted); font-size: .75rem; margin: 1rem 0 0; }
-    .family-plan { background: var(--sage-075); border: 1px solid var(--line); border-radius: var(--radius-lg); display: grid; gap: 2rem 3rem; grid-template-columns: .9fr 1.1fr; margin: 1rem auto 0; max-width: 930px; padding: clamp(2rem, 5vw, 4rem); scroll-margin-top: 100px; }
-    .family-plan h3 { font-size: 1.65rem; }
-    .family-plan-price { font-size: 1.02rem; margin: .85rem 0 .45rem; }
-    .family-plan-price strong { color: var(--forest-800); font-weight: 700; }
-    .family-plan-copy { color: var(--muted); font-size: .85rem; margin: 0; }
-    .family-plan-bonus { color: var(--forest-800); font-size: .83rem; font-weight: 600; margin: 1rem 0 0; }
-    .family-plan .price-list { align-content: center; }
+    .device-price-note { color: var(--muted); font-size: .88rem; margin: 0; }
+    .offer-bonus { background: var(--forest-800); border-radius: 18px; color: white; margin-top: 1.5rem; padding: 1.25rem 1.4rem; }
+    .bonus-label { color: #e7c67b; font-size: .67rem; font-weight: 700; letter-spacing: .09em; margin: 0 0 .5rem; text-transform: uppercase; }
+    .offer-bonus h3 { color: white; font-size: clamp(1.7rem, 3vw, 2.2rem); }
+    .bonus-plan { color: #fff; font-size: .94rem; margin: .25rem 0 0; }
+    .bonus-start { color: #dce8df; font-size: .76rem; margin: .65rem 0 0; }
+    .offer-benefits { background: var(--sage-075); border-top: 1px solid var(--line); padding: 1.75rem clamp(1.5rem, 3.5vw, 3rem); scroll-margin-top: 100px; }
+    .offer-benefits > h3 { font-size: 1.45rem; margin-bottom: 1.4rem; }
+    .offer-benefit-list { display: grid; gap: 1.5rem; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; margin: 0; padding: 0; }
+    .offer-benefit-icon { align-items: center; background: #fffdf9; border: 1px solid #dce8df; border-radius: 12px; color: var(--forest-700); display: flex; height: 38px; justify-content: center; margin-bottom: .7rem; width: 38px; }
+    .offer-benefit-icon svg { height: 22px; width: 22px; }
+    .offer-benefit-list h4 { font-size: .91rem; font-weight: 700; line-height: 1.4; margin: 0; }
+    .offer-benefit-list p { color: var(--muted); font-size: .83rem; line-height: 1.55; margin: .4rem 0 0; }
+    .offer-cellular { color: var(--muted); font-size: .8rem; margin: 1.5rem 0 0; padding-top: 1.1rem; border-top: 1px solid #d6e2d9; }
+    .offer-cellular strong { color: var(--forest-800); }
+    .offer-action { display: grid; gap: 1.15rem; margin-top: 1.15rem; }
+    .offer-plan-price { font-size: 1rem; line-height: 1.5; margin: 0 0 .4rem; }
+    .offer-plan-price strong { color: var(--forest-800); }
+    .offer-terms { color: var(--muted); font-size: .75rem; line-height: 1.55; margin: 0; max-width: 430px; }
+    .offer-action .button { min-height: 52px; width: 100%; }
+    .offer-return { align-items: center; color: var(--muted); display: flex; font-size: .73rem; gap: .35rem; justify-content: center; margin: .7rem 0 0; }
+    .offer-return svg { color: var(--forest-700); flex: 0 0 auto; }
 
     .faq { background: var(--cream); scroll-margin-top: 76px; }
     .faq-grid { display: grid; gap: 0 4rem; grid-template-columns: 1fr 1fr; margin-top: 3rem; }
@@ -622,7 +630,8 @@
     @media (max-width: 980px) {
       .setup-watch { grid-template-columns: 1fr; margin-left: auto; margin-right: auto; max-width: 720px; }
       .nav-links > a:not(.button) { display: none; }
-      .hero-grid, .price-card, .family-plan { grid-template-columns: 1fr; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .offer-top { grid-template-columns: 1fr 1fr; }
       .hero-copy { max-width: 720px; }
       .hero-visual { margin: 0 auto; width: min(100%, 620px); }
       .definition-grid { grid-template-areas: "text" "media" "features"; grid-template-columns: 1fr; max-width: 720px; row-gap: 2.25rem; text-align: center; }
@@ -689,8 +698,23 @@
       .setup-tile .phone { top: 6cqw; width: 50cqw; }
       .setup-step h3 { font-size: 1.4rem; }
       .setup-line { display: block; }
-      .price-card { gap: 2rem; }
+      .offer-top { grid-template-columns: 1fr; }
+      .offer-product { padding: .75rem 1.25rem 1.5rem; }
+      .offer-product img { max-height: 265px; object-fit: contain; }
+      .offer-includes { margin-top: 0; width: 100%; }
+      .offer-price { padding: 1.5rem; }
       .price-amount { font-size: 4rem; }
+      .offer-bonus { margin-top: 1.2rem; }
+      .offer-benefits { padding: 1.5rem; }
+      .offer-benefits > h3 { font-size: 1.35rem; margin-bottom: 1.15rem; }
+      .offer-benefit-list { gap: 1.2rem; grid-template-columns: 1fr; }
+      .offer-benefit-list li { display: grid; gap: .7rem; grid-template-columns: 38px minmax(0, 1fr); }
+      .offer-benefit-icon { margin: 0; }
+      .offer-benefit-list p { margin-top: .2rem; }
+      .offer-cellular { margin-top: 1.2rem; }
+      .offer-action { gap: 1rem; }
+      .offer-action .button { padding-left: .8rem; padding-right: .8rem; width: 100%; }
+      .offer-plan-price { font-size: .95rem; }
       .faq-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: .5rem; }
@@ -1026,43 +1050,65 @@
       </div>
     </section>
 
-    <section class="pricing" id="pricing">
+    <section class="pricing" id="pricing" aria-labelledby="pricing-heading">
       <div class="wrap">
         <div class="section-head center">
-          <p class="eyebrow">Founding family pricing</p>
-          <h2>One device. One family plan.</h2>
-          <p class="lede">Be one of the first families to bring GoSteady home.</p>
+          <p class="eyebrow">Founding family offer</p>
+          <h2 id="pricing-heading">Save $50 on GoSteady.</h2>
+          <p class="lede">Plus your first 2 months of the Family Plan, on us.</p>
         </div>
-        <div class="price-card">
-          <div>
-            <div class="price-name">Your GoSteady device</div>
-            <div class="price-amount"><span class="retail-price"><s>$249</s>Planned retail</span><strong>$199</strong></div>
-            <p class="device-price-note">Founding family price. Family Plan required.</p>
-            <a class="button" data-v2-cta href="/checkoutV2">Get founding family pricing</a>
-            <p class="price-note">Availability and payment details appear before payment.</p>
+        <div class="founding-offer">
+          <div class="offer-top">
+            <div class="offer-product">
+              <img src="/Assets/gosteady-device-and-box.webp?v=2" width="1536" height="1024" loading="lazy" decoding="async" alt="GoSteady smart cupholder with its mounting clamp beside the GoSteady box">
+              <div class="offer-includes">
+                <h3>What’s included</h3>
+                <ul>
+                  <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>GoSteady smart cupholder with tool-free clamp</span></li>
+                  <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>Quick start guide for an easy setup</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="offer-price">
+              <p class="price-name">Founding family device price</p>
+              <div class="price-amount"><strong>$199</strong><span class="retail-price"><s>$249</s>Planned retail</span></div>
+              <p class="device-price-note">One-time device purchase.</p>
+              <div class="offer-bonus">
+                <p class="bonus-label">Included for founding families</p>
+                <h3>First 2 months free</h3>
+                <p class="bonus-plan">of the GoSteady Family Plan</p>
+                <p class="bonus-start">Starts when you activate your device.</p>
+              </div>
+              <div class="offer-action">
+                <div>
+                  <p class="offer-plan-price">After your free months: <strong>$20/month</strong> or <strong>$200/year.</strong></p>
+                  <p class="offer-terms">Family Plan required for connected features. Choose your plan at checkout. Cancel monthly service or annual renewal any time.</p>
+                </div>
+                <div>
+                  <a class="button" data-v2-cta href="/checkoutV2">Get the founding family offer <span aria-hidden="true">→</span></a>
+                  <p class="offer-return"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg>30-day returns after delivery</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="device-includes">
-          <h3>A familiar place for a little reassurance.</h3>
-          <ul class="price-list">
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>GoSteady rollator attachment and tool-free clamp</span></li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>Quick start guide for an easy setup</span></li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>30-day returns after delivery</span></li>
-          </ul>
+          <div class="offer-benefits" id="family-plan">
+            <h3>Your Family Plan includes</h3>
+            <ul class="offer-benefit-list">
+              <li>
+                <span class="offer-benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg></span>
+                <div><h4>Stay informed, effortlessly.</h4><p>Simple updates keep your family connected, while your loved one gets on with their day.</p></div>
+              </li>
+              <li>
+                <span class="offer-benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg></span>
+                <div><h4>Updates when something changes.</h4><p>Get a heads-up when their activity differs from their usual routine, so you know when to check in.</p></div>
+              </li>
+              <li>
+                <span class="offer-benefit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><path d="M9 10h6m-3-3v6"/></svg></span>
+                <div><h4>Know when they need you.</h4><p>When they press the button, family gets a help request with their location.</p></div>
+              </li>
+            </ul>
+            <p class="offer-cellular"><strong>Cellular is included.</strong> No home Wi-Fi, Bluetooth pairing, or separate carrier plan.</p>
           </div>
-        </div>
-        <div class="family-plan" id="family-plan">
-          <div>
-            <h3>The GoSteady Family Plan</h3>
-            <p class="family-plan-price"><strong>$20/month</strong> or <strong>$200/year</strong></p>
-            <p class="family-plan-copy">Required for connected features. Cellular data is included—no separate carrier plan or home Wi-Fi needed.</p>
-            <p class="family-plan-bonus">Founding families get their first two months free after activation.</p>
-            <p class="price-note">Then billed on your selected plan. Cancel monthly service or annual renewal any time.</p>
-          </div>
-          <ul class="price-list">
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>Activity updates and quiet-day notifications</span></li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>Family portal with Care Circle sharing</span></li>
-            <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>One-press family alerts with GPS location</span></li>
-          </ul>
         </div>
       </div>
     </section>
