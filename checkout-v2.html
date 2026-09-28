@@ -469,16 +469,18 @@
             </li>
           </ul>
           <p class="plan-connectivity"><span class="check" aria-hidden="true">✓</span><span><strong>Cellular is included.</strong> No home Wi-Fi, Bluetooth pairing, or separate carrier plan.</span></p>
-          <p class="billing-label">All included. Choose how you pay.</p>
+          <p class="billing-label">Choose how you pay after your free months.</p>
           <div class="billing-switch">
             <input class="plan-radio" id="plan-monthly" type="radio" name="service-plan" value="monthly" checked>
             <label class="plan-option" for="plan-monthly">Pay monthly</label>
             <input class="plan-radio" id="plan-annual" type="radio" name="service-plan" value="annual">
             <label class="plan-option" for="plan-annual">Pay annually <span class="saving-badge">Save $40 / year</span></label>
           </div>
-          <div aria-live="polite" aria-atomic="true">
-            <div class="plan-price-row"><span class="plan-price" id="plan-display-price">$20</span><span class="plan-unit" id="plan-display-unit">/ month</span></div>
-            <p class="plan-billing" id="plan-billing">First two months free after activation, then billed monthly. Cancel any time.</p>
+          <div class="plan-offer" aria-live="polite" aria-atomic="true">
+            <p class="plan-free-heading">First 2 months free</p>
+            <p class="plan-free-start">Your free service starts when you activate your device.</p>
+            <div class="plan-price-row"><span class="plan-after">Then</span><span class="plan-price" id="plan-display-price">$20</span><span class="plan-unit" id="plan-display-unit">/ month</span></div>
+            <p class="plan-billing" id="plan-billing">Billed monthly. Cancel any time.</p>
           </div>
         </fieldset>
         <button class="button" id="continue-delivery" type="button">Continue to delivery <span aria-hidden="true">→</span></button>
@@ -841,8 +843,8 @@
       document.getElementById('plan-display-price').textContent = annual ? '$200' : '$20';
       document.getElementById('plan-display-unit').textContent = annual ? '/ year' : '/ month';
       document.getElementById('plan-billing').textContent = annual
-        ? 'First two months free after activation, then $200/year. Equivalent to $16.67/month.'
-        : 'First two months free after activation, then billed monthly. Cancel any time.';
+        ? 'Billed annually ($16.67/month equivalent). Cancel renewal any time.'
+        : 'Billed monthly. Cancel any time.';
       document.getElementById('service-summary-label').textContent = annual ? 'Annual service' : 'Monthly service';
       monthlyPrice.textContent = (offerDisclosed ? 'Then ' : '') + (annual ? '$200/yr' : '$20/mo');
       document.getElementById('service-summary-detail').textContent = annual
