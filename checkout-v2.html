@@ -635,10 +635,12 @@
       <div class="summary-line total"><span>Founding family price</span><span>$199</span></div>
       <div class="summary-line hidden" id="deposit-summary"><span>Deposit due today</span><span>$49</span></div>
       <div class="summary-line hidden" id="balance-summary"><span>Before shipment</span><span>$150</span></div>
-      <div class="summary-line promotion hidden" id="preorder-bonus"><span>Preorder bonus</span><span>First 2 months free</span></div>
-      <div class="summary-line"><span id="service-summary-label">Monthly service</span><span id="monthly-price">$20/mo</span></div>
+      <div class="summary-free-offer">
+        <strong>First 2 months free</strong>
+        <p>Your free service starts when you activate your device.</p>
+      </div>
+      <div class="summary-line"><span id="service-summary-label">Monthly service</span><span id="monthly-price">Then $20/mo</span></div>
       <p class="summary-service-detail" id="service-summary-detail">Billed monthly · cancel any time</p>
-      <p class="subscription-note" id="service-billing-note">Your first two months of service are free after activation. Then $20 is billed monthly. Cancel any time.</p>
       <button class="edit-plan" id="edit-service-plan" type="button">Change service plan</button>
     </aside>
   </main>
@@ -820,7 +822,6 @@
     const preorderStep = document.getElementById('preorder-step');
     const deliveryProgress = document.getElementById('delivery-progress');
     const paymentProgress = document.getElementById('payment-progress');
-    const preorderBonus = document.getElementById('preorder-bonus');
     const monthlyPrice = document.getElementById('monthly-price');
 
     // Keep displayed terms, form records, and the selected Stripe link aligned.
@@ -829,7 +830,6 @@
     const monthlyOption = document.getElementById('plan-monthly');
     const annualOption = document.getElementById('plan-annual');
     let selectedPlan = 'monthly';
-    let offerDisclosed = false;
     const planStorageKey = 'gosteady-service-plan';
     let openingPayment = false;
 
@@ -846,13 +846,10 @@
         ? 'Billed annually ($16.67/month equivalent). Cancel renewal any time.'
         : 'Billed monthly. Cancel any time.';
       document.getElementById('service-summary-label').textContent = annual ? 'Annual service' : 'Monthly service';
-      monthlyPrice.textContent = (offerDisclosed ? 'Then ' : '') + (annual ? '$200/yr' : '$20/mo');
+      monthlyPrice.textContent = annual ? 'Then $200/yr' : 'Then $20/mo';
       document.getElementById('service-summary-detail').textContent = annual
-        ? '$16.67/month equivalent · save $40 a year' : 'Billed monthly · cancel any time';
-      document.getElementById('service-billing-note').textContent =
-        'Your first two months of service are free after activation. ' + (annual
-          ? 'Then $200 is billed for a full year of service. Cancel renewal any time.'
-          : 'Then $20 is billed monthly. Cancel any time.');
+        ? 'Billed annually · $16.67/month equivalent · cancel renewal any time'
+        : 'Billed monthly · cancel any time';
       document.getElementById('preorder-service-terms').textContent = annual
         ? 'Then $200/year; cancel renewal any time' : 'Then $20/month; cancel any time';
     }
@@ -988,10 +985,8 @@
         preorderStep.classList.remove('hidden');
         deliveryProgress.classList.remove('active');
         paymentProgress.classList.add('active');
-        preorderBonus.classList.remove('hidden');
         document.getElementById('deposit-summary').classList.remove('hidden');
         document.getElementById('balance-summary').classList.remove('hidden');
-        offerDisclosed = true;
         updateServicePlan();
         shippingSubmit.disabled = false;
         showCheckoutStep(2);

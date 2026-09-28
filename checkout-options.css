@@ -58,6 +58,9 @@ main:has(#plan-step:not(.hidden)) .order-summary { display: none; }
 .summary-line { gap: .75rem; }
 .summary-line > :last-child { text-align: right; }
 .summary-service-detail { color: var(--text-soft); font-size: .75rem; margin-top: .3rem; }
+.summary-free-offer { background: var(--sage-pale); border: 1px solid #CFE0D2; border-radius: 10px; color: var(--sage-dark); margin: 1rem 0; padding: .85rem 1rem; }
+.summary-free-offer strong { display: block; font-family: var(--sans); font-size: 1rem; font-weight: 600; }
+.summary-free-offer p { font-size: .75rem; line-height: 1.5; margin-top: .3rem; }
 .preview-message { color: var(--sage-dark); background: var(--sage-pale); border: 1px solid #CFE0D2; border-radius: 10px; padding: .9rem; font-size: .85rem; margin-top: 1rem; }
 button:focus-visible, a:focus-visible { outline: 2px solid var(--sage); outline-offset: 4px; }
 h1:focus { outline: none; }
