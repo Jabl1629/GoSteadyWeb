@@ -1,5 +1,56 @@
 # Checkout analytics
 
+## Behavior diagnosis — September 29, 2026
+
+Microsoft Clarity adds session replay on the homepage and V2 checkout. Existing
+Plausible scroll/video events and Meta optimization goals are unchanged. Replay
+is prospective: it cannot reconstruct earlier visits. Ad blockers and consent
+restrictions can make its totals differ from Plausible and Meta.
+
+The recorder has custom events for `plan_viewed`, `delivery_button_seen`,
+`plan_continue_clicked`, `delivery_viewed`, `address_form_started`,
+`address_submit_attempted`, `reservation_viewed`, and checkout errors. Stage
+changes are captured even though checkout stays on one URL. Tags include
+`page_type`, `checkout_stage`, `service_plan`, `delivery_button_seen`,
+`plan_continued`, `address_form_started`, and
+`experience_version=replay_2026_09_29`. Tags accumulate over a Clarity session;
+use event order in replay to determine the final step or plan choice.
+
+Start with mobile recordings containing `plan_viewed` and no `delivery_viewed`.
+Compare those with and without `delivery_button_seen`; then inspect plan
+switching, long pauses, repeated/dead clicks, errors and quick returns to the
+homepage. Check sessions with `plan_continue_clicked` but no `delivery_viewed`
+first for a functional failure. Replay shows behavior, not a visitor's reason
+for leaving; repeated patterns should guide one change at a time.
+
+Additional Plausible custom-event goals (exact event names):
+
+| Event | Meaning |
+| --- | --- |
+| `V2 Delivery Button Seen` | At least half of Continue to delivery visible for one continuous second in an active tab |
+| `V2 Address Form Started` | First input/change in a delivery field; focus alone does not count |
+| `V2 Address Validation Error` | Browser rejected a delivery field; only its fixed field ID is included |
+| `V2 Address Save Error` | Address could not be saved |
+| `V2 Payment Handoff Error` | Stripe handoff error displayed |
+| `V2 Browser Error` | Script error or unhandled rejection; no raw error message |
+
+These goals are once per page load. Register them in Plausible's Goals settings
+to show counts in its dashboard. Existing `V2 Checkout Started` still means the
+delivery step was reached, and `V2 Details Submitted` still means address saved.
+
+Form fields are explicitly masked before the recorder loads. No customer
+identity, field values, or raw error messages are passed as custom properties.
+No recorder is installed in the family portal, demos, or Stripe. Local previews,
+URLs containing sensitive query parameters, GPC/DNT browsers and replay opt-outs
+are excluded. `utm_source=qa|test|internal`, `utm_medium=qa|test`, or `qa=1`
+excludes recording and these new diagnostics for the rest of that browser tab's
+session. This does not change the filtering of older analytics integrations.
+The privacy page contains a browser-specific replay opt-out. Clarity's regional
+consent defaults apply; the site never manufactures a consent grant.
+
+Public project configuration is in the `data-clarity-project` attribute of each
+page's behavior-tracking script. There are no new secret tokens or server costs.
+
 Updated September 23, 2026; checkout flow `plans_2026_09`.
 
 ## Primary goals in Plausible

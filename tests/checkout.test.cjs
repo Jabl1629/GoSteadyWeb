@@ -61,7 +61,9 @@ for (const file of ['checkout.html', 'checkout-v2.html']) {
     assert.equal(c.elements.get('deposit-summary').classList.contains('hidden'), true);
     await c.act('shipping-form', 'submit');
     assert.equal(c.elements.get('shipping-step').classList.contains('hidden'), true);
-    for (const id of ['preorder-step','deposit-summary','balance-summary','preorder-bonus'])
+    const visibleAfterAddress = ['preorder-step','deposit-summary','balance-summary'];
+    if (file === 'checkout.html') visibleAfterAddress.push('preorder-bonus');
+    for (const id of visibleAfterAddress)
       assert.equal(c.elements.get(id).classList.contains('hidden'), false);
     assert.equal(c.events.some(e => e.includes('Purchase') || e.some(v => typeof v === 'string' && v.includes('Preorder Completed'))), false);
   });
@@ -116,7 +118,13 @@ for (const file of ['checkout.html', 'checkout-v2.html']) {
     await c.act('continue-delivery');
     await c.act('shipping-form', 'submit');
     assert.equal(c.elements.get('monthly-price').textContent, 'Then $200/yr');
-    assert.match(c.elements.get('service-billing-note').textContent, /first two months.*free.*Then \$200/);
+    if (file === 'checkout.html') {
+      assert.match(c.elements.get('service-billing-note').textContent, /first two months.*free.*Then \$200/);
+    } else {
+      assert.match(c.elements.get('service-summary-detail').textContent, /Billed annually.*cancel renewal/);
+      const html = fs.readFileSync(path.join(__dirname, '..', file), 'utf8');
+      assert.match(html, /class="summary-free-offer">\s*<strong>First 2 months free<\/strong>\s*<p>Your free service starts when you activate your device\.<\/p>/);
+    }
     await c.act('back-to-delivery');
     await c.act('back-to-plan');
     assert.equal(c.elements.get('plan-annual').checked, true);

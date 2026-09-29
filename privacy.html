@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy — Go Steady</title>
+  <script src="/Assets/replay-preferences.js" defer></script>
   <link rel="icon" type="image/png" href="/logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -98,6 +99,10 @@
       text-decoration: underline;
     }
 
+    .privacy-control { background: white; border: 1px solid var(--color-border); border-radius: 8px; color: var(--color-sage-dark); cursor: pointer; font: inherit; font-size: .85rem; padding: .7rem 1rem; }
+    .privacy-control:focus-visible { outline: 2px solid var(--color-sage); outline-offset: 3px; }
+    #replay-preference-status { font-size: .8rem; margin-top: .5rem; }
+
     .summary {
       background: #fff;
       border: 1px solid var(--color-border);
@@ -134,7 +139,7 @@
 
   <div class="content">
     <h1>Privacy Policy</h1>
-    <p class="last-updated">Last updated: September 23, 2026</p>
+    <p class="last-updated">Last updated: September 29, 2026</p>
 
     <p>GoSteady LLC ("GoSteady," "we," "us," or "our") respects your privacy. This Privacy Policy
     explains how we collect, use, and share information when you visit gosteady.co (the "Site")
@@ -227,6 +232,16 @@
       <li><strong>Plausible Analytics</strong> — a privacy-friendly analytics tool that does not
       use cookies and does not collect personal data. It provides aggregate visitor statistics
       only.</li>
+      <li><strong>Microsoft Clarity</strong> — we use session replays and interaction analytics on the public
+      homepage and checkout to understand scrolling, clicks, checkout progress, and usability errors.
+      Form entries are masked, and we do not send entered names, email addresses, phone numbers,
+      shipping addresses, payment-card details, or device activity through this integration.
+      We do not install the recorder in the family portal or on Stripe’s payment pages.
+      Clarity may use cookies and collect technical information such as page URLs, referral sources,
+      device and browser information, and interaction timing. Microsoft processes this information
+      under its <a href="https://privacy.microsoft.com/privacystatement" target="_blank" rel="noopener">Privacy Statement</a>.
+      Browser privacy signals (Global Privacy Control or Do Not Track) disable our replay integration.
+      Where Clarity requires consent, full recordings and cross-page sessions are limited until valid consent is provided.</li>
       <li><strong>Meta Pixel and Conversions API (Facebook)</strong> — we use browser and server events to measure the
       effectiveness of our Facebook advertising. The Meta Pixel may use cookies to track
       conversions, optimize ads, and build targeted audiences. We send checkout milestones and confirmed reservation payments, including the amount paid. Matching information can include advertising click and browser identifiers and a hashed email address. Hashing does not make this information anonymous. We do not send device activity, assistance alerts, location, or payment-card information to Meta. Server attribution records are retained for up to 90 days. We honor Global Privacy Control on the website checkout. You can learn more at
@@ -241,6 +256,10 @@
       up to 90 days. Global Privacy Control suppresses these advertising events.
       See <a href="https://www.reddit.com/policies/privacy-policy" target="_blank" rel="noopener">Reddit’s Privacy Policy</a>.</li>
     </ul>
+    <p>You can turn off session replay for subsequent visits in this browser. This preference
+    is stored on your device and does not change the separate advertising settings described above.</p>
+    <button class="privacy-control" id="replay-preference" type="button">Turn off session replay in this browser</button>
+    <p id="replay-preference-status" role="status"></p>
     <p>You can opt out of interest-based advertising through your browser settings or by visiting
     <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener">Your Ad
     Choices</a>.</p>
@@ -257,6 +276,8 @@
       under contracts that limit their use of the data to providing services to us.</li>
       <li><strong>With Meta (Facebook) and Reddit</strong> — conversion event data to measure ad
       performance, as described above.</li>
+      <li><strong>With Microsoft Clarity</strong> — public shopping-flow interaction data for
+      usability analysis, as described above.</li>
       <li><strong>For legal reasons</strong> — to comply with law, enforce our terms, or protect
       the rights, safety, and security of users and the public.</li>
       <li><strong>In a business transfer</strong> — as part of a merger, acquisition, or sale of
