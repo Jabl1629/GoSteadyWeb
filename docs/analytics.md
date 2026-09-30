@@ -44,6 +44,12 @@ The $199 device quote and offer version remain unchanged. Legacy `/checkout`
 and `/checkout.html` redirect to `/checkoutV2`. Prior annual reservations and
 webhook records remain intact. Use dates and `flow_version` to separate cohorts.
 
+Checkout confidence update: optional phone collection is removed and the
+optional apartment field is collapsed by default. The setup video opens in a
+dialog without resetting the form; its existing `Setup Video Started`,
+`Setup Video Progress`, and `Setup Video Completed` events use `placement=checkout`.
+The `AddShippingInfo` trigger and payment events are unchanged.
+
 The sections below describe earlier versions and retained instrumentation.
 
 ## Behavior diagnosis — September 29, 2026
