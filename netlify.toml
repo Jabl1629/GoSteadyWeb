@@ -37,6 +37,7 @@
   from = "/checkout"
   to = "/checkoutV2"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/checkout.html"
