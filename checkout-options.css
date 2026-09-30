@@ -84,3 +84,45 @@ h1:focus { outline: none; }
 @media (prefers-reduced-motion: reduce) {
   .billing-switch::before { transition: none; }
 }
+
+/* Monthly offer and delivery form share one step. Keep the form close on mobile. */
+.checkout-combined main:has(#shipping-step:not(.hidden)) { max-width: 780px; grid-template-columns: minmax(0, 1fr); }
+.checkout-combined main:has(#shipping-step:not(.hidden)) .order-summary { display: none; }
+.checkout-combined .progress { max-width: 340px; margin-bottom: 1.5rem; }
+.checkout-offer { background: var(--cream); border: 1px solid var(--border); border-radius: 18px; padding: 1.25rem; margin-bottom: 1.75rem; }
+.checkout-product { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 1.25rem; align-items: center; }
+.checkout-product img { width: 100%; height: auto; mix-blend-mode: multiply; }
+.checkout-product .step-eyebrow { font-size: .65rem; margin-bottom: .3rem; }
+.checkout-product h2 { font-family: var(--serif); font-size: 1.4rem; font-weight: 500; line-height: 1.2; }
+.checkout-device-price { display: flex; flex-wrap: wrap; gap: .2rem .5rem; align-items: baseline; margin-top: .5rem; }
+.checkout-device-price strong { font-size: 1.2rem; font-weight: 600; }
+.checkout-device-price span, .checkout-included { color: var(--text-soft); font-size: .75rem; }
+.checkout-included { margin-top: .3rem; }
+.checkout-service { border-top: 1px solid var(--border); margin-top: 1rem; padding-top: 1rem; }
+.checkout-service > strong { display: block; font-family: var(--sans); font-size: 1.16rem; font-weight: 600; }
+.checkout-service p { color: var(--text-soft); font-size: .82rem; margin-top: .3rem; line-height: 1.5; }
+.checkout-service p strong { color: var(--text); font-weight: 600; }
+.checkout-service .checkout-service-benefits { font-size: .76rem; margin-top: .55rem; }
+.checkout-reassurance { border-top: 1px solid var(--border); display: grid; gap: .6rem; list-style: none; margin-top: 1rem; padding-top: 1rem; }
+.checkout-reassurance li { display: flex; align-items: flex-start; gap: .55rem; font-size: .77rem; line-height: 1.5; color: var(--text-soft); }
+.checkout-reassurance strong { color: var(--text); font-weight: 600; }
+.checkout-reassurance a { color: var(--sage-dark); text-underline-offset: 2px; }
+.checkout-combined .intro { font-size: .9rem; margin-bottom: 1.4rem; }
+.summary-guarantee { border-top: 1px solid var(--border); margin-top: 1rem; padding-top: 1rem; font-size: .75rem; color: var(--text-soft); line-height: 1.5; }
+.summary-guarantee strong { color: var(--text); font-weight: 600; }
+@media (max-width: 560px) {
+  .checkout-combined main { padding-top: 1.25rem; }
+  .checkout-offer { padding: 1rem; margin-bottom: 1.5rem; }
+  .checkout-product { grid-template-columns: 105px minmax(0, 1fr); gap: .75rem; }
+  .checkout-product h2 { font-size: 1.12rem; }
+  .checkout-product .step-eyebrow { font-size: .59rem; }
+  .checkout-device-price { gap: .1rem .35rem; margin-top: .35rem; }
+  .checkout-device-price span, .checkout-included { font-size: .68rem; }
+  .checkout-service, .checkout-reassurance { margin-top: .8rem; padding-top: .8rem; }
+  .checkout-service > strong { font-size: 1.08rem; }
+  .checkout-service p { font-size: .77rem; }
+  .checkout-reassurance li { font-size: .73rem; }
+  .checkout-combined .form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .checkout-combined .field { grid-column: auto; }
+  .checkout-combined .field.full { grid-column: 1 / -1; }
+}

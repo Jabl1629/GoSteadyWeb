@@ -35,8 +35,14 @@
 # Clean URL for the direct-to-consumer checkout funnel
 [[redirects]]
   from = "/checkout"
-  to = "/checkout.html"
-  status = 200
+  to = "/checkoutV2"
+  status = 301
+
+[[redirects]]
+  from = "/checkout.html"
+  to = "/checkoutV2"
+  status = 301
+  force = true
 
 # The V2 page is now the homepage; keep its old URLs alive as permanent redirects
 [[redirects]]

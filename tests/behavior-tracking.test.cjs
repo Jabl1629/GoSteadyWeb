@@ -20,6 +20,13 @@ function page(options = {}) {
   }
   const nodes = Object.fromEntries(ids.map(id => [id, target(id)]));
   ['shipping-step', 'preorder-step', 'notify-confirmation'].forEach(id => nodes[id].classes.add('hidden'));
+  if (options.combined) {
+    delete nodes['plan-step'];
+    delete nodes['continue-delivery'];
+    delete nodes['plan-monthly'];
+    delete nodes['plan-annual'];
+    nodes['shipping-step'].classes.delete('hidden');
+  }
   nodes.email.value = 'private-customer@example.com';
   const document = Object.assign(target('document'), {
     visibilityState: 'visible',
@@ -139,4 +146,21 @@ test('broken recorder and analytics never interrupt checkout interaction listene
     p.nodes['shipping-form'].emit('input', {target: p.nodes.email});
     p.nodes['continue-payment'].emit('click');
   });
+});
+
+test('combined checkout starts in delivery and only records genuine form entry', () => {
+  const p = page({combined: true});
+  assert.ok(p.replay().some(e => e[0] === 'event' && e[1] === 'delivery_viewed'));
+  assert.equal(p.replay().some(e => e[1] === 'plan_viewed'), false);
+  p.nodes.email.value = '';
+  p.nodes['shipping-form'].emit('input', {target:p.nodes.email});
+  assert.equal(p.events.length, 0);
+  p.nodes.email.value = 'private-customer@example.com';
+  p.nodes['shipping-form'].emit('change', {target:p.nodes.email});
+  assert.equal(p.events.filter(e => e[0] === 'V2 Address Form Started').length, 1);
+  p.nodes['shipping-step'].classes.add('hidden');
+  p.nodes['preorder-step'].classes.delete('hidden');
+  p.mutate('preorder-step');
+  assert.ok(p.replay().some(e => e[0] === 'event' && e[1] === 'reservation_viewed'));
+  assert.doesNotMatch(JSON.stringify([p.replay(), p.events]), /private-customer/);
 });

@@ -1,6 +1,6 @@
 # GoSteady reservation offer
 
-Updated September 23, 2026.
+Updated September 30, 2026.
 
 ## Customer offer
 
@@ -8,17 +8,17 @@ Updated September 23, 2026.
 - Refundable deposit collected now: $49 USD.
 - Remaining balance: $150 USD, collected before shipment after contacting the customer.
 - Estimated shipping: December 2026.
-- First two months of service are free after activation, then the selected plan:
-  $20/month (cancel any time) or $200/year (cancel renewal any time).
-- Annual billing starts after the two free months and covers a full year.
-  $200/year is approximately $16.67/month and saves $40 against 12 monthly payments.
+- First two months of service are free after activation, then $20/month, cancel anytime.
+- New checkout offers monthly service only. Existing annual reservations retain their recorded terms.
+- 60-day, no-questions-asked returns after delivery for a full device refund,
+  including the deposit applied to the device price. Contact support within 60 days.
 - Reservation payments are fully refundable before shipment. Contact: support@gosteady.co.
 
-Checkout begins with box contents and monthly/annual service selection. The
-device is $199. The homepage labels $249 as planned retail and shows the
-required Family Plan separately ($20/month or $200/year). The preorder status
-and deposit split are disclosed after address submission. The two free service
-months are also explained in the homepage Family Plan section.
+Checkout combines the device/box offer and delivery address form on one screen.
+The $199 device, two free months, ongoing $20/month service, fit on all standard
+walker types, and 60-day returns are shown together. There is no plan-selection
+step. The preorder status and deposit split are disclosed after a successful
+address submission and before payment. See `/terms.html#returns` for the refund policy.
 
 ## Live Stripe configuration
 
@@ -27,7 +27,7 @@ months are also explained in the homepage Family Plan section.
 - One-time price: `price_1UIwVtQ2TfGTSvqAnLz2pdLI` (4900 cents USD, quantity 1).
 - Payment Link: `plink_1UIwWXQ2TfGTSvqAuINb79n3`.
 - URL: https://buy.stripe.com/cNi14p4Im3rs3mv7Rqbsc03
-- Annual-choice deposit product: `gosteady_founding_family_199_annual`.
+- Historical annual-choice deposit product (not offered in the new checkout): `gosteady_founding_family_199_annual`.
 - Annual-choice one-time deposit price: `price_1UIwWBQ2TfGTSvqAxNlmF0Vp` ($49).
 - Annual-choice Payment Link: `plink_1UIwWcQ2TfGTSvqACjfPpIAH`.
 - Annual-choice URL: https://buy.stripe.com/dRm6oJ1waaTU4qz0oYbsc04
@@ -88,12 +88,14 @@ at activation using the selected recurring price, and review tax registration
 and collection before enabling service billing. Automatic tax remains off.
 Honor refund requests through Stripe before shipment.
 
-All Netlify checkout forms now declare and save `service_plan`, `service_interval`,
-`service_price`, `annual_price`, and `flow_version=plans_2026_09`. Choice and
-monitoring forms also retain source URL, referrer, UTMs, and fbclid. A customer
-can change plans after first submitting their address; the later choice record
-and Stripe Session contain their final choice. See [analytics.md](analytics.md)
-for the updated event map. Local previews do not submit forms or open payments.
+The current Netlify forms save `service_plan=monthly`, `service_interval=month`,
+`service_price=20`, an empty legacy `annual_price`, and
+`flow_version=delivery_monthly_2026_09_30`. Choice and monitoring forms also
+retain source URL, referrer, UTMs, and click IDs. Old stored annual selections
+cannot change the new offer or Stripe link. The old checkout routes redirect
+to the combined flow. Local previews do not submit forms or open payments.
+See [analytics.md](analytics.md) for the current event map: `AddShippingInfo`
+is the completed-address campaign target, separate from a paid deposit.
 
 The optional monitoring survey still appears after the notification-only
 choice. Paid customers stay on Stripe's confirmation page, so the website's

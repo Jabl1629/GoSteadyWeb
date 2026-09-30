@@ -1,8 +1,54 @@
 # Checkout analytics
 
+## Current checkout — September 30, 2026
+
+Flow version: `delivery_monthly_2026_09_30`. The offer and delivery address form
+now share the first screen. New customers see monthly service only: two free
+months after activation, then $20/month. The next screen discloses the preorder
+and $49 reservation before the Stripe handoff.
+
+**Meta campaign optimization target: `AddShippingInfo`**, in dataset
+**GoSteady Waitlist** (`2755897781476379`). This existing custom event means a
+valid address form was successfully saved. The payment/reservation screen is
+shown before the browser event fires. It does not fire on arrival, typing,
+validation failure, or a failed save. Pixel `trackCustom` and the existing
+Conversions API use the same event name and `shipping_<checkout_id>` identifier
+for deduplication. If Ads Manager requires a custom conversion, base it on this
+event, not a `/checkoutV2` URL visit: both steps use that same URL.
+
+Current funnel:
+
+| Plausible event | Meta event | Meaning |
+| --- | --- | --- |
+| `V2 Checkout Started` | `InitiateCheckout` | Combined offer/address page loaded; shallow diagnostic |
+| `V2 Address Form Started` | None | First nonempty address-field edit; diagnostic only |
+| `V2 Details Submitted` | `AddShippingInfo` | Address saved and payment/reservation screen shown |
+| `V2 Availability Disclosed` | None | Preorder and deposit terms shown |
+| `V2 Deposit Checkout Opened` | `AddPaymentInfo` | Stripe handoff started; not a payment |
+| Server-verified deposit | `Purchase` | Successful Stripe deposit, value $49 |
+
+Use `AddShippingInfo` for the new campaign, not `InitiateCheckout` or a
+form-start event. The latter remain useful for diagnosis. Campaign settings
+are managed by the owner; this deployment does not alter Meta budgets or ads.
+
+`V2 Plan Viewed`, plan-selection/continued events, and `V2 Delivery Button Seen`
+are retired in this flow. Their historical dashboard goals may remain, but
+should not be used as new-flow denominators. `V2 Checkout Started` retains its
+address-page-reached meaning and now occurs on initial load. Monthly details
+and Stripe-handoff goals are retained. Clarity starts at `delivery_viewed`, then
+records `address_form_started` and `reservation_viewed`; existing privacy and
+QA exclusions remain in place. Homepage `V2 Landing Viewed` is noninteractive
+so a page-load event alone does not lower the reported bounce rate.
+
+The $199 device quote and offer version remain unchanged. Legacy `/checkout`
+and `/checkout.html` redirect to `/checkoutV2`. Prior annual reservations and
+webhook records remain intact. Use dates and `flow_version` to separate cohorts.
+
+The sections below describe earlier versions and retained instrumentation.
+
 ## Behavior diagnosis — September 29, 2026
 
-Microsoft Clarity adds session replay on the homepage and V2 checkout. Existing
+Microsoft Clarity project `yq0g49ty6c` adds session replay on the homepage and V2 checkout. Existing
 Plausible scroll/video events and Meta optimization goals are unchanged. Replay
 is prospective: it cannot reconstruct earlier visits. Ad blockers and consent
 restrictions can make its totals differ from Plausible and Meta.
@@ -34,8 +80,8 @@ Additional Plausible custom-event goals (exact event names):
 | `V2 Payment Handoff Error` | Stripe handoff error displayed |
 | `V2 Browser Error` | Script error or unhandled rejection; no raw error message |
 
-These goals are once per page load. Register them in Plausible's Goals settings
-to show counts in its dashboard. Existing `V2 Checkout Started` still means the
+These goals are once per page load. All six are registered in Plausible's Goals
+settings under the `Behavior ·` and `Error ·` display names. Existing `V2 Checkout Started` still means the
 delivery step was reached, and `V2 Details Submitted` still means address saved.
 
 Form fields are explicitly masked before the recorder loads. No customer
@@ -50,6 +96,17 @@ consent defaults apply; the site never manufactures a consent grant.
 
 Public project configuration is in the `data-clarity-project` attribute of each
 page's behavior-tracking script. There are no new secret tokens or server costs.
+
+Deployment verification: production homepage, checkout, scripts and privacy
+page returned HTTP 200; the recorder loaded its Clarity library on a deliberately
+labeled verification visit, with all 96 checkout inputs explicitly masked.
+The QA-tagged checkout loaded no recorder. Clarity's live view received both the
+verification visit and an independent mobile visit attributed to the Meta
+campaign. Completed recordings and dashboard aggregates can arrive later.
+Clarity has a saved `Mobile visitors` segment (last three days, mobile devices).
+Exclude campaign `clarity_install_check` (source `diagnostic`, medium
+`verification`) from customer analysis: that visit included plan-to-delivery
+navigation but no form submission or payment. The test suite passed 69 checks.
 
 Updated September 23, 2026; checkout flow `plans_2026_09`.
 

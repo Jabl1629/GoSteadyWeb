@@ -143,6 +143,7 @@
   var fieldIds = ['first-name', 'last-name', 'email', 'phone', 'address-one', 'address-two', 'city', 'region', 'postal-code'];
   function startForm(event) {
     if (currentStage !== 'delivery' || fieldIds.indexOf(event.target.id) === -1 || seen.has('address_form_started')) return;
+    if (!String(event.target.value || '').trim()) return;
     seen.add('address_form_started');
     replay('set', 'address_form_started', 'yes');
     signal('address_form_started', 'V2 Address Form Started');
