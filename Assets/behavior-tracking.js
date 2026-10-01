@@ -69,8 +69,10 @@
 
   if (!checkout) {
     replay('event', 'homepage_viewed');
-    d.querySelectorAll('[data-v2-cta]').forEach(function (link) {
-      link.addEventListener('click', function () { replay('event', 'homepage_checkout_clicked'); });
+    d.querySelectorAll('[data-v2-cta], [data-pricing-cta]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        if (link.getAttribute('href') !== '#pricing') replay('event', 'homepage_checkout_clicked');
+      });
     });
     return;
   }
