@@ -36,7 +36,7 @@
   }
   </script>
   <script src="/Assets/reddit-tracking.js"></script>
-  <script src="/Assets/behavior-tracking.js?v=20261001-1" data-clarity-project="yq0g49ty6c" defer></script>
+  <script src="/Assets/behavior-tracking.js?v=20261001-3" data-clarity-project="yq0g49ty6c" defer></script>
   <script async src="https://plausible.io/js/pa-1F6kJUB_Hmb5mZjKjHFKC.js"></script>
   <script>
     window.plausible = window.plausible || function() {
@@ -720,7 +720,7 @@
         <a href="#how-it-works">How it works</a>
         <a href="#setup">Setup</a>
         <a href="#questions">Questions</a>
-        <a class="button" data-pricing-cta href="#pricing">View pricing</a>
+        <a class="button" data-v2-cta href="/checkoutV2">View pricing</a>
       </nav>
     </div>
   </header>
@@ -1162,39 +1162,16 @@
     const pageParams = new URLSearchParams(window.location.search);
     pageParams.set('source', 'cupholder_v2');
 
-    document.querySelectorAll('[data-v2-cta], [data-pricing-cta]').forEach(function(link) {
-      if (link.hasAttribute('data-v2-cta')) {
-        const checkoutUrl = new URL(link.getAttribute('href'), window.location.origin);
-        pageParams.forEach(function(value, key) { checkoutUrl.searchParams.set(key, value); });
-        link.href = checkoutUrl.pathname + checkoutUrl.search;
-      }
+    document.querySelectorAll('[data-v2-cta]').forEach(function(link) {
+      const checkoutUrl = new URL(link.getAttribute('href'), window.location.origin);
+      pageParams.forEach(function(value, key) { checkoutUrl.searchParams.set(key, value); });
+      link.href = checkoutUrl.pathname + checkoutUrl.search;
       link.addEventListener('click', function() {
-        if (link.getAttribute('href') === '#pricing') return;
         const offer = { offer_version: 'founding_family_199_2026_09', device_price: 199 };
         plausible('V2 Primary CTA', { props: offer });
         if (typeof fbq === 'function') fbq('trackCustom', 'V2PrimaryCTA', offer);
       });
     });
-
-    const pricingHeaderLink = document.querySelector('[data-pricing-cta]');
-    const pricingSection = document.getElementById('pricing');
-    const pricingOfferLink = pricingSection && pricingSection.querySelector('[data-v2-cta]');
-
-    if (pricingHeaderLink && pricingOfferLink && 'IntersectionObserver' in window) {
-      let pricingObserver;
-      function observePricing() {
-        if (pricingObserver) pricingObserver.disconnect();
-        const headerHeight = Math.ceil(document.querySelector('.site-header').getBoundingClientRect().height);
-        pricingObserver = new IntersectionObserver(function(entries) {
-          const visible = entries[0].isIntersecting && entries[0].intersectionRatio > 0;
-          pricingHeaderLink.textContent = visible ? 'Get GoSteady' : 'View pricing';
-          pricingHeaderLink.href = visible ? pricingOfferLink.href : '#pricing';
-        }, { rootMargin: '-' + headerHeight + 'px 0px 0px 0px', threshold: 0 });
-        pricingObserver.observe(pricingSection);
-      }
-      observePricing();
-      window.addEventListener('resize', observePricing, { passive: true });
-    }
 
     const heroCarousel = document.querySelector('[data-hero-carousel]');
 

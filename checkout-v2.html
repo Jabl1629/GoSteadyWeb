@@ -24,7 +24,7 @@
   </script>
   <!-- End Meta Pixel Code -->
   <script src="/Assets/reddit-tracking.js"></script>
-  <script src="/Assets/behavior-tracking.js" data-clarity-project="yq0g49ty6c" defer></script>
+  <script src="/Assets/behavior-tracking.js?v=20261001-3" data-clarity-project="yq0g49ty6c" defer></script>
   <script src="/Assets/setup-video.js" defer></script>
   <script async src="https://plausible.io/js/pa-1F6kJUB_Hmb5mZjKjHFKC.js"></script>
   <script>window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init()</script>
@@ -410,7 +410,7 @@
       .order-summary { padding: 1.1rem; }
     }
   </style>
-  <link rel="stylesheet" href="/checkout-options.css">
+  <link rel="stylesheet" href="/checkout-options.css?v=20261001-2">
 </head>
 <body class="checkout-combined">
   <noscript><img height="1" width="1" style="display:none" alt=""
@@ -432,19 +432,32 @@
   <main>
     <div class="checkout-main">
       <div class="progress" aria-label="Checkout progress">
-        <div class="progress-step active" id="delivery-progress" aria-current="step"><span>1</span> Delivery</div>
+        <div class="progress-step active" id="offer-progress" aria-current="step"><span>1</span> Offer</div>
         <div class="progress-line"></div>
-        <div class="progress-step" id="payment-progress"><span>2</span> Payment</div>
+        <div class="progress-step" id="delivery-progress"><span>2</span> Address</div>
+        <div class="progress-line"></div>
+        <div class="progress-step" id="payment-progress"><span>3</span> Payment</div>
       </div>
 
-      <section id="shipping-step" aria-labelledby="delivery-heading">
+      <section id="offer-step" aria-labelledby="offer-heading">
+        <div class="checkout-offer-heading">
+          <p class="step-eyebrow">Founding family offer</p>
+          <h1 id="offer-heading">Save $50 on GoSteady.</h1>
+        </div>
         <div class="checkout-offer">
           <div class="checkout-product">
-            <img src="/Assets/gosteady-device-and-box.webp?v=2" width="1536" height="1024" alt="The GoSteady smart cupholder and mounting clamp beside its box" fetchpriority="high">
-            <div>
-              <p class="step-eyebrow">Founding family offer</p>
-              <h2>GoSteady Family Connect</h2>
-              <p class="checkout-device-price"><strong>$199</strong> <span>one-time device price</span></p>
+            <div class="checkout-product-image">
+              <img src="/Assets/gosteady-device-and-box.webp?v=2" width="1536" height="1024" alt="The GoSteady smart cupholder and mounting clamp beside its box" fetchpriority="high">
+            </div>
+            <div class="checkout-price-copy">
+              <h3>GoSteady Family Connect</h3>
+              <div class="checkout-device-price">
+                <strong>$199</strong>
+                <span class="checkout-retail-price"><s>$249</s><small>Planned retail</small></span>
+              </div>
+              <p class="checkout-price-note">One-time device purchase.</p>
+            </div>
+            <div class="checkout-product-details">
               <p class="checkout-included">Smart cupholder, tool-free clamp &amp; quick start guide.</p>
               <a class="checkout-setup-link" href="/Assets/video/getting-started-v2.mp4" data-setup-video="checkout" aria-haspopup="dialog" aria-controls="setup-video-dialog">See how it attaches <span>· 90 sec</span></a>
             </div>
@@ -460,91 +473,101 @@
           </ul>
         </div>
 
-        <h1 id="delivery-heading">Your delivery details</h1>
-        <p class="intro">Enter your contact and delivery details to continue.</p>
+        <div class="offer-continue">
+          <button class="button" id="continue-address" type="button">Continue to address details <span aria-hidden="true">→</span></button>
+          <p>Review everything before paying. Nothing charged yet.</p>
+        </div>
+      </section>
 
-        <form id="shipping-form" name="cupholder-v2-shipping-intent" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-          <input type="hidden" name="service_plan" id="shipping-service-plan">
-          <input type="hidden" name="service_interval" id="shipping-service-interval">
-          <input type="hidden" name="service_price" id="shipping-service-price">
-          <input type="hidden" name="annual_price" id="shipping-annual-price">
-          <input type="hidden" name="flow_version" id="shipping-flow-version">
-          <input type="hidden" name="form-name" value="cupholder-v2-shipping-intent">
-          <input type="hidden" name="bot-field">
-          <input type="hidden" name="checkout_id" id="checkout-id">
-          <input type="hidden" name="rdt_cid" id="rdt-cid">
-          <input type="hidden" name="reddit_uuid">
-          <input type="hidden" name="reddit_opt_out">
-          <input type="hidden" name="fbp">
-          <input type="hidden" name="fbc">
-          <input type="hidden" name="client_user_agent">
-          <input type="hidden" name="meta_opt_out">
-          <input type="hidden" name="funnel_version" value="v2">
-          <input type="hidden" name="source_positioning" value="family_connect">
-          <input type="hidden" name="source_url" id="source-url">
-          <input type="hidden" name="referrer" id="referrer">
-          <input type="hidden" name="utm_source" id="utm-source">
-          <input type="hidden" name="utm_medium" id="utm-medium">
-          <input type="hidden" name="utm_campaign" id="utm-campaign">
-          <input type="hidden" name="utm_content" id="utm-content">
-          <input type="hidden" name="utm_term" id="utm-term">
-          <input type="hidden" name="fbclid" id="fbclid">
-          <input type="hidden" name="presented_price" value="199">
-          <input type="hidden" name="device_price" id="shipping-device-price" value="199">
-          <input type="hidden" name="offer_version" id="shipping-offer-version" value="founding_family_199_2026_09">
-          <input type="hidden" name="monthly_price" value="20">
-          <input type="hidden" name="currency" value="USD">
+      <section id="shipping-step" class="hidden" aria-labelledby="delivery-heading">
+        <div class="delivery-form-content">
+          <button class="back-link" id="back-to-offer" type="button">← Back to offer</button>
+          <h1 id="delivery-heading">Your delivery details</h1>
+          <p class="intro">Enter your contact and delivery details to continue.</p>
 
-          <div class="form-grid">
-            <div class="field">
-              <label for="first-name">First name</label>
-              <input id="first-name" name="first_name" type="text" autocomplete="given-name" required>
-            </div>
-            <div class="field">
-              <label for="last-name">Last name</label>
-              <input id="last-name" name="last_name" type="text" autocomplete="family-name" required>
-            </div>
-            <div class="field full">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required>
-            </div>
-            <div class="field full">
-              <label for="address-one">Address</label>
-              <input id="address-one" name="address_line_1" type="text" autocomplete="shipping address-line1" required>
-            </div>
-            <details class="field full address-extra">
-              <summary>Add apartment, suite, etc. <span class="optional">(optional)</span></summary>
+          <form id="shipping-form" name="cupholder-v2-shipping-intent" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="service_plan" id="shipping-service-plan">
+            <input type="hidden" name="service_interval" id="shipping-service-interval">
+            <input type="hidden" name="service_price" id="shipping-service-price">
+            <input type="hidden" name="annual_price" id="shipping-annual-price">
+            <input type="hidden" name="flow_version" id="shipping-flow-version">
+            <input type="hidden" name="form-name" value="cupholder-v2-shipping-intent">
+            <input type="hidden" name="bot-field">
+            <input type="hidden" name="checkout_id" id="checkout-id">
+            <input type="hidden" name="rdt_cid" id="rdt-cid">
+            <input type="hidden" name="reddit_uuid">
+            <input type="hidden" name="reddit_opt_out">
+            <input type="hidden" name="fbp">
+            <input type="hidden" name="fbc">
+            <input type="hidden" name="client_user_agent">
+            <input type="hidden" name="meta_opt_out">
+            <input type="hidden" name="funnel_version" value="v2">
+            <input type="hidden" name="source_positioning" value="family_connect">
+            <input type="hidden" name="source_url" id="source-url">
+            <input type="hidden" name="referrer" id="referrer">
+            <input type="hidden" name="utm_source" id="utm-source">
+            <input type="hidden" name="utm_medium" id="utm-medium">
+            <input type="hidden" name="utm_campaign" id="utm-campaign">
+            <input type="hidden" name="utm_content" id="utm-content">
+            <input type="hidden" name="utm_term" id="utm-term">
+            <input type="hidden" name="fbclid" id="fbclid">
+            <input type="hidden" name="presented_price" value="199">
+            <input type="hidden" name="device_price" id="shipping-device-price" value="199">
+            <input type="hidden" name="offer_version" id="shipping-offer-version" value="founding_family_199_2026_09">
+            <input type="hidden" name="monthly_price" value="20">
+            <input type="hidden" name="currency" value="USD">
+
+            <div class="form-grid">
               <div class="field">
-                <label for="address-two">Apartment, suite, etc.</label>
-                <input id="address-two" name="address_line_2" type="text" autocomplete="shipping address-line2">
+                <label for="first-name">First name</label>
+                <input id="first-name" name="first_name" type="text" autocomplete="given-name" required>
               </div>
-            </details>
-            <div class="field full">
-              <label for="city">City</label>
-              <input id="city" name="city" type="text" autocomplete="shipping address-level2" required>
+              <div class="field">
+                <label for="last-name">Last name</label>
+                <input id="last-name" name="last_name" type="text" autocomplete="family-name" required>
+              </div>
+              <div class="field full">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required>
+              </div>
+              <div class="field full">
+                <label for="address-one">Address</label>
+                <input id="address-one" name="address_line_1" type="text" autocomplete="shipping address-line1" required>
+              </div>
+              <details class="field full address-extra">
+                <summary>Add apartment, suite, etc. <span class="optional">(optional)</span></summary>
+                <div class="field">
+                  <label for="address-two">Apartment, suite, etc.</label>
+                  <input id="address-two" name="address_line_2" type="text" autocomplete="shipping address-line2">
+                </div>
+              </details>
+              <div class="field full">
+                <label for="city">City</label>
+                <input id="city" name="city" type="text" autocomplete="shipping address-level2" required>
+              </div>
+              <div class="field">
+                <label for="region">State</label>
+                <input id="region" name="region" type="text" autocomplete="shipping address-level1" maxlength="30" required>
+              </div>
+              <div class="field">
+                <label for="postal-code">ZIP code</label>
+                <input id="postal-code" name="postal_code" type="text" autocomplete="shipping postal-code" inputmode="numeric" maxlength="10" required>
+              </div>
             </div>
-            <div class="field">
-              <label for="region">State</label>
-              <input id="region" name="region" type="text" autocomplete="shipping address-level1" maxlength="30" required>
-            </div>
-            <div class="field">
-              <label for="postal-code">ZIP code</label>
-              <input id="postal-code" name="postal_code" type="text" autocomplete="shipping postal-code" inputmode="numeric" maxlength="10" required>
-            </div>
-          </div>
 
-          <button class="button" id="shipping-submit" type="submit" aria-describedby="payment-reassurance">Continue to payment</button>
-          <p class="payment-reassurance" id="payment-reassurance">Review everything before paying. Nothing charged yet.</p>
-          <div class="error-message" id="shipping-error" role="alert">We couldn't save your information. Please check your connection and try again.</div>
-        </form>
-        <div class="checkout-help">
-          <p>Questions before you continue? <a href="mailto:support@gosteady.co">support@gosteady.co</a></p>
-          <p class="privacy-note">We use your details to complete checkout. <a href="/privacy.html" target="_blank" rel="noopener">Privacy Policy</a></p>
+            <button class="button" id="shipping-submit" type="submit" aria-describedby="payment-reassurance">Continue to payment</button>
+            <p class="payment-reassurance" id="payment-reassurance">Review everything before paying. Nothing charged yet.</p>
+            <div class="error-message" id="shipping-error" role="alert">We couldn't save your information. Please check your connection and try again.</div>
+          </form>
+          <div class="checkout-help">
+            <p>Questions before you continue? <a href="mailto:support@gosteady.co">support@gosteady.co</a></p>
+            <p class="privacy-note">We use your details to complete checkout. <a href="/privacy.html" target="_blank" rel="noopener">Privacy Policy</a></p>
+          </div>
         </div>
       </section>
 
       <section id="preorder-step" class="hidden" aria-live="polite">
-        <button class="back-link" id="back-to-delivery" type="button">← Back to delivery</button>
+        <button class="back-link" id="back-to-delivery" type="button">← Back to address details</button>
         <div class="preorder-panel">
           <div class="preorder-banner">
             <strong>
@@ -702,13 +725,26 @@
     // Live Stripe Payment Link: $49 deposit toward the $199 device; $150 before shipment.
     // Card details must always be collected by the payment provider, never this page.
     const PAYMENT_LINK_URL = 'https://buy.stripe.com/cNi14p4Im3rs3mv7Rqbsc03';
-    const FLOW_VERSION = 'delivery_monthly_2026_09_30';
+    const FLOW_VERSION = 'offer_address_payment_2026_10_01';
     const OFFER_VERSION = 'founding_family_199_2026_09';
     const IS_LOCAL_PREVIEW = window.location.hostname !== 'gosteady.co';
     const params = new URLSearchParams(window.location.search);
-    const checkoutId = window.crypto && crypto.randomUUID
-      ? crypto.randomUUID()
-      : 'gs-' + Date.now() + '-' + Math.random().toString(16).slice(2);
+    const JOURNEY_KEY = 'gosteady-offer-checkout-v1';
+    function loadJourney() {
+      try {
+        const saved = JSON.parse(sessionStorage.getItem(JOURNEY_KEY));
+        if (saved && /^[a-zA-Z0-9_-]{8,200}$/.test(saved.id) && saved.expires > Date.now()) return saved;
+      } catch (_) {}
+      return { id: window.crypto && crypto.randomUUID ? crypto.randomUUID()
+        : 'gs-' + Date.now() + '-' + Math.random().toString(16).slice(2), expires: Date.now() + 2 * 60 * 60 * 1000 };
+    }
+    const journey = loadJourney();
+    const checkoutId = journey.id;
+    function saveJourney() { try { sessionStorage.setItem(JOURNEY_KEY, JSON.stringify(journey)); } catch (_) {} }
+    saveJourney();
+    const IS_QA = /^(qa|test|internal)$/i.test(params.get('utm_source') || '') ||
+      /^(qa|test)$/i.test(params.get('utm_medium') || '') || params.get('qa') === '1';
+
 
     // Analytics must never interrupt address capture or the payment handoff.
     function track(name, metaEvent, metaData, customMetaEvent, eventId) {
@@ -804,6 +840,8 @@
     const shippingForm = document.getElementById('shipping-form');
     const shippingSubmit = document.getElementById('shipping-submit');
     const shippingError = document.getElementById('shipping-error');
+    const offerStep = document.getElementById('offer-step');
+    const offerProgress = document.getElementById('offer-progress');
     const shippingStep = document.getElementById('shipping-step');
     const preorderStep = document.getElementById('preorder-step');
     const deliveryProgress = document.getElementById('delivery-progress');
@@ -815,6 +853,9 @@
     const selectedPlan = 'monthly';
     let openingPayment = false;
     let addressSaved = false;
+    let offerAccepted = false;
+    let reportingOffer = false;
+    let offerReportAttempts = 0;
 
     function updateServicePlan() {
       Object.entries(serviceDetails(selectedPlan)).forEach(function(entry) {
@@ -828,8 +869,8 @@
 
     function showCheckoutStep(step) {
       if (openingPayment || shippingSubmit.disabled) return;
-      const stages = [shippingStep, preorderStep];
-      const indicators = [deliveryProgress, paymentProgress];
+      const stages = [offerStep, shippingStep, preorderStep];
+      const indicators = [offerProgress, deliveryProgress, paymentProgress];
       stages.forEach(function(section, index) {
         if (index === step) section.classList.remove('hidden');
         else section.classList.add('hidden');
@@ -848,11 +889,48 @@
       window.scrollTo({ top: 0, behavior: 'instant' });
     }
 
-    document.getElementById('back-to-delivery').addEventListener('click', function() { showCheckoutStep(0); });
+    // Only an explicit offer-to-address transition qualifies for the new goal.
+    // Technical attribution goes to CAPI; customer form values never do.
+    function reportOfferAccepted() {
+      if (IS_LOCAL_PREVIEW || IS_QA || metaOptOut()) return;
+      if (!journey.offerAcceptedAt) {
+        journey.offerAcceptedAt = Math.floor(Date.now() / 1000);
+        saveJourney();
+        trackOnce('V2 Offer Accepted', 'OfferAccepted', {}, true, 'offer_' + checkoutId);
+      }
+      if (journey.offerReported || reportingOffer) return;
+      reportingOffer = true;
+      offerReportAttempts += 1;
+      const attribution = metaAttribution();
+      const source = new URL(window.location.href);
+      fetch('/.netlify/functions/offer-accepted', {
+        method: 'POST', credentials: 'same-origin', keepalive: true,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ checkout_id: checkoutId, event_time: journey.offerAcceptedAt,
+          source_url: source.origin + source.pathname, fbp: attribution.fbp, fbc: attribution.fbc,
+          meta_opt_out: attribution.meta_opt_out })
+      }).then(function(response) {
+        if (!response.ok) throw new Error('Offer reporting pending');
+        journey.offerReported = true;
+        saveJourney();
+      }).catch(function() {
+        // Retry transient browser/network failures without delaying navigation.
+        // Persisted Meta failures also use the existing hourly server retry job.
+        if (offerReportAttempts < 3) window.setTimeout(reportOfferAccepted, 1500 * offerReportAttempts);
+      }).finally(function() { reportingOffer = false; });
+    }
+    document.getElementById('continue-address').addEventListener('click', function() {
+      if (offerStep.classList.contains('hidden')) return;
+      offerAccepted = true;
+      showCheckoutStep(1);
+      reportOfferAccepted();
+    });
+    document.getElementById('back-to-offer').addEventListener('click', function() { showCheckoutStep(0); });
+    document.getElementById('back-to-delivery').addEventListener('click', function() { showCheckoutStep(1); });
     updateServicePlan();
-    // Retain the shallow checkout-start signal for reporting. The new campaign
-    // target is AddShippingInfo, emitted only after the address is saved.
+    // Keep the historical entry event stable. OfferAccepted is the new campaign goal.
     trackOnce('V2 Checkout Started', 'InitiateCheckout', { value: 199, currency: 'USD', content_name: 'GoSteady Family Connect' });
+    trackOnce('V2 Offer Viewed');
 
 
     // ---- Post-decision question: appetite for professional monitoring (Tier 2 signal) ----
@@ -920,7 +998,7 @@
 
     shippingForm.addEventListener('submit', function(event) {
       event.preventDefault();
-      if (shippingSubmit.disabled || openingPayment) return;
+      if (shippingSubmit.disabled || openingPayment || !offerAccepted || shippingStep.classList.contains('hidden')) return;
       if (!shippingForm.reportValidity()) return;
       shippingError.classList.remove('show');
       shippingSubmit.disabled = true;
@@ -939,7 +1017,7 @@
         document.getElementById('balance-summary').classList.remove('hidden');
         updateServicePlan();
         shippingSubmit.disabled = false;
-        showCheckoutStep(1);
+        showCheckoutStep(2);
         // Meta custom event matches the existing server-side event and event ID
         // so the pixel and CAPI delivery deduplicate into one saved address.
         trackOnce('V2 Details Submitted', 'AddShippingInfo', { value: 199, currency: 'USD' }, true, 'shipping_' + checkoutId);

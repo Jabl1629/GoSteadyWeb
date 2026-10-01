@@ -69,16 +69,14 @@
 
   if (!checkout) {
     replay('event', 'homepage_viewed');
-    d.querySelectorAll('[data-v2-cta], [data-pricing-cta]').forEach(function (link) {
-      link.addEventListener('click', function () {
-        if (link.getAttribute('href') !== '#pricing') replay('event', 'homepage_checkout_clicked');
-      });
+    d.querySelectorAll('[data-v2-cta]').forEach(function (link) {
+      link.addEventListener('click', function () { replay('event', 'homepage_checkout_clicked'); });
     });
     return;
   }
 
-  var stages = ['plan-step', 'shipping-step', 'preorder-step', 'notify-confirmation'];
-  var stageNames = ['plan', 'delivery', 'reservation', 'notification_confirmation'];
+  var stages = ['offer-step', 'plan-step', 'shipping-step', 'preorder-step', 'notify-confirmation'];
+  var stageNames = ['offer', 'plan', 'delivery', 'reservation', 'notification_confirmation'];
   var stageObserver;
   function updateStage() {
     var next = stages.findIndex(function (id) {
@@ -95,6 +93,8 @@
     updateButtonExposure();
   }
 
+  var offerButton = d.getElementById('continue-address');
+  if (offerButton) offerButton.addEventListener('click', function () { replay('event', 'offer_continue_clicked'); });
   var continueButton = d.getElementById('continue-delivery');
   var exposureTimer = null;
   var inView = false;

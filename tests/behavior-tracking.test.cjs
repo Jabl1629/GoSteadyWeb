@@ -27,6 +27,10 @@ function page(options = {}) {
     delete nodes['plan-annual'];
     nodes['shipping-step'].classes.delete('hidden');
   }
+  if (options.offer) {
+    delete nodes['plan-step']; delete nodes['continue-delivery'];
+    nodes['offer-step'] = target('offer-step'); nodes['continue-address'] = target('continue-address');
+  }
   nodes.email.value = 'private-customer@example.com';
   const document = Object.assign(target('document'), {
     visibilityState: 'visible',
@@ -163,4 +167,18 @@ test('combined checkout starts in delivery and only records genuine form entry',
   p.mutate('preorder-step');
   assert.ok(p.replay().some(e => e[0] === 'event' && e[1] === 'reservation_viewed'));
   assert.doesNotMatch(JSON.stringify([p.replay(), p.events]), /private-customer/);
+});
+
+
+test('three-step offer flow records separate offer and address views without early form entry', () => {
+  const p = page({offer:true});
+  assert.ok(p.replay().some(e => e[0] === 'event' && e[1] === 'offer_viewed'));
+  p.nodes['shipping-form'].emit('input', {target:p.nodes.email});
+  assert.equal(p.events.length,0);
+  p.nodes['continue-address'].emit('click');
+  p.nodes['offer-step'].classes.add('hidden'); p.nodes['shipping-step'].classes.delete('hidden');
+  p.mutate('shipping-step');
+  assert.ok(p.replay().some(e => e[0] === 'event' && e[1] === 'delivery_viewed'));
+  p.nodes['shipping-form'].emit('input', {target:p.nodes.email});
+  assert.equal(p.events.filter(e => e[0] === 'V2 Address Form Started').length,1);
 });

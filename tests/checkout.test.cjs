@@ -6,7 +6,7 @@ const vm = require('node:vm');
 
 // Exercise each page's actual checkout script with isolated DOM/network adapters.
 // No requests, analytics events, or payments leave this test process.
-function checkout(file, { failForms = false, failAnalytics = false, failStorage = false, search = '', paymentLink, hostname = 'gosteady.co', validForm = true, storedPlan } = {}) {
+function checkout(file, { failForms = false, failAnalytics = false, failStorage = false, search = '', paymentLink, hostname = 'gosteady.co', validForm = true, storedPlan, sharedStorage, failOffer = false, privacy = false } = {}) {
   const html = fs.readFileSync(path.join(__dirname, '..', file), 'utf8');
   let script = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].at(-1)[1];
   if (paymentLink) script = script.replace(/const PAYMENT_LINK_URL = '[^']+';/,
@@ -27,24 +27,27 @@ function checkout(file, { failForms = false, failAnalytics = false, failStorage 
     element(match[1], match[0].match(/class="([^"]*)"/)?.[1] || '');
   }
   element('email').value = 'review@example.com';
-  const requests = [], events = [];
+  const requests = [], events = [], offerRequests = [], pendingRetries = [];
   element('plan-monthly').value = 'monthly';
   element('plan-annual').value = 'annual';
   const location = { hostname, search, href: 'https://gosteady.co/checkoutV2'+search };
-  const storage = new Map(storedPlan ? [['gosteady-service-plan', storedPlan]] : []);
+  const storage = sharedStorage || new Map(storedPlan ? [['gosteady-service-plan', storedPlan]] : []);
   const sandbox = {
-    URL, URLSearchParams, crypto: { randomUUID: () => 'review-checkout-uuid' },
-    window: { location, crypto: {}, scrollTo() {} },
+    URL, URLSearchParams, navigator: { userAgent: 'Test browser', globalPrivacyControl: privacy }, crypto: { randomUUID: () => 'review-checkout-uuid' },
+    window: { location, crypto: {}, scrollTo() {}, setTimeout(fn) { pendingRetries.push(fn); } },
     document: { referrer: '', getElementById: id => elements.get(id) || null,
       querySelector: () => element('preorder-content'), createElement: () => element('new') },
     sessionStorage: { setItem: (k,v) => { if (failStorage) throw Error('Storage blocked'); storage.set(k,v); }, getItem: k => { if (failStorage) throw Error('Storage blocked'); return storage.get(k); } },
     FormData: class extends URLSearchParams { constructor() { super({email:'review@example.com'}); } },
     plausible: (...args) => { if (failAnalytics) throw Error('Analytics blocked'); events.push(['plausible', ...args]); },
     fbq: (...args) => { if (failAnalytics) throw Error('Analytics blocked'); events.push(['meta', ...args]); },
-    fetch: async (url, options) => { requests.push(new URLSearchParams(options.body)); return {ok:!failForms}; }
+    fetch: async (url, options) => {
+      if (url === '/.netlify/functions/offer-accepted') { offerRequests.push(JSON.parse(options.body)); return {ok:!failOffer}; }
+      requests.push(new URLSearchParams(options.body)); return {ok:!failForms};
+    }
   };
   vm.runInNewContext(script, sandbox);
-  return { elements, requests, events, location,
+  return { elements, requests, events, offerRequests, pendingRetries, storage, location,
     async act(id, type = 'click') {
       elements.get(id).listeners[type].call(elements.get(id), {preventDefault(){}});
       await new Promise(resolve => setImmediate(resolve));
@@ -194,13 +197,19 @@ for (const file of ['checkout.html']) {
 
 
 const mergedFile = 'checkout-v2.html';
-async function saveAddress(c) { await c.act('shipping-form', 'submit'); }
+async function saveAddress(c) {
+  if (!c.elements.get('offer-step').classList.contains('hidden')) await c.act('continue-address');
+  await c.act('shipping-form', 'submit');
+}
 function countMeta(c, name) { return c.events.filter(e => e[0] === 'meta' && e[2] === name).length; }
 
-test('merged checkout opens at delivery without counting a completed address or purchase', () => {
+test('three-step checkout opens at the offer without counting a completed address or purchase', () => {
   const c = checkout(mergedFile, {search:'?reserved=1&session_id=forged'});
   assert.equal(c.elements.has('plan-step'), false);
-  assert.equal(c.elements.get('shipping-step').classList.contains('hidden'), false);
+  assert.equal(c.elements.get('offer-step').classList.contains('hidden'), false);
+  assert.equal(c.elements.get('shipping-step').classList.contains('hidden'), true);
+  assert.equal(countMeta(c, 'OfferAccepted'), 0);
+  assert.equal(c.offerRequests.length, 0);
   assert.equal(c.elements.get('preorder-step').classList.contains('hidden'), true);
   assert.equal(countMeta(c, 'InitiateCheckout'), 1);
   assert.equal(countMeta(c, 'AddShippingInfo'), 0);
@@ -208,7 +217,7 @@ test('merged checkout opens at delivery without counting a completed address or 
   assert.equal(c.events.filter(e => e[0] === 'plausible' && e[1] === 'V2 Checkout Started').length, 1);
 });
 
-test('merged checkout only counts a saved address after revealing payment and deduplicates resubmission', async () => {
+test('three-step checkout only counts a saved address after revealing payment and deduplicates resubmission', async () => {
   const c = checkout(mergedFile, {search:'?utm_source=facebook&utm_content=founder'});
   await saveAddress(c);
   assert.equal(c.elements.get('shipping-step').classList.contains('hidden'), true);
@@ -221,7 +230,7 @@ test('merged checkout only counts a saved address after revealing payment and de
   const event = c.events.find(e => e[2] === 'AddShippingInfo');
   assert.equal(event[1], 'trackCustom');
   assert.equal(event[4].eventID, 'shipping_review-checkout-uuid');
-  assert.equal(event[3].flow_version, 'delivery_monthly_2026_09_30');
+  assert.equal(event[3].flow_version, 'offer_address_payment_2026_10_01');
   assert.equal(event[3].value, 199);
   assert.equal(countMeta(c, 'Purchase'), 0);
   await c.act('back-to-delivery');
@@ -232,7 +241,7 @@ test('merged checkout only counts a saved address after revealing payment and de
 });
 
 for (const [name, options] of [['invalid fields', {validForm:false}], ['failed save', {failForms:true}]]) {
-  test(`merged checkout: ${name} cannot reach payment or emit a completed-address event`, async () => {
+  test(`three-step checkout: ${name} cannot reach payment or emit a completed-address event`, async () => {
     const c = checkout(mergedFile, options);
     await saveAddress(c);
     assert.equal(c.elements.get('shipping-step').classList.contains('hidden'), false);
@@ -244,7 +253,7 @@ for (const [name, options] of [['invalid fields', {validForm:false}], ['failed s
   });
 }
 
-test('merged checkout ignores an old annual selection and uses monthly terms through Stripe', async () => {
+test('three-step checkout ignores an old annual selection and uses monthly terms through Stripe', async () => {
   const c = checkout(mergedFile, {storedPlan:'annual',search:'?utm_source=facebook&utm_content=founder'});
   await saveAddress(c);
   assert.equal(c.elements.get('monthly-price').textContent, 'Then $20/mo');
@@ -264,13 +273,13 @@ test('merged checkout ignores an old annual selection and uses monthly terms thr
   assert.equal(choice.get('balance_due'), '150');
   assert.equal(choice.get('preorder_bonus_months'), '2');
   assert.equal(choice.get('service_price'), '20');
-  assert.equal(choice.get('flow_version'), 'delivery_monthly_2026_09_30');
+  assert.equal(choice.get('flow_version'), 'offer_address_payment_2026_10_01');
   assert.equal(choice.get('utm_source'), 'facebook');
   assert.equal(choice.get('utm_content'), 'founder');
   assert.equal(countMeta(c, 'Purchase'), 0);
 });
 
-test('merged checkout cannot hand off payment or record a lead before address save', async () => {
+test('three-step checkout cannot hand off payment or record a lead before address save', async () => {
   const c = checkout(mergedFile);
   await c.act('continue-payment');
   await c.act('notify-button');
@@ -280,7 +289,7 @@ test('merged checkout cannot hand off payment or record a lead before address sa
   assert.equal(countMeta(c, 'Lead'), 0);
 });
 
-test('merged checkout keeps a notification request distinct from purchase', async () => {
+test('three-step checkout keeps a notification request distinct from purchase', async () => {
   const c = checkout(mergedFile);
   await saveAddress(c);
   await c.act('notify-button');
@@ -290,7 +299,7 @@ test('merged checkout keeps a notification request distinct from purchase', asyn
   assert.equal(countMeta(c, 'Purchase'), 0);
 });
 
-test('merged checkout analytics and storage failures do not block address saving or payment', async () => {
+test('three-step checkout analytics and storage failures do not block address saving or payment', async () => {
   const c = checkout(mergedFile, {failAnalytics:true,failStorage:true});
   await saveAddress(c);
   assert.equal(c.elements.get('preorder-step').classList.contains('hidden'), false);
@@ -298,7 +307,7 @@ test('merged checkout analytics and storage failures do not block address saving
   assert.equal(new URL(c.location.href).hostname, 'buy.stripe.com');
 });
 
-test('merged checkout protects local previews and rejects sandbox links on production', async () => {
+test('three-step checkout protects local previews and rejects sandbox links on production', async () => {
   for (const options of [{hostname:'127.0.0.1'}, {paymentLink:'https://buy.stripe.com/test_example'}]) {
     const c = checkout(mergedFile, options);
     await saveAddress(c);
@@ -308,4 +317,71 @@ test('merged checkout protects local previews and rejects sandbox links on produ
     assert.equal(countMeta(c, 'AddPaymentInfo'), 0);
     if (options.hostname) assert.equal(c.requests.length, 0);
   }
+});
+
+
+test('offer acceptance requires the explicit transition and deduplicates repeat taps, back navigation and refresh', async () => {
+  const c = checkout(mergedFile);
+  await c.act('shipping-form', 'submit');
+  assert.equal(c.requests.length, 0);
+  assert.equal(countMeta(c, 'OfferAccepted'), 0);
+  await c.act('continue-address');
+  assert.equal(c.elements.get('offer-step').classList.contains('hidden'), true);
+  assert.equal(c.elements.get('shipping-step').classList.contains('hidden'), false);
+  assert.equal(c.elements.get('delivery-progress')['aria-current'], 'step');
+  assert.equal(c.elements.get('offer-progress')['aria-current'], undefined);
+  assert.equal(countMeta(c, 'OfferAccepted'), 1);
+  const pixel = c.events.find(e => e[2] === 'OfferAccepted');
+  assert.equal(pixel[1], 'trackCustom');
+  assert.equal(pixel[4].eventID, 'offer_review-checkout-uuid');
+  assert.equal(c.offerRequests.length, 1);
+  assert.equal(c.offerRequests[0].checkout_id, 'review-checkout-uuid');
+  assert.equal(JSON.stringify(c.offerRequests).includes('review@example.com'), false);
+  await c.act('continue-address');
+  await c.act('back-to-offer');
+  await c.act('continue-address');
+  assert.equal(countMeta(c, 'OfferAccepted'), 1);
+  assert.equal(c.offerRequests.length, 1);
+  const refresh = checkout(mergedFile, {sharedStorage:c.storage});
+  assert.equal(countMeta(refresh, 'OfferAccepted'), 0);
+  await refresh.act('continue-address');
+  assert.equal(countMeta(refresh, 'OfferAccepted'), 0);
+  assert.equal(refresh.offerRequests.length, 0);
+});
+
+test('offer reporting failures never block the address step and retry the same event on return', async () => {
+  const c = checkout(mergedFile, {failOffer:true});
+  await c.act('continue-address');
+  assert.equal(c.elements.get('shipping-step').classList.contains('hidden'), false);
+  await c.act('back-to-offer');
+  await c.act('continue-address');
+  assert.equal(countMeta(c, 'OfferAccepted'), 1);
+  assert.equal(c.offerRequests.length, 2);
+  assert.deepEqual(c.offerRequests[0], c.offerRequests[1]);
+  await saveAddress(c);
+  assert.equal(c.elements.get('preorder-step').classList.contains('hidden'), false);
+});
+
+for (const options of [{hostname:'127.0.0.1'}, {search:'?utm_source=qa'}, {privacy:true}]) {
+  test('preview, QA and privacy opt-out never report offer acceptance: ' + JSON.stringify(options), async () => {
+    const c = checkout(mergedFile, options);
+    await c.act('continue-address');
+    assert.equal(c.elements.get('shipping-step').classList.contains('hidden'), false);
+    assert.equal(countMeta(c, 'OfferAccepted'), 0);
+    assert.equal(c.offerRequests.length, 0);
+  });
+}
+
+
+test('transient offer reporting retries are bounded and reuse the same conversion ID', async () => {
+  const c = checkout(mergedFile, {failOffer:true});
+  await c.act('continue-address');
+  for (let i = 0; i < 4 && c.pendingRetries.length; i++) {
+    c.pendingRetries.shift()(); await new Promise(resolve => setImmediate(resolve));
+  }
+  assert.equal(c.offerRequests.length,3);
+  assert.equal(c.pendingRetries.length,0);
+  assert.equal(countMeta(c,'OfferAccepted'),1);
+  assert.ok(c.offerRequests.every(r => r.checkout_id === c.offerRequests[0].checkout_id));
+  assert.equal(c.elements.get('shipping-step').classList.contains('hidden'),false);
 });

@@ -38,6 +38,7 @@ https://docs.netlify.com/manage/accounts-and-billing/billing/billing-for-credit-
 
 | Event | Proof | Value | Deduplication |
 | --- | --- | --- | --- |
+| `OfferAccepted` | Explicit offer → address transition (client-reported) | No revenue value; $199 device metadata | `offer_<checkout_id>` shared with browser |
 | `AddShippingInfo` | Verified Netlify address-form submission | $199 device interest (legacy $99 retained) | `shipping_<checkout_id>` shared with browser |
 | `Purchase` | Signed Stripe Checkout event, status complete and payment_status paid | $49 actually paid | `deposit_<checkout_session_id>` |
 
@@ -71,6 +72,8 @@ Meta Purchase reports gross successful deposits and is not reversed on refund.
   in the background. Payment handling waits for the address record when a
   checkout reference exists, preserving privacy preferences and attribution.
 - Match data is limited to hashed email, Meta browser/click IDs and user agent.
+  The anonymous offer transition additionally uses the client IP supplied by
+  Netlify, before any email or address is entered.
   No names, street addresses, phone numbers, care-recipient information,
   activity data or payment-card details are sent by this integration.
 - Source URLs have query strings removed. Global Privacy Control suppresses
@@ -159,3 +162,43 @@ from interest/conversion analysis.
 Before ads launch, verify Meta receipt in Test Events, Stripe webhook delivery
 responses and Netlify function logs. These are separate from publishing ads;
 the campaign remains unpublished until the business payment card is ready.
+
+
+## Offer → Address → Payment funnel (October 1, 2026)
+
+The user intentionally keeps availability, estimated shipping and preorder terms
+at step 3, before payment. See `AGENTS.md` for this product decision. Steps 1/2
+measure offer interest, not a sale or a completed address.
+
+- Homepage “View pricing” opens `/checkoutV2`, beginning at the Founding Family Offer.
+- “Continue to address details” reveals the address form and emits the new
+  custom event **`OfferAccepted`**, plus Plausible `V2 Offer Accepted`.
+- Refresh, direct entry, repeated taps and back navigation do not create another
+  event within the same two-hour tab session. If session storage is unavailable,
+  the in-page guard still prevents repeat taps; deduplication across reloads is
+  best effort in that case.
+- The browser's custom Pixel event and `POST /.netlify/functions/offer-accepted`
+  share `offer_<checkout_id>`. The server fixes the event name, offer metadata and
+  source URL; it never accepts a client-specified purchase, revenue or identity.
+- The server uses Netlify's client IP, the request user agent, and validated
+  `_fbp`/`_fbc` when available. No email, address or other form field is included.
+  This technical matching data is personal data, even before a name is provided.
+- The endpoint requires production configuration, POST/JSON and the same-site
+  origin. It is rate-limited, ignores GPC/opt-outs and QA, and uses the existing
+  durable receipts and hourly retries. The client retries transient failures up
+  to three times without blocking navigation. A client-reported milestone is
+  not independent server verification of a human action.
+- QA can reach Meta Test Events only with a matching server-configured
+  `META_TEST_CHECKOUT_ID` and `META_TEST_EVENT_CODE`. Normal browser QA is skipped;
+  controlled server tests must use the explicit Test Events route.
+- `InitiateCheckout` retains its historical checkout-entry meaning. Do not use
+  that event for the new campaign goal. `AddShippingInfo` remains the validated,
+  saved address, and `Purchase` remains the signed Stripe confirmation of $49 paid.
+- No new Meta token is required. The endpoint reuses the production CAPI
+  configuration. The user will choose `OfferAccepted` (or a custom conversion
+  based on it) in Meta Ads Manager. Campaign configuration is not changed here.
+
+Automated verification covers matching browser/server IDs, strict payload filters,
+privacy, QA isolation, duplicate/concurrent delivery, durable retries, and normal
+address/payment flows. A local test proves implementation behavior, not Meta's
+receipt or eligibility for campaign optimization; confirm those after deployment.
