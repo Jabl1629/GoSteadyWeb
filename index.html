@@ -704,7 +704,7 @@
       .js-reveal .cam-frame, .js-reveal .cam-link { transition-delay: 0s !important; }
     }
   </style>
-  <link rel="stylesheet" href="/Assets/homepage.css?v=20260930-1">
+  <link rel="stylesheet" href="/Assets/homepage.css?v=20260930-2">
 </head>
 <body class="homepage">
   <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=2755897781476379&amp;ev=PageView&amp;noscript=1"></noscript>
@@ -1027,88 +1027,56 @@
       </div>
     </section>
 
-    <section class="family-preview" id="your-updates" aria-labelledby="family-preview-heading" data-family-preview>
-      <div class="wrap">
-        <div class="family-preview-heading">
-          <h2 id="family-preview-heading">Stay connected.<br>Choose what reaches you.</h2>
-          <p>Choose the updates that matter to you, and how you receive them. <span class="family-preview-prompt">Try it below.</span></p>
+    <section class="notification-preview" id="your-updates" aria-labelledby="notification-preview-heading" data-phone-preview>
+      <div class="wrap notification-preview-layout">
+        <div class="notification-preview-copy">
+          <h2 id="notification-preview-heading">Stay connected.<br>Choose what reaches you.</h2>
+          <p>Keep some updates in the family portal. Get a text or call for the ones you want to hear about.</p>
+          <p class="notification-preview-invite"><span aria-hidden="true">↗</span> Try the switches and notification choices.</p>
         </div>
-
-        <div class="family-demo">
-          <div class="family-demo-topbar">
-            <span class="family-demo-brand"><img src="/Assets/logo-gs-selected.png" alt="" width="22" height="22">Family portal</span>
-            <span class="family-demo-example">Interactive preview</span>
+        <div class="notification-phone-wrap">
+          <div class="notification-phone" role="group" aria-label="Try GoSteady notification settings">
+            <div class="notification-phone-speaker" aria-hidden="true"></div>
+            <div class="notification-phone-brand"><img src="/Assets/logo-gs-selected.png" width="20" height="20" alt="">GoSteady <span>Family portal</span></div>
+            <div class="notification-phone-content">
+              <div class="notification-phone-heading"><h3>Notifications</h3></div>
+              <ul class="notification-settings" aria-label="Activity notifications">
+                <li class="notification-setting" data-phone-setting="morning" data-enabled="true">
+                  <span class="setting-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></span>
+                  <h4 id="setting-morning-title">No movement by late morning</h4>
+                  <button type="button" class="setting-switch" role="switch" aria-checked="true" aria-labelledby="setting-morning-title" data-phone-toggle><span></span></button>
+                  <p class="setting-description" data-phone-description data-description="Susan’s walker hasn’t moved by 11 AM.">Susan’s walker hasn’t moved by 11 AM.</p>
+                  <div class="setting-channels" role="group" aria-label="How to receive: No movement by late morning" data-phone-channels><button type="button" data-phone-channel="portal" aria-pressed="false"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg><span>Portal only</span></button><button type="button" data-phone-channel="text" aria-pressed="true"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v13H8l-4 4zM8 9h8m-8 4h5"/></svg><span>Text</span></button><button type="button" data-phone-channel="call" aria-pressed="false"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 3 4 4-2 3a16 16 0 0 0 7 7l3-2 4 4-2 2C10 22 2 14 3 5z"/></svg><span>Call</span></button></div>
+                </li>
+                <li class="notification-setting" data-phone-setting="overnight" data-enabled="true">
+                  <span class="setting-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 13.2A9 9 0 0 1 10.8 3.2a9 9 0 1 0 10 10Z"/></svg></span>
+                  <h4 id="setting-overnight-title">Up more than twice overnight</h4>
+                  <button type="button" class="setting-switch" role="switch" aria-checked="true" aria-labelledby="setting-overnight-title" data-phone-toggle><span></span></button>
+                  <p class="setting-description" data-phone-description data-description="Her walker moved more than twice between bedtime and morning.">Her walker moved more than twice between bedtime and morning.</p>
+                  <div class="setting-channels" role="group" aria-label="How to receive: Up more than twice overnight" data-phone-channels><button type="button" data-phone-channel="portal" aria-pressed="true"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg><span>Portal only</span></button><button type="button" data-phone-channel="text" aria-pressed="false"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v13H8l-4 4zM8 9h8m-8 4h5"/></svg><span>Text</span></button><button type="button" data-phone-channel="call" aria-pressed="false"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 3 4 4-2 3a16 16 0 0 0 7 7l3-2 4 4-2 2C10 22 2 14 3 5z"/></svg><span>Call</span></button></div>
+                </li>
+                <li class="notification-setting" data-phone-setting="quiet" data-enabled="true">
+                  <span class="setting-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 16 6-6 4 4 8-9m-5 0h5v5"/></svg></span>
+                  <h4 id="setting-quiet-title">Quieter than usual</h4>
+                  <button type="button" class="setting-switch" role="switch" aria-checked="true" aria-labelledby="setting-quiet-title" data-phone-toggle><span></span></button>
+                  <p class="setting-description" data-phone-description data-description="A slower day than usual for her.">A slower day than usual for her.</p>
+                  <div class="setting-channels" role="group" aria-label="How to receive: Quieter than usual" data-phone-channels><button type="button" data-phone-channel="portal" aria-pressed="true"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg><span>Portal only</span></button><button type="button" data-phone-channel="text" aria-pressed="false"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v13H8l-4 4zM8 9h8m-8 4h5"/></svg><span>Text</span></button><button type="button" data-phone-channel="call" aria-pressed="false"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 3 4 4-2 3a16 16 0 0 0 7 7l3-2 4 4-2 2C10 22 2 14 3 5z"/></svg><span>Call</span></button></div>
+                </li>
+                <li class="notification-setting" data-phone-setting="trend" data-enabled="false">
+                  <span class="setting-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 6 6 6 4-4 8 9m-5 0h5v-5"/></svg></span>
+                  <h4 id="setting-trend-title">Trending down</h4>
+                  <button type="button" class="setting-switch" role="switch" aria-checked="false" aria-labelledby="setting-trend-title" data-phone-toggle><span></span></button>
+                  <p class="setting-description" data-phone-description data-description="Less walker activity over time.">Off</p>
+                  <div class="setting-channels" role="group" aria-label="How to receive: Trending down" data-phone-channels hidden><button type="button" data-phone-channel="portal" aria-pressed="true"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg><span>Portal only</span></button><button type="button" data-phone-channel="text" aria-pressed="false"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v13H8l-4 4zM8 9h8m-8 4h5"/></svg><span>Text</span></button><button type="button" data-phone-channel="call" aria-pressed="false"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 3 4 4-2 3a16 16 0 0 0 7 7l3-2 4 4-2 2C10 22 2 14 3 5z"/></svg><span>Call</span></button></div>
+                </li>
+              </ul>
+              <p class="notification-phone-note">Text and call updates also appear in your portal.</p>
+            </div>
+            <div class="notification-phone-home" aria-hidden="true"></div>
           </div>
-          <div class="family-demo-week">
-            <div>
-              <p class="family-demo-label">Susan’s week</p>
-              <h3>3 steady days in a row.</h3>
-              <p class="family-demo-week-note">Walker activity · active minutes over the last 7 days</p>
-            </div>
-            <div class="family-demo-chart" role="img" aria-label="Example walker activity over seven days: 20, 27, 20, 16, 33, 25, and 32 active minutes. The last three days are above her weekly average.">
-              <div style="--bar:51%"><i></i><span>T</span></div><div style="--bar:69%"><i></i><span>F</span></div><div style="--bar:51%"><i></i><span>S</span></div><div style="--bar:41%"><i></i><span>S</span></div><div style="--bar:85%"><i></i><span>M</span></div><div style="--bar:64%"><i></i><span>T</span></div><div class="is-today" style="--bar:82%"><i></i><span>W</span></div>
-            </div>
-          </div>
-
-          <div class="family-demo-body">
-            <div class="family-demo-controls">
-              <fieldset class="family-demo-scenarios">
-                <legend>Which update would you like to try?</legend>
-                <div class="family-demo-options">
-                  <label class="family-demo-option">
-                    <input type="radio" name="family-demo-update" value="quiet" checked>
-                    <span class="family-demo-option-content">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"/></svg>
-                      <span><strong>Quieter day</strong><small>A change in their usual activity</small></span>
-                      <span class="family-demo-radio" aria-hidden="true"></span>
-                    </span>
-                  </label>
-                  <label class="family-demo-option">
-                    <input type="radio" name="family-demo-update" value="help">
-                    <span class="family-demo-option-content">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 5 8 9 8 9s8-4 8-9V6zM9 11h6m-3-3v6"/></svg>
-                      <span><strong>Help button</strong><small>When they ask family to check in</small></span>
-                      <span class="family-demo-radio" aria-hidden="true"></span>
-                    </span>
-                  </label>
-                  <label class="family-demo-option">
-                    <input type="radio" name="family-demo-update" value="overnight" aria-label="Up more than twice overnight">
-                    <span class="family-demo-option-content">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 13.2A9 9 0 0 1 10.8 3.2a9 9 0 1 0 10 10Z"/></svg>
-                      <span><strong><span class="family-demo-long-label">Up more than twice overnight</span><span class="family-demo-short-label" aria-hidden="true">Overnight</span></strong><small>Her walker moved more than twice between bedtime and morning.</small></span>
-                      <span class="family-demo-radio" aria-hidden="true"></span>
-                    </span>
-                  </label>
-                </div>
-              </fieldset>
-              <div class="family-demo-enable">
-                <span id="family-demo-enable-label">Receive this update</span>
-                <button type="button" class="family-demo-switch" role="switch" aria-checked="true" aria-labelledby="family-demo-enable-label" data-demo-enabled><span></span></button>
-              </div>
-              <div class="family-demo-delivery" data-demo-delivery>
-                <p id="family-demo-channel-label">How it reaches you</p>
-                <div class="family-demo-channels" role="group" aria-labelledby="family-demo-channel-label">
-                  <button type="button" data-demo-channel="app" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>Portal only</button>
-                  <button type="button" data-demo-channel="text" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v13H8l-4 4zM8 9h8m-8 4h5"/></svg>Text</button>
-                  <button type="button" data-demo-channel="call" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 3 4 4-2 3a16 16 0 0 0 7 7l3-2 4 4-2 2C10 22 2 14 3 5z"/></svg>Call</button>
-                </div>
-                <p class="family-demo-channel-note">Every alert also appears in your family portal.</p>
-              </div>
-            </div>
-
-            <div class="family-demo-result" aria-live="polite" aria-atomic="true">
-              <p class="family-demo-label" data-demo-result-label>Example text message</p>
-              <div class="family-demo-message" data-demo-message data-channel="text">
-                <div class="family-demo-message-top"><span class="family-demo-message-mark" aria-hidden="true"><img src="/Assets/logo-gs-selected.png" width="24" height="24" alt=""></span><div><strong data-demo-sender>GoSteady</strong><span data-demo-message-context>Text message · now</span></div><svg class="family-demo-call-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 3 4 4-2 3a16 16 0 0 0 7 7l3-2 4 4-2 2C10 22 2 14 3 5z"/></svg></div>
-                <h3 data-demo-title>A quieter day than usual</h3>
-                <p data-demo-copy>Susan’s walker activity is lower than usual today. It might be a good time to check in.</p>
-                <div class="family-demo-location" data-demo-location hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Location shared with family<small>Example: near 214 Maple Ave</small></span></div>
-              </div>
-              <p class="family-demo-result-note" data-demo-result-note>You’ll receive a text, with the update saved in your portal.</p>
-              <p class="family-demo-help-note" data-demo-help-note hidden>Help-button alerts go to family, not 911 or a monitoring center.</p>
-            </div>
-          </div>
-          <div class="family-demo-footer"><span>Sample activity. No notifications are sent.</span><a href="https://gosteady.co/userdemo/d2c/preview/dashboard" target="_blank" rel="noopener">Explore the full demo <span aria-hidden="true">↗</span></a></div>
+          <p class="notification-preview-caption">Interactive example. No notifications are sent.</p>
+          <a class="notification-preview-link" href="https://gosteady.co/userdemo/d2c/preview/dashboard" target="_blank" rel="noopener">Explore the full family portal <span aria-hidden="true">↗</span></a>
+          <p class="notification-preview-sr" role="status" aria-live="polite" aria-atomic="true" data-phone-status></p>
         </div>
       </div>
     </section>
@@ -1477,68 +1445,47 @@
       setupStepsList.forEach(function(step) { setupObserver.observe(step); });
     }
 
-    // A self-contained example: choices stay in memory and never send notifications.
-    const familyPreview = document.querySelector('[data-family-preview]');
-    if (familyPreview) {
-      const updateChoices = Array.from(familyPreview.querySelectorAll('[name="family-demo-update"]'));
-      const channelChoices = Array.from(familyPreview.querySelectorAll('[data-demo-channel]'));
-      const enabledButton = familyPreview.querySelector('[data-demo-enabled]');
-      const delivery = familyPreview.querySelector('[data-demo-delivery]');
-      const message = familyPreview.querySelector('[data-demo-message]');
-      const text = function(name, value) { familyPreview.querySelector('[data-demo-' + name + ']').textContent = value; };
-      const settings = {
-        quiet: { enabled: true, text: true, call: false },
-        help: { enabled: true, text: true, call: true },
-        overnight: { enabled: true, text: false, call: false }
-      };
-      const examples = {
-        quiet: { title: 'A quieter day than usual', copy: 'Susan’s walker activity is lower than usual today. It might be a good time to check in.', off: 'Quiet-day updates are off.' },
-        help: { title: 'Susan pressed her help button', copy: 'Susan has asked for help from her walker. Her location is shared so you can check in.', off: 'Help-button alerts are off.' },
-        overnight: { title: 'Up more than twice overnight', copy: 'Her walker moved more than twice between bedtime and morning.', off: 'Overnight updates are off.' }
-      };
-      let activeUpdate = 'quiet';
-
-      function renderFamilyPreview() {
-        const choice = settings[activeUpdate];
-        const example = examples[activeUpdate];
-        const channel = !choice.enabled ? 'off' : choice.text ? 'text' : choice.call ? 'call' : 'app';
-        enabledButton.setAttribute('aria-checked', String(choice.enabled));
-        delivery.classList.toggle('is-disabled', !choice.enabled);
-        channelChoices.forEach(function(button) {
-          const name = button.dataset.demoChannel;
-          button.setAttribute('aria-pressed', String(name === 'app' ? !choice.text && !choice.call : choice[name]));
-          button.disabled = !choice.enabled;
+    // Interactive example only: preferences stay in memory and never send notifications.
+    const notificationPreview = document.querySelector('[data-phone-preview]');
+    if (notificationPreview) {
+      const liveStatus = notificationPreview.querySelector('[data-phone-status]');
+      notificationPreview.querySelectorAll('[data-phone-setting]').forEach(function(row) {
+        const toggle = row.querySelector('[data-phone-toggle]');
+        const description = row.querySelector('[data-phone-description]');
+        const channels = row.querySelector('[data-phone-channels]');
+        const buttons = Array.from(row.querySelectorAll('[data-phone-channel]'));
+        const title = row.querySelector('h4').textContent;
+        const choice = {
+          enabled: toggle.getAttribute('aria-checked') === 'true',
+          text: buttons.find(function(b) { return b.dataset.phoneChannel === 'text'; }).getAttribute('aria-pressed') === 'true',
+          call: buttons.find(function(b) { return b.dataset.phoneChannel === 'call'; }).getAttribute('aria-pressed') === 'true'
+        };
+        function render(announce) {
+          row.dataset.enabled = String(choice.enabled);
+          toggle.setAttribute('aria-checked', String(choice.enabled));
+          description.textContent = choice.enabled ? description.dataset.description : 'Off';
+          channels.hidden = !choice.enabled;
+          buttons.forEach(function(button) {
+            const channel = button.dataset.phoneChannel;
+            button.setAttribute('aria-pressed', String(channel === 'portal' ? !choice.text && !choice.call : choice[channel]));
+            button.disabled = !choice.enabled;
+          });
+          if (announce) {
+            const delivery = !choice.enabled ? 'off' : choice.text && choice.call ? 'text and automated call' : choice.text ? 'text message' : choice.call ? 'automated call' : 'portal only';
+            liveStatus.textContent = title + ': ' + delivery + '. Example only.';
+          }
+        }
+        toggle.addEventListener('click', function() { choice.enabled = !choice.enabled; render(true); });
+        buttons.forEach(function(button) {
+          button.addEventListener('click', function() {
+            const channel = button.dataset.phoneChannel;
+            if (channel === 'portal') { choice.text = false; choice.call = false; }
+            else choice[channel] = !choice[channel];
+            render(true);
+          });
         });
-        message.dataset.channel = channel;
-        message.dataset.call = String(choice.enabled && choice.call);
-        const combined = choice.enabled && choice.text && choice.call;
-        text('result-label', combined ? 'Example text + call' : { text: 'Example text message', call: 'Example automated call', app: 'Example portal update', off: 'You’re in control' }[channel]);
-        text('sender', channel === 'call' ? 'GoSteady is calling' : 'GoSteady');
-        text('message-context', combined ? 'Text + automated call' : { text: 'Text message · now', call: 'Automated voice message', app: 'Family portal · now', off: 'Notification preferences' }[channel]);
-        text('title', choice.enabled ? example.title : example.off);
-        text('copy', choice.enabled ? example.copy : 'Turn this update back on whenever you’d like. Your other notification choices stay the same.');
-        text('result-note', !choice.enabled ? 'No text or call for this update.' : choice.text && choice.call ? 'You’ll get a text and an automated call that reads the alert to you.' : choice.text ? 'You’ll receive a text, with the update saved in your portal.' : choice.call ? 'An automated call reads the alert to you. It’s also saved in your portal.' : 'Check this update in your portal. No text or call.');
-        familyPreview.querySelector('[data-demo-location]').hidden = activeUpdate !== 'help' || !choice.enabled;
-        familyPreview.querySelector('[data-demo-help-note]').hidden = activeUpdate !== 'help' || !choice.enabled;
-      }
-
-      updateChoices.forEach(function(input) {
-        input.addEventListener('change', function() { activeUpdate = input.value; renderFamilyPreview(); });
+        render(false);
       });
-      enabledButton.addEventListener('click', function() {
-        settings[activeUpdate].enabled = !settings[activeUpdate].enabled;
-        renderFamilyPreview();
-      });
-      channelChoices.forEach(function(button) {
-        button.addEventListener('click', function() {
-          const choice = settings[activeUpdate];
-          const channel = button.dataset.demoChannel;
-          if (channel === 'app') { choice.text = false; choice.call = false; }
-          else choice[channel] = !choice[channel];
-          renderFamilyPreview();
-        });
-      });
-      renderFamilyPreview();
     }
 
     plausible('V2 Landing Viewed', { interactive: false, props: { offer_version: 'founding_family_199_2026_09', device_price: 199 } });
