@@ -705,6 +705,9 @@
     }
   </style>
   <link rel="stylesheet" href="/Assets/homepage.css?v=20260930-5">
+  <link rel="stylesheet" href="/Assets/family-story/card.css">
+  <script src="/Assets/family-story/card.js" defer></script>
+  <link rel="stylesheet" href="/Assets/family-story/compact-setup.css?v=20261002-1">
 </head>
 <body class="homepage">
   <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=2755897781476379&amp;ev=PageView&amp;noscript=1"></noscript>
@@ -804,6 +807,21 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="family-story" id="family-story" aria-labelledby="colleen-story-heading">
+      <div class="wrap">
+        <article class="family-story-card">
+          <a class="family-story-portrait" href="/Assets/family-story/family-story-19s.mp4" data-family-story aria-label="Watch Colleen’s story, 19 seconds" aria-haspopup="dialog" aria-controls="family-story-dialog">
+            <img src="/Assets/family-story/family-story-poster.webp" width="480" height="853" alt="Colleen sharing her experience using GoSteady with her mom" loading="lazy" decoding="async">
+            <span class="family-story-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="m7 4 14 8-14 8z"/></svg>0:19</span>
+          </a>
+          <h2 class="family-story-label" id="colleen-story-heading">Colleen’s story</h2>
+          <blockquote class="family-story-quote family-story-primary"><p>“It enables me to <strong>watch my mom’s activity</strong> in the night.”</p></blockquote>
+          <blockquote class="family-story-quote family-story-secondary"><p>“<strong>My mom loves the cup holder</strong> itself.”</p></blockquote>
+          <a class="family-story-action" href="/Assets/family-story/family-story-19s.mp4" data-family-story aria-haspopup="dialog" aria-controls="family-story-dialog"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m7 4 14 8-14 8z"/></svg>Watch Colleen’s story <span>19 sec</span></a>
+        </article>
       </div>
     </section>
 
@@ -971,41 +989,38 @@
               <p>Point your phone’s camera at the QR code and follow the link. No app download, no Bluetooth pairing, no Wi&#8209;Fi setup.</p>
             </div>
           </li>
-          <li class="setup-step" data-setup-step>
-            <div class="setup-tile setup-tile--portal" role="img" aria-label="The GoSteady portal on a phone: three steady days in a row, the Care Circle with an Add button, today’s movement, and a week of activity">
-              <div class="phone" aria-hidden="true">
+          <li class="setup-step setup-step--configure" id="configure-share" data-setup-step>
+            <div class="setup-tile setup-tile--portal" role="group" aria-label="Preview of family sharing and notification settings">
+              <div class="phone">
                 <div class="portal">
                   <span class="portal-clock">9:41</span>
-                  <div class="portal-top">
-                    <span>Tuesday, Sep 1</span>
-                    <span class="portal-icons">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17" cy="9" r="2.6"/><path d="M15.5 14.2a5 5 0 0 1 6 4.8"/></svg>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
-                    </span>
-                  </div>
-                  <div class="portal-card portal-hero">
+                  <div class="portal-summary">
+                    <span class="portal-summary-date">Tuesday, Sep 1</span>
                     <strong>3 steady days in a row.</strong>
-                    <p>Moving since 7:40 this morning, like most days.</p>
                   </div>
-                  <div class="portal-card portal-circle">
-                    <div class="portal-avatars">
-                      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span>
-                      <span>M</span>
-                      <span>T</span>
+                  <div class="portal-section portal-sharing">
+                    <div class="portal-circle">
+                      <strong>Care Circle</strong>
+                      <div class="portal-avatars" aria-hidden="true">
+                        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span>
+                        <span>M</span>
+                        <span>T</span>
+                      </div>
                     </div>
-                    <div><strong>Care Circle</strong><small>You, Maya and Tom see the same updates</small></div>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+                    <p class="portal-sharing-note">You, Maya and Tom see the same updates</p>
+                    <a class="portal-add" href="https://gosteady.co/userdemo/d2c/preview/care-team" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Add to Care Circle</a>
                   </div>
-                  <div class="portal-add"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Add to Care Circle</div>
-                  <div class="portal-stats">
-                    <div><strong>42</strong><small>active min</small></div>
-                    <div><strong>7:40</strong><small>first moved</small></div>
-                    <div><strong>Quiet</strong><small>overnight</small></div>
-                  </div>
-                  <div class="portal-card portal-week">
-                    <div class="portal-week-head"><strong>Activity, last 7 days</strong><span>Above his usual</span></div>
-                    <div class="portal-bars"><i style="--h:52%"></i><i style="--h:40%"></i><i style="--h:64%"></i><i style="--h:58%"></i><i style="--h:76%"></i><i style="--h:84%"></i><i class="is-today" style="--h:72%"></i></div>
-                    <div class="portal-days"><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span><span>M</span><span>T</span></div>
+                  <div class="portal-section portal-settings">
+                    <strong class="portal-section-heading">Enabled notifications</strong>
+                    <div class="portal-notification">
+                      <svg class="portal-call-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Phone call"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.69 2.79a2 2 0 0 1-.45 2.11L8.09 9.89a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.89.33 1.83.56 2.79.69A2 2 0 0 1 22 16.92z"/></svg>
+                      <strong>Family alert button pressed</strong>
+                    </div>
+                    <div class="portal-notification">
+                      <svg class="portal-text-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Text message"><path d="M4 4h16v13H8l-4 4zM8 9h8m-8 4h5"/></svg>
+                      <strong>No movement by late morning</strong>
+                    </div>
+                    <a class="portal-configure" href="https://gosteady.co/userdemo/d2c/preview/notifications" target="_blank" rel="noopener">Configure notifications</a>
                   </div>
                 </div>
                 <div class="phone-island"></div>
@@ -1017,64 +1032,13 @@
               </div>
             </div>
             <div class="setup-copy">
-              <p class="setup-label">3 · Check in</p>
-              <h3>Track and share right away</h3>
-              <p>Activity shows up on any phone or computer, and inviting family to the Care Circle takes a tap. Cellular is already built in.</p>
+              <p class="setup-label">3 · Configure and share</p>
+              <h3>Choose who receives notifications</h3>
+              <p>Activity shows up on any phone or computer. Share with your family members and decide what triggers text and/or voice call updates.</p>
+              <a class="setup-portal-link" href="https://gosteady.co/userdemo/d2c/preview/dashboard" target="_blank" rel="noopener">Explore the full family portal <span aria-hidden="true">↗</span></a>
             </div>
           </li>
         </ol>
-      </div>
-    </section>
-
-    <section class="notification-preview" id="your-updates" aria-labelledby="notification-preview-heading" data-phone-preview>
-      <div class="wrap notification-preview-layout">
-        <div class="notification-preview-copy">
-          <h2 id="notification-preview-heading">Stay connected.<br>Choose what reaches you.</h2>
-          <p>Keep some updates in the family portal. Get a text or call for the ones you want to hear about.</p>
-          <a class="notification-preview-link" href="https://gosteady.co/userdemo/d2c/preview/dashboard" target="_blank" rel="noopener">Explore the full family portal <span aria-hidden="true">↗</span></a>
-        </div>
-        <div class="notification-phone-wrap">
-          <div class="notification-phone" role="group" aria-label="Try GoSteady notification settings">
-            <div class="notification-phone-speaker" aria-hidden="true"></div>
-            <div class="notification-phone-brand"><img src="/Assets/logo-gs-selected.png" width="20" height="20" alt="">GoSteady <span>Family portal</span></div>
-            <div class="notification-phone-content">
-              <div class="notification-phone-heading"><h3>Notifications</h3></div>
-              <ul class="notification-settings" aria-label="Activity notifications">
-                <li class="notification-setting" data-phone-setting="morning" data-enabled="true">
-                  <span class="setting-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></span>
-                  <h4 id="setting-morning-title">No movement by late morning</h4>
-                  <button type="button" class="setting-switch" role="switch" aria-checked="true" aria-labelledby="setting-morning-title" data-phone-toggle><span></span></button>
-                  <p class="setting-description" data-phone-description data-description="Susan’s walker hasn’t moved by 11 AM.">Susan’s walker hasn’t moved by 11 AM.</p>
-                  <div class="setting-channels" role="group" aria-label="How to receive: No movement by late morning" data-phone-channels><button type="button" data-phone-channel="portal" aria-pressed="false"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg><span>Portal only</span></button><button type="button" data-phone-channel="text" aria-pressed="true"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v13H8l-4 4zM8 9h8m-8 4h5"/></svg><span>Text</span></button><button type="button" data-phone-channel="call" aria-pressed="false"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 3 4 4-2 3a16 16 0 0 0 7 7l3-2 4 4-2 2C10 22 2 14 3 5z"/></svg><span>Call</span></button></div>
-                </li>
-                <li class="notification-setting" data-phone-setting="overnight" data-enabled="false">
-                  <span class="setting-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 13.2A9 9 0 0 1 10.8 3.2a9 9 0 1 0 10 10Z"/></svg></span>
-                  <h4 id="setting-overnight-title">Up more than twice overnight</h4>
-                  <button type="button" class="setting-switch" role="switch" aria-checked="false" aria-labelledby="setting-overnight-title" data-phone-toggle><span></span></button>
-                  <p class="setting-description" data-phone-description data-description="Her walker moved more than twice between bedtime and morning.">Off</p>
-                  <div class="setting-channels" role="group" aria-label="How to receive: Up more than twice overnight" data-phone-channels hidden><button type="button" data-phone-channel="portal" aria-pressed="true"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg><span>Portal only</span></button><button type="button" data-phone-channel="text" aria-pressed="false"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v13H8l-4 4zM8 9h8m-8 4h5"/></svg><span>Text</span></button><button type="button" data-phone-channel="call" aria-pressed="false"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 3 4 4-2 3a16 16 0 0 0 7 7l3-2 4 4-2 2C10 22 2 14 3 5z"/></svg><span>Call</span></button></div>
-                </li>
-                <li class="notification-setting" data-phone-setting="quiet" data-enabled="false">
-                  <span class="setting-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 16 6-6 4 4 8-9m-5 0h5v5"/></svg></span>
-                  <h4 id="setting-quiet-title">Quieter than usual</h4>
-                  <button type="button" class="setting-switch" role="switch" aria-checked="false" aria-labelledby="setting-quiet-title" data-phone-toggle><span></span></button>
-                  <p class="setting-description" data-phone-description data-description="A slower day than usual for her.">Off</p>
-                  <div class="setting-channels" role="group" aria-label="How to receive: Quieter than usual" data-phone-channels hidden><button type="button" data-phone-channel="portal" aria-pressed="true"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg><span>Portal only</span></button><button type="button" data-phone-channel="text" aria-pressed="false"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v13H8l-4 4zM8 9h8m-8 4h5"/></svg><span>Text</span></button><button type="button" data-phone-channel="call" aria-pressed="false"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 3 4 4-2 3a16 16 0 0 0 7 7l3-2 4 4-2 2C10 22 2 14 3 5z"/></svg><span>Call</span></button></div>
-                </li>
-                <li class="notification-setting" data-phone-setting="trend" data-enabled="false">
-                  <span class="setting-icon"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 6 6 6 4-4 8 9m-5 0h5v-5"/></svg></span>
-                  <h4 id="setting-trend-title">Trending down</h4>
-                  <button type="button" class="setting-switch" role="switch" aria-checked="false" aria-labelledby="setting-trend-title" data-phone-toggle><span></span></button>
-                  <p class="setting-description" data-phone-description data-description="Less walker activity over time.">Off</p>
-                  <div class="setting-channels" role="group" aria-label="How to receive: Trending down" data-phone-channels hidden><button type="button" data-phone-channel="portal" aria-pressed="true"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg><span>Portal only</span></button><button type="button" data-phone-channel="text" aria-pressed="false"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v13H8l-4 4zM8 9h8m-8 4h5"/></svg><span>Text</span></button><button type="button" data-phone-channel="call" aria-pressed="false"><svg class="" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 3 4 4-2 3a16 16 0 0 0 7 7l3-2 4 4-2 2C10 22 2 14 3 5z"/></svg><span>Call</span></button></div>
-                </li>
-              </ul>
-              <p class="notification-phone-note">Text and call updates stay in your portal.</p>
-            </div>
-            <div class="notification-phone-home" aria-hidden="true"></div>
-          </div>
-          <p class="notification-preview-sr" role="status" aria-live="polite" aria-atomic="true" data-phone-status></p>
-        </div>
       </div>
     </section>
 
@@ -1146,6 +1110,17 @@
       <div class="footer-bottom"><span>© 2026 Go Steady LLC · Colorado, USA</span><span>Connected safety for rollator users</span></div>
     </div>
   </footer>
+
+  <dialog class="family-story-dialog" id="family-story-dialog" aria-labelledby="family-story-title">
+    <div class="family-story-dialog-header">
+      <h2 id="family-story-title">Colleen’s story</h2>
+      <button class="family-story-close" type="button" aria-label="Close Colleen’s story" autofocus><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+    </div>
+    <video class="family-story-video" controls playsinline preload="none" width="720" height="1280" aria-label="Colleen’s experience with GoSteady" data-src="/Assets/family-story/family-story-19s.mp4" poster="/Assets/family-story/family-story-poster.webp">
+      <track kind="captions" srclang="en" label="English" default data-src="/Assets/family-story/family-story.en.vtt">
+    </video>
+    <p class="family-story-error" hidden>Having trouble playing? <a href="/Assets/family-story/family-story-19s.mp4">Open the video directly.</a></p>
+  </dialog>
 
   <dialog class="setup-video-dialog" id="setup-video-dialog" aria-labelledby="setup-video-title" aria-describedby="setup-video-description">
     <div class="setup-video-heading">
@@ -1440,49 +1415,6 @@
         });
       }, { rootMargin: '0px 0px -12% 0px', threshold: .2 });
       setupStepsList.forEach(function(step) { setupObserver.observe(step); });
-    }
-
-    // Interactive example only: preferences stay in memory and never send notifications.
-    const notificationPreview = document.querySelector('[data-phone-preview]');
-    if (notificationPreview) {
-      const liveStatus = notificationPreview.querySelector('[data-phone-status]');
-      notificationPreview.querySelectorAll('[data-phone-setting]').forEach(function(row) {
-        const toggle = row.querySelector('[data-phone-toggle]');
-        const description = row.querySelector('[data-phone-description]');
-        const channels = row.querySelector('[data-phone-channels]');
-        const buttons = Array.from(row.querySelectorAll('[data-phone-channel]'));
-        const title = row.querySelector('h4').textContent;
-        const choice = {
-          enabled: toggle.getAttribute('aria-checked') === 'true',
-          text: buttons.find(function(b) { return b.dataset.phoneChannel === 'text'; }).getAttribute('aria-pressed') === 'true',
-          call: buttons.find(function(b) { return b.dataset.phoneChannel === 'call'; }).getAttribute('aria-pressed') === 'true'
-        };
-        function render(announce) {
-          row.dataset.enabled = String(choice.enabled);
-          toggle.setAttribute('aria-checked', String(choice.enabled));
-          description.textContent = choice.enabled ? description.dataset.description : 'Off';
-          channels.hidden = !choice.enabled;
-          buttons.forEach(function(button) {
-            const channel = button.dataset.phoneChannel;
-            button.setAttribute('aria-pressed', String(channel === 'portal' ? !choice.text && !choice.call : choice[channel]));
-            button.disabled = !choice.enabled;
-          });
-          if (announce) {
-            const delivery = !choice.enabled ? 'off' : choice.text && choice.call ? 'text and automated call' : choice.text ? 'text message' : choice.call ? 'automated call' : 'portal only';
-            liveStatus.textContent = title + ': ' + delivery + '. Example only.';
-          }
-        }
-        toggle.addEventListener('click', function() { choice.enabled = !choice.enabled; render(true); });
-        buttons.forEach(function(button) {
-          button.addEventListener('click', function() {
-            const channel = button.dataset.phoneChannel;
-            if (channel === 'portal') { choice.text = false; choice.call = false; }
-            else choice[channel] = !choice[channel];
-            render(true);
-          });
-        });
-        render(false);
-      });
     }
 
     plausible('V2 Landing Viewed', { interactive: false, props: { offer_version: 'founding_family_199_2026_09', device_price: 199 } });

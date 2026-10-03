@@ -1,0 +1,34 @@
+/* Family sharing and notification settings in setup step 3. */
+#configure-share { scroll-margin-top: 96px; }
+#configure-share .setup-copy h3 { color: var(--ink); }
+#configure-share .phone,
+#configure-share .portal { background: #fff; }
+#configure-share .portal { padding: 19cqw 6cqw 0; font-family: var(--sans); }
+#configure-share .portal-summary { padding-bottom: 5cqw; }
+#configure-share .portal-summary-date { display: block; color: var(--muted); font-size: 4.4cqw; font-weight: 500; line-height: 1.4; margin-bottom: 1.8cqw; }
+#configure-share .portal-summary strong { display: block; color: var(--ink); font-size: 6.2cqw; font-weight: 700; letter-spacing: -.025em; line-height: 1.25; }
+#configure-share .portal-section { border-top: 1px solid var(--line); padding: 5cqw 0; }
+#configure-share .portal-circle { justify-content: space-between; gap: 3cqw; margin: 0; }
+#configure-share .portal-circle strong,
+#configure-share .portal-section-heading { font-size: 5.4cqw; font-weight: 700; line-height: 1.3; }
+#configure-share .portal-section-heading { display: block; margin-bottom: 3cqw; }
+#configure-share .portal-avatars span { background: var(--sage-075); border-color: #fff; color: var(--forest-800); }
+#configure-share .portal-sharing-note { color: var(--muted); font-size: 4.4cqw; line-height: 1.45; margin: 1.4cqw 0 0; }
+#configure-share .portal-add,
+#configure-share .portal-configure { display: flex; align-items: center; justify-content: center; gap: 2cqw; height: auto; min-height: 12cqw; margin-top: 3.4cqw; padding: 2.6cqw 3cqw; border: 1px solid var(--forest-800); border-radius: 3cqw; font-family: var(--sans); font-size: 4.5cqw; font-weight: 600; line-height: 1.3; text-decoration: none; }
+#configure-share .portal-add { color: var(--forest-800); background: #fff; }
+#configure-share .portal-add:hover { background: var(--sage-075); }
+#configure-share .portal-notification { display: flex; align-items: center; gap: 3cqw; }
+#configure-share .portal-notification + .portal-notification { margin-top: 4cqw; }
+#configure-share .portal-notification strong { font-size: 4.9cqw; font-weight: 600; line-height: 1.4; }
+#configure-share .portal-text-icon { color: var(--forest-700); width: 6cqw; height: 6cqw; flex: 0 0 auto; }
+#configure-share .portal-call-icon { color: #b64040; width: 6cqw; height: 6cqw; flex: 0 0 auto; }
+#configure-share .portal-configure { color: #fff; background: var(--forest-800); }
+#configure-share .portal-configure:hover { background: var(--forest-900); }
+#configure-share .setup-portal-link { display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; text-decoration: underline; text-underline-offset: 4px; color: var(--forest-800); }
+#configure-share .setup-label { color: var(--forest-700); }
+@media (max-width: 680px) {
+  /* Give this denser interface enough width to read while keeping its tile compact. */
+  .homepage #configure-share .setup-tile--portal { aspect-ratio: auto; height: clamp(264px, calc(77vw + 24px), 364px); }
+  #configure-share .setup-tile--portal .phone { width: min(68cqw, 250px); top: 4cqw; }
+}
